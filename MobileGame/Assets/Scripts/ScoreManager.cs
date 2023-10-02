@@ -30,23 +30,23 @@ public class ScoreManager : MonoBehaviour
     {
         float playerSpeed = player.GetSpeed();
 
-        if (playerSpeed >= 75 && playerSpeed <= 105) // Only update the score when speed is within the relevant range
+        if (playerSpeed >= 75) // Only update the score when speed is within the relevant range
         {
             if (playerSpeed > 75 && playerSpeed < 90)
             {
                 scoreMultiplier = 1;
             }
-            else if (playerSpeed >= 90 && playerSpeed <= 105)
+            else if (playerSpeed >= 90 && playerSpeed < 135)
             {
                 scoreMultiplier = 5;
             }
-            else if (playerSpeed > 105)
+            else if (playerSpeed >= 135 && playerSpeed < 170)
             {
                 scoreMultiplier = 10;
             }
             else
             {
-                scoreMultiplier = 0;
+                scoreMultiplier = 20;
             }
 
             if (doubleMultiplier)
@@ -56,6 +56,8 @@ public class ScoreManager : MonoBehaviour
 
             UpdateScoreText();
         }
+        else
+            scoreMultiplier = 0;
     }
 
     private void UpdateScoreText()

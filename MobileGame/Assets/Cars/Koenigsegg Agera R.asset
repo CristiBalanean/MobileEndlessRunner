@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82192abfb2e48644be9b8d2a8a7642c, type: 3}
+  m_Name: Koenigsegg Agera R
+  m_EditorClassIdentifier: 
+  carName: 'Koenigsegg Agera R '
+  topSpeed: 200
+  acceleration: 50
+  brakingPower: 110
+  lowSpeedHandling: 7.5
+  highSpeedHandling: 7
+  length: 0
+  height: 0
+  carSprite: {fileID: -1031546874, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}

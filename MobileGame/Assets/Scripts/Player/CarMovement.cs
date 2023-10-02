@@ -11,49 +11,83 @@ public class CarMovement : MonoBehaviour
     private float dirX;
     private float smoothingFactor = 0.75f; // Adjust this value to control smoothing intensity
 
-    private Vector3 smoothAcceleration;
+    private float touchDirection;
+
+    private float topSpeed;
+    private float acceleration;
+    private float brakePower;
+    private float lowSpeedHandling;
+    private float highSpeedHandling;
+
+    private bool accelerating = false;
+    private bool braking = false;
+
+    private int controls;
+
     private Vector3 filteredAcceleration;
+
+    [SerializeField] private Car player;
 
     [SerializeField] private float currentSpeed;
 
+    [Header("Movement")]
     [SerializeField] private float tiltSpeed = 240f;
-    [SerializeField] private float deadZone = 0.2f; // Dead zone to avoid jitter
+    [SerializeField] private float deadZone = 0.2f;
     [SerializeField] private float filterStrength = 0.3f;
-
-    [SerializeField] private float topSpeed;
-    [SerializeField] private float acceleration;
-
-    [SerializeField] private float brakeSpeed;
-
-    [SerializeField] private bool accelerating = false;
-    [SerializeField] private bool braking = false;
 
     [SerializeField] private TMP_Text speedText;
 
-    [SerializeField] private CameraShake cameraShake; // Reference to the CameraShake script
+    [SerializeField] private CameraShake cameraShake;
 
-    // Start is called before the first frame update
+    [SerializeField] private GameObject tilt;
+    [SerializeField] private GameObject touch;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+
+        player = CarData.Instance.currentCar;
+
+        topSpeed = player.GetTopSpeed();
+        acceleration = player.GetAcceleration();
+        brakePower = player.GetBrakingPower();
+        lowSpeedHandling = player.GetLowSpeedHandling();
+        highSpeedHandling = player.GetHighSpeedHandling();
+
+        GetComponent<SpriteRenderer>().sprite = player.GetSprite();
+
+        controls = PlayerPrefs.GetInt("Tilt");
+        if(controls == 1)
+            touch.SetActive(false);
+        else
+            tilt.SetActive(false);
     }
 
     void Update()
     {
-        Vector3 rawAcceleration = GetAveragedAcceleration();
-
-        // Apply the low-pass filter
-        filteredAcceleration = Vector3.Lerp(filteredAcceleration, rawAcceleration, filterStrength);
-
-        // Use the filtered acceleration for controls
-        dirX = filteredAcceleration.x * smoothingFactor * tiltSpeed * Time.deltaTime;
-
-        dirX = Mathf.Clamp(dirX, -7.5f, 7.5f);
-
-        if (Mathf.Abs(rawAcceleration.x) < deadZone)
+        if (controls == 1)
         {
-            rawAcceleration.x = 0f;
+            Vector3 rawAcceleration = GetAveragedAcceleration();
+
+            // Apply the low-pass filter
+            filteredAcceleration = Vector3.Lerp(filteredAcceleration, rawAcceleration, filterStrength);
+
+            // Use the filtered acceleration for controls
+            dirX = filteredAcceleration.x * smoothingFactor * tiltSpeed * Time.deltaTime;
+
+            if (Mathf.Abs(rawAcceleration.x) < deadZone)
+            {
+                rawAcceleration.x = 0f;
+            }
         }
+        else
+        {
+            dirX = touchDirection * 1000f * Time.deltaTime;
+        }
+
+        float normalizedSpeed = Mathf.Clamp01((currentSpeed - 25f) / (topSpeed - 25f));
+        float currentHandling = Mathf.Lerp(lowSpeedHandling, highSpeedHandling, normalizedSpeed);
+        dirX = Mathf.Clamp(dirX, -currentHandling, currentHandling);
 
         transform.position = new Vector2(Mathf.Clamp(transform.position.x, -1.25f, 1.25f), transform.position.y);
 
@@ -73,6 +107,12 @@ public class CarMovement : MonoBehaviour
     {
         rigidBody.velocity = new Vector2(dirX, currentSpeed/3.6f);
 
+        if(controls == 0 && !braking)
+        {
+            if (currentSpeed < topSpeed)
+                currentSpeed += acceleration * Time.fixedDeltaTime;
+        }
+
         if(accelerating && !braking) 
         {
             if(currentSpeed < topSpeed)
@@ -82,7 +122,7 @@ public class CarMovement : MonoBehaviour
         if(braking)
         {
             if(currentSpeed > 25)
-                currentSpeed -= brakeSpeed * Time.fixedDeltaTime;
+                currentSpeed -= brakePower * Time.fixedDeltaTime;
         }
 
         if(!accelerating && !braking)
@@ -167,5 +207,31 @@ public class CarMovement : MonoBehaviour
     public void SetAcceleration(float newAcceleration)
     {
         acceleration = newAcceleration;
+    }
+
+    public float GetCameraNormalizedSpeed()
+    {
+        return Mathf.Clamp01((currentSpeed) / 200f);
+    }
+
+    public void DirectionRight() { touchDirection = 1; }
+    
+    public void DirectionLeft() { touchDirection = -1; }
+
+    public void Straight() { touchDirection = 0; }
+
+    public void ChangeControlsUI()
+    {
+        controls = PlayerPrefs.GetInt("Tilt");
+        if (controls == 1)
+        {
+            touch.SetActive(false);
+            tilt.SetActive(true);
+        }
+        else
+        {
+            tilt.SetActive(false);
+            touch.SetActive(true);
+        }
     }
 }

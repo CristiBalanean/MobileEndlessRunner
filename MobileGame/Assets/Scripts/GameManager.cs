@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private CarMovement player;
 
+    [SerializeField] private Button controlsButton;
+
     public float deltaTime;
 
     private void Awake()
@@ -31,27 +33,20 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         if(Instance == null)
-            Instance = this;
-
-        if (PlayerPrefs.GetFloat("TiltSpeed") != 0)
-        {
-            player.SetTiltSpeed(PlayerPrefs.GetFloat("TiltSpeed"));
-            slider.value = PlayerPrefs.GetFloat("TiltSpeed") - 2000f;
-        }
-        else
-        {
-            player.SetTiltSpeed(4000f);
-            slider.value = 2000f;
-        }    
+            Instance = this;   
 
         restartScreen.SetActive(false);
         pauseScreen.SetActive(false);
         settingsScreen.SetActive(false);
 
-        slider.onValueChanged.AddListener((v) => {
-            PlayerPrefs.SetFloat("TiltSpeed", v + 2000f);
-            player.SetTiltSpeed(PlayerPrefs.GetFloat("TiltSpeed"));
-        });
+        if (PlayerPrefs.GetInt("Tilt") == 1)
+        {
+            controlsButton.GetComponentInChildren<TMP_Text>().text = "TILT";
+        }
+        else
+        {
+            controlsButton.GetComponentInChildren<TMP_Text>().text = "TOUCH";
+        }
     }
 
     private void Update()
@@ -101,5 +96,21 @@ public class GameManager : MonoBehaviour
     public void Exit()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    public void Controls()
+    {
+        if (PlayerPrefs.GetInt("Tilt") == 1)
+        {
+            PlayerPrefs.SetInt("Tilt", 0);
+            controlsButton.GetComponentInChildren<TMP_Text>().text = "TOUCH";
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Tilt", 1);
+            controlsButton.GetComponentInChildren<TMP_Text>().text = "TILT";
+        }
+
+        player.ChangeControlsUI();
     }
 }
