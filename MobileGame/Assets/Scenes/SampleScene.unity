@@ -198,6 +198,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35257196}
   m_CullTransparentMesh: 1
+--- !u!1 &98607421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 98607423}
+  - component: {fileID: 98607422}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &98607422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98607421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3459c4ba36d27e2489176b3a56f02bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restartScreen: {fileID: 1603728138}
+  pauseScreen: {fileID: 1645996191}
+  settingsScreen: {fileID: 216818289}
+  scoreText: {fileID: 496835966}
+  speedText: {fileID: 928738514}
+--- !u!4 &98607423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98607421}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 113.26847, y: 1242.1229, z: -9.051266}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &105679618
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,6 +549,7 @@ GameObject:
   - component: {fileID: 216818290}
   - component: {fileID: 216818292}
   - component: {fileID: 216818291}
+  - component: {fileID: 216818293}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -522,8 +572,8 @@ RectTransform:
   - {fileID: 2080882020}
   - {fileID: 307545040}
   - {fileID: 704501756}
-  - {fileID: 2052620437}
   - {fileID: 1372917754}
+  - {fileID: 2052620437}
   m_Father: {fileID: 1538516663}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -569,6 +619,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 216818289}
   m_CullTransparentMesh: 1
+--- !u!114 &216818293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216818289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a3f2284e54da14ca33a4cd9fd62eeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &273361869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,9 +1454,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1177021331}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ActivateSettingsScreen
+      - m_Target: {fileID: 98607422}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ShowSettingsScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2760,7 +2822,7 @@ GameObject:
   - component: {fileID: 908141905}
   - component: {fileID: 908141904}
   m_Layer: 5
-  m_Name: YourScore
+  m_Name: FinalScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3233,8 +3295,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1177021331}
-        m_TargetAssemblyTypeName: RestartManager, Assembly-CSharp
+      - m_Target: {fileID: 1603728142}
+        m_TargetAssemblyTypeName: RestartScreen, Assembly-CSharp
         m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
@@ -3485,54 +3547,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054705958}
   m_CullTransparentMesh: 1
---- !u!1 &1088642441
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1088642443}
-  - component: {fileID: 1088642442}
-  m_Layer: 0
-  m_Name: FPS
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1088642442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088642441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b71c686f810bf344bcc4dcf1854db6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textColor: {r: 0, g: 0, b: 0, a: 1}
-  fontSize: 35
-  updatePeriod: 0.2
-  lowFpsThreshold: 60
---- !u!4 &1088642443
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088642441}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 644.54645, y: 207.72745, z: 1.0650566}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1154203125
 GameObject:
   m_ObjectHideFlags: 0
@@ -3696,11 +3710,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8da2d6b416f7b4b993f14c792d8427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restartScreen: {fileID: 1603728138}
-  pauseScreen: {fileID: 1645996191}
-  settingsScreen: {fileID: 216818289}
-  finalScoreText: {fileID: 908141904}
-  slider: {fileID: 0}
   player: {fileID: 1577061386}
   controlsButton: {fileID: 1372917755}
   deltaTime: 0
@@ -4445,9 +4454,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1177021331}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ReturnToGame
+      - m_Target: {fileID: 1645996195}
+        m_TargetAssemblyTypeName: PauseScreen, Assembly-CSharp
+        m_MethodName: ReturnButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4577,9 +4586,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1177021331}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: PauseGame
+      - m_Target: {fileID: 98607422}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ShowPauseScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4710,9 +4719,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1177021331}
-        m_TargetAssemblyTypeName: RestartManager, Assembly-CSharp
-        m_MethodName: RestartGame
+      - m_Target: {fileID: 1645996195}
+        m_TargetAssemblyTypeName: PauseScreen, Assembly-CSharp
+        m_MethodName: RestartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4991,9 +5000,9 @@ RectTransform:
   - {fileID: 1690431394}
   - {fileID: 1269715369}
   - {fileID: 350232157}
-  - {fileID: 1445946447}
   - {fileID: 496835965}
   - {fileID: 928738513}
+  - {fileID: 1445946447}
   - {fileID: 1603728139}
   - {fileID: 1645996192}
   - {fileID: 216818290}
@@ -5124,7 +5133,6 @@ MonoBehaviour:
   tiltSpeed: 4000
   deadZone: 0.04
   filterStrength: 0.2
-  speedText: {fileID: 928738514}
   cameraShake: {fileID: 519420033}
   tilt: {fileID: 1269715368}
   touch: {fileID: 350232156}
@@ -5235,6 +5243,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda25d6804340d74da13693790415d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1664540638}
+        m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
+        m_MethodName: SetHighscore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 98607422}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ShowRestartScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1603728142}
+        m_TargetAssemblyTypeName: RestartScreen, Assembly-CSharp
+        m_MethodName: SetFinalScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &1577061392
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5291,6 +5338,7 @@ GameObject:
   - component: {fileID: 1603728139}
   - component: {fileID: 1603728141}
   - component: {fileID: 1603728140}
+  - component: {fileID: 1603728142}
   m_Layer: 5
   m_Name: RestartScreen
   m_TagString: Untagged
@@ -5359,6 +5407,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1603728138}
   m_CullTransparentMesh: 1
+--- !u!114 &1603728142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603728138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a19177acdcbe474b9905fa1819fbd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalScore: {fileID: 908141904}
 --- !u!1 &1639848915
 GameObject:
   m_ObjectHideFlags: 0
@@ -5638,6 +5699,7 @@ GameObject:
   - component: {fileID: 1645996192}
   - component: {fileID: 1645996194}
   - component: {fileID: 1645996193}
+  - component: {fileID: 1645996195}
   m_Layer: 5
   m_Name: PauseScreen
   m_TagString: Untagged
@@ -5707,6 +5769,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1645996191}
   m_CullTransparentMesh: 1
+--- !u!114 &1645996195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645996191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3078c479608041042b7c0724249a1b8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1657466108
 GameObject:
   m_ObjectHideFlags: 0
@@ -5810,8 +5884,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreMultiplier: 1
   doubleMultiplier: 0
-  scoreText: {fileID: 496835966}
   player: {fileID: 1577061386}
+  score: 0
 --- !u!1 &1690431393
 GameObject:
   m_ObjectHideFlags: 0
@@ -6017,8 +6091,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1177021331}
-        m_TargetAssemblyTypeName: RestartManager, Assembly-CSharp
+      - m_Target: {fileID: 1603728142}
+        m_TargetAssemblyTypeName: RestartScreen, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
@@ -6896,8 +6970,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1177021331}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 216818293}
+        m_TargetAssemblyTypeName: SettingsScreen, Assembly-CSharp
         m_MethodName: BackButton
         m_Mode: 1
         m_Arguments:
@@ -7330,9 +7404,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1177021331}
-        m_TargetAssemblyTypeName: RestartManager, Assembly-CSharp
-        m_MethodName: Exit
+      - m_Target: {fileID: 1645996195}
+        m_TargetAssemblyTypeName: PauseScreen, Assembly-CSharp
+        m_MethodName: ExitButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7386,6 +7460,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1177021332}
   - {fileID: 1664540637}
+  - {fileID: 98607423}
   - {fileID: 1296700582}
   - {fileID: 105679620}
   - {fileID: 1787078052}
@@ -7393,7 +7468,6 @@ SceneRoots:
   - {fileID: 314338017}
   - {fileID: 1564572544}
   - {fileID: 1577061390}
+  - {fileID: 340411493}
   - {fileID: 1538516663}
   - {fileID: 1039989969}
-  - {fileID: 340411493}
-  - {fileID: 1088642443}

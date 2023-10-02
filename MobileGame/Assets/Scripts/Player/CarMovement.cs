@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class CarMovement : MonoBehaviour
 {
+    public delegate void SpeedChangeHandler(float speedChangeEvent);
+    public static event SpeedChangeHandler OnSpeedChange;
+
     private Rigidbody2D rigidBody;
 
     private float dirX;
@@ -35,8 +38,6 @@ public class CarMovement : MonoBehaviour
     [SerializeField] private float deadZone = 0.2f;
     [SerializeField] private float filterStrength = 0.3f;
 
-    [SerializeField] private TMP_Text speedText;
-
     [SerializeField] private CameraShake cameraShake;
 
     [SerializeField] private GameObject tilt;
@@ -65,6 +66,8 @@ public class CarMovement : MonoBehaviour
 
     void Update()
     {
+        OnSpeedChange?.Invoke(currentSpeed);
+
         if (controls == 1)
         {
             Vector3 rawAcceleration = GetAveragedAcceleration();
@@ -90,8 +93,6 @@ public class CarMovement : MonoBehaviour
         dirX = Mathf.Clamp(dirX, -currentHandling, currentHandling);
 
         transform.position = new Vector2(Mathf.Clamp(transform.position.x, -1.25f, 1.25f), transform.position.y);
-
-        speedText.text = "SPEED: " + GetSpeed().ToString("F1") + " KM/H";
 
         float shakeMagnitude = Mathf.Clamp((GetSpeed() - 75f) * 0.01f, 0f, 0.0125f);
 

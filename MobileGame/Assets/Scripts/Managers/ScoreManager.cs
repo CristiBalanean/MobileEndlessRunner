@@ -11,11 +11,9 @@ public class ScoreManager : MonoBehaviour
 
     public bool doubleMultiplier = false;
 
-    [SerializeField] TMP_Text scoreText;
-
     [SerializeField] CarMovement player;
 
-    private int score = 0;
+    public int score = 0;
 
     private void Start()
     {
@@ -53,16 +51,9 @@ public class ScoreManager : MonoBehaviour
                 scoreMultiplier *= 2;
 
             score += 1 * scoreMultiplier;
-
-            UpdateScoreText();
         }
         else
             scoreMultiplier = 0;
-    }
-
-    private void UpdateScoreText()
-    {
-        scoreText.text = "SCORE: " + score.ToString();
     }
 
     public int GetFinalScore()
@@ -73,5 +64,11 @@ public class ScoreManager : MonoBehaviour
     public void AddToScore(int value)
     {
         score += value;
+    }
+
+    public void SetHighscore()
+    {
+        if (GetFinalScore() > PlayerPrefs.GetInt("HighScore"))
+            PlayerPrefs.SetInt("HighScore", GetFinalScore());
     }
 }

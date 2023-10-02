@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CarHealth : MonoBehaviour
 {
+    [SerializeField] private UnityEvent deathTrigger;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.CompareTag("Obstacle") || collision.transform.CompareTag("Police"))
         {
-            if(ScoreManager.Instance.GetFinalScore() > PlayerPrefs.GetInt("HighScore"))
-                PlayerPrefs.SetInt("HighScore", ScoreManager.Instance.GetFinalScore());
+            deathTrigger.Invoke();
 
-            GetComponent<CarMovement>().SetSpeedAtDeath();
             gameObject.SetActive(false);
-            GameManager.Instance.ActivateRestartScreen();
         }
     }
 }

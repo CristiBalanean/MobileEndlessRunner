@@ -9,14 +9,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [SerializeField] private GameObject restartScreen;
-    [SerializeField] private GameObject pauseScreen;
-    [SerializeField] private GameObject settingsScreen;
-
-    [SerializeField] private TMP_Text finalScoreText;
-
-    [SerializeField] private Slider slider;
-
     [SerializeField] private CarMovement player;
 
     [SerializeField] private Button controlsButton;
@@ -35,9 +27,7 @@ public class GameManager : MonoBehaviour
         if(Instance == null)
             Instance = this;   
 
-        restartScreen.SetActive(false);
-        pauseScreen.SetActive(false);
-        settingsScreen.SetActive(false);
+        
 
         if (PlayerPrefs.GetInt("Tilt") == 1)
         {
@@ -53,49 +43,6 @@ public class GameManager : MonoBehaviour
     {
         deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
         float fps = 1.0f / deltaTime;
-    }
-
-    public void ActivateRestartScreen()
-    {
-        restartScreen.SetActive(true);
-        finalScoreText.text = "YOUR SCORE: " + ScoreManager.Instance.GetFinalScore().ToString();
-    }
-
-    public void PauseGame()
-    {
-        pauseScreen.SetActive(true);
-        Time.timeScale = 0;
-    }
-
-    public void ReturnToGame()
-    {
-        pauseScreen.SetActive(false);
-        Time.timeScale = 1;
-    }
-
-    public void RestartGame()
-    {
-        SceneManager.LoadScene("SampleScene");
-
-        if (Time.timeScale == 0)
-            Time.timeScale = 1;
-    }
-
-    public void ActivateSettingsScreen()
-    {
-        settingsScreen.SetActive(true);
-        pauseScreen.SetActive(false);
-    }
-
-    public void BackButton()
-    {
-        settingsScreen.SetActive(false);
-        pauseScreen.SetActive(true);
-    }
-
-    public void Exit()
-    {
-        SceneManager.LoadScene("Menu");
     }
 
     public void Controls()
