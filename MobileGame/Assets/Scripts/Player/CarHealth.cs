@@ -7,6 +7,12 @@ public class CarHealth : MonoBehaviour
 {
     [SerializeField] private UnityEvent deathTrigger;
 
+    private void Start()
+    {
+        MoneyManager moneyManager = FindObjectOfType<MoneyManager>();
+        deathTrigger.AddListener(moneyManager.ComputeFinalMoney);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.CompareTag("Obstacle") || collision.transform.CompareTag("Police"))

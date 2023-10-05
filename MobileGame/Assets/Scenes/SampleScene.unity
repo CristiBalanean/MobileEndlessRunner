@@ -631,6 +631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a3f2284e54da14ca33a4cd9fd62eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputTypeButton: {fileID: 1372917755}
 --- !u!1 &273361869
 GameObject:
   m_ObjectHideFlags: 0
@@ -2108,6 +2109,70 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &637044322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 637044324}
+  - component: {fileID: 637044323}
+  - component: {fileID: 637044325}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &637044323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637044322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fff40c1db6e684db6d932c36de0b33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentInput: 0
+  smoothingFactor: 0.75
+  movementSensitivityX: 4000
+  deadZone: 0.2
+  filterStrength: 0.3
+--- !u!4 &637044324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637044322}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.348615, y: 4.6727557, z: 0.01890546}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &637044325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637044322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15951282ca119ba489669fcbf0b3d846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiltUI: {fileID: 1269715368}
+  touchUI: {fileID: 350232156}
 --- !u!1 &641169935
 GameObject:
   m_ObjectHideFlags: 0
@@ -3710,9 +3775,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8da2d6b416f7b4b993f14c792d8427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1577061386}
-  controlsButton: {fileID: 1372917755}
-  deltaTime: 0
 --- !u!4 &1177021332
 Transform:
   m_ObjectHideFlags: 0
@@ -4321,9 +4383,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1177021331}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Controls
+      - m_Target: {fileID: 216818293}
+        m_TargetAssemblyTypeName: SettingsScreen, Assembly-CSharp
+        m_MethodName: InputTypeButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5130,9 +5192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   currentSpeed: 25
-  tiltSpeed: 4000
-  deadZone: 0.04
-  filterStrength: 0.2
   cameraShake: {fileID: 519420033}
   tilt: {fileID: 1269715368}
   touch: {fileID: 350232156}
@@ -6692,9 +6751,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1577061386}
-          m_TargetAssemblyTypeName: CarMovement, Assembly-CSharp
-          m_MethodName: Straight
+        - m_Target: {fileID: 637044323}
+          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+          m_MethodName: ChangeDirectionRightOff
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -6708,9 +6767,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1577061386}
-          m_TargetAssemblyTypeName: CarMovement, Assembly-CSharp
-          m_MethodName: DirectionRight
+        - m_Target: {fileID: 637044323}
+          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+          m_MethodName: ChangeDirectionRight
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -7293,9 +7352,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1577061386}
-          m_TargetAssemblyTypeName: CarMovement, Assembly-CSharp
-          m_MethodName: Straight
+        - m_Target: {fileID: 637044323}
+          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+          m_MethodName: ChangeDirectionLeftOff
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -7309,9 +7368,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1577061386}
-          m_TargetAssemblyTypeName: CarMovement, Assembly-CSharp
-          m_MethodName: DirectionLeft
+        - m_Target: {fileID: 637044323}
+          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+          m_MethodName: ChangeDirectionLeft
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -7461,6 +7520,7 @@ SceneRoots:
   - {fileID: 1177021332}
   - {fileID: 1664540637}
   - {fileID: 98607423}
+  - {fileID: 637044324}
   - {fileID: 1296700582}
   - {fileID: 105679620}
   - {fileID: 1787078052}

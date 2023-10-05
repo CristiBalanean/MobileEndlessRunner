@@ -20,6 +20,12 @@ public class Car : ScriptableObject
     [Header("Sprite")]
     [SerializeField] private Sprite carSprite;
 
+    [Header("Price")]
+    [SerializeField] private int carPrice;
+
+    [Header("Unlocked")]
+    [SerializeField] private bool unlocked;
+
     public string GetName() { return carName; }
 
     public float GetTopSpeed() {  return topSpeed; }
@@ -37,4 +43,10 @@ public class Car : ScriptableObject
     public float GetHeight() { return height; }
 
     public Sprite GetSprite() { return carSprite; }
+
+    public int GetCarPrice() { return carPrice; }
+
+    public bool IsLocked() { return unlocked; }
+
+    public void Unlock() { unlocked = true; }
 }
