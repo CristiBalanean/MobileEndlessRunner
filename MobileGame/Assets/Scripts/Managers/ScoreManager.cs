@@ -15,6 +15,8 @@ public class ScoreManager : MonoBehaviour
 
     public int score = 0;
 
+    private float distanceTraveled;
+
     private void Start()
     {
         if(Instance == null)
@@ -22,6 +24,11 @@ public class ScoreManager : MonoBehaviour
 
         // Start invoking the UpdateScore function every 1 second (1.0f seconds) and repeat every 1 second (1.0f seconds)
         InvokeRepeating("UpdateScore", 0f, 0.25f);
+    }
+
+    private void Update()
+    {
+        distanceTraveled = Vector2.Distance(player.transform.position, Vector2.zero);
     }
 
     private void UpdateScore()
@@ -59,6 +66,11 @@ public class ScoreManager : MonoBehaviour
     public int GetFinalScore()
     {
         return score;
+    }
+
+    public float GetDistanceTraveled()
+    {
+        return distanceTraveled;
     }
 
     public void AddToScore(int value)

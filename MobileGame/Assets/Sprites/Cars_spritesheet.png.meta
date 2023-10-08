@@ -69,8 +69,8 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
-    resizeAlgorithm: 1
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Default Car
+      name: Default
       rect:
         serializedVersion: 2
         x: 0
@@ -150,8 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5838fd2f52b19b34bae9071010f91e6b
-      internalID: 567776306
+      spriteID: 5277dfb383e3f1049ac2f88c52304a17
+      internalID: -764487271
       vertices: []
       indices: 
       edges: []
@@ -171,17 +171,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2158ba2a8c6590478d66710e8092315
-      internalID: -1451875932
+      spriteID: ae1478bd685c79142a06f9dceb0c2fe5
+      internalID: 929274752
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Honda Civic
+      name: Honda
       rect:
         serializedVersion: 2
-        x: 256
+        x: 255
         y: 896
         width: 128
         height: 128
@@ -192,8 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05616e6e0af876e4db838aab4b431537
-      internalID: 808487133
+      spriteID: bf5181247d285f54f92a865955a6f12c
+      internalID: -1669213762
       vertices: []
       indices: 
       edges: []
@@ -213,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2065b90ad8ebf74a854f553e5e75d65
-      internalID: -1758931459
+      spriteID: a254ad72b3ad7f74db67fee698d10e07
+      internalID: 855596945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Audi R8
+      name: Audi
       rect:
         serializedVersion: 2
         x: 512
@@ -234,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47a895366d1ff104593ee7632579f272
-      internalID: 1381268801
+      spriteID: bbeede8587d10c1449f906b3acf4be75
+      internalID: 270791369
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Koenigsegg Agera R
+      name: Koenisseg
       rect:
         serializedVersion: 2
         x: 640
@@ -255,8 +255,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b459250e399184f4798d663d9feb779d
-      internalID: -1031546874
+      spriteID: 68dc6d8ab47cfa241aa8f56f350d477e
+      internalID: 929593907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nissan
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 896
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f7f239ddc3df3349b33cb25a69e878e
+      internalID: 191546273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Toyota
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 896
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6567d0ecb45534d409213afa1cb909d7
+      internalID: -1401264564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golf
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5052d477ffef3741a3a039931aa4156
+      internalID: -420829498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BMW seria 1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 768
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea16bd3042ffd754e8d318e012ddbf2c
+      internalID: 1251585493
       vertices: []
       indices: 
       edges: []
@@ -272,12 +356,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Audi R8: 1381268801
-      Default Car: 567776306
-      Honda Civic: 808487133
-      Koenigsegg Agera R: -1031546874
-      Lexus: -1758931459
-      Mustang: -1451875932
+      Audi: 270791369
+      BMW seria 1: 1251585493
+      Default: -764487271
+      Golf: -420829498
+      Honda: -1669213762
+      Koenisseg: 929593907
+      Lexus: 855596945
+      Mustang: 929274752
+      Nissan: 191546273
+      Toyota: -1401264564
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

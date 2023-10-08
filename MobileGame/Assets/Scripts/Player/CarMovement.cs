@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CarMovement : MonoBehaviour
 {
@@ -70,8 +71,18 @@ public class CarMovement : MonoBehaviour
     {
         rigidBody.velocity = new Vector2(dirX, currentSpeed/3.6f);
 
+        if (transform.position.x == -1.25f || transform.position.x == 1.25f)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.fixedDeltaTime * 10f);
+        }
+        else
+        {
+            float tiltAngle = Mathf.Lerp(-1.5f, 1.5f, (dirX + 1f) / 2f);
+            Quaternion targetRotation = Quaternion.Euler(0f, 0f, -tiltAngle);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 5f);
+        }
 
-        if((accelerating || InputManager.Instance.currentInput == InputTypes.TOUCH) && !braking) 
+        if ((accelerating || InputManager.Instance.currentInput == InputTypes.TOUCH) && !braking) 
         {
             if(currentSpeed < topSpeed)
                 currentSpeed += acceleration * Time.fixedDeltaTime;

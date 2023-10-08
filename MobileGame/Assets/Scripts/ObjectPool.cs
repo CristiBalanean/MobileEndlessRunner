@@ -9,7 +9,7 @@ public class ObjectPool : MonoBehaviour
     private List<GameObject> pool = new List<GameObject>();
     [SerializeField] private int amount;
 
-    [SerializeField] private GameObject[] objectsToPool;
+    [SerializeField] private GameObject objectToPool;
 
     private void Awake()
     {
@@ -21,8 +21,7 @@ public class ObjectPool : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            int rand = Random.Range(0, objectsToPool.Length);
-            GameObject obj = Instantiate(objectsToPool[rand]);
+            GameObject obj = Instantiate(objectToPool);
             obj.SetActive(false);
             pool.Add(obj);
         }

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e82192abfb2e48644be9b8d2a8a7642c, type: 3}
-  m_Name: Audi R8
+  m_Name: Nissan
   m_EditorClassIdentifier: 
-  carName: Audi R8
-  topSpeed: 150
-  acceleration: 30
-  brakingPower: 70
-  lowSpeedHandling: 4
-  highSpeedHandling: 3.5
+  carName: Nissan Skyline R34
+  topSpeed: 190
+  acceleration: 45
+  brakingPower: 90
+  lowSpeedHandling: 6.5
+  highSpeedHandling: 6
   length: 0
   height: 0
-  carSprite: {fileID: 270791369, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
-  carPrice: 75000
+  carSprite: {fileID: 191546273, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+  carPrice: 350000
   unlocked: 0

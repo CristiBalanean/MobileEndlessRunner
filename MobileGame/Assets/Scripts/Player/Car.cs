@@ -50,3 +50,26 @@ public class Car : ScriptableObject
 
     public void Unlock() { unlocked = true; }
 }
+
+[System.Serializable]
+public class CarUnlockedData
+{
+    public string carName;
+    public bool unlocked;
+
+    public CarUnlockedData()
+    {
+
+    }
+}
+
+[System.Serializable]
+public class CarUnlockedDataWrapper
+{
+    public CarUnlockedData[] carDataList;
+
+    public CarUnlockedDataWrapper(CarUnlockedData[] carDataList)
+    {
+        this.carDataList = carDataList;
+    }
+}

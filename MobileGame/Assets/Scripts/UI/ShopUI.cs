@@ -7,6 +7,11 @@ public class ShopUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text currentMoneyText;
 
+    private void Start()
+    {
+        currentMoneyText.text = "CURRENT MONEY: " + MoneyManager.Instance.currentMoney.ToString();
+    }
+
     private void OnEnable()
     {
         currentMoneyText.text = "CURRENT MONEY: " + MoneyManager.Instance.currentMoney.ToString();
