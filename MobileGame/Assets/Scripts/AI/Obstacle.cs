@@ -29,8 +29,6 @@ public class Obstacle : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().sprite = SpritePool.Instance.ChooseSprite();
 
-        topSpeed = Random.Range(21.5f, 25.5f);
-
         // Set the initial velocity
         Vector2 initialVelocity = Vector2.up * topSpeed;
         rigidBody.velocity = initialVelocity;

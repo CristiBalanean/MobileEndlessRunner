@@ -7,8 +7,12 @@ using UnityEngine.UIElements;
 
 public class CarMovement : MonoBehaviour
 {
+    public static CarMovement Instance;
+
     public delegate void SpeedChangeHandler(float speedChangeEvent);
     public static event SpeedChangeHandler OnSpeedChange;
+
+    public float speedMultiplier;
 
     private Rigidbody2D rigidBody;
 
@@ -32,8 +36,10 @@ public class CarMovement : MonoBehaviour
     [SerializeField] private GameObject tilt;
     [SerializeField] private GameObject touch;
 
-    void Start()
+    private void Awake()
     {
+        Instance = this;
+
         rigidBody = GetComponent<Rigidbody2D>();
 
         player = CarData.Instance.currentCar;
@@ -44,6 +50,11 @@ public class CarMovement : MonoBehaviour
         lowSpeedHandling = player.GetLowSpeedHandling();
         highSpeedHandling = player.GetHighSpeedHandling();
         GetComponent<SpriteRenderer>().sprite = player.GetSprite();
+    }
+
+    private void Start()
+    {
+        speedMultiplier = Mathf.Lerp(1f, 1.75f, topSpeed / 200);
     }
 
     void Update()
@@ -129,11 +140,6 @@ public class CarMovement : MonoBehaviour
     public float GetAcceleration()
     {
         return acceleration;
-    }
-
-    public void SetSpeedAtDeath()
-    {
-        currentSpeed = 0;
     }
 
     public void SetTopSpeed(float newSpeed)

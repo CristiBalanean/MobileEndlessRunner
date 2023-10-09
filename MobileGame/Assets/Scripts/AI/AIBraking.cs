@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Linq;
 using UnityEngine;
 
 public class AIBraking : MonoBehaviour
 {
     [SerializeField] float safeDistance;
-
-    [SerializeField] LayerMask obstacleLayer;
+    [SerializeField] float brakeForce = 20f;
     [SerializeField] Transform detector;
+    [SerializeField] LayerMask obstacleLayer;
 
     private Rigidbody2D rigidBody;
-    private RaycastHit2D hitInfo;
-    private float targetSpeed;
-    private float speed;
 
     public bool braking;
 
@@ -21,78 +16,51 @@ public class AIBraking : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    private void OnEnable()
-    {
-        safeDistance = Random.Range(2.5f, 4.5f);
-    }
-
-    void Update()
+    void FixedUpdate()
     {
         DetectObstaclesInFront();
     }
 
     private void DetectObstaclesInFront()
     {
-        hitInfo = Physics2D.Raycast(detector.position, Vector2.up, 15f, obstacleLayer);
+        RaycastHit2D[] hitInfos = Physics2D.RaycastAll(transform.position, Vector2.up, 15f, obstacleLayer);
 
-        if (hitInfo)
+        foreach (RaycastHit2D hit in hitInfos)
         {
-            float distanceToObstacle = CheckDistance(hitInfo.transform);
-
-            braking = true;
-
-            if (GetComponent<Obstacle>() != null)
+            if (hit.transform != transform) // Exclude the current car from the detected obstacles
             {
-                speed = GetComponent<Obstacle>().topSpeed;
-            }
+                float distanceToObstacle = Vector2.Distance(transform.position, hit.point);
 
-            if (hitInfo.transform.GetComponent<Obstacle>() != null)
-            {
-                targetSpeed = hitInfo.transform.GetComponent<Obstacle>().topSpeed;
+                braking = distanceToObstacle < safeDistance;
+                ApplyBrakingForce(distanceToObstacle);
+                return; // Exit the method after detecting the first obstacle
             }
-            else if (hitInfo.transform.GetComponent<CarMovement>() != null)
-            {
-                targetSpeed = hitInfo.transform.GetComponent<CarMovement>().GetSpeed();
-            }
-            else
-            {
-                return;
-            }
+        }
 
-            if (distanceToObstacle > safeDistance && distanceToObstacle < safeDistance + 1f)
-            {
-                if (hitInfo.transform.GetComponent<CarMovement>() == null)
-                {
-                    rigidBody.velocity = new Vector2(rigidBody.velocity.x, Mathf.Lerp(rigidBody.velocity.y, hitInfo.rigidbody.velocity.y, 1f));
-                    return;
-                }
-            }
-            else if (distanceToObstacle < safeDistance)
-            {
-                float speedDifference = targetSpeed - speed;
+        braking = false; // No obstacles detected
+    }
 
+    private void ApplyBrakingForce(float distanceToObstacle)
+    {
+        Vector2 brakeDirection = -transform.up; // Get the opposite direction of the car
+        Vector2 brakeForceVector = brakeDirection * brakeForce; // Calculate the maximum braking force vector
 
-                float timeToMatch = speedDifference / (-speed);
-                float deceleration = speedDifference / timeToMatch;
-
-                float brakingForce = rigidBody.mass * deceleration * 9.8f;
-
-                rigidBody.AddForce(Vector2.up * brakingForce * Time.deltaTime);
-            }
-
-            if (transform.GetComponent<Obstacle>() != null)
-            {
-                transform.GetComponent<Obstacle>().currentSpeed = rigidBody.velocity.magnitude;
-            }
+        if (distanceToObstacle < safeDistance)
+        {
+            float brakingFactor = 1f - (distanceToObstacle / safeDistance); // Calculate a braking factor based on the distance
+            Vector2 actualBrakeForce = brakeForceVector * brakingFactor; // Apply reduced braking force based on the distance
+            rigidBody.AddForce(actualBrakeForce); // Apply the reduced braking force
+        }
+        else if (distanceToObstacle < safeDistance * 1.25f)
+        {
+            // Maintain current speed when tailing (optional: you can add a speed factor if needed)
+            // You can also add logic here to match the speed of the car in front
+            float currentSpeed = Vector2.Dot(rigidBody.velocity, brakeDirection);
+            rigidBody.velocity = brakeDirection * currentSpeed;
         }
         else
         {
-            braking = false;
+            rigidBody.AddForce(brakeForceVector); // Apply maximum braking force if the distance is greater than safeDistance * 2
         }
-    }
-
-    private float CheckDistance(Transform target)
-    {
-        return Vector2.Distance(transform.position, target.position);
     }
 }

@@ -33,8 +33,7 @@ Transform:
   m_LocalPosition: {x: -0.83, y: -1.967, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6428935927842249924}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6821376548888118941
@@ -104,6 +103,7 @@ MonoBehaviour:
   topSpeed: 0
   acceleration: 1.5
   currentSpeed: 0
+  aggresiveDriver: 0
 --- !u!61 &506409304146858503
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -188,41 +188,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1b26d0eda72054e91b27f3c9b1cca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 7
-  safeDistance: 4
+  safeDistance: 3
+  brakeForce: 2.5
+  detector: {fileID: 0}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
-  detector: {fileID: 6428935927842249924}
   braking: 0
---- !u!1 &6564239358316420580
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6428935927842249924}
-  m_Layer: 0
-  m_Name: DetectorUp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6428935927842249924
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6564239358316420580}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.021, y: 0.723, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4749391520103002643}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
