@@ -960,6 +960,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a3f2284e54da14ca33a4cd9fd62eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputTypeTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1577061386}
+        m_TargetAssemblyTypeName: CarMovement, Assembly-CSharp
+        m_MethodName: ChangeInputType
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   inputTypeButton: {fileID: 1372917755}
 --- !u!1 &273361869
 GameObject:
@@ -5660,6 +5675,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 0
+  currentAcceleration: 0
+  gearAccelerations: []
+  currentGearIndex: 0
+  accelerating: 0
   player: {fileID: 0}
   currentSpeed: 25
   cameraShake: {fileID: 519420033}
@@ -6356,7 +6375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoints:
   - {fileID: 105679618}
-  - {fileID: 0}
+  - {fileID: 1759088690}
   - {fileID: 1236803125}
   powerUps:
   - {fileID: 4857213248471279223, guid: 9114b08ca56ab514cb9619f2c567e518, type: 3}
@@ -6376,7 +6395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoints:
   - {fileID: 105679618}
-  - {fileID: 0}
+  - {fileID: 1759088690}
   - {fileID: 1236803125}
   policePrefab: {fileID: 6725105912748856326, guid: 559111b0b67db9f4ca3a01e953509e51, type: 3}
 --- !u!1 &1664540636
@@ -7607,7 +7626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 3
+  - eventID: 1
     callback:
       m_PersistentCalls:
         m_Calls:

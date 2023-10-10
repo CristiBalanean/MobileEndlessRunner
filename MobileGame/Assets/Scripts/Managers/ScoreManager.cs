@@ -35,7 +35,7 @@ public class ScoreManager : MonoBehaviour
     {
         float playerSpeed = player.GetSpeed();
 
-        if (playerSpeed >= 75) // Only update the score when speed is within the relevant range
+        if (playerSpeed >= 60) // Only update the score when speed is within the relevant range
         {
             if (playerSpeed > 75 && playerSpeed < 90)
             {

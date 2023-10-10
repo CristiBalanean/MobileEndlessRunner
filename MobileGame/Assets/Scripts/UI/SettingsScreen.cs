@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Numerics;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class SettingsScreen : MonoBehaviour
 {
+    [SerializeField] private UnityEvent inputTypeTrigger;
+
     [SerializeField] private Button inputTypeButton;
 
     private void OnEnable()
@@ -37,8 +40,7 @@ public class SettingsScreen : MonoBehaviour
     }
 
     public void InputTypeButton()
-    {
-        
+    {        
         if (PlayerPrefs.GetInt("Tilt") == 1)
         {
             PlayerPrefs.SetInt("Tilt", 0);
@@ -51,5 +53,7 @@ public class SettingsScreen : MonoBehaviour
             inputTypeButton.GetComponentInChildren<TMP_Text>().text = "TILT";
             InputManager.Instance.ChangeInputType(InputTypes.TILT);
         }
+
+        inputTypeTrigger.Invoke();
     }
 }
