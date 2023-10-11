@@ -17,6 +17,10 @@ public class ScoreManager : MonoBehaviour
 
     private float distanceTraveled;
 
+    [SerializeField] private int overtakeCounter = 0;
+    private float overtakeComboTime = 5f;
+    private float currentOvertakeComboTime;
+
     private void Start()
     {
         if(Instance == null)
@@ -24,11 +28,20 @@ public class ScoreManager : MonoBehaviour
 
         // Start invoking the UpdateScore function every 1 second (1.0f seconds) and repeat every 1 second (1.0f seconds)
         InvokeRepeating("UpdateScore", 0f, 0.25f);
+
+        currentOvertakeComboTime = overtakeComboTime;
     }
 
     private void Update()
     {
         distanceTraveled = Vector2.Distance(player.transform.position, Vector2.zero);
+
+        if(overtakeCounter > 0)
+        {
+            currentOvertakeComboTime -= Time.deltaTime;
+        }
+        if (currentOvertakeComboTime < 0)
+            overtakeCounter = 0;
     }
 
     private void UpdateScore()
@@ -82,5 +95,12 @@ public class ScoreManager : MonoBehaviour
     {
         if (GetFinalScore() > PlayerPrefs.GetInt("HighScore"))
             PlayerPrefs.SetInt("HighScore", GetFinalScore());
+    }
+
+    public void IncrementOvertakeCounter()
+    {
+        overtakeCounter++;
+        AddToScore(overtakeCounter * 10);
+        currentOvertakeComboTime = overtakeComboTime;
     }
 }
