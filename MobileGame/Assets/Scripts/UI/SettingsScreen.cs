@@ -12,6 +12,11 @@ public class SettingsScreen : MonoBehaviour
 
     [SerializeField] private Button inputTypeButton;
 
+    private void OnEnable()
+    {
+        Time.timeScale = 0f;
+    }
+
     private void Start()
     {
         if (PlayerPrefs.GetInt("Tilt") == 1)

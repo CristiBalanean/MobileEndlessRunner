@@ -222,8 +222,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   safeDistance: 4
+  acceleration: 5
+  brakingForce: 15
+  proportionalGain: 1
+  integralGain: 0.1
+  derivativeGain: 0.1
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
-  detector: {fileID: 13412633008527440}
-  braking: 0
+  hasSomethingInFront: 0

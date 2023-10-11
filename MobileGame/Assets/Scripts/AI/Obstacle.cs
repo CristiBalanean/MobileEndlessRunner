@@ -13,7 +13,6 @@ public class Obstacle : MonoBehaviour
     private GameObject player;
 
     private bool shouldCheckDistance = false;
-    [SerializeField] private bool aggresiveDriver = false;
 
     void Awake()
     {
@@ -32,12 +31,6 @@ public class Obstacle : MonoBehaviour
 
         // Start checking distance when enabled
         shouldCheckDistance = true;
-
-        int rand = Random.Range(0, 2);
-        if (rand == 0)
-            aggresiveDriver = false;
-        else
-            aggresiveDriver = true;
     }
 
     private void Update()

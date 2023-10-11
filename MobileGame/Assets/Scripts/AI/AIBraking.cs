@@ -3,7 +3,6 @@ using UnityEngine;
 public class AIBraking : MonoBehaviour
 {
     [SerializeField] float safeDistance;
-    [SerializeField] float maxSpeed = 10f;
     [SerializeField] float acceleration = 5f;
     [SerializeField] float brakingForce = 10f;
     [SerializeField] float proportionalGain = 1f;
@@ -15,9 +14,11 @@ public class AIBraking : MonoBehaviour
     private float integral = 0f;
     private float previousError = 0f;
 
+    public bool hasSomethingInFront = false;
+
     private void OnEnable()
     {
-        safeDistance = Random.Range(1.5f, 2.5f);
+        safeDistance = Random.Range(1.75f, 2.5f);
     }
 
     void Start()
@@ -34,24 +35,28 @@ public class AIBraking : MonoBehaviour
     {
         RaycastHit2D[] hitInfos = Physics2D.RaycastAll(transform.position, Vector2.up, 7.5f, obstacleLayer);
 
+        // Reset the flag before checking for obstacles
+        hasSomethingInFront = false;
+
         foreach (RaycastHit2D hit in hitInfos)
         {
             if (hit.transform != transform) // Exclude the current car from the detected obstacles
             {
                 float distanceToObstacle = Vector2.Distance(transform.position, hit.point);
                 float targetSpeed = hit.rigidbody.velocity.magnitude;
-                float speedError = targetSpeed - rigidBody.velocity.magnitude;
 
-                float accelerationForce = 0f;
+                // Check if the obstacle is moving slower or at the same speed
+                if (targetSpeed <= rigidBody.velocity.magnitude)
+                {
+                    float speedError = targetSpeed - rigidBody.velocity.magnitude;
+                    float accelerationForce = 0f;
 
-                if (distanceToObstacle < safeDistance)
-                {
-                    // Apply braking force to maintain safe distance
-                    accelerationForce = -brakingForce;
-                }
-                else
-                {
-                    if (!hit.transform.CompareTag("Player"))
+                    if (distanceToObstacle < safeDistance)
+                    {
+                        // Apply braking force to maintain safe distance
+                        accelerationForce = -brakingForce;
+                    }
+                    else
                     {
                         // Use PID controller to match the velocity of the car in front
                         float proportional = speedError * proportionalGain;
@@ -64,13 +69,17 @@ public class AIBraking : MonoBehaviour
                         // Clamp the acceleration to prevent exceeding the maximum speed
                         accelerationForce = Mathf.Clamp(accelerationForce, -brakingForce, acceleration);
                     }
+
+                    // Apply the calculated acceleration
+                    rigidBody.AddForce(transform.up * accelerationForce);
+                    if (GetComponent<Obstacle>() != null)
+                        GetComponent<Obstacle>().currentSpeed = rigidBody.velocity.magnitude;
+                    previousError = speedError;
+
+                    // Set the flag to indicate that there's something in front
+                    hasSomethingInFront = true;
+                    return;
                 }
-
-                // Apply the calculated acceleration
-                rigidBody.AddForce(transform.up * accelerationForce);
-
-                previousError = speedError;
-                return;
             }
         }
     }

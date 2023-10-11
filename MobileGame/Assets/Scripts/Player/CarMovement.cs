@@ -79,7 +79,7 @@ public class CarMovement : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -1.25f, 1.25f), transform.position.y);
+        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -2.5f, 2.5f), transform.position.y);
         dirX = InputManager.Instance.HandleInput();
         dirX = Mathf.Clamp(dirX, -Handling(), Handling());
 

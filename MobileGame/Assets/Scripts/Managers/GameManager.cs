@@ -27,11 +27,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButton(0) || Input.touchCount > 0 && !isPlaying)
+        if((Input.GetMouseButton(0) || Input.touchCount > 0) && !isPlaying)
         {
+            isPlaying = true;
             tapToPlayText.SetActive(false);
             Time.timeScale = 1f;
-            isPlaying = true;
         }
     }
 }

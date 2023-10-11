@@ -11,7 +11,9 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField] private Collider2D densityCollider;
     [SerializeField] private float minSpawnInterval;
     [SerializeField] private float maxSpawnInterval;
-    [SerializeField] private float minSpawnDistance = 0.75f; // Adjust the value based on your game's requirements
+    [SerializeField] private float minSpawnDistance = 1.25f; // Adjust the value based on your game's requirements
+
+    [SerializeField] private LayerMask obstacleLayer;
 
     private void Start()
     {
@@ -50,11 +52,11 @@ public class SpawnPoint : MonoBehaviour
         // Increase density threshold at higher speeds for larger gaps
         if (playerSpeed > 150f)
         {
-            return 5;
+            return 4;
         }
         else
         {
-            return 3;
+            return 5;
         }
     }
 
@@ -69,7 +71,7 @@ public class SpawnPoint : MonoBehaviour
 
     private void SpawnVehicle()
     {
-        Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(transform.position, minSpawnDistance);
+        Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(transform.position, minSpawnDistance, obstacleLayer);
 
         foreach (var collider in nearbyColliders)
         {
@@ -86,7 +88,7 @@ public class SpawnPoint : MonoBehaviour
             car.transform.position = transform.position;
 
             // Adjust spawn position based on lane density to avoid overlap
-            car.GetComponent<Obstacle>().topSpeed = Random.Range((laneSpeed - 2.5f) / 3.6f, laneSpeed / 3.6f) * CarMovement.Instance.speedMultiplier;
+            car.GetComponent<Obstacle>().topSpeed = Random.Range((laneSpeed - 4.5f) / 3.6f, laneSpeed / 3.6f) * CarMovement.Instance.speedMultiplier;
             car.SetActive(true);
         }
     }
