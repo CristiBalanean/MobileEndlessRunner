@@ -12,7 +12,7 @@ public class PauseScreen : MonoBehaviour
 
     private void OnDisable()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
     }
 
     public void ReturnButton()

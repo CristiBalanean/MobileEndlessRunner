@@ -15,13 +15,9 @@ public class Obstacle : MonoBehaviour
     private bool shouldCheckDistance = false;
     [SerializeField] private bool aggresiveDriver = false;
 
-    private AIBraking aiBraking;
-
-
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        aiBraking = GetComponent<AIBraking>();
         player = GameObject.FindWithTag("Player");
     }
 
@@ -54,12 +50,6 @@ public class Obstacle : MonoBehaviour
                 gameObject.SetActive(false);
             else if (player.transform.position.y > transform.position.y && distance > 10f)
                 gameObject.SetActive(false);
-        }
-
-        if (!aiBraking.braking && currentSpeed < topSpeed) 
-        {
-            currentSpeed += acceleration * Time.deltaTime;
-            rigidBody.velocity = new Vector2(transform.position.x, currentSpeed);
         }
     }
 }

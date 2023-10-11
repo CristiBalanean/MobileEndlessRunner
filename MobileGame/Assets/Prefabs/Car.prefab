@@ -188,10 +188,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1b26d0eda72054e91b27f3c9b1cca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  safeDistance: 3
-  brakeForce: 2.5
-  detector: {fileID: 0}
+  safeDistance: 2
+  maxSpeed: 10
+  acceleration: 5
+  brakingForce: 10
+  proportionalGain: 1
+  integralGain: 0.1
+  derivativeGain: 0.1
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
-  braking: 0

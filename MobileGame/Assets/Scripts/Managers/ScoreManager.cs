@@ -37,11 +37,11 @@ public class ScoreManager : MonoBehaviour
 
         if (playerSpeed >= 60) // Only update the score when speed is within the relevant range
         {
-            if (playerSpeed > 75 && playerSpeed < 90)
+            if (playerSpeed > 60 && playerSpeed < 80)
             {
                 scoreMultiplier = 1;
             }
-            else if (playerSpeed >= 90 && playerSpeed < 135)
+            else if (playerSpeed >= 80 && playerSpeed < 135)
             {
                 scoreMultiplier = 5;
             }

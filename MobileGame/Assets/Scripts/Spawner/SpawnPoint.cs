@@ -11,6 +11,7 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField] private Collider2D densityCollider;
     [SerializeField] private float minSpawnInterval;
     [SerializeField] private float maxSpawnInterval;
+    [SerializeField] private float minSpawnDistance = 0.75f; // Adjust the value based on your game's requirements
 
     private void Start()
     {
@@ -68,10 +69,23 @@ public class SpawnPoint : MonoBehaviour
 
     private void SpawnVehicle()
     {
+        Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(transform.position, minSpawnDistance);
+
+        foreach (var collider in nearbyColliders)
+        {
+            if (collider.CompareTag("Obstacle")) // Check if the collider belongs to a spawned car
+            {
+                // Car too close, don't spawn a new one
+                return;
+            }
+        }
+
         GameObject car = ObjectPool.instance.GetPooledObject();
         if (car != null)
         {
             car.transform.position = transform.position;
+
+            // Adjust spawn position based on lane density to avoid overlap
             car.GetComponent<Obstacle>().topSpeed = Random.Range((laneSpeed - 2.5f) / 3.6f, laneSpeed / 3.6f) * CarMovement.Instance.speedMultiplier;
             car.SetActive(true);
         }

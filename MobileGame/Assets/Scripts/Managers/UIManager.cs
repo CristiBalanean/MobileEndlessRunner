@@ -72,6 +72,6 @@ public class UIManager : MonoBehaviour
 
     private void UpdateSpeedText(float speed)
     {
-        speedText.text = "SPEED: " + speed.ToString("F1") + " KM/H";
+        speedText.text = "SPEED: " + speed.ToString("F1") + " MI/H";
     }
 }

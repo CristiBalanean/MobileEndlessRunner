@@ -13,11 +13,6 @@ public class RestartScreen : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    private void OnDisable()
-    {
-        Time.timeScale = 1;
-    }
-
     public void RestartGame()
     {
         SceneManager.LoadScene("SampleScene");
