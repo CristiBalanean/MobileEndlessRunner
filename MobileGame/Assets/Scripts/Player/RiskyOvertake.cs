@@ -5,22 +5,19 @@ using UnityEngine;
 
 public class RiskyOvertake : MonoBehaviour
 {
-    private bool hasCollided = false;
+    private bool canRiskyOvertake = false;
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!hasCollided && collision.CompareTag("Obstacle") && transform.position.y > collision.transform.position.y)
-        {
-            ScoreManager.Instance.IncrementOvertakeCounter();
-            hasCollided = true; // Set the flag to true to prevent further calls during this collision
-        }
+        if (transform.position.y < collision.transform.position.y)
+            canRiskyOvertake = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Obstacle"))
-        {
-            hasCollided = false; // Reset the flag when the objects are no longer colliding
-        }
+        if (canRiskyOvertake && transform.position.y > collision.transform.position.y)
+            ScoreManager.Instance.IncrementOvertakeCounter();
+
+        canRiskyOvertake = false;
     }
 }

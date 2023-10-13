@@ -14,6 +14,11 @@ public class MenuManager : MonoBehaviour
 
     private const string FirstTimeKey = "IsFirstTime";
 
+    private void Awake()
+    {
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+    }
+
     private void Start()
     {
         if (PlayerPrefs.GetInt(FirstTimeKey, 1) == 1)
