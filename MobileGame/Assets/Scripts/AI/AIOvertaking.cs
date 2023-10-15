@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class AIOvertaking : MonoBehaviour
 {
-    [SerializeField] private bool aggressiveDriver = false;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private Collider2D colliderLeft;
     [SerializeField] private Collider2D colliderRight;
@@ -11,12 +10,9 @@ public class AIOvertaking : MonoBehaviour
     private AIBraking braking;
 
     private static bool isOvertaking = false; // Global overtaking state
-
-    private float overtakingCooldown = 10f; // Cooldown period for overtaking in seconds
-    private float overtakingCooldownTimer = 0f; // Timer for overtaking cooldown
-    private bool canChangeLane = false;
-    private bool isChangingLane = false; // New variable to track lane-changing state
-    private float laneChangeCooldown = 1f;
+    private static float globalCooldownDuration = 10f; // Global cooldown period after overtaking in seconds
+    private static float globalCooldownTimer; // Timer for the global cooldown period
+    private bool canChangeLane = true; // Allow lane change at the start
 
     private void Awake()
     {
@@ -25,65 +21,51 @@ public class AIOvertaking : MonoBehaviour
 
     private void OnEnable()
     {
-        int rand = Random.Range(0, 2);
-        aggressiveDriver = rand == 1;
-        aggressiveDriver = true;
-
-        Invoke("CanChangeLane", 5f);
+        globalCooldownTimer = globalCooldownDuration; // Initialize the global cooldown timer when object is enabled
     }
 
     private void Update()
     {
-        if (overtakingCooldownTimer > 0)
+        if (globalCooldownTimer > 0)
         {
-            overtakingCooldownTimer -= Time.deltaTime;
-            if (overtakingCooldownTimer <= 0)
-            {
-                // Reset the overtaking state and cooldown timer
-                isOvertaking = false;
-                overtakingCooldownTimer = 0f;
-            }
+            globalCooldownTimer -= Time.deltaTime;
         }
 
-        if (aggressiveDriver && braking.hasSomethingInFront && canChangeLane && !isChangingLane && !isOvertaking)
+        if (braking.hasSomethingInFront && canChangeLane && !isOvertaking && globalCooldownTimer <= 0)
         {
-            StartCoroutine(ChangeLaneWithCooldown());
+            ChangeLane();
         }
     }
 
-    private IEnumerator ChangeLaneWithCooldown()
+    private void ChangeLane()
     {
-        canChangeLane = false;
-        isChangingLane = true; // Set the lane-changing state to true
-        isOvertaking = true; // Set the global overtaking state to true
-
-        float elapsedTime = 0f;
         float startLanePosition = transform.position.x;
-        float laneWidth = 1.65f; // Distance between lanes
+        float laneWidth = 1.35f; // Distance between lanes
 
-        overtakingCooldownTimer = overtakingCooldown;
-
-        // Calculate the target lane position based on the current lane position
         float targetLanePosition = (startLanePosition < 0) ? startLanePosition + laneWidth : startLanePosition - laneWidth;
 
-        // Check if there is something in the right lane
         bool isBlockedRight = colliderRight.IsTouchingLayers(layerMask);
-
-        // Check if there is something in the left lane
         bool isBlockedLeft = colliderLeft.IsTouchingLayers(layerMask);
 
-        if (!isBlockedRight && targetLanePosition > 0)
+        if (!isBlockedRight && targetLanePosition > 0 || !isBlockedLeft && targetLanePosition < 0)
         {
-            targetLanePosition -= laneWidth; // Change to left lane
+            StartCoroutine(MoveToLane(targetLanePosition));
         }
-        else if (!isBlockedLeft && targetLanePosition < 0)
-        {
-            targetLanePosition += laneWidth; // Change to right lane
-        }
+    }
 
-        while (elapsedTime < laneChangeCooldown)
+    private IEnumerator MoveToLane(float targetLanePosition)
+    {
+        canChangeLane = false;
+        isOvertaking = true;
+        globalCooldownTimer = globalCooldownDuration; // Reset the global cooldown timer
+
+        float startLanePosition = transform.position.x;
+        float elapsedTime = 0f;
+        float laneChangeDuration = 1f; // Set the duration for lane change
+
+        while (elapsedTime < laneChangeDuration)
         {
-            float t = elapsedTime / laneChangeCooldown;
+            float t = elapsedTime / laneChangeDuration;
             float newLanePosition = Mathf.Lerp(startLanePosition, targetLanePosition, t);
             transform.position = new Vector3(newLanePosition, transform.position.y, transform.position.z);
 
@@ -92,12 +74,7 @@ public class AIOvertaking : MonoBehaviour
         }
 
         transform.position = new Vector3(targetLanePosition, transform.position.y, transform.position.z);
-        isChangingLane = false; // Reset the lane-changing state
         canChangeLane = true;
-    }
-
-    private void CanChangeLane()
-    {
-        canChangeLane = true;
+        isOvertaking = false;
     }
 }

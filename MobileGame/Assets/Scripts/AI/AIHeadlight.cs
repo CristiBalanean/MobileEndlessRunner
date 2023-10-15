@@ -17,6 +17,9 @@ public class AIHeadlight : MonoBehaviour
     {
         TimeManager.instance.notifyIsDay.AddListener(TurnOffHeadlight);
         TimeManager.instance.notifyIsNight.AddListener(TurnOnHeadlight);
+
+        if (!TimeManager.instance.isDay)
+            TurnOnHeadlight();
     }
 
     private void OnDisable()

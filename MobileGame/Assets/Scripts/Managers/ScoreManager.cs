@@ -100,7 +100,7 @@ public class ScoreManager : MonoBehaviour
     public void IncrementOvertakeCounter()
     {
         overtakeCounter++;
-        AddToScore(overtakeCounter * 10);
+        AddToScore(overtakeCounter * 100);
         currentOvertakeComboTime = overtakeComboTime;
     }
 }

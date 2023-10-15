@@ -17,7 +17,7 @@ public class TimeManager : MonoBehaviour
     private float minuteLength => dayLength / 1440;
 
     private TimeSpan currentTime;
-    private bool isDay = true; // Track the current state
+    public bool isDay = true; // Track the current state
 
     private void Awake()
     {

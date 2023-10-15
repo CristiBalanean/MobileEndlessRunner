@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class RiskyOvertake : MonoBehaviour
 {
-    private bool canRiskyOvertake = false;
+    public bool canRiskyOvertake = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (transform.position.y < collision.transform.position.y)
+        if (transform.position.y < collision.transform.position.y && collision.CompareTag("Obstacle"))
             canRiskyOvertake = true;
     }
 
