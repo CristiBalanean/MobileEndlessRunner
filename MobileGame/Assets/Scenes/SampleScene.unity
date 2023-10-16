@@ -1696,6 +1696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 340411493}
   - component: {fileID: 340411491}
+  - component: {fileID: 340411494}
   m_Layer: 0
   m_Name: CameraRig
   m_TagString: Untagged
@@ -1738,6 +1739,20 @@ Transform:
   - {fileID: 519420032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &340411494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340411490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f18e836935f8b4b8e414391c5ed373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshold: 100
+  worldSpawner: {fileID: 1296700583}
 --- !u!1 &350232156
 GameObject:
   m_ObjectHideFlags: 0
@@ -2700,8 +2715,8 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420033}
   - component: {fileID: 519420034}
+  - component: {fileID: 519420033}
   - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
@@ -4454,6 +4469,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Police
       objectReference: {fileID: 0}
+    - target: {fileID: 6725105912748856326, guid: 559111b0b67db9f4ca3a01e953509e51, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7811879583894782842, guid: 559111b0b67db9f4ca3a01e953509e51, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.9471397
@@ -5328,8 +5347,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1577061390}
   initialSegments: 5
-  segmentLength: 8
+  segmentLength: 14
   unloadDistanceThreshold: 10
+  playerPositionLastFrame: 0
+  nextSegmentSpawnPosition: 0
 --- !u!1 &1307863351
 GameObject:
   m_ObjectHideFlags: 0
@@ -6334,7 +6355,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1469490511}
   m_CullTransparentMesh: 1
---- !u!1 &1494829514
+--- !u!1 &1495368178
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6342,84 +6363,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1494829516}
-  - component: {fileID: 1494829515}
+  - component: {fileID: 1495368180}
+  - component: {fileID: 1495368179}
   m_Layer: 0
-  m_Name: A*
+  m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1494829515
+--- !u!114 &1495368179
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494829514}
+  m_GameObject: {fileID: 1495368178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
+  m_Script: {fileID: 11500000, guid: d462de3471dbef14f95001af5b4832df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
-  data:
-    dataString: UEsDBBQAAAgIAAAQIeycNZy9VAIAAA8FAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1z2jAQ/SuMzk0HGJeU3lqHkB4SmNBMLr4IaW1rkCWPPsJHhv/elWxjQ6cnNO+93X37YT6JULYG5rRZGsGfNQfyY0TCm3wZ9eQTHGih1UacoNO8C+7KIKJR80qd0IhPQpjVFTgj2E9VyCAeI+iVyLWpFryAVFtnEc6ptICU0S5EK4Q+R+SAP3fzEHLE1/Q+vE74mo9HZ3wyUA5ML+2EnaxRecUkrWrgwXIvvu+yNiqFvbSC4JtpKYVtjRB3rGOjKa2txzZQwAXFxmL1oC9BFKUL6YbBqzy34FpHhh4fhMH5NFnJL90MraJ219j6oNLDxXeT8vkfdpZEOje6euqqTsahgisF273SI6PWDWY6hB+ubXu1p3JHtxLeS1Avemm0VxxJZ3wI9RamD4NUl87SEtiu1zVeb0Bf/381d5PR+RybP6RSVNtAfU0aYCN1HHdcPBhczG90HM/CtikQDS7eLPyhxfB+WuJRGOuQattUwd5WexOkZBGHFrrxLtVGQYRb0zUoKt1xjWnc7QZvuEHZG+aRhi+lLd5y3QdwExLhXj8e31Brvb9sy5Z6/wy2XHknhYLedCBecE6pVqo5sOFMurCNNzllg7DCC359WySZT5PZd0hyNoV8lsDdhM0TPtkmkPDZNzaekHh8QmGfVK4bo+14cGuqT67w0Lo/kNHS0DoeOzd0vxSnSg9GLlSuN8wAqNVVBgsGa+A3yRdc4Hw24JxQcd3kMyNSsx3w7KLPYqOLgzM067vPSC0+tAtIRtL4h5GRAF9OeW3gQ8A+1O6Sncn5L1BLAwQUAAAICAAAECHs0jiVC20AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0komlkYmZRapJWrJRapqZSaquYbKlSYphkkmqSYqZabKBoVIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAECHsnDWcvVQCAAAPBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAECHs0jiVC20AAAB4AAAACQAkAAAAAAAAAAAAAAChAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAFkDAAAAAA==
-    upgradeData: 
-    file_cachedStartup: {fileID: 0}
-    data_cachedStartup: 
-    cacheStartup: 0
-  showNavGraphs: 1
-  showUnwalkableNodes: 1
-  debugMode: 0
-  debugFloor: 0
-  debugRoof: 1
-  manualDebugFloorRoof: 0
-  showSearchTree: 0
-  unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
-  maxNearestNodeDistance: 100
-  scanOnStartup: 1
-  fullGetNearestSearch: 0
-  prioritizeGraphs: 0
-  prioritizeGraphsLimit: 1
-  colorSettings:
-    _SolidColor: {r: 0.11764706, g: 0.4, b: 0.7882353, a: 0.9}
-    _UnwalkableNode: {r: 1, g: 0, b: 0, a: 0.5}
-    _BoundsHandles: {r: 0.29, g: 0.454, b: 0.741, a: 0.9}
-    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: 0.5}
-    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: 0.5}
-    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
-    _AreaColors:
-    - {r: 0, g: 0, b: 0, a: 0}
-  tagNames: []
-  heuristic: 2
-  heuristicScale: 1
-  threadCount: 1
-  maxFrameTime: 10
-  batchGraphUpdates: 0
-  graphUpdateBatchingInterval: 0.2
-  euclideanEmbedding:
-    mode: 0
-    seed: 0
-    pivotPointRoot: {fileID: 0}
-    spreadOutCount: 1
-  showGraphs: 1
---- !u!4 &1494829516
+  gridSizeX: 4
+  gridSizeY: 20
+  nodeSize: 1.35
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!4 &1495368180
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494829514}
+  m_GameObject: {fileID: 1495368178}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.65, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1577061390}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1538516659
 GameObject:
@@ -6752,7 +6736,6 @@ Transform:
   - {fileID: 412001905}
   - {fileID: 1950872212}
   - {fileID: 1923052009}
-  - {fileID: 1494829516}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1577061391
@@ -6835,7 +6818,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.005935326, y: -0.014251649}
@@ -8119,8 +8102,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0018000007, y: 1.3972, z: 0}
-    m_Extent: {x: 1.9923, y: 2.5974998, z: 0}
+    m_Center: {x: 0.0071000457, y: 1.4005, z: 0}
+    m_Extent: {x: 1.9995999, y: 2.6073, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -9415,4 +9398,5 @@ SceneRoots:
   - {fileID: 141285530}
   - {fileID: 243352905}
   - {fileID: 15473293}
+  - {fileID: 1495368180}
   - {fileID: 973123279}

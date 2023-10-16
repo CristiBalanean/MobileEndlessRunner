@@ -5,12 +5,12 @@ using UnityEngine;
 public class WorldSpawner : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    [SerializeField] private int initialSegments = 7;
-    [SerializeField] private float segmentLength = 8f;
+    public int initialSegments = 7;
+    public float segmentLength = 8f;
     [SerializeField] private float unloadDistanceThreshold = 30f; // Threshold for unloading segments
 
-    private float playerPositionLastFrame;
-    private float nextSegmentSpawnPosition;
+    public float playerPositionLastFrame;
+    public float nextSegmentSpawnPosition;
 
     private Queue<GameObject> highwaySegments = new Queue<GameObject>();
 
@@ -32,6 +32,7 @@ public class WorldSpawner : MonoBehaviour
 
         if (playerPosition > playerPositionLastFrame + segmentLength)
         {
+            Debug.Log("Spawn");
             SpawnHighwaySegment();
             playerPositionLastFrame = playerPosition;
         }
