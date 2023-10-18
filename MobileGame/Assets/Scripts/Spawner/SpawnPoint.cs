@@ -35,7 +35,7 @@ public class SpawnPoint : MonoBehaviour
             if(car != null)
             {
                 car.transform.position = transform.position;
-                car.GetComponent<Obstacle>().topSpeed = Random.Range(50, 60) / 3.6f * CarMovement.Instance.speedMultiplier;
+                car.GetComponent<Obstacle>().topSpeed = (Random.Range(50, 60) + CarMovement.Instance.speedMultiplier) / 3.6f;
                 car.SetActive(true);
                 currentTime = spawnTime;
             }

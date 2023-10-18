@@ -1,0 +1,36 @@
+{
+    "carDataList": [
+        {
+            "carName": "Default Car",
+            "unlocked": true
+        },
+        {
+            "carName": "Honda Civic",
+            "unlocked": false
+        },
+        {
+            "carName": "Lexus",
+            "unlocked": false
+        },
+        {
+            "carName": "Audi R8",
+            "unlocked": false
+        },
+        {
+            "carName": "Toyota Supra",
+            "unlocked": false
+        },
+        {
+            "carName": "Mustang",
+            "unlocked": false
+        },
+        {
+            "carName": "Nissan Skyline R34",
+            "unlocked": false
+        },
+        {
+            "carName": "Koenigsegg Agera R ",
+            "unlocked": true
+        }
+    ]
+}

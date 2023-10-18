@@ -32,7 +32,6 @@ public class WorldSpawner : MonoBehaviour
 
         if (playerPosition > playerPositionLastFrame + segmentLength)
         {
-            Debug.Log("Spawn");
             SpawnHighwaySegment();
             playerPositionLastFrame = playerPosition;
         }

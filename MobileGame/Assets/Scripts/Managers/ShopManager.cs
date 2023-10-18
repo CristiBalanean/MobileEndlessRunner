@@ -17,11 +17,6 @@ public class ShopManager : MonoBehaviour
 
     private int i = 0;
 
-    private void Awake()
-    {
-        LoadFile();
-    }
-
     private void Start()
     {
         if (PlayerPrefs.HasKey("CarDataIndex"))
@@ -33,7 +28,7 @@ public class ShopManager : MonoBehaviour
             carName.text = cars[i].GetName();
             carSprite.sprite = cars[i].GetSprite();
 
-            if (!cars[i].IsLocked())
+            if (!cars[i].IsUnlocked())
             {
                 select.gameObject.SetActive(false);
                 unlock.gameObject.SetActive(true);
@@ -50,7 +45,7 @@ public class ShopManager : MonoBehaviour
             carName.text = cars[i].GetName();
             carSprite.sprite = cars[i].GetSprite();
 
-            if (!cars[i].IsLocked())
+            if (!cars[i].IsUnlocked())
             {
                 select.gameObject.SetActive(false);
                 unlock.gameObject.SetActive(true);
@@ -61,11 +56,12 @@ public class ShopManager : MonoBehaviour
                 unlock.gameObject.SetActive(false);
             }
         }
+        LoadFile();
     }
 
     private void Update()
     {
-        if (!cars[i].IsLocked())
+        if (!cars[i].IsUnlocked())
         {
             select.gameObject.SetActive(false);
             unlock.gameObject.SetActive(true);
@@ -88,7 +84,10 @@ public class ShopManager : MonoBehaviour
         else { i = 0; }
 
         carName.text = cars[i].GetName();
-        carPrice.text = cars[i].GetCarPrice().ToString();
+        if (cars[i].IsUnlocked())
+            carPrice.text = "OWNED";
+        else
+            carPrice.text = cars[i].GetCarPrice().ToString();
         carSprite.sprite = cars[i].GetSprite();
     }
 
@@ -98,7 +97,10 @@ public class ShopManager : MonoBehaviour
         else { i = cars.Length - 1; }
 
         carName.text = cars[i].GetName();
-        carPrice.text = cars[i].GetCarPrice().ToString();
+        if (cars[i].IsUnlocked())
+            carPrice.text = "OWNED";
+        else
+            carPrice.text = cars[i].GetCarPrice().ToString();
         carSprite.sprite = cars[i].GetSprite();
     }
 
@@ -135,51 +137,21 @@ public class ShopManager : MonoBehaviour
         {
             carDataList[i] = new CarUnlockedData();
             carDataList[i].carName = cars[i].GetName();
-            carDataList[i].unlocked = cars[i].IsLocked();
+            carDataList[i].unlocked = cars[i].IsUnlocked();
         }
         CarUnlockedDataWrapper wrapper = new CarUnlockedDataWrapper(carDataList);
 
-        // Serialize carDataList to JSON
-        string json = JsonUtility.ToJson(wrapper);
-        Debug.Log(json);
-
-        // Save the JSON data to PlayerPrefs or a file on disk
-        PlayerPrefs.SetString("CarUnlockedData", json);
-        Debug.Log("Car data saved to PlayerPrefs.");
+        JsonHandler.instance.SaveJson(wrapper);
     }
 
     private void LoadFile()
     {
-        // Retrieve the JSON data from PlayerPrefs
-        string json = PlayerPrefs.GetString("CarUnlockedData");
+        CarUnlockedDataWrapper wrapper = JsonHandler.instance.LoadJson();
 
-        // Deserialize the JSON data into a CarUnlockedDataWrapper instance
-        CarUnlockedDataWrapper wrapper = JsonUtility.FromJson<CarUnlockedDataWrapper>(json);
-
-        // Check if the wrapper is not null and contains valid data
-        if (wrapper != null && wrapper.carDataList != null && wrapper.carDataList.Length > 0)
+        for (int i = 0; i < cars.Length; i++) 
         {
-            // Iterate through the deserialized data and update your Car objects
-            for (int i = 0; i < wrapper.carDataList.Length; i++)
-            {
-                string carName = wrapper.carDataList[i].carName;
-                bool isUnlocked = wrapper.carDataList[i].unlocked;
-
-                // Find the corresponding Car object in your cars array
-                Car car = System.Array.Find(cars, c => c.GetName() == carName);
-
-                // Update the unlocked state of the Car object
-                if (car != null)
-                {
-                    if(isUnlocked)
-                        car.Unlock(); // Unlock the car if necessary
-                }
-            }
-            Debug.Log("Car data loaded successfully.");
-        }
-        else
-        {
-            SaveFile();
+            if (wrapper.carDataList[i].carName == cars[i].GetName() && wrapper.carDataList[i].unlocked)
+                cars[i].Unlock();
         }
     }
 }

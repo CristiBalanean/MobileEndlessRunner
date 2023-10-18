@@ -16,7 +16,6 @@ public class FloatingOrigin : MonoBehaviour
         if (Mathf.Abs(cameraPosition.y) > threshold)
         {
             RecenterObjects(threshold);
-            Debug.Log("Recentered");
         }
     }
 

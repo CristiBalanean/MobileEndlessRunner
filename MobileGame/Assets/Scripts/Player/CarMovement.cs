@@ -64,7 +64,8 @@ public class CarMovement : MonoBehaviour
         if (InputManager.Instance.currentInput == InputTypes.TOUCH)
             accelerating = true;
 
-        speedMultiplier = Mathf.Lerp(1f, 1.75f, topSpeed / 200);
+        float speedLerp = Mathf.Clamp01((topSpeed - 100) / 200);
+        speedMultiplier = Mathf.Lerp(0, 175, speedLerp);
 
         currentGearIndex = 0;
         currentAcceleration = baseAcceleration;
@@ -79,7 +80,7 @@ public class CarMovement : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -2.5f, 2.5f), transform.position.y);
+        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -2f, 2f), transform.position.y);
         dirX = InputManager.Instance.HandleInput();
         dirX = Mathf.Clamp(dirX, -Handling(), Handling());
 

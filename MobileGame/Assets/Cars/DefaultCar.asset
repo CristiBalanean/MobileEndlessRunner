@@ -16,8 +16,8 @@ MonoBehaviour:
   topSpeed: 100
   acceleration: 10
   brakingPower: 30
-  lowSpeedHandling: 3
-  highSpeedHandling: 2
+  lowSpeedHandling: 2
+  highSpeedHandling: 3
   length: 0
   height: 0
   carSprite: {fileID: -764487271, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}

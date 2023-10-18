@@ -46,7 +46,7 @@ public class Car : ScriptableObject
 
     public int GetCarPrice() { return carPrice; }
 
-    public bool IsLocked() { return unlocked; }
+    public bool IsUnlocked() { return unlocked; }
 
     public void Unlock() { unlocked = true; }
 }
