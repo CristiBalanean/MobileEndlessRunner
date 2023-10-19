@@ -20,6 +20,6 @@ MonoBehaviour:
   highSpeedHandling: 3
   length: 0
   height: 0
-  carSprite: {fileID: -764487271, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+  carSprite: {fileID: -1203546740, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
   carPrice: 15000
   unlocked: 1

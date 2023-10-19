@@ -1,29 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PoliceSpawning : MonoBehaviour
 {
-    [SerializeField] private GameObject[] spawnPoints;
     [SerializeField] private GameObject policePrefab;
+    [SerializeField] private Transform player;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Transform[] spawnPoints;
+
+    public void SpawnPoliceCars()
     {
-        InvokeRepeating("PoliceEventChance", 30f, 2.5f);
+        for (int i = 0; i < spawnPoints.Length; i++) 
+        {
+            float yVariation = Random.Range(-6f, -4f);
+            SpawnPoliceCar(spawnPoints[i].position.x, player.position.y + yVariation);
+        }
     }
 
-    private void PoliceEventChance()
+    private void SpawnPoliceCar(float x, float y)
     {
-        float rand = Random.Range(0, 1000);
-
-        if (rand < 30)
-            SpawnPoliceEvent();
-    }
-
-    private void SpawnPoliceEvent()
-    {
-        int randomSpawn = Random.Range(0, spawnPoints.Length);
-        Instantiate(policePrefab, spawnPoints[randomSpawn].transform.position, Quaternion.identity);
+        // Instantiate the police car at the specified position
+        GameObject policeCar = Instantiate(policePrefab, new Vector3(x, y, 0f), Quaternion.identity);
     }
 }

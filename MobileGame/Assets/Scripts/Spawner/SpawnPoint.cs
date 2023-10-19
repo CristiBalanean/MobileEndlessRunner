@@ -12,6 +12,8 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField] private float spawnTime;
     private float currentTime;
 
+    public bool isPoliceEvent = false;
+
     private void Start()
     {
         currentTime = spawnTime;
@@ -23,7 +25,8 @@ public class SpawnPoint : MonoBehaviour
             currentTime -= Time.deltaTime;
         else
         {
-            SpawnVehicle();
+            if(!isPoliceEvent)
+                SpawnVehicle();
         }
     }
 
@@ -71,5 +74,15 @@ public class SpawnPoint : MonoBehaviour
         }
 
         return obstacleCount;
+    }
+
+    public void PoliceEventIsStarting()
+    {
+        isPoliceEvent = true;
+    }
+
+    public void PoliceEventIsEnding()
+    {
+        isPoliceEvent = false;
     }
 }

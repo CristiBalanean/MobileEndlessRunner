@@ -199,7 +199,7 @@ MonoBehaviour:
   derivativeGain: 0.1
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   hasSomethingInFront: 0
 --- !u!114 &-2055249216150113563
 MonoBehaviour:
@@ -213,10 +213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c945db06e6aa1ce4591836a3623dd5a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggressiveDriver: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   colliderLeft: {fileID: 708749691498881095}
   colliderRight: {fileID: 1780172585436918364}
 --- !u!1 &5087806652330700603

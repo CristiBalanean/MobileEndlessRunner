@@ -117,7 +117,7 @@ public class CarMovement : MonoBehaviour
 
     private void TiltCar()
     {
-        if (transform.position.x == -1.25f || transform.position.x == 1.25f)
+        if (transform.position.x == -2f || transform.position.x == 2f)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.fixedDeltaTime * 10f);
         }
