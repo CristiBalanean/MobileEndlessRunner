@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
+    [SerializeField] private ObjectPool pool;
+
     [SerializeField] private LayerMask obstacleLayer;
 
     [SerializeField] private Collider2D densityCollider;
@@ -34,7 +36,7 @@ public class SpawnPoint : MonoBehaviour
     {
         if (CheckIfCanSpawn() && CheckLaneDensity() <= maxLaneDensity)
         {
-            GameObject car = ObjectPool.instance.GetPooledObject();
+            GameObject car = pool.GetPooledObject();
             if(car != null)
             {
                 car.transform.position = transform.position;

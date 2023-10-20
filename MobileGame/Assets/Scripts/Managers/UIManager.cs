@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text speedText;
+    [SerializeField] private TMP_Text fpsCounterText;
 
     private void Awake()
     {
@@ -38,6 +39,12 @@ public class UIManager : MonoBehaviour
         settingsScreen.SetActive(false);
 
         InvokeRepeating("UpdateScoreText", 0f, 0.25f);
+    }
+
+    private void Update()
+    {
+        int currentFPS = (int)(1f / Time.deltaTime);
+        fpsCounterText.text = "FPS: " + currentFPS.ToString();
     }
 
     public void ShowRestartScreen()
@@ -72,6 +79,6 @@ public class UIManager : MonoBehaviour
 
     private void UpdateSpeedText(float speed)
     {
-        speedText.text = "SPEED: " + speed.ToString("F1") + " MI/H";
+        speedText.text = "SPEED: " + speed.ToString("F1") + " kph";
     }
 }

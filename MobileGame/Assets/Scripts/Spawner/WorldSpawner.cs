@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WorldSpawner : MonoBehaviour
 {
+    [SerializeField] private ObjectPool pool;
+
     [SerializeField] private Transform player;
     public int initialSegments = 7;
     public float segmentLength = 8f;
@@ -45,7 +47,7 @@ public class WorldSpawner : MonoBehaviour
 
         for (int i = 0; i < segmentsToAdd; i++)
         {
-            GameObject newSegment = ObjectPoolHighway.instance.GetPooledObject();
+            GameObject newSegment = pool.GetPooledObject();
 
             if (newSegment != null)
             {

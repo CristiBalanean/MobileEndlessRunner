@@ -25,10 +25,9 @@ public class CarHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.CompareTag("Spike"))
+        if (collision.CompareTag("Spike"))
         {
             deathTrigger.Invoke();
-
             gameObject.SetActive(false);
         }
     }

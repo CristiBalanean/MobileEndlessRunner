@@ -4,18 +4,10 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    public static ObjectPool instance;
-
     private List<GameObject> pool = new List<GameObject>();
     [SerializeField] private int amount;
 
     [SerializeField] private GameObject objectToPool;
-
-    private void Awake()
-    {
-        if(instance == null)
-            instance = this;
-    }
 
     private void Start()
     {
