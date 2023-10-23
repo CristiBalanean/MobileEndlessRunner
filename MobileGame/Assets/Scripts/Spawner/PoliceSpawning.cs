@@ -11,7 +11,7 @@ public class PoliceSpawning : MonoBehaviour
     {
         for (int i = 0; i < spawnPoints.Length; i++) 
         {
-            float yVariation = Random.Range(-6f, -4f);
+            float yVariation = Random.Range(-3.5f, -2f);
             SpawnPoliceCar(spawnPoints[i].position.x, player.position.y + yVariation);
         }
     }

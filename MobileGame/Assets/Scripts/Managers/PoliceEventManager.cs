@@ -7,8 +7,10 @@ public class PoliceEventManager : MonoBehaviour
     public UnityEvent StopSpawningCars;
     public UnityEvent StartSpawningCars;
     public UnityEvent SpawnBarrier;
+    public UnityEvent ChangeCameraOffsetToPolice;
+    public UnityEvent ChangeCameraOffsetToNormal;
 
-    public delegate IEnumerator StartSpawningSpikeTrapsDelegate();
+    public delegate void StartSpawningSpikeTrapsDelegate();
     public static event StartSpawningSpikeTrapsDelegate StartSpawningSpikeTraps;
 
     [SerializeField] private Transform player;
@@ -53,10 +55,26 @@ public class PoliceEventManager : MonoBehaviour
     {
         Debug.Log("Event Has Started!");
         policeSpawning.SpawnPoliceCars();
-        StartCoroutine(StartSpawningSpikeTraps());
+        ChangeCameraOffsetToPolice?.Invoke();
+        StartSpawningSpikeTraps?.Invoke();
         yield return new WaitForSeconds(eventDuration);
+        StartSpawningSpikeTraps?.Invoke();
+        ChangeCameraOffsetToNormal?.Invoke();
+        PoliceAI[] policeCars = FindObjectsOfType<PoliceAI>();
+        foreach(PoliceAI policeCar in policeCars)
+        {
+            Destroy(policeCar.gameObject);
+        }
+        GameObject[] spikes = GameObject.FindGameObjectsWithTag("Spike");
+        foreach(GameObject spike in spikes)
+        {
+            Destroy(spike);
+        }
+        yield return new WaitForSeconds(1f);
         SpawnBarrier?.Invoke();
-        StopCoroutine(StartSpawningSpikeTraps());
         Debug.Log("Event Has Ended!");
+        yield return new WaitForSeconds(3f);
+        StartSpawningCars?.Invoke();
+        ScoreManager.Instance.AddToScore(5000);
     }
 }

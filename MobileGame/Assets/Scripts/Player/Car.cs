@@ -26,6 +26,9 @@ public class Car : ScriptableObject
     [Header("Unlocked")]
     [SerializeField] private bool unlocked;
 
+    [Header("Collider")]
+    [SerializeField] private GameObject colliderPrefab;
+
     public string GetName() { return carName; }
 
     public float GetTopSpeed() {  return topSpeed; }
@@ -49,6 +52,8 @@ public class Car : ScriptableObject
     public bool IsUnlocked() { return unlocked; }
 
     public void Unlock() { unlocked = true; }
+
+    public GameObject GetColliderPrefab() { return colliderPrefab; }
 }
 
 [System.Serializable]

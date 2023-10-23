@@ -1,38 +1,56 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    [SerializeField] private Transform targetTransform;
+    [SerializeField] private Vector3 normalOffset;
+    [SerializeField] private Vector3 policeChaseOffset;
+    [SerializeField] private RectTransform panel;
+    [SerializeField] private Canvas canvas;
 
-    [SerializeField] private float minFOV;
-    [SerializeField] private float maxFOV;
-    [SerializeField] private float lowSpeedYOffset;
-    [SerializeField] private float highSpeedYOffset;
-
-    [SerializeField] private float desiredYPosition;
-
-    [SerializeField] private Camera mainCamera;
-
-    private CarMovement player;
+    private Vector3 currentOffset;
+    private Camera mainCamera;
+    private float transitionDuration = 3f;
 
     private void Awake()
     {
         mainCamera = GetComponentInChildren<Camera>();
-        player = target.GetComponent<CarMovement>();
+    }
+
+    private void Start()
+    {
+        var panelHeight = panel.rect.height * canvas.scaleFactor;
+        Vector2 resolutionOffset = mainCamera.ScreenToWorldPoint(new Vector2(0, panelHeight + 1));
+        normalOffset = new Vector3(0, resolutionOffset.y + 1, normalOffset.z);
+        currentOffset = normalOffset;
     }
 
     private void Update()
     {
-        mainCamera.orthographicSize = Mathf.Lerp(minFOV, maxFOV, player.GetCameraNormalizedSpeed());
+        transform.position = new Vector3(0, targetTransform.position.y, 0) - currentOffset;
     }
 
-    private void FixedUpdate()
+    public void ChangeToPoliceOffset()
     {
-        desiredYPosition = Mathf.Lerp(lowSpeedYOffset, highSpeedYOffset, player.GetCameraNormalizedSpeed());
-        Vector3 desiredPosition = target.position + new Vector3(0, desiredYPosition, 0);
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, player.GetCameraNormalizedSpeed());
-        transform.position = new Vector3(transform.position.x, smoothedPosition.y, transform.position.z);
+        StartCoroutine(ChangeOffset(policeChaseOffset));
+    }
+
+    public void ChangeToNormalOffset()
+    {
+        StartCoroutine (ChangeOffset(normalOffset));
+    }
+
+    public IEnumerator ChangeOffset(Vector3 offset)
+    {
+        float currentTime = 0;
+        Vector3 startOffset = currentOffset;
+
+        while(currentTime <  transitionDuration) 
+        {
+            currentOffset = Vector3.Lerp(startOffset, offset, currentTime / transitionDuration);
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
     }
 }

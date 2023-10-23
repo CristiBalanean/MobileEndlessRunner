@@ -57,6 +57,8 @@ public class CarMovement : MonoBehaviour
         lowSpeedHandling = player.GetLowSpeedHandling();
         highSpeedHandling = player.GetHighSpeedHandling();
         GetComponent<SpriteRenderer>().sprite = player.GetSprite();
+        GameObject collider = Instantiate(player.GetColliderPrefab(), transform.position, Quaternion.identity);
+        collider.transform.parent = transform;
     }
 
     private void Start()

@@ -1721,13 +1721,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c400b074db5d9624fa027a0db0a26d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1577061390}
-  minFOV: 7.5
-  maxFOV: 12.5
-  lowSpeedYOffset: 4
-  highSpeedYOffset: 6
-  desiredYPosition: 0
-  mainCamera: {fileID: 0}
+  targetTransform: {fileID: 1577061390}
+  normalOffset: {x: 0, y: 0, z: 10}
+  policeChaseOffset: {x: 0, y: 0, z: 10}
+  panel: {fileID: 1690431394}
+  canvas: {fileID: 1538516662}
 --- !u!4 &340411493
 Transform:
   m_ObjectHideFlags: 0
@@ -2828,7 +2826,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3606,7 +3604,7 @@ Transform:
   m_GameObject: {fileID: 684365910}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4987,7 +4985,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Build Alpha 0.2
+  m_text: Build Alpha 0.3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6845,7 +6843,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -6981,7 +6979,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1577061390}
   - component: {fileID: 1577061389}
-  - component: {fileID: 1577061392}
   - component: {fileID: 1577061387}
   - component: {fileID: 1577061386}
   - component: {fileID: 1577061391}
@@ -7082,7 +7079,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 201907dc23c386e4ead793f194d75b9a, type: 3}
+  m_Sprite: {fileID: -2068725451, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7102,7 +7099,7 @@ Transform:
   m_GameObject: {fileID: 1577061385}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7160,51 +7157,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!61 &1577061392
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577061385}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.005935326, y: -0.014251649}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5238096, y: 1.5238096}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6731112, y: 1.3729812}
-  m_EdgeRadius: 0
 --- !u!1 &1603728138
 GameObject:
   m_ObjectHideFlags: 0
@@ -7817,7 +7769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 275.96484}
+  m_AnchoredPosition: {x: 0, y: 275}
   m_SizeDelta: {x: 0, y: 555}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1690431395
@@ -8479,8 +8431,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0018000007, y: 1.4000499, z: 0}
-    m_Extent: {x: 2.0003, y: 2.60945, z: 0}
+    m_Center: {x: 0.0026500225, y: 1.4000001, z: 0}
+    m_Extent: {x: 1.99985, y: 2.6068, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -9585,6 +9537,36 @@ MonoBehaviour:
       - m_Target: {fileID: 785926940}
         m_TargetAssemblyTypeName: BarrierSpawner, Assembly-CSharp
         m_MethodName: SpawnBarrier
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ChangeCameraOffsetToPolice:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 340411491}
+        m_TargetAssemblyTypeName: CameraFollow, Assembly-CSharp
+        m_MethodName: ChangeToPoliceOffset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ChangeCameraOffsetToNormal:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 340411491}
+        m_TargetAssemblyTypeName: CameraFollow, Assembly-CSharp
+        m_MethodName: ChangeToNormalOffset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
