@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
+    [SerializeField] private GameObject player;
+
     private Transform cameraTransform;
     private Vector3 originalPosition;
 
@@ -24,18 +26,21 @@ public class CameraShake : MonoBehaviour
 
     private void Update()
     {
-        if (shakeDuration > 0)
+        if (player.activeSelf == true)
         {
-            Vector3 newPosition = originalPosition + Random.insideUnitSphere * shakeMagnitude;
-            newPosition.z = originalPosition.z; // Maintain the camera's z position
-            cameraTransform.localPosition = newPosition;
+            if (shakeDuration > 0)
+            {
+                Vector3 newPosition = originalPosition + Random.insideUnitSphere * shakeMagnitude;
+                newPosition.z = originalPosition.z; // Maintain the camera's z position
+                cameraTransform.localPosition = newPosition;
 
-            shakeDuration -= Time.deltaTime * shakeSpeed;
-        }
-        else
-        {
-            // Reset the camera position
-            cameraTransform.localPosition = originalPosition;
+                shakeDuration -= Time.deltaTime * shakeSpeed;
+            }
+            else
+            {
+                // Reset the camera position
+                cameraTransform.localPosition = originalPosition;
+            }
         }
     }
 }

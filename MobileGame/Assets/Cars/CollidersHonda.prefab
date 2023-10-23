@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 803449531282705431}
   - component: {fileID: 1625913229965465236}
+  - component: {fileID: 5013541289631575155}
   m_Layer: 8
   m_Name: BackCollider
   m_TagString: Untagged
@@ -67,6 +68,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.55}
   m_Size: {x: 0.7, y: 0.3}
   m_Direction: 1
+--- !u!114 &5013541289631575155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613528797492542892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da33a392a0e34d0468f8c99087d4cc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraShake: {fileID: 0}
 --- !u!1 &5423952714823785951
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,6 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7504025534949678859}
   - component: {fileID: 1803725245961382373}
+  - component: {fileID: 587045826050902702}
   m_Layer: 8
   m_Name: FrontCollider
   m_TagString: Untagged
@@ -169,6 +184,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.55}
   m_Size: {x: 0.6, y: 0.3}
   m_Direction: 1
+--- !u!114 &587045826050902702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6991450525521763951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14073dbed0e7daf468cb6d7d92413b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraShake: {fileID: 0}
 --- !u!1 &7189317444791636411
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1111657218893792918}
   - component: {fileID: 257335909770209957}
+  - component: {fileID: 2839479369041225528}
   m_Layer: 8
   m_Name: LeftSideCollider
   m_TagString: Untagged
@@ -246,6 +275,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.9}
   m_EdgeRadius: 0
+--- !u!114 &2839479369041225528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7189317444791636411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da33a392a0e34d0468f8c99087d4cc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraShake: {fileID: 0}
 --- !u!1 &7310973234418723877
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8432948969724464495}
   - component: {fileID: 5659300950719915594}
+  - component: {fileID: 7214867627780669584}
   m_Layer: 8
   m_Name: RightSideCollider
   m_TagString: Untagged
@@ -323,3 +366,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.9}
   m_EdgeRadius: 0
+--- !u!114 &7214867627780669584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7310973234418723877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da33a392a0e34d0468f8c99087d4cc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraShake: {fileID: 0}

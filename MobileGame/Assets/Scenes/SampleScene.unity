@@ -2775,6 +2775,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420034}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420036}
   - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
@@ -2869,6 +2870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17bccbc3bc27dcf4ca3e62e176e3c700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1577061385}
 --- !u!82 &519420034
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3009,6 +3011,18 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &519420036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0afc022cfb767949a63160922f4764c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &522308649
 GameObject:
   m_ObjectHideFlags: 0
@@ -7157,6 +7171,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  health: 15
 --- !u!1 &1603728138
 GameObject:
   m_ObjectHideFlags: 0
@@ -8431,8 +8446,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0026500225, y: 1.4000001, z: 0}
-    m_Extent: {x: 1.99985, y: 2.6068, z: 0}
+    m_Center: {x: -0.0016000271, y: 1.398, z: 0}
+    m_Extent: {x: 2.0075, y: 2.6019, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

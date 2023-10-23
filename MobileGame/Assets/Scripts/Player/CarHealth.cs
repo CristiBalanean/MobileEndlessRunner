@@ -7,20 +7,25 @@ public class CarHealth : MonoBehaviour
 {
     [SerializeField] private UnityEvent deathTrigger;
 
+    [SerializeField] private int health;
+
     private void Start()
     {
         MoneyManager moneyManager = FindObjectOfType<MoneyManager>();
         deathTrigger.AddListener(moneyManager.ComputeFinalMoney);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void TriggerDeath()
     {
-        if (collision.transform.CompareTag("Obstacle") || collision.transform.CompareTag("Police"))
-        {
-            deathTrigger.Invoke();
+        deathTrigger.Invoke();
+        gameObject.SetActive(false);
+    }
 
-            gameObject.SetActive(false);
-        }
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+        if (health <= 0)
+            TriggerDeath();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

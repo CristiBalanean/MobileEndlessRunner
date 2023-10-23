@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 8330086863155912916}
   - component: {fileID: 8442545938906473807}
   - component: {fileID: -2055249216150113563}
+  - component: {fileID: 2262236958019198454}
+  - component: {fileID: -910315899207388484}
   m_Layer: 6
   m_Name: Car
   m_TagString: Obstacle
@@ -149,7 +151,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -218,6 +220,40 @@ MonoBehaviour:
     m_Bits: 320
   colliderLeft: {fileID: 708749691498881095}
   colliderRight: {fileID: 1780172585436918364}
+--- !u!95 &2262236958019198454
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517040841658587091}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 34863b622fd428441aee24a1b3be03fd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-910315899207388484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517040841658587091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ed72b0815518245b6a1984e2657845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiAnimator: {fileID: 0}
 --- !u!1 &5087806652330700603
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,8 +451,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.004750073, y: 1.47065, z: 0}
-    m_Extent: {x: 2.00165, y: 2.5255501, z: 0}
+    m_Center: {x: -0.0035000443, y: 1.4756501, z: 0}
+    m_Extent: {x: 2.0004, y: 2.5269501, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
