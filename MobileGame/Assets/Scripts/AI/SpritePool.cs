@@ -6,16 +6,28 @@ public class SpritePool : MonoBehaviour
 {
     public static SpritePool Instance;
 
-    [SerializeField] private Sprite[] sprites;
+    [SerializeField] private CarGraphics[] carGraphics;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public Sprite ChooseSprite()
+    public CarGraphics ChooseSprite()
     {
-        int rand = Random.Range(0, sprites.Length);
-        return sprites[rand];
+        int rand = Random.Range(0, carGraphics.Length);
+        return carGraphics[rand];
     }
 }
+
+[System.Serializable]
+public class CarGraphics
+{
+    [SerializeField] private Sprite sprite;
+    [SerializeField] private GameObject collider;
+
+    public Sprite GetSprite() { return sprite; }
+
+    public GameObject GetCollider() { return collider;}
+}
+

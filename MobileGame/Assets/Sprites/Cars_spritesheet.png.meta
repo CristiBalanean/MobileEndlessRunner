@@ -429,6 +429,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Cars_spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 482cd562f23503240be5d961fca8c77f
+      internalID: -1825034388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cars_spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dd8c2603064edb4e97f38808e4b2205
+      internalID: 12322508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cars_spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 394868b188410c34b936a2f2f8901740
+      internalID: -1662877497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -446,6 +509,9 @@ TextureImporter:
       Cars_spritesheet_11: 454122883
       Cars_spritesheet_12: -1432169405
       Cars_spritesheet_13: 890006652
+      Cars_spritesheet_14: -1825034388
+      Cars_spritesheet_15: 12322508
+      Cars_spritesheet_16: -1662877497
       Cars_spritesheet_2: -409047236
       Cars_spritesheet_3: -1978909859
       Cars_spritesheet_4: 1200064572

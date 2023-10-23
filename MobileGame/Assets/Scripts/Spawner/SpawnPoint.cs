@@ -3,22 +3,29 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
+    [SerializeField] private CarMovement player;
     [SerializeField] private ObjectPool pool;
-
     [SerializeField] private LayerMask obstacleLayer;
-
     [SerializeField] private Collider2D densityCollider;
-
-    [SerializeField] private int maxLaneDensity;
     [SerializeField] private float laneSpeed;
     [SerializeField] private float spawnTime;
-    private float currentTime;
 
+    private float currentTime;
+    private int maxLaneDensity;
     public bool isPoliceEvent = false;
 
     private void Start()
     {
         currentTime = spawnTime;
+        maxLaneDensity = SetDensity();
+    }
+
+    private int SetDensity()
+    {
+        if (player.GetTopSpeed() < 150)
+            return 3;
+        else
+            return 2;
     }
 
     private void Update()
@@ -54,7 +61,8 @@ public class SpawnPoint : MonoBehaviour
 
         if (hitUp.transform == null && hitDown.transform == null)
             return true;
-        else return false;
+        else
+            return false;
     }
 
     private int CheckLaneDensity()

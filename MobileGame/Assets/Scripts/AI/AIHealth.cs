@@ -5,12 +5,12 @@ using UnityEngine;
 public class AIHealth : MonoBehaviour
 {
     private Animator aiAnimator;
-    private BoxCollider2D aiCollider;
+    private Collider2D[] aiCollider;
 
     private void Awake()
     {
         aiAnimator = GetComponent<Animator>();
-        aiCollider = GetComponent<BoxCollider2D>();
+        aiCollider = GameObject.FindGameObjectWithTag("AiCollider").GetComponents<Collider2D>();
         aiAnimator.enabled = false;
     }
 
@@ -19,13 +19,16 @@ public class AIHealth : MonoBehaviour
         aiAnimator.enabled = false;
         aiAnimator.Rebind();
         aiAnimator.Update(0f);
-        aiCollider.isTrigger = false;
+        foreach (var collider in aiCollider)
+            collider.isTrigger = false;
     }
 
     public IEnumerator DeathTrigger()
     {
         yield return new WaitForSeconds(.1f);
         aiAnimator.enabled = true;
+        foreach (var collider in aiCollider)
+            collider.isTrigger = true;
         yield return new WaitForSeconds(1.25f);
         gameObject.SetActive(false);
     }

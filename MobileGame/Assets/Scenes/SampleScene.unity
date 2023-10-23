@@ -720,12 +720,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ae777fdab5d2c44bab65afb16b5d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1577061386}
   pool: {fileID: 314338016}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
   densityCollider: {fileID: 32846391}
-  maxLaneDensity: 3
   laneSpeed: 50
   spawnTime: 2
   isPoliceEvent: 0
@@ -758,14 +758,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b0947f73e75394ca7268ce5edd1ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: 8e480b85ca0431046956c1159a218b60, type: 3}
-  - {fileID: 21300000, guid: a100867a4d4b2344d829204de9624e71, type: 3}
-  - {fileID: -690558637, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
-  - {fileID: 248233056, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
-  - {fileID: 21300000, guid: f89aa3036f3027243839e96305a1e5ce, type: 3}
-  - {fileID: -1046139785, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
-  - {fileID: 454122883, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+  carGraphics:
+  - sprite: {fileID: -690558637, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+    collider: {fileID: 285797471649795006, guid: e4c571e1f5b6c3f45a71d06c332e956a, type: 3}
+  - sprite: {fileID: 248233056, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+    collider: {fileID: 2758099672681507203, guid: d2e6cce2867b0c9469f578f84230a794, type: 3}
+  - sprite: {fileID: -1046139785, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+    collider: {fileID: 1986776347124288855, guid: 91cb87f3cbdba944fab6a3611d618985, type: 3}
+  - sprite: {fileID: -1825034388, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+    collider: {fileID: 1236812821188872859, guid: a5954a4c4eb8cf24ca1d41af496ffa57, type: 3}
+  - sprite: {fileID: 12322508, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+    collider: {fileID: 8114605648725432665, guid: 098fdcf21e4030747a16b68e14571b19, type: 3}
 --- !u!4 &141285530
 Transform:
   m_ObjectHideFlags: 0
@@ -1824,12 +1827,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ae777fdab5d2c44bab65afb16b5d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1577061386}
   pool: {fileID: 314338016}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
   densityCollider: {fileID: 553044761}
-  maxLaneDensity: 3
   laneSpeed: 60
   spawnTime: 1.75
   isPoliceEvent: 0
@@ -7855,12 +7858,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ae777fdab5d2c44bab65afb16b5d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1577061386}
   pool: {fileID: 314338016}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
   densityCollider: {fileID: 880804982}
-  maxLaneDensity: 3
   laneSpeed: 60
   spawnTime: 1.5
   isPoliceEvent: 0
@@ -8446,8 +8449,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0016000271, y: 1.398, z: 0}
-    m_Extent: {x: 2.0075, y: 2.6019, z: 0}
+    m_Center: {x: 0.0016000271, y: 1.3991, z: 0}
+    m_Extent: {x: 1.9943, y: 2.6036, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -8775,12 +8778,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ae777fdab5d2c44bab65afb16b5d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1577061386}
   pool: {fileID: 314338016}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
   densityCollider: {fileID: 1338417212}
-  maxLaneDensity: 3
   laneSpeed: 55
   spawnTime: 2
   isPoliceEvent: 0

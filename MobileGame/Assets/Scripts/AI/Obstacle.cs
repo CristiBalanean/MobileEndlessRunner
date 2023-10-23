@@ -18,12 +18,15 @@ public class Obstacle : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
+
+        CarGraphics carGraphics = SpritePool.Instance.ChooseSprite();
+        GetComponent<SpriteRenderer>().sprite = carGraphics.GetSprite();
+        GameObject collider = Instantiate(carGraphics.GetCollider(), transform.position, Quaternion.identity);
+        collider.transform.parent = transform;
     }
 
     private void OnEnable()
     {
-        GetComponent<SpriteRenderer>().sprite = SpritePool.Instance.ChooseSprite();
-
         // Set the initial velocity
         Vector2 initialVelocity = Vector2.up * topSpeed;
         rigidBody.velocity = initialVelocity;

@@ -9,7 +9,7 @@ public class RiskyOvertake : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (transform.position.y < collision.transform.position.y && collision.CompareTag("Obstacle"))
+        if (transform.position.y < collision.transform.position.y && collision.CompareTag("AiCollider"))
             canRiskyOvertake = true;
     }
 

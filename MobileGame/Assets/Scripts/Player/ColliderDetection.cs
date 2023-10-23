@@ -27,7 +27,7 @@ public class ColliderDetection : MonoBehaviour
         }
 
         Obstacle currentCollision = collision.gameObject.GetComponent<Obstacle>();
-        float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.x) / 2;
+        float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.x);
         if (currentCollision != null)
         {
             if (collisionMagnitude > 20)

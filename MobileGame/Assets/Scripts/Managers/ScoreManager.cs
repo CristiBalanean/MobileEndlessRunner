@@ -56,15 +56,15 @@ public class ScoreManager : MonoBehaviour
             }
             else if (playerSpeed >= 80 && playerSpeed < 135)
             {
-                scoreMultiplier = 5;
+                scoreMultiplier = 10;
             }
             else if (playerSpeed >= 135 && playerSpeed < 170)
             {
-                scoreMultiplier = 10;
+                scoreMultiplier = 50;
             }
             else
             {
-                scoreMultiplier = 20;
+                scoreMultiplier = 100;
             }
 
             if (doubleMultiplier)
