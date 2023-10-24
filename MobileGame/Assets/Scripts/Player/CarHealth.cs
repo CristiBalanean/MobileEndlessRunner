@@ -17,8 +17,9 @@ public class CarHealth : MonoBehaviour
 
     public void TriggerDeath()
     {
+        ParticleManager.instance.InstantiateParticle(transform);
+        CarMovement.Instance.hasDied = true;
         deathTrigger.Invoke();
-        gameObject.SetActive(false);
     }
 
     public void TakeDamage(int amount)

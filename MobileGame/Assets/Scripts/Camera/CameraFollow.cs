@@ -11,7 +11,8 @@ public class CameraFollow : MonoBehaviour
 
     private Vector3 currentOffset;
     private Camera mainCamera;
-    private float transitionDuration = 3f;
+
+    private bool hasDied = false;
 
     private void Awake()
     {
@@ -28,20 +29,21 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
-        transform.position = new Vector3(0, targetTransform.position.y, 0) - currentOffset;
+        if (!hasDied)
+            transform.position = new Vector3(0, targetTransform.position.y, 0) - currentOffset;
     }
 
     public void ChangeToPoliceOffset()
     {
-        StartCoroutine(ChangeOffset(policeChaseOffset));
+        StartCoroutine(ChangeOffset(policeChaseOffset, 3));
     }
 
     public void ChangeToNormalOffset()
     {
-        StartCoroutine (ChangeOffset(normalOffset));
+        StartCoroutine (ChangeOffset(normalOffset, 3));
     }
 
-    public IEnumerator ChangeOffset(Vector3 offset)
+    public IEnumerator ChangeOffset(Vector3 offset, float transitionDuration)
     {
         float currentTime = 0;
         Vector3 startOffset = currentOffset;
@@ -52,5 +54,11 @@ public class CameraFollow : MonoBehaviour
             currentTime += Time.deltaTime;
             yield return null;
         }
+    }
+
+    public void PlayerDied()
+    {
+        hasDied = true;
+        StartCoroutine(ChangeOffset(policeChaseOffset, .25f));
     }
 }

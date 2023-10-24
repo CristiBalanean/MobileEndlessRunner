@@ -33,6 +33,7 @@ public class CarMovement : MonoBehaviour
     public bool accelerating = false;
     private bool braking = false;
     private bool canAccelerate = true;
+    public bool hasDied = false;
 
     [SerializeField] private Car player;
 
@@ -98,10 +99,18 @@ public class CarMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidBody.velocity = new Vector2(dirX, currentSpeed/3.6f);
+        if (!hasDied)
+        {
+            rigidBody.velocity = new Vector2(dirX, currentSpeed / 3.6f);
 
-        TiltCar();
-        ManageMovement();
+            TiltCar();
+            ManageMovement();
+        }
+        else
+        {
+            currentSpeed = 0;
+            rigidBody.velocity = Vector2.zero;
+        }
     }
 
     private float Handling()
@@ -133,6 +142,7 @@ public class CarMovement : MonoBehaviour
 
     private void ManageMovement()
     {
+
         if (accelerating && !braking && canAccelerate)
         {
             if (currentSpeed < topSpeed)

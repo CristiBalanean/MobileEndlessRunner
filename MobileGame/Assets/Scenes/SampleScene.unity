@@ -1214,6 +1214,51 @@ MonoBehaviour:
         m_CallState: 2
   dayLength: 180
   isDay: 1
+--- !u!1 &253520549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 253520551}
+  - component: {fileID: 253520550}
+  m_Layer: 0
+  m_Name: ParticleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &253520550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253520549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edc47a1db13e2e5499e420132b16f753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smokeParticle: {fileID: 8269889106096524862, guid: b9aa5c2ab7520004c94e5e5a193efbd6, type: 3}
+--- !u!4 &253520551
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253520549}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.38452175, y: 1.4232433, z: -4.3117576}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &273361869
 GameObject:
   m_ObjectHideFlags: 0
@@ -7023,6 +7068,7 @@ MonoBehaviour:
   gearAccelerations: []
   currentGearIndex: 0
   accelerating: 0
+  hasDied: 0
   player: {fileID: 0}
   currentSpeed: 25
   cameraShake: {fileID: 519420033}
@@ -7165,6 +7211,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1603728142}
         m_TargetAssemblyTypeName: RestartScreen, Assembly-CSharp
         m_MethodName: SetFinalScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 340411491}
+        m_TargetAssemblyTypeName: CameraFollow, Assembly-CSharp
+        m_MethodName: PlayerDied
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8449,8 +8507,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0016000271, y: 1.3991, z: 0}
-    m_Extent: {x: 1.9943, y: 2.6036, z: 0}
+    m_Center: {x: -0.00045001507, y: 1.3945999, z: 0}
+    m_Extent: {x: 1.99765, y: 2.5992, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -9925,6 +9983,7 @@ SceneRoots:
   - {fileID: 98607423}
   - {fileID: 637044324}
   - {fileID: 2113721268}
+  - {fileID: 253520551}
   - {fileID: 785718679}
   - {fileID: 421150897}
   - {fileID: 785926941}

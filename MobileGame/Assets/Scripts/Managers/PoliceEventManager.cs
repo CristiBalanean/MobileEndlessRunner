@@ -32,7 +32,7 @@ public class PoliceEventManager : MonoBehaviour
     {
         float rand = Random.Range(0, 1000);
 
-        if (rand < 30 && !hasStarted)
+        if (rand < 30 && !hasStarted && !CarMovement.Instance.hasDied)
         {
             Debug.Log("Event Is Preparing!");
             hasStarted = true;
