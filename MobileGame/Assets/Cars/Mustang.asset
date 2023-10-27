@@ -14,13 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: Mustang
   topSpeed: 180
-  acceleration: 40
-  brakingPower: 80
+  acceleration: 22
+  brakingPower: 44
   lowSpeedHandling: 6
   highSpeedHandling: 6
-  length: 0
-  height: 0
   carSprite: {fileID: 1276455663, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
   carPrice: 200000
-  unlocked: 1
+  unlocked: 0
   colliderPrefab: {fileID: 1203725089412988513, guid: 202cfaa0cf1833c4e82b3017b16902d1, type: 3}

@@ -8,7 +8,7 @@ public class Nitro : PowerUp
 
     protected override IEnumerator PickUp(Collider2D player)
     {
-        GetComponent<SpriteRenderer>().enabled = false;
+        /*GetComponent<SpriteRenderer>().enabled = false;
 
         CarMovement playerSpeed = player.GetComponent<CarMovement>();
         player.isTrigger = true;
@@ -26,6 +26,8 @@ public class Nitro : PowerUp
         player.isTrigger = false;
 
         GetComponent<SpriteRenderer>().enabled = true;
-        gameObject.SetActive(false);
+        gameObject.SetActive(false);*/
+
+        yield return null;
     }
 }

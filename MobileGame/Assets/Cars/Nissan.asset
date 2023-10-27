@@ -14,12 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: Nissan Skyline R34
   topSpeed: 190
-  acceleration: 45
-  brakingPower: 90
+  acceleration: 24
+  brakingPower: 48
   lowSpeedHandling: 6
   highSpeedHandling: 6.5
-  length: 0
-  height: 0
   carSprite: {fileID: -1015314366, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
   carPrice: 350000
   unlocked: 0

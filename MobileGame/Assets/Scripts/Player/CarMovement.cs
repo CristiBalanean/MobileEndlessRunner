@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class CarMovement : MonoBehaviour
 {
@@ -13,47 +10,69 @@ public class CarMovement : MonoBehaviour
     public delegate void SpeedChangeHandler(float speedChangeEvent);
     public static event SpeedChangeHandler OnSpeedChange;
 
-    public float speedMultiplier;
-
     private Rigidbody2D rigidBody;
+    public float speedMultiplier;
+    private float currentSpeed;
+    private float currentHandling;
+    private Vector2 input;
+    public bool hasDied = false; //put it in the car health script
 
-    private float dirX;
+    [SerializeField] private CameraShake cameraShake;
+    [SerializeField] private Car player;
 
     private float topSpeed;
-    private float baseAcceleration;
-    public float currentAcceleration;
+    private float acceleration;
     private float brakePower;
     private float lowSpeedHandling;
     private float highSpeedHandling;
-    private float[] gearRatios = { 0.25f, 0.45f, 0.65f, 0.85f, 1f };
-    public float[] gearAccelerations;
 
-    public int currentGearIndex;
-
-    public bool accelerating = false;
-    private bool braking = false;
-    private bool canAccelerate = true;
-    public bool hasDied = false;
-
-    [SerializeField] private Car player;
-
-    [SerializeField] private float currentSpeed;
-
-    [SerializeField] private CameraShake cameraShake;
-
-    [SerializeField] private GameObject tilt;
-    [SerializeField] private GameObject touch;
+    private float frictionCoefficient = 2f; // Adjust this value to control friction strength
+    private float handlingMultiplier = 5f; // Adjust this value to control handling strength
+    private float decelerationExponent = 2f;
+    private float frictionCoefficientBrake = .75f;
 
     private void Awake()
     {
         Instance = this;
 
         rigidBody = GetComponent<Rigidbody2D>();
-
         player = CarData.Instance.currentCar;
 
+        InitializeCar();
+    }
+
+    private void Start()
+    {
+        float speedLerp = Mathf.Clamp01((topSpeed - 100) / 200);
+        speedMultiplier = Mathf.Lerp(0, 175, speedLerp);
+    }
+
+    private void Update()
+    {
+        input = InputManager.Instance.HandleInput();
+        
+        ClampCarPositionHorizontal();
+        UpdateCurrentSpeed();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!hasDied)
+        {
+            CarVerticalMovement();
+            TiltCar();
+            CarHandling();
+            ShakeCamera();
+        }
+        else
+            rigidBody.velocity = Vector2.zero;
+    }
+
+
+    private void InitializeCar()
+    {
         topSpeed = player.GetTopSpeed();
-        baseAcceleration = player.GetAcceleration();
+        acceleration = player.GetAcceleration();
         brakePower = player.GetBrakingPower();
         lowSpeedHandling = player.GetLowSpeedHandling();
         highSpeedHandling = player.GetHighSpeedHandling();
@@ -62,68 +81,45 @@ public class CarMovement : MonoBehaviour
         collider.transform.parent = transform;
     }
 
-    private void Start()
+    private void ClampCarPositionHorizontal()
     {
-        if (InputManager.Instance.currentInput == InputTypes.TOUCH)
-            accelerating = true;
-
-        float speedLerp = Mathf.Clamp01((topSpeed - 100) / 200);
-        speedMultiplier = Mathf.Lerp(0, 175, speedLerp);
-
-        currentGearIndex = 0;
-        currentAcceleration = baseAcceleration;
-        gearAccelerations = new float[gearRatios.Length];
-
-        for (int i = 1; i < gearRatios.Length; i++)
-        {
-            gearAccelerations[i] = baseAcceleration - baseAcceleration * gearRatios[i];
-        }
-        gearAccelerations[0] = baseAcceleration;
+        var pos = transform.position;
+        pos.x = Mathf.Clamp(transform.position.x, -2.0f, 2.0f);
+        transform.position = pos;
     }
 
-    void Update()
+    private void UpdateCurrentSpeed()
     {
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -2f, 2f), transform.position.y);
-        dirX = InputManager.Instance.HandleInput();
-        dirX = Mathf.Clamp(dirX, -Handling(), Handling());
-
-        ShakeCamera();
+        currentSpeed = rigidBody.velocity.magnitude * 3.6f;
 
         if (currentSpeed > topSpeed)
             currentSpeed = topSpeed;
-        else if (currentSpeed < 25f)
-            currentSpeed = 25f;
+        else if (currentSpeed < 25)
+        {
+            currentSpeed = 25;
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, 25 / 3.6f);
+        }
 
         OnSpeedChange?.Invoke(currentSpeed);
     }
 
-    private void FixedUpdate()
+    private void CarHandling()
     {
-        if (!hasDied)
-        {
-            rigidBody.velocity = new Vector2(dirX, currentSpeed / 3.6f);
+        currentHandling = Mathf.Lerp(lowSpeedHandling, highSpeedHandling, currentSpeed / topSpeed);
 
-            TiltCar();
-            ManageMovement();
-        }
-        else
-        {
-            currentSpeed = 0;
-            rigidBody.velocity = Vector2.zero;
-        }
-    }
+        // Calculate the target horizontal velocity based on input and handling
+        float targetVelocityX = input.x * currentHandling;
 
-    private float Handling()
-    {
-        float normalizedSpeed = Mathf.Clamp01((currentSpeed - 25f) / (topSpeed - 25f));
-        float currentHandling = Mathf.Lerp(lowSpeedHandling, highSpeedHandling, normalizedSpeed);
-        return currentHandling;
-    }
+        // Calculate the horizontal velocity change required to reach the target
+        float velocityChangeX = targetVelocityX - rigidBody.velocity.x;
 
-    private void ShakeCamera()
-    {
-        float shakeMagnitude = Mathf.Clamp((GetSpeed() - 75f) * 0.01f, 0f, 0.0125f);
-        cameraShake.Shake(0.1f, shakeMagnitude, 1.5f);
+        // Applying friction in the horizontal direction
+        Vector2 frictionForce = -rigidBody.velocity.normalized * frictionCoefficient;
+        rigidBody.AddForce(frictionForce, ForceMode2D.Force);
+
+        // Applying the handling force with friction only in the horizontal direction
+        Vector2 handlingForce = new Vector2(velocityChangeX * handlingMultiplier, 0f);
+        rigidBody.AddForce(handlingForce, ForceMode2D.Force);
     }
 
     private void TiltCar()
@@ -134,92 +130,49 @@ public class CarMovement : MonoBehaviour
         }
         else
         {
-            float tiltAngle = Mathf.Lerp(-1.5f, 1.5f, (dirX + 1f) / 2f);
+            float tiltAngle = Mathf.Lerp(-2.5f, 2.5f, (rigidBody.velocity.x + 1f) / 2f);
             Quaternion targetRotation = Quaternion.Euler(0f, 0f, -tiltAngle);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 5f);
         }
     }
-
-    private void ManageMovement()
+    private void ShakeCamera()
     {
+        float shakeMagnitude = Mathf.Clamp((GetSpeed() - 75f) * 0.01f, 0f, 0.0125f);
+        cameraShake.Shake(0.1f, shakeMagnitude, 1.5f);
+    }
 
-        if (accelerating && !braking && canAccelerate)
+    private void CarVerticalMovement()
+    {
+        float currentVelocityY = rigidBody.velocity.y;
+
+        // Calculate the ratio of current speed to top speed
+        float speedRatio = Mathf.Clamp01(currentVelocityY / (topSpeed / 3.6f));
+
+        // Calculate effective acceleration with friction using an exponential function
+        float decelerationFactor = 1 - Mathf.Pow(speedRatio, decelerationExponent);
+        decelerationFactor = Mathf.Clamp(decelerationFactor, 0.275f, 1);
+        float effectiveAcceleration = acceleration * decelerationFactor;
+
+        // Calculate brake friction based on the current velocity (adjust the frictionCoefficientBrake value)
+        float brakeFriction = Mathf.Abs(currentVelocityY) * frictionCoefficientBrake;
+
+        // Applying engine acceleration or brake force based on input.y
+        if (input.y == 1 && currentVelocityY < topSpeed / 3.6f)
         {
-            if (currentSpeed < topSpeed)
-            {
-                currentSpeed += currentAcceleration * Time.fixedDeltaTime;
-
-                // Check if the next gear should be engaged
-                if (currentGearIndex < gearRatios.Length - 1 && currentSpeed / topSpeed >= gearRatios[currentGearIndex + 1])
-                {
-                    // Prevent further acceleration during gear change
-                    canAccelerate = false;
-                    StartCoroutine(ChangeToHigherGear());
-                }
-            }
+            // Apply engine acceleration with friction
+            Vector2 engineAccelerationForce = transform.up * input.y * effectiveAcceleration;
+            rigidBody.AddForce(engineAccelerationForce, ForceMode2D.Force);
         }
-
-        if (braking)
+        else if (input.y == -1 && currentVelocityY > 25 / 3.6f)
         {
-            if (currentSpeed > 25)
-                currentSpeed -= brakePower * Time.fixedDeltaTime;
+            // Calculate the total brake force, including brake power and brake friction
+            float totalBrakeForce = brakePower - brakeFriction;
+            totalBrakeForce = Mathf.Max(totalBrakeForce, 0f); // Ensure brake force is non-negative
 
-            ChangeToLowerGear();
+            // Apply brake force with friction
+            Vector2 engineBrakeForce = transform.up * input.y * totalBrakeForce;
+            rigidBody.AddForce(engineBrakeForce, ForceMode2D.Force);
         }
-
-        if (!accelerating && !braking && canAccelerate)
-        {
-            if (currentSpeed > 25)
-                currentSpeed -= Time.fixedDeltaTime;
-
-            ChangeToLowerGear();
-        }
-    }
-
-    private IEnumerator ChangeToHigherGear()
-    {
-        currentGearIndex++;
-
-        yield return new WaitForSeconds(1f);
-        currentAcceleration = gearAccelerations[currentGearIndex];
-        canAccelerate = true;
-    }
-
-    private void ChangeToLowerGear()
-    {
-        if (currentGearIndex > 0 && currentSpeed / topSpeed <= gearRatios[currentGearIndex])
-        {
-            currentGearIndex--;
-            currentAcceleration = gearAccelerations[currentGearIndex];
-        }
-    }
-
-    public void ChangeInputType()
-    {
-        if (InputManager.Instance.currentInput == InputTypes.TILT)
-            accelerating = false;
-        else
-            accelerating = true;
-    }
-
-    public void Accelerate()
-    {
-        accelerating = true;
-    }
-
-    public void AccelerateOff()
-    {
-        accelerating = false;
-    }
-
-    public void Brake()
-    {
-        braking = true;
-    }
-
-    public void BrakeOff()
-    {
-        braking = false;
     }
 
     public float GetSpeed()
@@ -227,28 +180,8 @@ public class CarMovement : MonoBehaviour
         return currentSpeed;
     }
 
-    public float GetAcceleration()
-    {
-        return baseAcceleration;
-    }
-
-    public void SetTopSpeed(float newSpeed)
-    {
-        topSpeed = newSpeed;
-    }
-
     public float GetTopSpeed()
     {
         return topSpeed;
-    }
-
-    public void SetAcceleration(float newAcceleration)
-    {
-        baseAcceleration = newAcceleration;
-    }
-
-    public float GetCameraNormalizedSpeed()
-    {
-        return Mathf.Clamp01((currentSpeed) / 200f);
     }
 }

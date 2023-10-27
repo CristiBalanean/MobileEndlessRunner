@@ -14,12 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: Lexus
   topSpeed: 140
-  acceleration: 25
-  brakingPower: 50
+  acceleration: 15
+  brakingPower: 30
   lowSpeedHandling: 3.5
   highSpeedHandling: 4
-  length: 0
-  height: 0
   carSprite: {fileID: -1978909859, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
   carPrice: 25000
   unlocked: 0

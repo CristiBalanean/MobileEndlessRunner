@@ -2050,9 +2050,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1577061386}
-          m_TargetAssemblyTypeName: CarMovement, Assembly-CSharp
-          m_MethodName: Brake
+        - m_Target: {fileID: 637044323}
+          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+          m_MethodName: ChangeBrakingOn
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2066,9 +2066,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1577061386}
-          m_TargetAssemblyTypeName: CarMovement, Assembly-CSharp
-          m_MethodName: BrakeOff
+        - m_Target: {fileID: 637044323}
+          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+          m_MethodName: ChangeBrakingOff
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -7064,16 +7064,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 0
-  currentAcceleration: 0
-  gearAccelerations: []
-  currentGearIndex: 0
-  accelerating: 0
   hasDied: 0
-  player: {fileID: 0}
-  currentSpeed: 25
   cameraShake: {fileID: 519420033}
-  tilt: {fileID: 1269715368}
-  touch: {fileID: 350232156}
+  player: {fileID: 0}
 --- !u!50 &1577061387
 Rigidbody2D:
   serializedVersion: 4
@@ -8318,9 +8311,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1577061386}
-          m_TargetAssemblyTypeName: CarMovement, Assembly-CSharp
-          m_MethodName: Brake
+        - m_Target: {fileID: 637044323}
+          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+          m_MethodName: ChangeBrakingOn
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -8334,9 +8327,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1577061386}
-          m_TargetAssemblyTypeName: CarMovement, Assembly-CSharp
-          m_MethodName: BrakeOff
+        - m_Target: {fileID: 637044323}
+          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+          m_MethodName: ChangeBrakingOff
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -8507,8 +8500,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.00045001507, y: 1.3945999, z: 0}
-    m_Extent: {x: 1.99765, y: 2.5992, z: 0}
+    m_Center: {x: 0.0016000271, y: 1.4068999, z: 0}
+    m_Extent: {x: 1.9928, y: 2.5966, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -9181,9 +9174,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1577061386}
-          m_TargetAssemblyTypeName: CarMovement, Assembly-CSharp
-          m_MethodName: AccelerateOff
+        - m_Target: {fileID: 637044323}
+          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+          m_MethodName: ChangeAcceleratingOff
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -9197,9 +9190,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1577061386}
-          m_TargetAssemblyTypeName: CarMovement, Assembly-CSharp
-          m_MethodName: Accelerate
+        - m_Target: {fileID: 637044323}
+          m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+          m_MethodName: ChangeAcceleratingOn
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

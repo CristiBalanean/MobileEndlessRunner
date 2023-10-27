@@ -14,8 +14,6 @@ public class Car : ScriptableObject
     [SerializeField] private float brakingPower;
     [SerializeField] private float lowSpeedHandling;
     [SerializeField] private float highSpeedHandling;
-    [SerializeField] private float length;
-    [SerializeField] private float height;
 
     [Header("Sprite")]
     [SerializeField] private Sprite carSprite;
@@ -40,10 +38,6 @@ public class Car : ScriptableObject
     public float GetLowSpeedHandling() {  return lowSpeedHandling; }
 
     public float GetHighSpeedHandling() { return highSpeedHandling; }
-
-    public float GetLength() { return length; }
-
-    public float GetHeight() { return height; }
 
     public Sprite GetSprite() { return carSprite; }
 

@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum InputTypes
 {
@@ -19,18 +15,12 @@ public class InputManager : MonoBehaviour
     public delegate void OnInputTypeChanges(InputTypes inputTypes);
     public event OnInputTypeChanges onInputTypeChanges;
 
-    [SerializeField] private float smoothingFactor = 0.75f;
-    [SerializeField] private float movementSensitivityX = 240f;
-
-    [Header("Tilt")]
-    [SerializeField] private float deadZone = 0.2f;
-    [SerializeField] private float filterStrength = 0.3f;
-    Vector3 filteredAcceleration;
-
-    [Header("Touch")]
-    private float touchDirection;
+    private float xAxisDirection;
+    private float yAxisDirection;
     private bool left;
     private bool right;
+    private bool accelerating;
+    private bool braking;
 
     private void Awake()
     {
@@ -50,7 +40,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public float HandleInput()
+    public Vector2 HandleInput()
     {
         switch (currentInput)
         {
@@ -61,66 +51,69 @@ public class InputManager : MonoBehaviour
                 return HandleTouchInput();
         }
 
-        return 0;
+        return Vector2.zero;
     }
 
-    private float HandleTiltInput()
+    private Vector2 HandleTiltInput()
     {
-        Vector3 rawAcceleration = GetAveragedAcceleration();
+        xAxisDirection = Input.acceleration.x * 6f;
+        if (xAxisDirection > -0.1f && xAxisDirection < 0.1f)
+            xAxisDirection = 0;
+        xAxisDirection = Mathf.Clamp(xAxisDirection, -1, 1);
 
-        filteredAcceleration = Vector3.Lerp(filteredAcceleration, rawAcceleration, filterStrength);
+        // Determine the y-axis input based on accelerating and braking states
+        float yAxisDirection = 0;
+        if (accelerating && !braking)
+            yAxisDirection = 1;
+        else if (braking)
+            yAxisDirection = -1;
 
-        float dirX = filteredAcceleration.x * smoothingFactor * movementSensitivityX * Time.deltaTime;
-
-        if (Mathf.Abs(rawAcceleration.x) < deadZone)
-        {
-            rawAcceleration.x = 0f;
-        }
-
-        return dirX;
+        return new Vector2(xAxisDirection, yAxisDirection);
     }
 
-    private float HandleTouchInput()
+    private Vector2 HandleTouchInput()
     {
         if (left)
-            touchDirection = -1;
+            xAxisDirection = -1;
         else if(right)
-            touchDirection = 1;
+            xAxisDirection = 1;
         else if(!left && !right)
-            touchDirection = 0;
+            xAxisDirection = 0;
 
-        float dirX = touchDirection * movementSensitivityX * smoothingFactor * Time.deltaTime;
+        if (braking)
+            yAxisDirection = -1;
+        else
+            yAxisDirection = 1;
 
-        return dirX;
+        return new Vector2(xAxisDirection, yAxisDirection);
     }
 
-    private Vector3 GetAveragedAcceleration()
-    {
-        float period = 0.0f;
-        Vector3 acc = Vector3.zero;
-
-        // Iterate through all accelerometer events in the last frame
-        foreach (var evnt in Input.accelerationEvents)
-        {
-            acc += evnt.acceleration * evnt.deltaTime;
-            period += evnt.deltaTime;
-        }
-
-        // Ensure that at least one reading was recorded
-        if (period > 0)
-        {
-            // Compute the weighted average
-            acc *= 1.0f / period;
-        }
-
-        return acc;
-    }
 
     public void ChangeInputType(InputTypes newInputType)
     {
         currentInput = newInputType;
 
         onInputTypeChanges?.Invoke(newInputType);
+    }
+
+    public void ChangeAcceleratingOn()
+    {
+        accelerating = true;
+    }
+
+    public void ChangeAcceleratingOff()
+    {
+        accelerating = false;
+    }
+
+    public void ChangeBrakingOn()
+    {
+        braking = true;
+    }
+
+    public void ChangeBrakingOff()
+    {
+        braking = false;
     }
 
     public void ChangeDirectionLeft()

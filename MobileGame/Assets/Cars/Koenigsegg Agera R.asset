@@ -14,13 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: 'Koenigsegg Agera R '
   topSpeed: 200
-  acceleration: 50
-  brakingPower: 110
+  acceleration: 25
+  brakingPower: 50
   lowSpeedHandling: 7
   highSpeedHandling: 7.5
-  length: 0
-  height: 0
   carSprite: {fileID: -2122711842, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
   carPrice: 500000
-  unlocked: 1
+  unlocked: 0
   colliderPrefab: {fileID: 7135039146680131254, guid: c5619055478e02b4c85d1e1feac77c48, type: 3}

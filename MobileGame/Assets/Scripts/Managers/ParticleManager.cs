@@ -15,6 +15,7 @@ public class ParticleManager : MonoBehaviour
 
     public void InstantiateParticle(Transform position)
     {
-        Instantiate(smokeParticle, position.position + new Vector3(0, 0.36f, 0), Quaternion.identity);
+        GameObject smokeEffect = Instantiate(smokeParticle, position.position + new Vector3(0, 0.36f, 0), Quaternion.identity);
+        smokeEffect.transform.parent = GameObject.Find("Player").transform;
     }
 }
