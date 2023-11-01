@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject shop;
+    [SerializeField] private GameObject powerUps;
     [SerializeField] private GameObject chooseControls;
 
     private const string FirstTimeKey = "IsFirstTime";
@@ -49,6 +50,12 @@ public class MenuManager : MonoBehaviour
         menu.SetActive(false);
     }
 
+    public void PowerUps()
+    {
+        powerUps.SetActive(true);
+        menu.SetActive(false);
+    }
+
     public void Quit()
     {
         Application.Quit();
@@ -57,6 +64,12 @@ public class MenuManager : MonoBehaviour
     public void Back()
     {
         shop.SetActive(false);
+        menu.SetActive(true);
+    }
+
+    public void BackPowerUps()
+    {
+        powerUps.SetActive(false);
         menu.SetActive(true);
     }
 

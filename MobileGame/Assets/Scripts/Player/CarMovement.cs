@@ -13,7 +13,7 @@ public class CarMovement : MonoBehaviour
     private Rigidbody2D rigidBody;
     public float speedMultiplier;
     private float currentSpeed;
-    private float currentHandling;
+    public float currentHandling;
     private Vector2 input;
     public bool hasDied = false; //put it in the car health script
 
@@ -21,15 +21,18 @@ public class CarMovement : MonoBehaviour
     [SerializeField] private Car player;
 
     private float topSpeed;
-    private float acceleration;
+    public float acceleration;
     private float brakePower;
     private float lowSpeedHandling;
     private float highSpeedHandling;
 
     private float frictionCoefficient = 2f; // Adjust this value to control friction strength
     private float handlingMultiplier = 5f; // Adjust this value to control handling strength
-    private float decelerationExponent = 2f;
-    private float frictionCoefficientBrake = .75f;
+    private float decelerationExponent = 1f;
+    private float brakeHoldDuration = 0f;
+    private float maxBrakeHoldDuration = 1f; // Adjust this value for the maximum duration the brake is held
+    private float accelerationHoldDuration = 0;
+    private float maxAccelerationHoldDuration = .75f;
 
     private void Awake()
     {
@@ -105,20 +108,23 @@ public class CarMovement : MonoBehaviour
 
     private void CarHandling()
     {
+        float adjustedTimeScale = 1f / Time.timeScale;
+
         currentHandling = Mathf.Lerp(lowSpeedHandling, highSpeedHandling, currentSpeed / topSpeed);
 
         // Calculate the target horizontal velocity based on input and handling
-        float targetVelocityX = input.x * currentHandling;
+        float targetVelocityX = input.x * currentHandling * adjustedTimeScale;
 
         // Calculate the horizontal velocity change required to reach the target
         float velocityChangeX = targetVelocityX - rigidBody.velocity.x;
 
-        // Applying friction in the horizontal direction
-        Vector2 frictionForce = -rigidBody.velocity.normalized * frictionCoefficient;
+        // Applying friction in the horizontal direction (only)
+        Vector2 frictionForce = -rigidBody.velocity.normalized * (frictionCoefficient * adjustedTimeScale);
+        frictionForce.y = 0f; // Ensure no y-component
         rigidBody.AddForce(frictionForce, ForceMode2D.Force);
 
-        // Applying the handling force with friction only in the horizontal direction
-        Vector2 handlingForce = new Vector2(velocityChangeX * handlingMultiplier, 0f);
+        // Applying the handling force only in the horizontal direction
+        Vector2 handlingForce = new Vector2(velocityChangeX * handlingMultiplier, 0f) * adjustedTimeScale;
         rigidBody.AddForce(handlingForce, ForceMode2D.Force);
     }
 
@@ -126,13 +132,13 @@ public class CarMovement : MonoBehaviour
     {
         if (transform.position.x == -2f || transform.position.x == 2f)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.fixedDeltaTime * 10f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.fixedUnscaledDeltaTime * 10f);
         }
         else
         {
             float tiltAngle = Mathf.Lerp(-2.5f, 2.5f, (rigidBody.velocity.x + 1f) / 2f);
             Quaternion targetRotation = Quaternion.Euler(0f, 0f, -tiltAngle);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 5f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedUnscaledDeltaTime * 5f);
         }
     }
     private void ShakeCamera()
@@ -150,28 +156,42 @@ public class CarMovement : MonoBehaviour
 
         // Calculate effective acceleration with friction using an exponential function
         float decelerationFactor = 1 - Mathf.Pow(speedRatio, decelerationExponent);
-        decelerationFactor = Mathf.Clamp(decelerationFactor, 0.275f, 1);
+        decelerationFactor = Mathf.Clamp(decelerationFactor, 0.05f, 1);
         float effectiveAcceleration = acceleration * decelerationFactor;
-
-        // Calculate brake friction based on the current velocity (adjust the frictionCoefficientBrake value)
-        float brakeFriction = Mathf.Abs(currentVelocityY) * frictionCoefficientBrake;
 
         // Applying engine acceleration or brake force based on input.y
         if (input.y == 1 && currentVelocityY < topSpeed / 3.6f)
         {
-            // Apply engine acceleration with friction
-            Vector2 engineAccelerationForce = transform.up * input.y * effectiveAcceleration;
+            accelerationHoldDuration += Time.deltaTime;
+
+            float accelerationForce = Mathf.Lerp(0, effectiveAcceleration, accelerationHoldDuration / maxAccelerationHoldDuration);
+
+            // Apply engine acceleration with friction only in the vertical direction
+            Vector2 engineAccelerationForce = transform.up * accelerationForce;
             rigidBody.AddForce(engineAccelerationForce, ForceMode2D.Force);
+
+            // Reset brake hold duration when accelerating
+            brakeHoldDuration = 0f;
         }
         else if (input.y == -1 && currentVelocityY > 25 / 3.6f)
         {
-            // Calculate the total brake force, including brake power and brake friction
-            float totalBrakeForce = brakePower - brakeFriction;
-            totalBrakeForce = Mathf.Max(totalBrakeForce, 0f); // Ensure brake force is non-negative
+            // Increase brake hold duration
+            brakeHoldDuration += Time.deltaTime;
 
-            // Apply brake force with friction
-            Vector2 engineBrakeForce = transform.up * input.y * totalBrakeForce;
+            // Calculate brake force based on the hold duration (linear increase)
+            float brakeForce = Mathf.Lerp(0, brakePower, brakeHoldDuration / maxBrakeHoldDuration);
+
+            // Apply brake force only in the vertical direction
+            Vector2 engineBrakeForce = -transform.up * brakeForce;
             rigidBody.AddForce(engineBrakeForce, ForceMode2D.Force);
+
+            accelerationHoldDuration = 0;
+        }
+        else
+        {
+            // Reset brake hold duration when not braking
+            brakeHoldDuration = 0f;
+            accelerationHoldDuration = 0;
         }
     }
 

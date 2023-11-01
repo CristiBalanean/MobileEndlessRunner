@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class CarHealth : MonoBehaviour
 {
     [SerializeField] private UnityEvent deathTrigger;
-
     [SerializeField] private int health;
 
     private void Start()

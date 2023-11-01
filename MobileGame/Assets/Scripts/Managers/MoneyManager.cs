@@ -22,7 +22,9 @@ public class MoneyManager : MonoBehaviour
 
     public void ComputeFinalMoney()
     {
-        currentMoney += ScoreManager.Instance.GetFinalScore() / 25 + (int)ScoreManager.Instance.GetDistanceTraveled() / 10;
+        int moneyToGive = ScoreManager.Instance.GetFinalScore() / 25 + (int)ScoreManager.Instance.GetDistanceTraveled() / 20;
+        currentMoney += moneyToGive;
         PlayerPrefs.SetInt("Money", currentMoney);
+        Debug.Log("Money given: " + moneyToGive);
     }
 }

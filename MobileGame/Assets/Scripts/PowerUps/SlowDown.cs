@@ -1,17 +1,26 @@
 using System.Collections;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "PowerUps/SlowDown")]
 public class SlowDown : PowerUp
 {
-    protected override IEnumerator PickUp(Collider2D player)
+    private bool isUsed = false;
+
+    public override void ApplyPowerUp(GameObject target)
     {
-        GetComponent<SpriteRenderer>().enabled = false;
+        if (!isUsed)
+        {
+            Time.timeScale = 0.25f;
+            isUsed = true;
+        }
+    }
 
-        Time.timeScale = 0.5f;
-        yield return new WaitForSeconds(duration);
-        Time.timeScale = 1f;
-
-        GetComponent<SpriteRenderer>().enabled = true;
-        gameObject.SetActive(false);
+    public override void FinishPowerUp(GameObject target)
+    {
+        if (isUsed)
+        {
+            Time.timeScale = 1f;
+            isUsed = false;
+        }
     }
 }
