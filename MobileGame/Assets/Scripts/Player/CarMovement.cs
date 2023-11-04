@@ -29,7 +29,6 @@ public class CarMovement : MonoBehaviour
 
     private float frictionCoefficient = 2f; // Adjust this value to control friction strength
     private float handlingMultiplier = 5f; // Adjust this value to control handling strength
-    private float decelerationExponent = 1f;
     private float brakeHoldDuration = 0f;
     private float maxBrakeHoldDuration = 1f; // Adjust this value for the maximum duration the brake is held
     private float accelerationHoldDuration = 0;

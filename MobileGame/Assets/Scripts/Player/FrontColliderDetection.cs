@@ -16,6 +16,7 @@ public class FrontColliderDetection : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         StartCoroutine(cameraShake.Shake(.1f, .1f, 1f));
+        SoundManager.instance.Play("Crash");
 
         AIHealth aiHealth = collision.gameObject.GetComponent<AIHealth>();
         if (aiHealth != null)
