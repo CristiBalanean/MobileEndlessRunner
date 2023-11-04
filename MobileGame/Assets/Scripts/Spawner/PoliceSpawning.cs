@@ -2,23 +2,63 @@ using UnityEngine;
 
 public class PoliceSpawning : MonoBehaviour
 {
+    public static PoliceSpawning instance;
+
     [SerializeField] private GameObject policePrefab;
     [SerializeField] private Transform player;
 
     [SerializeField] private Transform[] spawnPoints;
+    private GameObject[] activePoliceCars; // Array to keep track of active police cars
+    private int activePoliceCount; // Current number of active police cars
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void Start()
+    {
+        // Initialize the array of active police cars
+        activePoliceCars = new GameObject[2];
+        activePoliceCount = 0;
+    }
 
     public void SpawnPoliceCars()
     {
-        for (int i = 0; i < spawnPoints.Length; i++) 
+        // Spawn police cars only if there are less than 2 active police cars
+        while (activePoliceCount < 2)
         {
-            float yVariation = Random.Range(-3.5f, -2f);
-            SpawnPoliceCar(spawnPoints[i].position.x, player.position.y + yVariation);
+            float yVariation = Random.Range(-8f, -6f);
+
+            // Randomly select a spawn point
+            Transform selectedSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
+            float xPosition = selectedSpawnPoint.position.x;
+            float yPosition = player.position.y + yVariation;
+
+            // Instantiate the police car at the specified position
+            GameObject policeCar = Instantiate(policePrefab, new Vector3(xPosition, yPosition, 0f), Quaternion.identity);
+
+            // Add the police car to the array of active police cars
+            activePoliceCars[activePoliceCount] = policeCar;
+            activePoliceCount++;
         }
     }
 
-    private void SpawnPoliceCar(float x, float y)
+    public void RemovePoliceCar(GameObject car)
     {
-        // Instantiate the police car at the specified position
-        GameObject policeCar = Instantiate(policePrefab, new Vector3(x, y, 0f), Quaternion.identity);
+        // Remove the destroyed police car from the array of active police cars
+        for (int i = 0; i < activePoliceCount; i++)
+        {
+            if (activePoliceCars[i] == car)
+            {
+                activePoliceCars[i] = null;
+                activePoliceCount--;
+                break;
+            }
+        }
+
+        // Spawn a new police car to maintain the count of active police cars
+        SpawnPoliceCars();
     }
 }

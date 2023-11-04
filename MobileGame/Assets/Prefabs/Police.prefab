@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 1020778882587016528}
   - component: {fileID: 3289376419261740372}
   - component: {fileID: -822062187628405986}
+  - component: {fileID: 1555084715597939887}
   m_Layer: 6
   m_Name: Police
   m_TagString: Police
@@ -274,7 +275,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1432169405, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+  m_Sprite: {fileID: 440866075, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -317,7 +318,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.020742387, y: -0.048164904}
+  m_Offset: {x: -0.010763407, y: 0.004581064}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -328,7 +329,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6917562, y: 1.5036899}
+  m_Size: {x: 0.688905, y: 1.3981979}
   m_EdgeRadius: 0
 --- !u!50 &3289376419261740372
 Rigidbody2D:
@@ -342,7 +343,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -367,6 +368,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b551e5f5dba3cf4ba9cb1be41033536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1555084715597939887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6725105912748856326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3455fa7396bd49b4da8a4de1f96c0a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7391948202525945708
@@ -504,8 +517,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0015500188, y: 1.4732499, z: 0}
-    m_Extent: {x: 1.9935501, y: 2.52445, z: 0}
+    m_Center: {x: -0.0036000013, y: 1.4748, z: 0}
+    m_Extent: {x: 1.9983, y: 2.5286999, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

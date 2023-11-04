@@ -759,16 +759,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carGraphics:
-  - sprite: {fileID: -690558637, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
-    collider: {fileID: 285797471649795006, guid: e4c571e1f5b6c3f45a71d06c332e956a, type: 3}
-  - sprite: {fileID: 248233056, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
-    collider: {fileID: 2758099672681507203, guid: d2e6cce2867b0c9469f578f84230a794, type: 3}
   - sprite: {fileID: -1046139785, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+    collider: {fileID: 285797471649795006, guid: e4c571e1f5b6c3f45a71d06c332e956a, type: 3}
+  - sprite: {fileID: 454122883, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+    collider: {fileID: 2758099672681507203, guid: d2e6cce2867b0c9469f578f84230a794, type: 3}
+  - sprite: {fileID: -1432169405, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
     collider: {fileID: 1986776347124288855, guid: 91cb87f3cbdba944fab6a3611d618985, type: 3}
-  - sprite: {fileID: -1825034388, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+  - sprite: {fileID: -1381298412, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
     collider: {fileID: 1236812821188872859, guid: a5954a4c4eb8cf24ca1d41af496ffa57, type: 3}
-  - sprite: {fileID: 12322508, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+  - sprite: {fileID: -528902320, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
     collider: {fileID: 8114605648725432665, guid: 098fdcf21e4030747a16b68e14571b19, type: 3}
+  - sprite: {fileID: -1825034388, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+    collider: {fileID: 884768014932230024, guid: 10e4ada5669ac2f4394bbb6b735e218d, type: 3}
+  - sprite: {fileID: 12322508, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+    collider: {fileID: 8499879033410915253, guid: aaba76e70c785a04db26c0539b01c66b, type: 3}
+  - sprite: {fileID: -1662877497, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+    collider: {fileID: 1809646541157297187, guid: 2fe51ddeb4931724b9ae4e7fa211a28c, type: 3}
 --- !u!4 &141285530
 Transform:
   m_ObjectHideFlags: 0
@@ -2308,7 +2314,7 @@ GameObject:
   - component: {fileID: 421150897}
   - component: {fileID: 421150896}
   m_Layer: 0
-  m_Name: SpikeTrapSpawner
+  m_Name: TrapsSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2326,7 +2332,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c7c4d853cf23754facbe39747805fb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeTrapPrefab: {fileID: 3664580242639268156, guid: af72fd2070929034ca7da94af355d0ba, type: 3}
+  trapsPrefab:
+  - {fileID: 3664580242639268156, guid: af72fd2070929034ca7da94af355d0ba, type: 3}
+  - {fileID: 8055293268442821844, guid: bcc84094e82b89c4fa2faa70e70642a0, type: 3}
+  - {fileID: 3357743382105874749, guid: 7e9f9f34075d3f34dae45475b929dd29, type: 3}
   spawnPoints:
   - {fileID: 105679620}
   - {fileID: 1759088693}
@@ -7413,6 +7422,48 @@ MonoBehaviour:
   hasDied: 0
   cameraShake: {fileID: 519420033}
   player: {fileID: 0}
+  accelerationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0083351135
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.39631492
+      value: 0.656978
+      inSlope: -1.9575502
+      outSlope: -1.9575502
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17823713
+      outWeight: 0.14889245
+    - serializedVersion: 3
+      time: 0.75687766
+      value: 0.0264606
+      inSlope: -0.3221701
+      outSlope: -0.3221701
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.104818754
+      outWeight: 0.24636589
+    - serializedVersion: 3
+      time: 0.9986718
+      value: 0.000502547
+      inSlope: -0.026322562
+      outSlope: -0.026322562
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07259194
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   acceleration: 0
 --- !u!50 &1577061387
 Rigidbody2D:
@@ -8827,8 +8878,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0042000413, y: 1.3938, z: 0}
-    m_Extent: {x: 2.0039, y: 2.6008, z: 0}
+    m_Center: {x: 0.005749941, y: 1.4012, z: 0}
+    m_Extent: {x: 2.00155, y: 2.608, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

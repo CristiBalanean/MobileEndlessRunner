@@ -30,7 +30,7 @@ public class WorldSpawner : MonoBehaviour
 
     private void Update()
     {
-        float playerPosition = player.position.y;
+        float playerPosition = player.position.y - segmentLength / 2;
 
         if (playerPosition > playerPositionLastFrame + segmentLength)
         {

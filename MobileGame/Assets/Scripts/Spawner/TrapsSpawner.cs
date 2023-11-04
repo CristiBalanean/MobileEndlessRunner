@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpikeTrapSpawner : MonoBehaviour
+public class TrapsSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject spikeTrapPrefab;
+    [SerializeField] private GameObject[] trapsPrefab;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private RectTransform exclamationMark1;
     [SerializeField] private RectTransform exclamationMark2;
@@ -70,8 +70,10 @@ public class SpikeTrapSpawner : MonoBehaviour
             exclamationMark2.gameObject.SetActive(false);
 
             // Spawn spike trap
-            Instantiate(spikeTrapPrefab, spawnPoints[randomSpawnPoint1].position + new Vector3(0, 10, 0), Quaternion.identity);
-            Instantiate(spikeTrapPrefab, spawnPoints[randomSpawnPoint2].position + new Vector3(0, 10, 0), Quaternion.identity);
+            int rand1 = Random.Range(0, trapsPrefab.Length);
+            int rand2 = Random.Range(0, trapsPrefab.Length);
+            Instantiate(trapsPrefab[rand1], spawnPoints[randomSpawnPoint1].position + new Vector3(0, 10, 0), Quaternion.identity);
+            Instantiate(trapsPrefab[rand2], spawnPoints[randomSpawnPoint2].position + new Vector3(0, 10, 0), Quaternion.identity);
         }
     }
 }

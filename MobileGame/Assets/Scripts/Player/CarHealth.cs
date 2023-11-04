@@ -8,6 +8,8 @@ public class CarHealth : MonoBehaviour
     [SerializeField] private UnityEvent deathTrigger;
     [SerializeField] private int health;
 
+    private bool hasDied = false;
+
     private void Start()
     {
         MoneyManager moneyManager = FindObjectOfType<MoneyManager>();
@@ -24,8 +26,11 @@ public class CarHealth : MonoBehaviour
     public void TakeDamage(int amount)
     {
         health -= amount;
-        if (health <= 0)
+        if (health <= 0 && !hasDied)
+        {
             TriggerDeath();
+            hasDied = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

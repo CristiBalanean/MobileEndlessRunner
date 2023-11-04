@@ -19,6 +19,7 @@ public class CarMovement : MonoBehaviour
 
     [SerializeField] private CameraShake cameraShake;
     [SerializeField] private Car player;
+    [SerializeField] private AnimationCurve accelerationCurve;
 
     private float topSpeed;
     public float acceleration;
@@ -155,7 +156,7 @@ public class CarMovement : MonoBehaviour
         float speedRatio = Mathf.Clamp01(currentVelocityY / (topSpeed / 3.6f));
 
         // Calculate effective acceleration with friction using an exponential function
-        float decelerationFactor = 1 - Mathf.Pow(speedRatio, decelerationExponent);
+        float decelerationFactor = accelerationCurve.Evaluate(speedRatio);
         decelerationFactor = Mathf.Clamp(decelerationFactor, 0.05f, 1);
         float effectiveAcceleration = acceleration * decelerationFactor;
 
@@ -167,7 +168,7 @@ public class CarMovement : MonoBehaviour
             float accelerationForce = Mathf.Lerp(0, effectiveAcceleration, accelerationHoldDuration / maxAccelerationHoldDuration);
 
             // Apply engine acceleration with friction only in the vertical direction
-            Vector2 engineAccelerationForce = transform.up * accelerationForce;
+            Vector2 engineAccelerationForce = Vector2.up * accelerationForce;
             rigidBody.AddForce(engineAccelerationForce, ForceMode2D.Force);
 
             // Reset brake hold duration when accelerating

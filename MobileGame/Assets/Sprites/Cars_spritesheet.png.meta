@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cars_spritesheet_0
+      name: DefaultCar
       rect:
         serializedVersion: 2
         x: 0
@@ -144,7 +144,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -157,7 +157,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_1
+      name: Mustang
       rect:
         serializedVersion: 2
         x: 128
@@ -165,7 +165,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -178,7 +178,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_2
+      name: Honda
       rect:
         serializedVersion: 2
         x: 256
@@ -186,7 +186,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -199,7 +199,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_3
+      name: Lexus
       rect:
         serializedVersion: 2
         x: 384
@@ -207,7 +207,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -220,7 +220,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_4
+      name: AudiR8
       rect:
         serializedVersion: 2
         x: 512
@@ -228,7 +228,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -241,7 +241,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_5
+      name: Koenisegg
       rect:
         serializedVersion: 2
         x: 640
@@ -249,7 +249,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -262,7 +262,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_6
+      name: Nissan
       rect:
         serializedVersion: 2
         x: 768
@@ -270,7 +270,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -283,7 +283,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_7
+      name: ToyotaSupra
       rect:
         serializedVersion: 2
         x: 896
@@ -291,7 +291,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -304,15 +304,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_8
+      name: Ferrari
       rect:
         serializedVersion: 2
-        x: 0
-        y: 768
+        x: 1024
+        y: 896
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -325,15 +325,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_9
+      name: Bugatti
       rect:
         serializedVersion: 2
-        x: 128
-        y: 768
+        x: 1152
+        y: 896
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -346,15 +346,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_10
+      name: Golf
       rect:
         serializedVersion: 2
-        x: 256
+        x: 0
         y: 768
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -367,15 +367,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_11
+      name: Bmw
       rect:
         serializedVersion: 2
-        x: 384
+        x: 128
         y: 768
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -388,15 +388,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_12
+      name: Audi
       rect:
         serializedVersion: 2
-        x: 0
-        y: 640
+        x: 256
+        y: 768
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -409,15 +409,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_13
+      name: Sandero
       rect:
         serializedVersion: 2
-        x: 128
-        y: 640
+        x: 384
+        y: 768
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -430,15 +430,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_14
+      name: Sabre
       rect:
         serializedVersion: 2
-        x: 384
-        y: 640
+        x: 512
+        y: 768
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -451,15 +451,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_15
+      name: Infernus
       rect:
         serializedVersion: 2
-        x: 512
-        y: 640
+        x: 640
+        y: 768
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -472,15 +472,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cars_spritesheet_16
+      name: Hyundai
       rect:
         serializedVersion: 2
-        x: 128
-        y: 512
+        x: 768
+        y: 768
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -488,6 +488,90 @@ TextureImporter:
       bones: []
       spriteID: 394868b188410c34b936a2f2f8901740
       internalID: -1662877497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cars_spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dda771eeeaaf0904c9af1fe00551fb3b
+      internalID: 440866075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cars_spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47367746d1c14de41bcfc1ce0747ce7c
+      internalID: -736659980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Van
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9c60d9b2025b6b4f83c17ffbe852672
+      internalID: -1381298412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bus
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a3b668f4bd14da49a47fef55e51c590
+      internalID: -528902320
       vertices: []
       indices: 
       edges: []
@@ -503,23 +587,27 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Cars_spritesheet_0: -1203546740
-      Cars_spritesheet_1: 1276455663
-      Cars_spritesheet_10: -1046139785
-      Cars_spritesheet_11: 454122883
-      Cars_spritesheet_12: -1432169405
-      Cars_spritesheet_13: 890006652
-      Cars_spritesheet_14: -1825034388
-      Cars_spritesheet_15: 12322508
-      Cars_spritesheet_16: -1662877497
-      Cars_spritesheet_2: -409047236
-      Cars_spritesheet_3: -1978909859
-      Cars_spritesheet_4: 1200064572
-      Cars_spritesheet_5: -2122711842
-      Cars_spritesheet_6: -1015314366
-      Cars_spritesheet_7: -2068725451
-      Cars_spritesheet_8: -690558637
-      Cars_spritesheet_9: 248233056
+      Audi: -1432169405
+      AudiR8: 1200064572
+      Bmw: 454122883
+      Bugatti: 248233056
+      Bus: -528902320
+      Cars_spritesheet_17: 440866075
+      Cars_spritesheet_18: -736659980
+      DefaultCar: -1203546740
+      Ferrari: -690558637
+      Golf: -1046139785
+      Honda: -409047236
+      Hyundai: -1662877497
+      Infernus: 12322508
+      Koenisegg: -2122711842
+      Lexus: -1978909859
+      Mustang: 1276455663
+      Nissan: -1015314366
+      Sabre: -1825034388
+      Sandero: 890006652
+      ToyotaSupra: -2068725451
+      Van: -1381298412
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

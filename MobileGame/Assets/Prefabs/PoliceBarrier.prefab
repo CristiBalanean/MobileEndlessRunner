@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7112159429450231939}
   - component: {fileID: 448644648674838719}
   - component: {fileID: 3158206709820985044}
+  - component: {fileID: 4690205640521419090}
   m_Layer: 0
   m_Name: Police (2)
   m_TagString: Police
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 890006652, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+  m_Sprite: {fileID: -736659980, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -131,6 +132,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.72, y: 1.51}
   m_EdgeRadius: 0
+--- !u!114 &4690205640521419090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307695846015002224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3455fa7396bd49b4da8a4de1f96c0a6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1469921048423009560
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +387,7 @@ GameObject:
   - component: {fileID: 2859009653200421084}
   - component: {fileID: 7204683792271749459}
   - component: {fileID: 7155462172498679866}
+  - component: {fileID: 7601413347792498523}
   m_Layer: 0
   m_Name: Police
   m_TagString: Police
@@ -438,7 +452,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1432169405, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+  m_Sprite: {fileID: 440866075, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -494,6 +508,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.79, y: 1.45}
   m_EdgeRadius: 0
+--- !u!114 &7601413347792498523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2621230152172307837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3455fa7396bd49b4da8a4de1f96c0a6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3630090332201793323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,6 +1031,7 @@ GameObject:
   - component: {fileID: 871537098166917250}
   - component: {fileID: 4029396063641352372}
   - component: {fileID: 5113583766793182531}
+  - component: {fileID: 2159951696562939232}
   m_Layer: 0
   m_Name: Police (1)
   m_TagString: Police
@@ -1069,7 +1096,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1432169405, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+  m_Sprite: {fileID: 440866075, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1125,6 +1152,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.68, y: 1.45}
   m_EdgeRadius: 0
+--- !u!114 &2159951696562939232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8014727009797876629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3455fa7396bd49b4da8a4de1f96c0a6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3473907952221758922
 PrefabInstance:
   m_ObjectHideFlags: 0

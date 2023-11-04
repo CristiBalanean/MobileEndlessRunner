@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: -2055249216150113563}
   - component: {fileID: 2262236958019198454}
   - component: {fileID: -910315899207388484}
+  - component: {fileID: 2776542812084018045}
   m_Layer: 6
   m_Name: Car
   m_TagString: Obstacle
@@ -237,6 +238,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50ed72b0815518245b6a1984e2657845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2776542812084018045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517040841658587091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3455fa7396bd49b4da8a4de1f96c0a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5087806652330700603

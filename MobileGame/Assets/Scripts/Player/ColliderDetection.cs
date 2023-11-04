@@ -22,11 +22,10 @@ public class ColliderDetection : MonoBehaviour
         AIHealth aiHealth = collision.gameObject.GetComponent<AIHealth>();
         if (aiHealth != null)
         {
-
             StartCoroutine(aiHealth.DeathTrigger());
         }
 
-        Obstacle currentCollision = collision.gameObject.GetComponent<Obstacle>();
+        Damageable currentCollision = collision.gameObject.GetComponent<Damageable>();
         float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.x);
         if (currentCollision != null)
         {
