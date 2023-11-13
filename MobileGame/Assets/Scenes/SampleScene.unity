@@ -1249,7 +1249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc47a1db13e2e5499e420132b16f753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smokeParticle: {fileID: 8269889106096524862, guid: b9aa5c2ab7520004c94e5e5a193efbd6, type: 3}
 --- !u!4 &253520551
 Transform:
   m_ObjectHideFlags: 0
@@ -7458,6 +7457,7 @@ GameObject:
   - component: {fileID: 1577061391}
   - component: {fileID: 1577061393}
   - component: {fileID: 1577061392}
+  - component: {fileID: 1577061394}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -7794,6 +7794,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minPitch: 0.5
   maxPitch: 3
+--- !u!114 &1577061394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577061385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda25d6804340d74da13693790415d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  health: 50
 --- !u!1 &1603728138
 GameObject:
   m_ObjectHideFlags: 0
@@ -9048,8 +9064,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.005649984, y: 1.4049, z: 0}
-    m_Extent: {x: 1.9983499, y: 2.6016998, z: 0}
+    m_Center: {x: 0.0027999282, y: 1.39905, z: 0}
+    m_Extent: {x: 1.9972999, y: 2.60835, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

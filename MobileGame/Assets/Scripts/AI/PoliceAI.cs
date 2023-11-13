@@ -7,7 +7,6 @@ public class PoliceAI : MonoBehaviour
     private Rigidbody2D rigidBody;
     private float topSpeed;
     private float acceleration;
-    private bool startBraking = false;
 
     private float maxTiltAngle = 5f; // The maximum tilt angle in degrees
     private float tiltSpeed = 3f; // The speed at which the AI tilts
@@ -42,40 +41,38 @@ public class PoliceAI : MonoBehaviour
     {
         TiltCar();
 
-        if(startBraking)
+        float distance = Vector2.Distance(transform.position, playerCarTransform.position);
+        if (distance < 1.5f)
         {
+            //We start ramming the player
             Vector2 directionToPlayer = (playerCarTransform.position - transform.position).normalized;
-            Vector2 stoppingForce = new Vector2(directionToPlayer.x * 5f, -100);
-
-            if (rigidBody.velocity.y > 0)
-            {
-                rigidBody.AddForce(stoppingForce, ForceMode2D.Force);
-            }
-            else
-                rigidBody.velocity = Vector2.zero;
-            return;
-        }
-
-        if (playerCarTransform.position.y < transform.position.y - .5f)
-        {
-            startBraking = true;
-        }
-
-        // If the distance is below the ramming distance, try to ram the player
-        if (playerCarTransform.position.y < transform.position.y + 1.5f)
-        {
-            Vector2 directionToPlayer = (playerCarTransform.position - transform.position).normalized;
-            float rammingForceX = directionToPlayer.x * 50f;
+            float rammingForceX = directionToPlayer.x * 100f;
             Vector2 rammingForce = new Vector2(rammingForceX, 0);
 
-            // Apply the ramming force
             rigidBody.AddForce(rammingForce, ForceMode2D.Force);
         }
-        // If the AI is not too close, apply normal acceleration
-        else if (rigidBody.velocity.y < topSpeed / 3.6f)
+        else
         {
-            Vector3 accelerationForce = transform.up * acceleration;
-            rigidBody.AddForce(accelerationForce, ForceMode2D.Force);
+            //we accelerate is ai is behind player
+            if (transform.position.y < playerCarTransform.position.y && rigidBody.velocity.y < topSpeed / 3.6f)
+            {
+                Vector3 accelerationForce = transform.up * acceleration;
+                rigidBody.AddForce(accelerationForce, ForceMode2D.Force);
+            }
+            //we brake if ai is in front of player
+            else if (playerCarTransform.position.y < transform.position.y - .5f)
+            {
+                Vector2 directionToPlayer = (playerCarTransform.position - transform.position).normalized;
+                Vector2 stoppingForce = new Vector2(directionToPlayer.x * 5f, -50);
+
+                if (rigidBody.velocity.y > 0)
+                {
+                    rigidBody.AddForce(stoppingForce, ForceMode2D.Force);
+                }
+                else
+                    rigidBody.velocity = Vector2.zero;
+                return;
+            }
         }
     }
 

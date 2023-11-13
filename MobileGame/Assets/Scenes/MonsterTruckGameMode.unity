@@ -365,7 +365,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 72295035}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14073dbed0e7daf468cb6d7d92413b48, type: 3}
+  m_Script: {fileID: 11500000, guid: 560317413b313764ab74f11094cff9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraShake: {fileID: 0}
@@ -919,7 +919,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 184400811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da33a392a0e34d0468f8c99087d4cc07, type: 3}
+  m_Script: {fileID: 11500000, guid: 560317413b313764ab74f11094cff9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraShake: {fileID: 0}
@@ -1705,6 +1705,7 @@ GameObject:
   - component: {fileID: 333528032}
   - component: {fileID: 333528031}
   - component: {fileID: 333528030}
+  - component: {fileID: 333528036}
   - component: {fileID: 333528029}
   - component: {fileID: 333528035}
   m_Layer: 8
@@ -2001,6 +2002,70 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &333528036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333528028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda25d6804340d74da13693790415d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 255147281}
+        m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
+        m_MethodName: SetHighscore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1296199781}
+        m_TargetAssemblyTypeName: RestartScreen, Assembly-CSharp
+        m_MethodName: SetFinalScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1923185927}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ShowRestartScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1669807234}
+        m_TargetAssemblyTypeName: CameraFollow, Assembly-CSharp
+        m_MethodName: PlayerDied
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  health: 50
 --- !u!1 &336569134
 GameObject:
   m_ObjectHideFlags: 0
@@ -3234,7 +3299,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 770382624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da33a392a0e34d0468f8c99087d4cc07, type: 3}
+  m_Script: {fileID: 11500000, guid: 560317413b313764ab74f11094cff9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraShake: {fileID: 0}
@@ -5726,7 +5791,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1181209366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da33a392a0e34d0468f8c99087d4cc07, type: 3}
+  m_Script: {fileID: 11500000, guid: 560317413b313764ab74f11094cff9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraShake: {fileID: 0}
@@ -9158,7 +9223,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1767765176}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da33a392a0e34d0468f8c99087d4cc07, type: 3}
+  m_Script: {fileID: 11500000, guid: 560317413b313764ab74f11094cff9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraShake: {fileID: 0}
@@ -9241,8 +9306,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.00064992905, y: 1.39465, z: 0}
-    m_Extent: {x: 2.00635, y: 2.59695, z: 0}
+    m_Center: {x: 0.0029000044, y: 1.40065, z: 0}
+    m_Extent: {x: 1.9996, y: 2.60045, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

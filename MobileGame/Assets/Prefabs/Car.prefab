@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 2776542812084018045}
   - component: {fileID: -240699513011009973}
   - component: {fileID: -5137476395587064871}
+  - component: {fileID: 6652028304918403341}
   m_Layer: 6
   m_Name: Car
   m_TagString: Obstacle
@@ -367,6 +368,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minPitch: 0.5
   maxPitch: 3
+--- !u!114 &6652028304918403341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517040841658587091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd873db9ca411ae45b90ebc44230629f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5087806652330700603
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,8 +605,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0, y: 1.47375, z: 0}
-    m_Extent: {x: 2.0075, y: 2.5230498, z: 0}
+    m_Center: {x: -0.0054000616, y: 1.4765, z: 0}
+    m_Extent: {x: 1.9973, y: 2.5334, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

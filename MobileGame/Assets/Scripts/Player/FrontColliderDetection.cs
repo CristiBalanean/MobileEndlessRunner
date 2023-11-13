@@ -19,14 +19,6 @@ public class FrontColliderDetection : MonoBehaviour
         StartCoroutine(cameraShake.Shake(.1f, .1f, 1f));
         SoundManager.instance.Play("Crash");
 
-        AIHealth aiHealth = collision.gameObject.GetComponent<AIHealth>();
-        if (aiHealth != null)
-        {
-            StartCoroutine(aiHealth.DeathTrigger());
-            if (SceneManager.GetActiveScene().name == "MonsterTruckGameMode")
-                aiHealth.TriggerExplosion();
-        }
-
         Damageable currentCollision = collision.gameObject.GetComponent<Damageable>();
         float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
         if (currentCollision != null && playerHealth != null)
