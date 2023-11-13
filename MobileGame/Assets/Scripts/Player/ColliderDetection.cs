@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ColliderDetection : MonoBehaviour
 {
@@ -24,11 +25,13 @@ public class ColliderDetection : MonoBehaviour
         if (aiHealth != null)
         {
             StartCoroutine(aiHealth.DeathTrigger());
+            if (SceneManager.GetActiveScene().name == "MonsterTruckGameMode")
+                aiHealth.TriggerExplosion();
         }
 
         Damageable currentCollision = collision.gameObject.GetComponent<Damageable>();
-        float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.x);
-        if (currentCollision != null)
+        float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
+        if (currentCollision != null && playerHealth != null)
         {
             if (collisionMagnitude > 20)
             {

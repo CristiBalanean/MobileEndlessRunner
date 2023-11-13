@@ -1218,7 +1218,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  dayLength: 180
+  dayLength: 120
   isDay: 1
 --- !u!1 &253520549
 GameObject:
@@ -1855,6 +1855,7 @@ MonoBehaviour:
   policeChaseOffset: {x: 0, y: 0, z: 10}
   panel: {fileID: 1690431394}
   canvas: {fileID: 1538516662}
+  smoothFactor: 1
 --- !u!4 &340411493
 Transform:
   m_ObjectHideFlags: 0
@@ -4051,8 +4052,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Theme
-    clip: {fileID: 8300000, guid: 1194ca5c010e25343b1ce89680cb3a01, type: 3}
-    volume: 0.3
+    clip: {fileID: 8300000, guid: 9f74e824cb2171f45ba2eb8c15d441ee, type: 3}
+    volume: 0.45
     pitch: 1
     loop: 1
     source: {fileID: 0}
@@ -9047,8 +9048,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.004450023, y: 1.4020998, z: 0}
-    m_Extent: {x: 1.99735, y: 2.6044, z: 0}
+    m_Center: {x: -0.005649984, y: 1.4049, z: 0}
+    m_Extent: {x: 1.9983499, y: 2.6016998, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

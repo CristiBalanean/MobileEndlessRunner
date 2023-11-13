@@ -9,6 +9,9 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private RectTransform panel;
     [SerializeField] private Canvas canvas;
 
+    [Range(0f, 1f)]
+    [SerializeField] private float smoothFactor;
+
     private Vector3 currentOffset;
     private Camera mainCamera;
 
@@ -27,10 +30,13 @@ public class CameraFollow : MonoBehaviour
         currentOffset = normalOffset;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!hasDied)
-            transform.position = new Vector3(0, targetTransform.position.y, 0) - currentOffset;
+        {
+            Vector3 newPosition = new Vector3(0, targetTransform.position.y, 0) - currentOffset;
+            transform.position = Vector3.Lerp(transform.position, newPosition, smoothFactor);
+        }
     }
 
     public void ChangeToPoliceOffset()

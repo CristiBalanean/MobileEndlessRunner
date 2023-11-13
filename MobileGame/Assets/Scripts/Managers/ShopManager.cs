@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
@@ -19,6 +20,8 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        select.interactable = false;
+
         if (PlayerPrefs.HasKey("CarDataIndex"))
         {
             carName.text = cars[PlayerPrefs.GetInt("CarDataIndex")].GetName();
@@ -59,25 +62,6 @@ public class ShopManager : MonoBehaviour
         LoadFile();
     }
 
-    private void Update()
-    {
-        if (!cars[i].IsUnlocked())
-        {
-            select.gameObject.SetActive(false);
-            unlock.gameObject.SetActive(true);
-        }
-        else
-        {
-            select.gameObject.SetActive(true);
-            unlock.gameObject.SetActive(false);
-        }
-
-        if (CarData.Instance.currentCar == cars[i])
-            select.interactable = false;
-        else
-            select.interactable = true;
-    }
-
     public void Next()
     {
         if(i < cars.Length - 1) { i++; }
@@ -89,6 +73,22 @@ public class ShopManager : MonoBehaviour
         else
             carPrice.text = cars[i].GetCarPrice().ToString();
         carSprite.sprite = cars[i].GetSprite();
+
+        if (!cars[i].IsUnlocked())
+        {
+            select.gameObject.SetActive(false);
+            unlock.gameObject.SetActive(true);
+        }
+        else
+        {
+            select.gameObject.SetActive(true);
+            unlock.gameObject.SetActive(false);
+        }
+
+        if (CarData.Instance.currentCar == cars[i] || (carName.text == "Monster Truck" && cars[i].IsUnlocked()))
+            select.interactable = false;
+        else
+            select.interactable = true;
     }
 
     public void Previous()
@@ -102,12 +102,29 @@ public class ShopManager : MonoBehaviour
         else
             carPrice.text = cars[i].GetCarPrice().ToString();
         carSprite.sprite = cars[i].GetSprite();
+
+        if (!cars[i].IsUnlocked())
+        {
+            select.gameObject.SetActive(false);
+            unlock.gameObject.SetActive(true);
+        }
+        else
+        {
+            select.gameObject.SetActive(true);
+            unlock.gameObject.SetActive(false);
+        }
+
+        if (CarData.Instance.currentCar == cars[i] || (carName.text == "Monster Truck" && cars[i].IsUnlocked()))
+            select.interactable = false;
+        else
+            select.interactable = true;
     }
 
     public void Select()
     {
         CarData.Instance.currentCar = cars[i];
         PlayerPrefs.SetInt("CarDataIndex", i);
+        select.interactable = false;
     }
 
     public void Unlock()
@@ -130,16 +147,18 @@ public class ShopManager : MonoBehaviour
 
     private void SaveFile()
     {
-        CarUnlockedData[] carDataList = new CarUnlockedData[cars.Length];
+        List<CarUnlockedData> carDataList = new List<CarUnlockedData>();
 
         // Populate carDataList with unlocked state of each car
-        for (int i = 0; i < cars.Length; i++)
+        foreach (var car in cars)
         {
-            carDataList[i] = new CarUnlockedData();
-            carDataList[i].carName = cars[i].GetName();
-            carDataList[i].unlocked = cars[i].IsUnlocked();
+            CarUnlockedData carData = new CarUnlockedData();
+            carData.carName = car.GetName();
+            carData.unlocked = car.IsUnlocked();
+            carDataList.Add(carData);
         }
-        CarUnlockedDataWrapper wrapper = new CarUnlockedDataWrapper(carDataList);
+
+        CarUnlockedDataWrapper wrapper = new CarUnlockedDataWrapper(carDataList.ToArray());
 
         JsonHandler.instance.SaveJson(wrapper);
     }
@@ -148,10 +167,15 @@ public class ShopManager : MonoBehaviour
     {
         CarUnlockedDataWrapper wrapper = JsonHandler.instance.LoadJson();
 
-        for (int i = 0; i < cars.Length; i++) 
+        foreach (var carData in wrapper.carDataList)
         {
-            if (wrapper.carDataList[i].carName == cars[i].GetName() && wrapper.carDataList[i].unlocked)
-                cars[i].Unlock();
+            // Find the car by name in the cars array
+            var car = Array.Find(cars, c => c.GetName() == carData.carName);
+
+            if (car != null && carData.unlocked)
+            {
+                car.Unlock();
+            }
         }
     }
 }

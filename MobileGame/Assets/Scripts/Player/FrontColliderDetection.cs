@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FrontColliderDetection : MonoBehaviour
 {
@@ -22,11 +23,13 @@ public class FrontColliderDetection : MonoBehaviour
         if (aiHealth != null)
         {
             StartCoroutine(aiHealth.DeathTrigger());
+            if (SceneManager.GetActiveScene().name == "MonsterTruckGameMode")
+                aiHealth.TriggerExplosion();
         }
 
         Damageable currentCollision = collision.gameObject.GetComponent<Damageable>();
         float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
-        if (currentCollision != null)
+        if (currentCollision != null && playerHealth != null)
         {
             if (collisionMagnitude > 20)
             {

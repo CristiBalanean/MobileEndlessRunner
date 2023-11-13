@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject shop;
     [SerializeField] private GameObject powerUps;
     [SerializeField] private GameObject chooseControls;
+    [SerializeField] private GameObject play;
 
     private const string FirstTimeKey = "IsFirstTime";
 
@@ -41,7 +42,8 @@ public class MenuManager : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("SampleScene");
+        play.SetActive(true);
+        menu.SetActive(false);
     }
 
     public void Shop()

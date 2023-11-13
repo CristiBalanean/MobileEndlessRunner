@@ -6,16 +6,29 @@ public class ParticleManager : MonoBehaviour
 {
     public static ParticleManager instance;
 
-    [SerializeField] private GameObject smokeParticle;
+    [SerializeField] private Particle[] particles;
 
     private void Awake()
     {
         instance = this;
     }
 
-    public void InstantiateParticle(Transform position)
+    public void InstantiateParticle(Transform position, string name)
     {
-        GameObject smokeEffect = Instantiate(smokeParticle, position.position + new Vector3(0, 0.36f, 0), Quaternion.identity);
-        smokeEffect.transform.parent = GameObject.Find("Player").transform;
+        foreach(var particle in particles)
+        {
+            if(particle.name == name)
+            {
+                GameObject particleEffect = Instantiate(particle.particleGO, position.position, Quaternion.identity);
+                particleEffect.transform.parent = GameObject.Find("Player").transform;
+            }
+        }
     }
 }
+
+public class Particle
+{
+    public GameObject particleGO;
+    public string name;
+}
+

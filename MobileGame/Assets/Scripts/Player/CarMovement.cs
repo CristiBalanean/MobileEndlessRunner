@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CarMovement : MonoBehaviour
 {
@@ -39,7 +40,8 @@ public class CarMovement : MonoBehaviour
         Instance = this;
 
         rigidBody = GetComponent<Rigidbody2D>();
-        player = CarData.Instance.currentCar;
+        if(SceneManager.GetActiveScene().name != "MonsterTruckGameMode")
+            player = CarData.Instance.currentCar;
 
         InitializeCar();
     }
@@ -80,8 +82,12 @@ public class CarMovement : MonoBehaviour
         lowSpeedHandling = player.GetLowSpeedHandling();
         highSpeedHandling = player.GetHighSpeedHandling();
         GetComponent<SpriteRenderer>().sprite = player.GetSprite();
-        GameObject collider = Instantiate(player.GetColliderPrefab(), transform.position, Quaternion.identity);
-        collider.transform.parent = transform;
+
+        if (SceneManager.GetActiveScene().name != "MonsterTruckGameMode")
+        {
+            GameObject collider = Instantiate(player.GetColliderPrefab(), transform.position, Quaternion.identity);
+            collider.transform.parent = transform;
+        }
     }
 
     private void ClampCarPositionHorizontal()
@@ -144,7 +150,7 @@ public class CarMovement : MonoBehaviour
     private void ShakeCamera()
     {
         float shakeMagnitude = Mathf.Clamp((GetSpeed() - 75f) * 0.01f, 0f, 0.0125f);
-        cameraShake.Shake(0.1f, shakeMagnitude, 1.5f);
+        cameraShake.Shake(0.1f, shakeMagnitude * 1.5f, 1.5f);
     }
 
     private void CarVerticalMovement()

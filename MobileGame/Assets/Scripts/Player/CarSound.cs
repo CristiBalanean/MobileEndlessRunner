@@ -35,15 +35,12 @@ public class CarSound : MonoBehaviour
     private void EngineSound()
     {
         currentSpeed = rigidBody.velocity.magnitude * 3.6f;
-        pitchFromCar = rigidBody.velocity.magnitude / 50f;
+        pitchFromCar = rigidBody.velocity.magnitude / 30f;
 
         if (currentSpeed < minSpeed)
             audioSource.pitch = minPitch;
 
         if(currentSpeed > minSpeed && currentSpeed < maxSpeed)
             audioSource.pitch = minPitch + pitchFromCar;
-
-        if (currentSpeed > maxSpeed)
-            audioSource.pitch = maxPitch;
     }
 }

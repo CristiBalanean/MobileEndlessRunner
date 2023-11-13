@@ -18,7 +18,7 @@ public class CarHealth : MonoBehaviour
 
     public void TriggerDeath()
     {
-        ParticleManager.instance.InstantiateParticle(transform);
+        //ParticleManager.instance.InstantiateParticle(transform);
         CarMovement.Instance.hasDied = true;
         deathTrigger.Invoke();
     }
@@ -38,7 +38,6 @@ public class CarHealth : MonoBehaviour
         if (collision.CompareTag("Spike"))
         {
             deathTrigger.Invoke();
-            gameObject.SetActive(false);
         }
     }
 }
