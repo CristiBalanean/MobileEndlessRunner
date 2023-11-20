@@ -1854,6 +1854,7 @@ MonoBehaviour:
   policeChaseOffset: {x: 0, y: 0, z: 10}
   panel: {fileID: 1690431394}
   canvas: {fileID: 1538516662}
+  carHeight: 1
   smoothFactor: 1
 --- !u!4 &340411493
 Transform:
@@ -7592,7 +7593,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8308,7 +8309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b2f003e8b12304684a7656d1cd126a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  policePrefab: {fileID: 6725105912748856326, guid: 559111b0b67db9f4ca3a01e953509e51, type: 3}
+  policePrefab:
+  - {fileID: 6725105912748856326, guid: 559111b0b67db9f4ca3a01e953509e51, type: 3}
+  - {fileID: 6725105912748856326, guid: f07ffdb02c484ee4e8d976d5b7792b19, type: 3}
   player: {fileID: 1577061390}
   spawnPoints:
   - {fileID: 105679620}
@@ -9064,8 +9067,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0027999282, y: 1.39905, z: 0}
-    m_Extent: {x: 1.9972999, y: 2.60835, z: 0}
+    m_Center: {x: -0.00395, y: 1.3989999, z: 0}
+    m_Extent: {x: 1.99455, y: 2.6004, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

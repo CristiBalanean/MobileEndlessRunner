@@ -4,7 +4,7 @@ public class PoliceSpawning : MonoBehaviour
 {
     public static PoliceSpawning instance;
 
-    [SerializeField] private GameObject policePrefab;
+    [SerializeField] private GameObject[] policePrefab;
     [SerializeField] private Transform player;
 
     [SerializeField] private Transform[] spawnPoints;
@@ -36,8 +36,9 @@ public class PoliceSpawning : MonoBehaviour
             float xPosition = selectedSpawnPoint.position.x;
             float yPosition = player.position.y + yVariation;
 
+            int rand = Random.Range(0,policePrefab.Length);
             // Instantiate the police car at the specified position
-            GameObject policeCar = Instantiate(policePrefab, new Vector3(xPosition, yPosition, 0f), Quaternion.identity);
+            GameObject policeCar = Instantiate(policePrefab[rand], new Vector3(xPosition, yPosition, 0f), Quaternion.identity);
 
             // Add the police car to the array of active police cars
             activePoliceCars[activePoliceCount] = policeCar;

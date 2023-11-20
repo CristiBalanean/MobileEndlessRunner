@@ -44,15 +44,14 @@ GameObject:
   - component: {fileID: 4749391520103002643}
   - component: {fileID: 6821376548888118941}
   - component: {fileID: 2077312630781199194}
+  - component: {fileID: -240699513011009973}
+  - component: {fileID: 2262236958019198454}
   - component: {fileID: 8330086863155912916}
   - component: {fileID: 8442545938906473807}
   - component: {fileID: -2055249216150113563}
-  - component: {fileID: 2262236958019198454}
   - component: {fileID: -910315899207388484}
-  - component: {fileID: 2776542812084018045}
-  - component: {fileID: -240699513011009973}
   - component: {fileID: -5137476395587064871}
-  - component: {fileID: 6652028304918403341}
+  - component: {fileID: 5506743911467977839}
   m_Layer: 6
   m_Name: Car
   m_TagString: Obstacle
@@ -156,108 +155,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
---- !u!114 &8330086863155912916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3517040841658587091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e63163987b0380448084dcb3d27fc01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  topSpeed: 0
-  acceleration: 1.5
-  currentSpeed: 0
---- !u!114 &8442545938906473807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3517040841658587091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c1b26d0eda72054e91b27f3c9b1cca8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  safeDistance: 2
-  acceleration: 5
-  brakingForce: 15
-  proportionalGain: 1
-  integralGain: 0.1
-  derivativeGain: 0.1
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 320
-  hasSomethingInFront: 0
---- !u!114 &-2055249216150113563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3517040841658587091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c945db06e6aa1ce4591836a3623dd5a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 320
-  colliderLeft: {fileID: 708749691498881095}
-  colliderRight: {fileID: 1780172585436918364}
---- !u!95 &2262236958019198454
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3517040841658587091}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 34863b622fd428441aee24a1b3be03fd, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-910315899207388484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3517040841658587091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ed72b0815518245b6a1984e2657845, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beginningMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  explodedCarMaterial: {fileID: 2100000, guid: 1a736b117fb09744fa898dfe3efe80b8, type: 2}
-  explosionGO: {fileID: 7768325357048307294, guid: 4b85876d4ec611e46bea5dc6c34e32d3, type: 3}
---- !u!114 &2776542812084018045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3517040841658587091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3455fa7396bd49b4da8a4de1f96c0a6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &-240699513011009973
 AudioSource:
   m_ObjectHideFlags: 0
@@ -270,7 +167,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e7f07cb798e72d348ae5c7e12a93636e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -354,6 +251,96 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &2262236958019198454
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517040841658587091}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 34863b622fd428441aee24a1b3be03fd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8330086863155912916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517040841658587091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e63163987b0380448084dcb3d27fc01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topSpeed: 0
+  acceleration: 1.5
+  currentSpeed: 0
+--- !u!114 &8442545938906473807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517040841658587091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c1b26d0eda72054e91b27f3c9b1cca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  safeDistance: 2
+  acceleration: 5
+  brakingForce: 15
+  proportionalGain: 1
+  integralGain: 0.1
+  derivativeGain: 0.1
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 320
+  hasSomethingInFront: 0
+--- !u!114 &-2055249216150113563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517040841658587091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c945db06e6aa1ce4591836a3623dd5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 320
+  colliderLeft: {fileID: 708749691498881095}
+  colliderRight: {fileID: 1780172585436918364}
+--- !u!114 &-910315899207388484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517040841658587091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ed72b0815518245b6a1984e2657845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beginningMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  explodedCarMaterial: {fileID: 2100000, guid: 1a736b117fb09744fa898dfe3efe80b8, type: 2}
+  explosionGO: {fileID: 7768325357048307294, guid: 4b85876d4ec611e46bea5dc6c34e32d3, type: 3}
 --- !u!114 &-5137476395587064871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,7 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minPitch: 0.5
   maxPitch: 3
---- !u!114 &6652028304918403341
+--- !u!114 &5506743911467977839
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -377,7 +364,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3517040841658587091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd873db9ca411ae45b90ebc44230629f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d9c2ffeaf534f048bd619cb132d6f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5087806652330700603
@@ -605,8 +592,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0054000616, y: 1.4765, z: 0}
-    m_Extent: {x: 1.9973, y: 2.5334, z: 0}
+    m_Center: {x: -0.0024999976, y: 1.47755, z: 0}
+    m_Extent: {x: 2.0014, y: 2.5303502, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

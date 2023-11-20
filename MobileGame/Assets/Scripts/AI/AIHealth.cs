@@ -42,7 +42,7 @@ public class AIHealth : MonoBehaviour
 
     public void TriggerExplosion()
     {
-        ScoreManager.Instance.AddToScore(500);
+        ScoreManager.Instance.AddToScore(5000);
         spriteRenderer.material = explodedCarMaterial;
         GameObject explosion = Instantiate(explosionGO, transform.position, Quaternion.identity);
         SoundManager.instance.Play("Explosion");

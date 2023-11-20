@@ -10,7 +10,9 @@ public class RestartScreen : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.SetActiveScene(currentScene);
+        SceneManager.LoadScene(currentScene.name);
     }
 
     public void Exit()

@@ -22,7 +22,9 @@ public class PauseScreen : MonoBehaviour
 
     public void RestartButton()
     {
-        SceneManager.LoadScene("SampleScene");
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.SetActiveScene(currentScene);
+        SceneManager.LoadScene(currentScene.name);
     }
 
     public void ExitButton()

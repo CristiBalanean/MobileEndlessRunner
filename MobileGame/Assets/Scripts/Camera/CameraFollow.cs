@@ -8,6 +8,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Vector3 policeChaseOffset;
     [SerializeField] private RectTransform panel;
     [SerializeField] private Canvas canvas;
+    [SerializeField] private float carHeight;
 
     [Range(0f, 1f)]
     [SerializeField] private float smoothFactor;
@@ -26,8 +27,9 @@ public class CameraFollow : MonoBehaviour
     {
         var panelHeight = panel.rect.height * canvas.scaleFactor;
         Vector2 resolutionOffset = mainCamera.ScreenToWorldPoint(new Vector2(0, panelHeight + 1));
-        normalOffset = new Vector3(0, resolutionOffset.y + 1, normalOffset.z);
+        normalOffset = new Vector3(0, resolutionOffset.y + carHeight, normalOffset.z);
         currentOffset = normalOffset;
+        transform.position = new Vector3(0, targetTransform.position.y, 0) - currentOffset;
     }
 
     private void FixedUpdate()
@@ -65,6 +67,6 @@ public class CameraFollow : MonoBehaviour
     public void PlayerDied()
     {
         hasDied = true;
-        StartCoroutine(ChangeOffset(policeChaseOffset, .25f));
+        //StartCoroutine(ChangeOffset(policeChaseOffset, .25f));
     }
 }
