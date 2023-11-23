@@ -17,11 +17,24 @@ public class PoliceAICollision : MonoBehaviour
 
         if (policeHealth != null)
         {
-            if (collision.transform.CompareTag("Player"))
+            if (collision.transform.CompareTag("Player") || collision.transform.CompareTag("Trap"))
             {
                 float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
                 policeHealth.TakeDamage((int)collisionMagnitude);
+                if (SceneManager.GetActiveScene().name == "MonsterTruckGameMode")
+                    policeHealth.TriggerExplosion();
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        SoundManager.instance.Play("Crash");
+
+        if(policeHealth != null) 
+        {
+            if(collision.transform.CompareTag("Barrier"))
+                policeHealth.DeathTrigger();
         }
     }
 }

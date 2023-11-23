@@ -18,7 +18,7 @@ public class AgentMover : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         maxSpeed = CarMovement.Instance.GetTopSpeed() / 3.6f + 2.5f;
-        acceleration = CarMovement.Instance.acceleration + 15f;
+        acceleration = CarMovement.Instance.acceleration;
         deacceleration = acceleration * 2;
     }
 
@@ -29,14 +29,24 @@ public class AgentMover : MonoBehaviour
 
     private void Update()
     {
-        ClampXPosition();   
+        ClampXPosition();
+
+        float distance = Vector2.Distance(GameObject.Find("Player").transform.position, transform.position);
+        if (distance > 30)
+        {
+            if(SwatSpawner.instance != null)
+                SwatSpawner.instance.RemovePoliceCar(gameObject);
+            else if(PoliceSpawning.instance != null)
+                PoliceSpawning.instance.RemovePoliceCar(gameObject);
+            Destroy(gameObject);
+        }
     }
 
     private void FixedUpdate()
     {
-        if (MovementInput.magnitude > 0 && currentSpeed >= 0 && rb2d.velocity.y < maxSpeed)
+        if (MovementInput.magnitude > 0)
         {
-            oldMovementInput = MovementInput;
+            oldMovementInput = MovementInput.normalized; // Normalize to retain direction
             currentSpeed += acceleration * Time.deltaTime;
         }
         else

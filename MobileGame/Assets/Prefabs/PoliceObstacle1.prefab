@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 363356828218968687}
   m_Layer: 0
   m_Name: PoliceObstacle1
-  m_TagString: Police
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

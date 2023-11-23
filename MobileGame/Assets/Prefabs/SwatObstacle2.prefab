@@ -122,7 +122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3472380395210575793}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SwatObstacle2
   m_TagString: Police
   m_Icon: {fileID: 0}

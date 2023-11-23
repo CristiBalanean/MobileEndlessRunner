@@ -241,9 +241,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2065626389274803929}
   - component: {fileID: 7044510332636314609}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Swat_Rammer
-  m_TagString: Untagged
+  m_TagString: Police
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -661,8 +661,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.007799983, y: 1.4757998, z: 0}
-    m_Extent: {x: 1.9964, y: 2.53, z: 0}
+    m_Center: {x: -0.0037500262, y: 1.4756, z: 0}
+    m_Extent: {x: 1.99425, y: 2.5336, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

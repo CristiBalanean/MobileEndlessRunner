@@ -7,12 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class ColliderDetection : MonoBehaviour
 {
-    private CarHealth playerHealth;
+    private CarHealth health;
     public CameraCollisionShake cameraShake;
 
-    private void Start()
+    private void Awake()
     {
-        playerHealth = transform.root.GetComponent<CarHealth>();
+        Transform rootObject = transform.root;
+        health = rootObject.GetComponent<CarHealth>();
         cameraShake = GameObject.Find("Main Camera").GetComponent<CameraCollisionShake>();
     }
 
@@ -21,25 +22,7 @@ public class ColliderDetection : MonoBehaviour
         StartCoroutine(cameraShake.Shake(.1f, .1f, 1f));
         SoundManager.instance.Play("Crash");
 
-        AIHealth aiHealth = collision.gameObject.GetComponent<AIHealth>();
-        if (aiHealth != null)
-        {
-            StartCoroutine(aiHealth.DeathTrigger());
-            if (SceneManager.GetActiveScene().name == "MonsterTruckGameMode")
-                aiHealth.TriggerExplosion();
-        }
-
-        Damageable currentCollision = collision.gameObject.GetComponent<Damageable>();
         float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
-        if (currentCollision != null && playerHealth != null)
-        {
-            if (collisionMagnitude > 20)
-            {
-                playerHealth.TriggerDeath();
-                return;
-            }
-            else
-                playerHealth.TakeDamage((int)collisionMagnitude);
-        }
+        health.TakeDamage((int)collisionMagnitude);
     }
 }

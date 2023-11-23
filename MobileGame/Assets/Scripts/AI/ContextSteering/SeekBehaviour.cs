@@ -33,6 +33,7 @@ public class SeekBehaviour : SteeringBehaviour
 
         float distanceToTarget = directionToTarget.magnitude;
         float minDistanceToPlayer = 3.0f; // Adjust this value based on your requirements
+        float maxDistanceToPlayer = 5.0f; // Adjust this value based on your requirements
 
         if (distanceToTarget < minDistanceToPlayer)
         {
@@ -51,9 +52,26 @@ public class SeekBehaviour : SteeringBehaviour
                 }
             }
         }
+        else if (distanceToTarget > maxDistanceToPlayer)
+        {
+            // If too far, move closer to the player
+            Vector2 approachDirection = directionToTarget.normalized;
+
+            // Adjust interest based on approach direction
+            for (int i = 0; i < interest.Length; i++)
+            {
+                float result = Vector2.Dot(approachDirection, Directions.eightDirections[i]);
+                float valueToPutIn = result;
+
+                if (valueToPutIn > interest[i])
+                {
+                    interest[i] = valueToPutIn;
+                }
+            }
+        }
         else
         {
-            // If not too close, continue with regular behavior
+            // If within the desired range, continue with regular behavior
             for (int i = 0; i < interest.Length; i++)
             {
                 float result = Vector2.Dot(directionToTarget.normalized, Directions.eightDirections[i]);

@@ -6,8 +6,9 @@ TagManager:
   tags:
   - Obstacle
   - Police
-  - Spike
   - AiCollider
+  - Trap
+  - Barrier
   layers:
   - Default
   - TransparentFX

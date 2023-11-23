@@ -60,15 +60,10 @@ public class PoliceEventManager : MonoBehaviour
         yield return new WaitForSeconds(eventDuration);
         StartSpawningSpikeTraps?.Invoke();
         ChangeCameraOffsetToNormal?.Invoke();
-        PoliceAI[] policeCars = FindObjectsOfType<PoliceAI>();
-        foreach(PoliceAI policeCar in policeCars)
+        GameObject[] traps = GameObject.FindGameObjectsWithTag("Trap");
+        foreach(GameObject trap in traps)
         {
-            Destroy(policeCar.gameObject);
-        }
-        GameObject[] spikes = GameObject.FindGameObjectsWithTag("Spike");
-        foreach(GameObject spike in spikes)
-        {
-            Destroy(spike);
+            Destroy(trap);
         }
         yield return new WaitForSeconds(1f);
         SpawnBarrier?.Invoke();

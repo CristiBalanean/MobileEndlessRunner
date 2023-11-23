@@ -32,12 +32,4 @@ public class CarHealth : MonoBehaviour
             hasDied = true;
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Spike"))
-        {
-            deathTrigger.Invoke();
-        }
-    }
 }
