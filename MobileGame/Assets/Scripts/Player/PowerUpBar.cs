@@ -9,6 +9,7 @@ public class PowerUpBar : MonoBehaviour
 
     [SerializeField] private Image powerUpBarUI;
     [SerializeField] private Image powerUpImage;
+    [SerializeField] private Image powerUpSprite;
     [SerializeField] private float powerUpCountdown;
 
     private float currentTime;
@@ -16,6 +17,13 @@ public class PowerUpBar : MonoBehaviour
 
     private void Start()
     {
+        if (PowerUpData.Instance.currentPowerUp == null)
+        {
+            powerUpBarUI.gameObject.SetActive(false);
+            powerUpImage.gameObject.SetActive(false);
+            powerUpSprite.gameObject.SetActive(false);
+        }
+
         currentTime = powerUpCountdown;
         powerUpBarUI.fillAmount = currentTime / powerUpCountdown;
         powerUpImage.sprite = PowerUpData.Instance.currentPowerUpImage;
@@ -24,21 +32,24 @@ public class PowerUpBar : MonoBehaviour
 
     private void Update()
     {
-        powerUpBarUI.fillAmount = currentTime / powerUpCountdown;
+        if (PowerUpData.Instance.currentPowerUp != null)
+        {
+            powerUpBarUI.fillAmount = currentTime / powerUpCountdown;
 
-        if (isPressed && currentTime > 0)
-        {
-            currentTime -= Time.unscaledDeltaTime;
-            currentPowerUp.ApplyPowerUp(GameObject.Find("Player"));
+            if (isPressed && currentTime > 0)
+            {
+                currentTime -= Time.unscaledDeltaTime;
+                currentPowerUp.ApplyPowerUp(GameObject.Find("Player"));
+            }
+            else if (currentTime < 0 || currentTime < powerUpCountdown)
+            {
+                isPressed = false;
+                currentTime += Time.unscaledDeltaTime;
+                currentPowerUp.FinishPowerUp(GameObject.Find("Player"));
+            }
+            else if (currentTime > powerUpCountdown)
+                currentTime = powerUpCountdown;
         }
-        else if(currentTime < 0 || currentTime < powerUpCountdown)
-        {
-            isPressed = false;
-            currentTime += Time.unscaledDeltaTime;
-            currentPowerUp.FinishPowerUp(GameObject.Find("Player"));
-        }
-        else if (currentTime > powerUpCountdown)
-            currentTime = powerUpCountdown;
     }
 
     public void ButtonPressed()

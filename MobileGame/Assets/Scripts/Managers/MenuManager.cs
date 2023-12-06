@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private TMP_Text highscore;
-
     [SerializeField] private GameObject menu;
-    [SerializeField] private GameObject shop;
-    [SerializeField] private GameObject powerUps;
     [SerializeField] private GameObject chooseControls;
-    [SerializeField] private GameObject play;
+    [SerializeField] private string shopScene;
+    [SerializeField] private string playScene;
+    [SerializeField] private string settingsScene;
 
     private const string FirstTimeKey = "IsFirstTime";
 
@@ -34,45 +29,29 @@ public class MenuManager : MonoBehaviour
         {
             chooseControls.SetActive(false);
         }
-
-        highscore.text = "HighScore: " + PlayerPrefs.GetInt("HighScore").ToString();
-
-        shop.SetActive(false);
     }
 
     public void Play()
     {
-        play.SetActive(true);
-        menu.SetActive(false);
+        SceneManager.LoadScene(playScene);
     }
 
     public void Shop()
     {
-        shop.SetActive(true);
-        menu.SetActive(false);
+        SceneManager.LoadScene(shopScene);
     }
 
-    public void PowerUps()
+    public void Settings()
     {
-        powerUps.SetActive(true);
-        menu.SetActive(false);
+        SceneManager.LoadScene(settingsScene);
     }
 
     public void Quit()
     {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
         Application.Quit();
-    }
-
-    public void Back()
-    {
-        shop.SetActive(false);
-        menu.SetActive(true);
-    }
-
-    public void BackPowerUps()
-    {
-        powerUps.SetActive(false);
-        menu.SetActive(true);
     }
 
     public void Tilt()

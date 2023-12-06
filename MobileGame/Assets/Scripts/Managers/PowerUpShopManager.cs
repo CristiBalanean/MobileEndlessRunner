@@ -1,54 +1,191 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PowerUpShopManager : MonoBehaviour
 {
-    [SerializeField] private PowerUps[] powerUps;
-    [SerializeField] private Image powerUpSprite;
-    [SerializeField] private TMP_Text powerUpName;
+    public UnityEvent updateMoney;
+
+    [SerializeField] private Powerups[] powerups;
+    [SerializeField] private Image powerupSprite;
+    [SerializeField] private Image lockImage;
+    [SerializeField] private TMP_Text powerupName;
+    [SerializeField] private TMP_Text powerupDescription;
+    [SerializeField] private TMP_Text powerupPrice;
+
+    [SerializeField] private Button unlockButton;
+    [SerializeField] private Button selectButton;
 
     private int index;
 
-    private void OnEnable()
+    private void Start()
     {
         index = 0;
 
-        powerUpSprite.sprite = powerUps[index].powerUpImage;
-        powerUpName.text = powerUps[index].powerUpName;
-        PowerUpData.Instance.currentPowerUp = powerUps[index].powerUp;
-        PowerUpData.Instance.currentPowerUpImage = powerUps[index].powerUpImage;
+        if (PlayerPrefs.HasKey("PowerupDataIndex"))
+        {
+            selectButton.interactable = false;
+
+            index = PlayerPrefs.GetInt("PowerupDataIndex");
+
+            powerupSprite.sprite = powerups[PlayerPrefs.GetInt("PowerupDataIndex")].powerupImage;
+            powerupSprite.sprite = powerups[PlayerPrefs.GetInt("PowerupDataIndex")].powerupImage;
+            powerupName.text = powerups[PlayerPrefs.GetInt("PowerupDataIndex")].powerUpName;
+            powerupDescription.text = powerups[PlayerPrefs.GetInt("PowerupDataIndex")].powerUpDescription;
+            powerupPrice.text = "OWNED";
+
+            selectButton.gameObject.SetActive(true);
+            unlockButton.gameObject.SetActive(false);
+            lockImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            powerupSprite.sprite = powerups[index].powerupImage;
+            powerupName.text = powerups[index].powerUpName;
+            powerupDescription.text = powerups[index].powerUpDescription;
+            powerupPrice.text = "<sprite=0> " + powerups[index].powerupPrice.ToString();
+
+            if (!powerups[index].unlocked)
+            {
+                selectButton.gameObject.SetActive(false);
+                unlockButton.gameObject.SetActive(true);
+                lockImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                selectButton.gameObject.SetActive(true);
+                unlockButton.gameObject.SetActive(false);
+                lockImage.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void Next()
     {
-        if (index < powerUps.Length - 1) { index++; }
+        if (index < powerups.Length - 1) { index++; }
         else { index = 0; }
 
-        powerUpSprite.sprite = powerUps[index].powerUpImage;
-        powerUpName.text = powerUps[index].powerUpName;
-        PowerUpData.Instance.currentPowerUp = powerUps[index].powerUp;
-        PowerUpData.Instance.currentPowerUpImage = powerUps[index].powerUpImage;
+        powerupSprite.sprite = powerups[index].powerupImage;
+        powerupName.text = powerups[index].powerUpName;
+        powerupDescription.text = powerups[index].powerUpDescription;
+        powerupPrice.text = "<sprite=0> " + powerups[index].powerupPrice.ToString();
+
+        if (!powerups[index].unlocked)
+        {
+            selectButton.gameObject.SetActive(false);
+            unlockButton.gameObject.SetActive(true);
+            lockImage.gameObject.SetActive(true);
+        }
+        else
+        {
+            selectButton.gameObject.SetActive(true);
+            unlockButton.gameObject.SetActive(false);
+            lockImage.gameObject.SetActive(false);
+            powerupPrice.text = "OWNED";
+        }
+
+        if (PowerUpData.Instance.currentPowerUp == powerups[index].powerup)
+            selectButton.interactable = false;
+        else
+            selectButton.interactable = true;
     }
 
     public void Previous()
     {
         if (index > 0) { index--; }
-        else { index = powerUps.Length - 1; }
+        else { index = powerups.Length - 1; }
 
-        powerUpSprite.sprite = powerUps[index].powerUpImage;
-        powerUpName.text = powerUps[index].powerUpName;
-        PowerUpData.Instance.currentPowerUp = powerUps[index].powerUp;
-        PowerUpData.Instance.currentPowerUpImage = powerUps[index].powerUpImage;
+        powerupSprite.sprite = powerups[index].powerupImage;
+        powerupName.text = powerups[index].powerUpName;
+        powerupDescription.text = powerups[index].powerUpDescription;
+        powerupPrice.text = "<sprite=0> " + powerups[index].powerupPrice.ToString();
+
+        if (!powerups[index].unlocked)
+        {
+            selectButton.gameObject.SetActive(false);
+            unlockButton.gameObject.SetActive(true);
+            lockImage.gameObject.SetActive(true);
+        }
+        else
+        {
+            selectButton.gameObject.SetActive(true);
+            unlockButton.gameObject.SetActive(false);
+            lockImage.gameObject.SetActive(false);
+            powerupPrice.text = "OWNED";
+        }
+
+        if (PowerUpData.Instance.currentPowerUp == powerups[index].powerup)
+            selectButton.interactable = false;
+        else
+            selectButton.interactable = true;
     }
-}
 
-[System.Serializable]
-public class PowerUps
-{
-    public string powerUpName;
-    public PowerUp powerUp;
-    public Sprite powerUpImage;
+    public void Select()
+    {
+        PowerUpData.Instance.currentPowerUp = powerups[index].powerup;
+        PowerUpData.Instance.currentPowerUpImage = powerups[index].powerupImage;
+        PlayerPrefs.SetInt("PowerupDataIndex", index);
+        selectButton.interactable = false;
+    }
+
+    public void Unlock()
+    {
+        if (MoneyManager.Instance.currentMoney >= powerups[index].powerupPrice)
+        {
+            powerups[index].unlocked = true;
+            selectButton.gameObject.SetActive(true);
+            unlockButton.gameObject.SetActive(false);
+            lockImage.gameObject.SetActive(false);
+            MoneyManager.Instance.currentMoney -= powerups[index].powerupPrice;
+            PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
+
+            SaveFile();
+            LoadFile();
+        }
+        else
+            Debug.LogError("Not Enough Money!");
+
+        updateMoney.Invoke();
+    }
+
+    private void SaveFile()
+    {
+        List<PowerupUnlockedData> powerupDataList = new List<PowerupUnlockedData>();
+
+        // Populate carDataList with unlocked state of each car
+        foreach (var powerup in powerups)
+        {
+            PowerupUnlockedData powerupData = new PowerupUnlockedData();
+            powerupData.powerupName = powerup.powerUpName;
+            powerupData.unlocked = powerup.unlocked;
+            powerupDataList.Add(powerupData);
+        }
+
+        PowerupUnlockedDataWrapper wrapper = new PowerupUnlockedDataWrapper(powerupDataList.ToArray());
+
+        JsonHandlerPowerups.instance.SaveJson(wrapper);
+    }
+
+    private void LoadFile()
+    {
+        PowerupUnlockedDataWrapper wrapper = JsonHandlerPowerups.instance.LoadJson();
+
+        if (wrapper != null)
+        {
+            foreach (var powerupData in wrapper.powerupDataList)
+            {
+                // Find the car by name in the cars array
+                var powerup = Array.Find(powerups, c => c.powerUpName == powerupData.powerupName);
+
+                if (powerup != null && powerupData.unlocked)
+                {
+                    powerup.unlocked = true;
+                }
+            }
+        }
+    }
 }

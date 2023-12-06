@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -94,7 +95,12 @@ public class ScoreManager : MonoBehaviour
     public void SetHighscore()
     {
         if (GetFinalScore() > PlayerPrefs.GetInt("HighScore"))
-            PlayerPrefs.SetInt("HighScore", GetFinalScore());
+        {
+            if (SceneManager.GetActiveScene().name == "SampleScene")
+                PlayerPrefs.SetInt("HighScore", GetFinalScore());
+            else if (SceneManager.GetActiveScene().name == "MonsterTruckGameMode")
+                PlayerPrefs.SetInt("MonsterTruckHighScore", GetFinalScore());
+        }
     }
 
     public void IncrementOvertakeCounter()

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ShopUI : MonoBehaviour
 {
@@ -9,11 +10,16 @@ public class ShopUI : MonoBehaviour
 
     private void Start()
     {
-        currentMoneyText.text = "CURRENT MONEY: " + MoneyManager.Instance.currentMoney.ToString();
+        currentMoneyText.text = MoneyManager.Instance.currentMoney.ToString();
     }
 
     private void OnEnable()
     {
-        currentMoneyText.text = "CURRENT MONEY: " + MoneyManager.Instance.currentMoney.ToString();
+        currentMoneyText.text = MoneyManager.Instance.currentMoney.ToString();
+    }
+
+    public void UpdateMoney()
+    {
+        currentMoneyText.text = MoneyManager.Instance.currentMoney.ToString();
     }
 }

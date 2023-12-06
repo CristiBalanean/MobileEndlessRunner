@@ -10,7 +10,7 @@ public class SettingsScreen : MonoBehaviour
 {
     [SerializeField] private UnityEvent inputTypeTrigger;
 
-    [SerializeField] private Button inputTypeButton;
+    [SerializeField] private TMP_Dropdown inputTypeDropdown;
 
     private void OnEnable()
     {
@@ -19,13 +19,15 @@ public class SettingsScreen : MonoBehaviour
 
     private void Start()
     {
+        inputTypeDropdown.onValueChanged.AddListener(delegate { InputTypeChanged(); });
+
         if (PlayerPrefs.GetInt("Tilt") == 1)
         {
-            inputTypeButton.GetComponentInChildren<TMP_Text>().text = "TILT";
+            inputTypeDropdown.value = 0;
         }
         else
         {
-            inputTypeButton.GetComponentInChildren<TMP_Text>().text = "TOUCH";
+            inputTypeDropdown.value = 1;
         }
     }
 
@@ -34,19 +36,19 @@ public class SettingsScreen : MonoBehaviour
         UIManager.Instance.ShowPauseScreen();
     }
 
-    public void InputTypeButton()
-    {        
-        if (PlayerPrefs.GetInt("Tilt") == 1)
+    private void InputTypeChanged()
+    {
+        if (inputTypeDropdown.value == 0)
         {
-            PlayerPrefs.SetInt("Tilt", 0);
-            inputTypeButton.GetComponentInChildren<TMP_Text>().text = "TOUCH";
-            InputManager.Instance.ChangeInputType(InputTypes.TOUCH);
+            Debug.Log("TILT");
+            PlayerPrefs.SetInt("Tilt", 1);
+            InputManager.Instance.ChangeInputType(InputTypes.TILT);
         }
         else
         {
-            PlayerPrefs.SetInt("Tilt", 1);
-            inputTypeButton.GetComponentInChildren<TMP_Text>().text = "TILT";
-            InputManager.Instance.ChangeInputType(InputTypes.TILT);
+            Debug.Log("TOUCH");
+            PlayerPrefs.SetInt("Tilt", 0);
+            InputManager.Instance.ChangeInputType(InputTypes.TOUCH);
         }
 
         inputTypeTrigger.Invoke();

@@ -11,7 +11,10 @@ public class JsonHandler : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
 
         // Combine the path to the saved files directory
         path = Path.Combine(Application.persistentDataPath, "saved files");
@@ -31,7 +34,25 @@ public class JsonHandler : MonoBehaviour
         // Combine the path with the file name
         path = Path.Combine(path, "data.json");
 
+        // Check if the JSON file exists, create an empty one if not
+        if (!File.Exists(path))
+        {
+            CreateEmptyJsonFile();
+            Debug.Log("Empty JSON file created at: " + path);
+        }
+
         Debug.Log("JsonHandler initialized with path: " + path);
+    }
+
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void CreateEmptyJsonFile()
+    {
+        // Create an empty JSON file at the specified path
+        File.WriteAllText(path, "");
     }
 
 

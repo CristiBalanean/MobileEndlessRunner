@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Ferrari
   m_EditorClassIdentifier: 
   carName: Ferrari
-  topSpeed: 250
-  acceleration: 30
-  brakingPower: 60
+  topSpeed: 225
+  acceleration: 28
+  brakingPower: 56
   lowSpeedHandling: 7.5
   highSpeedHandling: 8
   carSprite: {fileID: -690558637, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
-  carPrice: 1000000
+  carPrice: 750000
   unlocked: 0
   colliderPrefab: {fileID: 2453988377905684084, guid: 395c833a3222b8b49ba8a7fb691d3d10, type: 3}
