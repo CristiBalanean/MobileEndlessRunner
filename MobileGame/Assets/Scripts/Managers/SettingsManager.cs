@@ -12,6 +12,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private TMP_Dropdown inputTypeDropdown;
     [SerializeField] private Toggle postProcessingToggle;
     [SerializeField] private TMP_Text toggleText;
+    [SerializeField] private Animator transition;
 
     private void Start()
     {
@@ -77,6 +78,13 @@ public class SettingsManager : MonoBehaviour
 
     public void BackButton()
     {
-        SceneManager.LoadScene(menuScene);
+        StartCoroutine(LoadLevel(menuScene));
+    }
+
+    IEnumerator LoadLevel(string scene)
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(scene);
     }
 }

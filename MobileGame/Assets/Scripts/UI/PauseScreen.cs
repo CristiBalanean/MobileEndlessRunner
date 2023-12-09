@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseScreen : MonoBehaviour
 {
+    [SerializeField] private Animator transition;
+
     private void OnEnable()
     {
         Time.timeScale = 0f;
@@ -24,11 +26,18 @@ public class PauseScreen : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.SetActiveScene(currentScene);
-        SceneManager.LoadScene(currentScene.name);
+        StartCoroutine(LoadLevel(currentScene.name));
     }
 
     public void ExitButton()
     {
-        SceneManager.LoadScene("Menu");
+        StartCoroutine(LoadLevel("Menu"));
+    }
+
+    IEnumerator LoadLevel(string scene)
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(scene);
     }
 }

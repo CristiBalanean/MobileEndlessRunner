@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private string shopScene;
     [SerializeField] private string playScene;
     [SerializeField] private string settingsScene;
+    [SerializeField] private Animator transition;
 
     private const string FirstTimeKey = "IsFirstTime";
 
@@ -33,17 +35,17 @@ public class MenuManager : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene(playScene);
+        StartCoroutine(LoadLevel(playScene));
     }
 
     public void Shop()
     {
-        SceneManager.LoadScene(shopScene);
+        StartCoroutine(LoadLevel(shopScene));
     }
 
     public void Settings()
     {
-        SceneManager.LoadScene(settingsScene);
+        StartCoroutine(LoadLevel(settingsScene));
     }
 
     public void Quit()
@@ -66,5 +68,12 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetInt("Tilt", 0);
         chooseControls.SetActive(false);
         menu.SetActive(true);
+    }
+
+    IEnumerator LoadLevel(string scene)
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(scene);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
@@ -17,6 +18,8 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private GameObject carsUI;
     [SerializeField] private GameObject powerupsUI;
 
+    [SerializeField] private Animator transition;
+
     private void Start()
     {
         carsButton.interactable = false;
@@ -24,7 +27,7 @@ public class ShopManager : MonoBehaviour
 
     public void BackButton()
     {
-        SceneManager.LoadScene(menuScene);
+        StartCoroutine(LoadLevel(menuScene));
     }
 
     public void ChangeToCars()
@@ -41,5 +44,12 @@ public class ShopManager : MonoBehaviour
         powerUpsButton.interactable = false;
         carsUI.SetActive(false);
         powerupsUI.SetActive(true);
+    }
+
+    IEnumerator LoadLevel(string scene)
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(scene);
     }
 }

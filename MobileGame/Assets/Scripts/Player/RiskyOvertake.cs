@@ -27,7 +27,7 @@ public class RiskyOvertake : MonoBehaviour
             }
 
             // Check if the player can perform a risky overtake when leaving the collider
-            if (overlappingColliders == 0 && transform.position.y > collision.transform.position.y)
+            if (overlappingColliders == 0 && transform.position.y > collision.transform.position.y && collision.isTrigger == false)
             {
                 ScoreManager.Instance.IncrementOvertakeCounter();
             }

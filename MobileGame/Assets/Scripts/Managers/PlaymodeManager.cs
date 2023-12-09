@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEngine.UI.Selectable;
 
 public class PlaymodeManager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class PlaymodeManager : MonoBehaviour
     [SerializeField] private Button playmodeButton;
 
     [SerializeField] private Car monsterTruck;
+
+    [SerializeField] private Animator transition;
 
     int index = 0;
 
@@ -94,17 +97,24 @@ public class PlaymodeManager : MonoBehaviour
         switch (index)
         {
             case 0:
-                SceneManager.LoadScene(normalModeScene);
+                StartCoroutine(LoadLevel(normalModeScene));
                 break;
 
             case 1:
-                SceneManager.LoadScene(chaosModeScene);
+                StartCoroutine(LoadLevel(chaosModeScene));
                 break;
         }
     }
 
     public void BackButton()
     {
-        SceneManager.LoadScene(menuScene);
+        StartCoroutine(LoadLevel(menuScene));
+    }
+
+    IEnumerator LoadLevel(string scene)
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(scene);
     }
 }
