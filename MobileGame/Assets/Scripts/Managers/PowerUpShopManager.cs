@@ -26,6 +26,8 @@ public class PowerUpShopManager : MonoBehaviour
     {
         index = 0;
 
+        LoadFile();
+
         if (PlayerPrefs.HasKey("PowerupDataIndex"))
         {
             selectButton.interactable = false;

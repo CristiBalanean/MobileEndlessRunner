@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e82192abfb2e48644be9b8d2a8a7642c, type: 3}
-  m_Name: Ferrari
+  m_Name: Mclaren
   m_EditorClassIdentifier: 
-  carName: Ferrari
-  topSpeed: 280
-  acceleration: 33
-  brakingPower: 66
-  lowSpeedHandling: 7.5
-  highSpeedHandling: 8
-  carSprite: {fileID: -690558637, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
-  carPrice: 750000
+  carName: McLaren
+  topSpeed: 215
+  acceleration: 26
+  brakingPower: 52
+  lowSpeedHandling: 7
+  highSpeedHandling: 7.5
+  carSprite: {fileID: -1291099520, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+  carPrice: 600000
   unlocked: 0
-  colliderPrefab: {fileID: 2453988377905684084, guid: 395c833a3222b8b49ba8a7fb691d3d10, type: 3}
+  colliderPrefab: {fileID: 4559439306246710852, guid: 643dc29561834d846ad24e2d289398bb, type: 3}

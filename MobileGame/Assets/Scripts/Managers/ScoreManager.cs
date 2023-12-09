@@ -8,6 +8,8 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
 
+    [SerializeField] private ObjectPool overtakeTextPool;
+
     public int scoreMultiplier = 1;
 
     public bool doubleMultiplier = false;
@@ -108,5 +110,10 @@ public class ScoreManager : MonoBehaviour
         overtakeCounter++;
         AddToScore(overtakeCounter * 100);
         currentOvertakeComboTime = overtakeComboTime;
+
+        GameObject overtakeText = overtakeTextPool.GetPooledObject();
+        overtakeText.transform.position = player.transform.position;
+        overtakeText.GetComponentInChildren<TMP_Text>().text = "+" + (overtakeCounter * 100).ToString();
+        overtakeText.SetActive(true);
     }
 }

@@ -9,8 +9,11 @@ using UnityEngine.UI;
 public class SettingsScreen : MonoBehaviour
 {
     [SerializeField] private UnityEvent inputTypeTrigger;
+    [SerializeField] private UnityEvent postProcessingTrigger;
 
     [SerializeField] private TMP_Dropdown inputTypeDropdown;
+    [SerializeField] private Toggle postProcessingToggle;
+    [SerializeField] private TMP_Text toggleText;
 
     private void OnEnable()
     {
@@ -28,6 +31,26 @@ public class SettingsScreen : MonoBehaviour
         else
         {
             inputTypeDropdown.value = 1;
+        }
+
+        if(PlayerPrefs.HasKey("PostProcessing"))
+        {
+            if (PlayerPrefs.GetInt("PostProcessing") == 1)
+            {
+                postProcessingToggle.isOn = true;
+                toggleText.text = "ON";
+            }
+            else
+            {
+                postProcessingToggle.isOn = false;
+                toggleText.text = "OFF";
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("PostProcessing", 1);
+            postProcessingToggle.isOn = true;
+            toggleText.text = "ON";
         }
     }
 
@@ -52,5 +75,21 @@ public class SettingsScreen : MonoBehaviour
         }
 
         inputTypeTrigger.Invoke();
+    }
+
+    public void OnValueChangedToggle()
+    {
+        if (postProcessingToggle.isOn)
+        {
+            PlayerPrefs.SetInt("PostProcessing", 1);
+            toggleText.text = "ON";
+        }
+        else
+        {
+            PlayerPrefs.SetInt("PostProcessing", 0);
+            toggleText.text = "OFF";
+        }
+
+        postProcessingTrigger.Invoke();
     }
 }

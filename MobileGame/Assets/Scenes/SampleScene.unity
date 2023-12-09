@@ -1423,7 +1423,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  postProcessingTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1177021331}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ChangePostProcessingSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   inputTypeDropdown: {fileID: 1714751053}
+  postProcessingToggle: {fileID: 1715055277}
+  toggleText: {fileID: 1126621748}
 --- !u!1 &243352903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,7 +1769,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'VIDEO EFFECTS:'
+  m_text: 'POST PROCESSING:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 590eefe89158b0c418e74aa4b168dcb9, type: 2}
   m_sharedMaterial: {fileID: 7189270103020448709, guid: 590eefe89158b0c418e74aa4b168dcb9, type: 2}
@@ -1815,7 +1832,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -369.64728, y: 0, z: 0, w: 0}
+  m_margin: {x: -369.64728, y: 0, z: -80.23132, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3044,7 +3061,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -3308,7 +3325,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 735}
+  m_AnchoredPosition: {x: 0, y: 650}
   m_SizeDelta: {x: 185, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569871369
@@ -3418,8 +3435,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 684365911}
-  - component: {fileID: 684365912}
   - component: {fileID: 684365913}
+  - component: {fileID: 684365914}
   m_Layer: 8
   m_Name: OvertakeColliders
   m_TagString: Untagged
@@ -3444,20 +3461,6 @@ Transform:
   - {fileID: 1950872212}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &684365912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684365910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 338a8f9002016d0479f4763ced7b4de2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1577061390}
-  offset: {x: 0, y: 0, z: 0}
 --- !u!50 &684365913
 Rigidbody2D:
   serializedVersion: 4
@@ -3485,6 +3488,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &684365914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684365910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ef795cf9c030f4bb5487c7c4889d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1577061390}
 --- !u!1 &688093356
 GameObject:
   m_ObjectHideFlags: 0
@@ -3760,12 +3776,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Theme
-    clip: {fileID: 8300000, guid: 9f74e824cb2171f45ba2eb8c15d441ee, type: 3}
-    volume: 0.45
-    pitch: 1
-    loop: 1
-    source: {fileID: 0}
   - name: Crash
     clip: {fileID: 8300000, guid: 6db18d06e799e2a41acde0a2b9cb7a61, type: 3}
     volume: 1
@@ -5488,7 +5498,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Build Alpha 0.3
+  m_text: Build Alpha 0.4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 590eefe89158b0c418e74aa4b168dcb9, type: 2}
   m_sharedMaterial: {fileID: 7189270103020448709, guid: 590eefe89158b0c418e74aa4b168dcb9, type: 2}
@@ -6045,6 +6055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tapToPlayText: {fileID: 92620643}
+  postProcessingVolume: {fileID: 1672240863}
 --- !u!4 &1177021332
 Transform:
   m_ObjectHideFlags: 0
@@ -7227,6 +7238,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387011884}
   m_CullTransparentMesh: 1
+--- !u!1 &1417943739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1417943741}
+  - component: {fileID: 1417943740}
+  m_Layer: 0
+  m_Name: ObjectPoolOvertakeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1417943740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417943739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6ce83d74933784a8bb3b96d4016d0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 5
+  objectToPool: {fileID: 7669761549882261515, guid: 489857cd198915f48b20f628fcd3af9c, type: 3}
+--- !u!4 &1417943741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417943739}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 402.81946, y: 1054.439, z: -13.4663515}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1438444078
 GameObject:
   m_ObjectHideFlags: 0
@@ -8810,11 +8867,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fbfe756e1e013449945ade8598affd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overtakeTextPool: {fileID: 1417943740}
   scoreMultiplier: 1
   doubleMultiplier: 0
   player: {fileID: 1577061386}
   score: 0
   overtakeCounter: 0
+--- !u!1 &1672240863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1672240865}
+  - component: {fileID: 1672240864}
+  m_Layer: 0
+  m_Name: Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1672240864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672240863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 3a06143af93c6784bbb78d351207c135, type: 2}
+--- !u!4 &1672240865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672240863}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 402.81946, y: 1054.439, z: -13.4663515}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1690431393
 GameObject:
   m_ObjectHideFlags: 0
@@ -8869,7 +8976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.92156863}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9115,7 +9222,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 216818293}
+        m_TargetAssemblyTypeName: SettingsScreen, Assembly-CSharp
+        m_MethodName: OnValueChangedToggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1715901325
 GameObject:
@@ -9971,8 +10090,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.005649984, y: 1.3949, z: 0}
-    m_Extent: {x: 1.9992499, y: 2.6002998, z: 0}
+    m_Center: {x: 0.006649971, y: 1.40415, z: 0}
+    m_Extent: {x: 1.9985499, y: 2.59655, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -11777,6 +11896,7 @@ SceneRoots:
   - {fileID: 522308650}
   - {fileID: 314338017}
   - {fileID: 1564572544}
+  - {fileID: 1417943741}
   - {fileID: 1238921875}
   - {fileID: 1577061390}
   - {fileID: 684365911}
@@ -11789,4 +11909,5 @@ SceneRoots:
   - {fileID: 243352905}
   - {fileID: 15473293}
   - {fileID: 1025307771}
+  - {fileID: 1672240865}
   - {fileID: 880805056}

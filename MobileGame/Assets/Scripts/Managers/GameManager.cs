@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private GameObject tapToPlayText;
+    [SerializeField] private GameObject postProcessingVolume;
 
     private bool isPlaying = false;
 
@@ -22,6 +23,14 @@ public class GameManager : MonoBehaviour
         if(Instance == null)
             Instance = this;
         Time.timeScale = 0f;
+
+        if (PlayerPrefs.HasKey("PostProcessing"))
+        {
+            if (PlayerPrefs.GetInt("PostProcessing") == 1)
+                postProcessingVolume.SetActive(true);
+            else
+                postProcessingVolume.SetActive(false);     
+        }
     }
 
     private void Update()
@@ -32,5 +41,13 @@ public class GameManager : MonoBehaviour
             tapToPlayText.SetActive(false);
             Time.timeScale = 1f;
         }
+    }
+
+    public void ChangePostProcessingSettings()
+    {
+        if (PlayerPrefs.GetInt("PostProcessing") == 1)
+            postProcessingVolume.SetActive(true);
+        else
+            postProcessingVolume.SetActive(false);
     }
 }

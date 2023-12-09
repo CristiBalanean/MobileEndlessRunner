@@ -1,23 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RiskyOvertake : MonoBehaviour
 {
-    public bool canRiskyOvertake = false;
+    private int overlappingColliders = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (transform.position.y < collision.transform.position.y && collision.CompareTag("AiCollider"))
-            canRiskyOvertake = true;
+        if (collision.CompareTag("AiCollider"))
+        {
+            overlappingColliders++;
+            // You can optionally check for specific conditions before allowing risky overtake
+            // For example: if (transform.position.y < collision.transform.position.y) { ... }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (canRiskyOvertake && transform.position.y > collision.transform.position.y)
-            ScoreManager.Instance.IncrementOvertakeCounter();
+        if (collision.CompareTag("AiCollider"))
+        {
+            overlappingColliders--;
+            if (overlappingColliders < 0)
+            {
+                overlappingColliders = 0; // Ensure the counter doesn't go negative
+            }
 
-        canRiskyOvertake = false;
+            // Check if the player can perform a risky overtake when leaving the collider
+            if (overlappingColliders == 0 && transform.position.y > collision.transform.position.y)
+            {
+                ScoreManager.Instance.IncrementOvertakeCounter();
+            }
+        }
     }
 }

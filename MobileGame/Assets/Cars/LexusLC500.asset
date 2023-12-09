@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e82192abfb2e48644be9b8d2a8a7642c, type: 3}
-  m_Name: Ferrari
+  m_Name: LexusLC500
   m_EditorClassIdentifier: 
-  carName: Ferrari
-  topSpeed: 280
-  acceleration: 33
-  brakingPower: 66
+  carName: Lexus LC 500
+  topSpeed: 270
+  acceleration: 32
+  brakingPower: 64
   lowSpeedHandling: 7.5
-  highSpeedHandling: 8
-  carSprite: {fileID: -690558637, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
-  carPrice: 750000
+  highSpeedHandling: 7.5
+  carSprite: {fileID: 392686488, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
+  carPrice: 875000
   unlocked: 0
-  colliderPrefab: {fileID: 2453988377905684084, guid: 395c833a3222b8b49ba8a7fb691d3d10, type: 3}
+  colliderPrefab: {fileID: 1898779574649994285, guid: dd3bed3812d8f99478e47c955aac8f1f, type: 3}
