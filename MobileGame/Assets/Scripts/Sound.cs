@@ -6,6 +6,8 @@ public class Sound
 {
     public string name;
 
+    public AudioMixerGroup audioMixerGroup;
+
     public AudioClip clip;
 
     [Range(0,1)]

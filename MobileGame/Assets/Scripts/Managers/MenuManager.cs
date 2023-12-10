@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private string playScene;
     [SerializeField] private string settingsScene;
     [SerializeField] private Animator transition;
+    [SerializeField] private AudioMixer audioMixer;
 
     private const string FirstTimeKey = "IsFirstTime";
 
@@ -31,6 +33,17 @@ public class MenuManager : MonoBehaviour
         {
             chooseControls.SetActive(false);
         }
+
+        //music and sound
+        if (PlayerPrefs.HasKey("Music"))
+            audioMixer.SetFloat("MusicParam", Mathf.Log10(PlayerPrefs.GetFloat("Music")) * 20);
+        else
+            audioMixer.SetFloat("MusicParam", 0);
+
+        if (PlayerPrefs.HasKey("Sound"))
+            audioMixer.SetFloat("SoundParam", Mathf.Log10(PlayerPrefs.GetFloat("Sound")) * 20);
+        else
+            audioMixer.SetFloat("SoundParam", 0);
     }
 
     public void Play()

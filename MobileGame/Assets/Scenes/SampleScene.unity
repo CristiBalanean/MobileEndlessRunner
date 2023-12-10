@@ -1037,13 +1037,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 1251336690}
   m_HandleRect: {fileID: 1327613699}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.0001
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 216818293}
+        m_TargetAssemblyTypeName: SettingsScreen, Assembly-CSharp
+        m_MethodName: SetSoundVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &141285528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,6 +1463,9 @@ MonoBehaviour:
   inputTypeDropdown: {fileID: 1714751053}
   postProcessingToggle: {fileID: 1715055277}
   toggleText: {fileID: 1126621748}
+  audioMixer: {fileID: 24100000, guid: 49b2c9eaa096ed44b9e28eaf73039303, type: 2}
+  musicSlider: {fileID: 1257156831}
+  soundSlider: {fileID: 137295917}
 --- !u!1 &243352903
 GameObject:
   m_ObjectHideFlags: 0
@@ -3852,10 +3867,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Crash
+    audioMixerGroup: {fileID: 6256102462847861083, guid: 49b2c9eaa096ed44b9e28eaf73039303, type: 2}
     clip: {fileID: 8300000, guid: 6db18d06e799e2a41acde0a2b9cb7a61, type: 3}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
+    source: {fileID: 0}
+  - name: Ambience
+    audioMixerGroup: {fileID: 6256102462847861083, guid: 49b2c9eaa096ed44b9e28eaf73039303, type: 2}
+    clip: {fileID: 8300000, guid: 01cdc63708b39cf4c8dd88c27ae336ad, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Main Theme
+    audioMixerGroup: {fileID: 6644168083918109884, guid: 49b2c9eaa096ed44b9e28eaf73039303, type: 2}
+    clip: {fileID: 8300000, guid: 1194ca5c010e25343b1ce89680cb3a01, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
     source: {fileID: 0}
 --- !u!4 &756715736
 Transform:
@@ -6469,13 +6499,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 1537891136}
   m_HandleRect: {fileID: 1034532898}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.0001
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 216818293}
+        m_TargetAssemblyTypeName: SettingsScreen, Assembly-CSharp
+        m_MethodName: SetMusicVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1261225331
 GameObject:
   m_ObjectHideFlags: 0
@@ -8454,10 +8496,10 @@ AudioSource:
   m_GameObject: {fileID: 1577061385}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6256102462847861083, guid: 49b2c9eaa096ed44b9e28eaf73039303, type: 2}
   m_audioClip: {fileID: 8300000, guid: e7f07cb798e72d348ae5c7e12a93636e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -8584,6 +8626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraShake: {fileID: 0}
+  impactParticle: {fileID: 827022964876259116, guid: f8f55cdbdda1057469eda7b5792369c2, type: 3}
 --- !u!1 &1603728138
 GameObject:
   m_ObjectHideFlags: 0
@@ -10303,8 +10346,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.00455004, y: 1.3995001, z: 0}
-    m_Extent: {x: 2.00355, y: 2.6062, z: 0}
+    m_Center: {x: 0.00069999695, y: 1.3925, z: 0}
+    m_Extent: {x: 2.0059, y: 2.5998, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

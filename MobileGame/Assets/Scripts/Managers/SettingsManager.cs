@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,11 +14,15 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Toggle postProcessingToggle;
     [SerializeField] private TMP_Text toggleText;
     [SerializeField] private Animator transition;
+    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider soundSlider;
 
     private void Start()
     {
         inputTypeDropdown.onValueChanged.AddListener(delegate { InputTypeChanged(); });
 
+        //input
         if (PlayerPrefs.GetInt("Tilt") == 1)
         {
             inputTypeDropdown.value = 0;
@@ -27,6 +32,7 @@ public class SettingsManager : MonoBehaviour
             inputTypeDropdown.value = 1;
         }
 
+        //post-processing
         if (PlayerPrefs.HasKey("PostProcessing"))
         {
             if (PlayerPrefs.GetInt("PostProcessing") == 1)
@@ -45,6 +51,29 @@ public class SettingsManager : MonoBehaviour
             PlayerPrefs.SetInt("PostProcessing", 1);
             postProcessingToggle.isOn = true;
             toggleText.text = "ON";
+        }
+
+        //music and sound
+        if (PlayerPrefs.HasKey("Music"))
+        {
+            audioMixer.SetFloat("MusicParam", Mathf.Log10(PlayerPrefs.GetFloat("Music")) * 20);
+            musicSlider.value = PlayerPrefs.GetFloat("Music");
+        }
+        else
+        {
+            audioMixer.SetFloat("MusicParam", 0);
+            musicSlider.value = 1;
+        }
+
+        if (PlayerPrefs.HasKey("Sound"))
+        {
+            audioMixer.SetFloat("SoundParam", Mathf.Log10(PlayerPrefs.GetFloat("Sound")) * 20);
+            soundSlider.value = PlayerPrefs.GetFloat("Sound");
+        }
+        else
+        {
+            audioMixer.SetFloat("SoundParam", 0);
+            soundSlider.value = 1;
         }
     }
 
@@ -79,6 +108,18 @@ public class SettingsManager : MonoBehaviour
     public void BackButton()
     {
         StartCoroutine(LoadLevel(menuScene));
+    }
+
+    public void SetSoundVolume(float volume)
+    {
+        audioMixer.SetFloat("SoundParam", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("Sound", volume);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        audioMixer.SetFloat("MusicParam", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("Music", volume);
     }
 
     IEnumerator LoadLevel(string scene)

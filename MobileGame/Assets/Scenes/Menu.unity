@@ -3110,6 +3110,7 @@ MonoBehaviour:
   playScene: Playmode
   settingsScene: Settings
   transition: {fileID: 346353961}
+  audioMixer: {fileID: 24100000, guid: 49b2c9eaa096ed44b9e28eaf73039303, type: 2}
 --- !u!4 &2108262437
 Transform:
   m_ObjectHideFlags: 0

@@ -1,4 +1,3 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -9,6 +8,8 @@ public class ColliderDetection : MonoBehaviour
 {
     private CarHealth health;
     public CameraCollisionShake cameraShake;
+
+    [SerializeField] private GameObject impactParticle;
 
     private void Awake()
     {
@@ -24,5 +25,8 @@ public class ColliderDetection : MonoBehaviour
 
         float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
         health.TakeDamage((int)collisionMagnitude);
+
+        GameObject particle = Instantiate(impactParticle, collision.transform.position, UnityEngine.Quaternion.identity);
+        Destroy(particle, 1.1f);
     }
 }

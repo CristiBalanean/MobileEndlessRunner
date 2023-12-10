@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
         GameStateManager.Instance.SetState(newGameState);
         newGameState = GameState.Paused;
         GameStateManager.Instance.SetState(newGameState);
+
+        SoundManager.instance.Play("Ambience");
+        SoundManager.instance.Play("Main Theme");
     }
 
     private void Start()
