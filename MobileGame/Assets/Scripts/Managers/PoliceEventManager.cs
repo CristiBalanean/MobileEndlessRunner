@@ -22,7 +22,16 @@ public class PoliceEventManager : MonoBehaviour
 
     private bool hasStarted = false;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
     void Start()
     {
         InvokeRepeating("PoliceEventChance", 30f, 2.5f);
@@ -71,5 +80,10 @@ public class PoliceEventManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         StartSpawningCars?.Invoke();
         ScoreManager.Instance.AddToScore(5000);
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        enabled = newGameState == GameState.Gameplay;
     }
 }

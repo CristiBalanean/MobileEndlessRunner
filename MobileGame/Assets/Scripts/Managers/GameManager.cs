@@ -16,13 +16,18 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 240;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+        AudioListener.pause = false;
+        GameState newGameState = GameState.Gameplay;
+        GameStateManager.Instance.SetState(newGameState);
+        newGameState = GameState.Paused;
+        GameStateManager.Instance.SetState(newGameState);
     }
 
     private void Start()
     {
         if(Instance == null)
             Instance = this;
-        Time.timeScale = 0f;
 
         if (PlayerPrefs.HasKey("PostProcessing"))
         {
@@ -39,7 +44,10 @@ public class GameManager : MonoBehaviour
         {
             isPlaying = true;
             tapToPlayText.SetActive(false);
-            Time.timeScale = 1f;
+
+            GameState newGameState = GameState.Gameplay;
+
+            GameStateManager.Instance.SetState(newGameState);
         }
     }
 

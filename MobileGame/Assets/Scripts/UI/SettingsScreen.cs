@@ -16,11 +16,6 @@ public class SettingsScreen : MonoBehaviour
     [SerializeField] private Toggle postProcessingToggle;
     [SerializeField] private TMP_Text toggleText;
 
-    private void OnEnable()
-    {
-        Time.timeScale = 0f;
-    }
-
     private void Start()
     {
         inputTypeDropdown.onValueChanged.AddListener(delegate { InputTypeChanged(); });

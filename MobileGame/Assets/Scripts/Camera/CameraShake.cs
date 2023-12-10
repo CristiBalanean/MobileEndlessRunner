@@ -15,6 +15,13 @@ public class CameraShake : MonoBehaviour
     {
         cameraTransform = GetComponent<Transform>();
         originalPosition = cameraTransform.localPosition;
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     public void Shake(float duration, float magnitude, float speed)
@@ -42,5 +49,10 @@ public class CameraShake : MonoBehaviour
                 cameraTransform.localPosition = originalPosition;
             }
         }
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        enabled = newGameState == GameState.Gameplay;
     }
 }

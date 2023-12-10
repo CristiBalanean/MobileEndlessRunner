@@ -1,25 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseScreen : MonoBehaviour
 {
     [SerializeField] private Animator transition;
+    [SerializeField] private TMP_Text countDownText;
+    [SerializeField] private int countDownTime;
+    private int currentCountDownTime;
 
     private void OnEnable()
     {
-        Time.timeScale = 0f;
-    }
+        GameState newGameState = GameState.Paused;
 
-    private void OnDisable()
-    {
-        Time.timeScale = 1f;
+        AudioListener.pause = true;
+        GameStateManager.Instance.SetState(newGameState);
     }
 
     public void ReturnButton()
     {
-        gameObject.SetActive(false);
+        StartCoroutine(Countdown());
     }
 
     public void RestartButton()
@@ -39,5 +41,32 @@ public class PauseScreen : MonoBehaviour
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(scene);
+    }
+
+    IEnumerator Countdown()
+    {
+        currentCountDownTime = countDownTime;
+
+        countDownText.gameObject.SetActive(true);
+
+        gameObject.GetComponent<RectTransform>().localScale = Vector3.zero;
+
+        while(currentCountDownTime > 0)
+        {
+            countDownText.text = currentCountDownTime.ToString();
+
+            yield return new WaitForSeconds(1f);
+            currentCountDownTime--;
+        }
+
+        gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
+
+        gameObject.SetActive(false);
+        AudioListener.pause = false;
+
+        GameState newGameState = GameState.Gameplay;
+        GameStateManager.Instance.SetState(newGameState);
+
+        countDownText.gameObject.SetActive(false);
     }
 }

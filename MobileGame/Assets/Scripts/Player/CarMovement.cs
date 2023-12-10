@@ -44,6 +44,13 @@ public class CarMovement : MonoBehaviour
             player = CarData.Instance.currentCar;
 
         InitializeCar();
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     private void Start()
@@ -209,5 +216,11 @@ public class CarMovement : MonoBehaviour
     public float GetTopSpeed()
     {
         return topSpeed;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        enabled = newGameState == GameState.Gameplay;
+        rigidBody.simulated = newGameState == GameState.Gameplay;
     }
 }
