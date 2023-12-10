@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class PauseScreen : MonoBehaviour
@@ -9,13 +11,14 @@ public class PauseScreen : MonoBehaviour
     [SerializeField] private Animator transition;
     [SerializeField] private TMP_Text countDownText;
     [SerializeField] private int countDownTime;
+    [SerializeField] private AudioMixer audioMixer;
     private int currentCountDownTime;
 
     private void OnEnable()
     {
         GameState newGameState = GameState.Paused;
 
-        AudioListener.pause = true;
+        audioMixer.SetFloat("SoundParam", -80);
         GameStateManager.Instance.SetState(newGameState);
     }
 
@@ -62,7 +65,11 @@ public class PauseScreen : MonoBehaviour
         gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
 
         gameObject.SetActive(false);
-        AudioListener.pause = false;
+
+        if(PlayerPrefs.HasKey("Sound"))
+            audioMixer.SetFloat("SoundParam", Mathf.Log10(PlayerPrefs.GetFloat("Sound")) * 20);
+        else
+            audioMixer.SetFloat("SoundParam", 0);
 
         GameState newGameState = GameState.Gameplay;
         GameStateManager.Instance.SetState(newGameState);

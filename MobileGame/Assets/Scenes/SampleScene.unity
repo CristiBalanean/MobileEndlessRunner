@@ -9026,6 +9026,7 @@ MonoBehaviour:
   transition: {fileID: 575694776}
   countDownText: {fileID: 1006801476}
   countDownTime: 3
+  audioMixer: {fileID: 24100000, guid: 49b2c9eaa096ed44b9e28eaf73039303, type: 2}
 --- !u!1 &1657466108
 GameObject:
   m_ObjectHideFlags: 0
@@ -10346,8 +10347,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.00069999695, y: 1.3925, z: 0}
-    m_Extent: {x: 2.0059, y: 2.5998, z: 0}
+    m_Center: {x: 0.0024000406, y: 1.39775, z: 0}
+    m_Extent: {x: 1.9989, y: 2.60175, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

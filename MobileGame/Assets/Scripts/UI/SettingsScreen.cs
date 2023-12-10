@@ -57,23 +57,19 @@ public class SettingsScreen : MonoBehaviour
         //music and sound
         if (PlayerPrefs.HasKey("Music"))
         {
-            audioMixer.SetFloat("MusicParam", Mathf.Log10(PlayerPrefs.GetFloat("Music")) * 20);
             musicSlider.value = PlayerPrefs.GetFloat("Music");
         }
         else
         {
-            audioMixer.SetFloat("MusicParam", 0);
             musicSlider.value = 1;
         }
 
         if (PlayerPrefs.HasKey("Sound"))
         {
-            audioMixer.SetFloat("SoundParam", Mathf.Log10(PlayerPrefs.GetFloat("Sound")) * 20);
             soundSlider.value = PlayerPrefs.GetFloat("Sound");
         }
         else
         {
-            audioMixer.SetFloat("SoundParam", 0);
             soundSlider.value = 1;
         }
     }
@@ -119,7 +115,7 @@ public class SettingsScreen : MonoBehaviour
 
     public void SetSoundVolume(float volume)
     {
-        audioMixer.SetFloat("SoundParam", Mathf.Log10(volume) * 20);
+        //audioMixer.SetFloat("SoundParam", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("Sound", volume);
     }
 
