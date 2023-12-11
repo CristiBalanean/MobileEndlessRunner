@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject tapToPlayText;
     [SerializeField] private GameObject postProcessingVolume;
+    [SerializeField] private AudioMixer audioMixer;
 
     private bool isPlaying = false;
 
@@ -39,6 +41,17 @@ public class GameManager : MonoBehaviour
             else
                 postProcessingVolume.SetActive(false);     
         }
+
+        //music and sound
+        if (PlayerPrefs.HasKey("Music"))
+            audioMixer.SetFloat("MusicParam", Mathf.Log10(PlayerPrefs.GetFloat("Music")) * 20);
+        else
+            audioMixer.SetFloat("MusicParam", 0);
+
+        if (PlayerPrefs.HasKey("Sound"))
+            audioMixer.SetFloat("SoundParam", Mathf.Log10(PlayerPrefs.GetFloat("Sound")) * 20);
+        else
+            audioMixer.SetFloat("SoundParam", 0);
     }
 
     private void Update()

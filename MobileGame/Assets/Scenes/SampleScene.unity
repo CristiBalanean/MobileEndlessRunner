@@ -6295,6 +6295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tapToPlayText: {fileID: 92620643}
   postProcessingVolume: {fileID: 1672240863}
+  audioMixer: {fileID: 24100000, guid: 49b2c9eaa096ed44b9e28eaf73039303, type: 2}
 --- !u!4 &1177021332
 Transform:
   m_ObjectHideFlags: 0
@@ -8261,6 +8262,7 @@ GameObject:
   - component: {fileID: 1577061392}
   - component: {fileID: 1577061394}
   - component: {fileID: 1577061395}
+  - component: {fileID: 1577061396}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -8375,7 +8377,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: f87acfbe84c8d304eb20ea5a97371ffc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8396,15 +8398,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1200064572, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.047619, y: 3.047619}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1577061390
@@ -8627,6 +8629,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraShake: {fileID: 0}
   impactParticle: {fileID: 827022964876259116, guid: f8f55cdbdda1057469eda7b5792369c2, type: 3}
+--- !u!114 &1577061396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577061385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e256e39ea61b14fab970d9b5f0cadc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorSwapMaterial: {fileID: 2100000, guid: f87acfbe84c8d304eb20ea5a97371ffc, type: 2}
+  colors:
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 0.65882355, g: 0.70980394, b: 0.69803923, a: 0}
+  - {r: 0.45882356, g: 0.654902, b: 0.2627451, a: 0}
+  - {r: 0.64705884, g: 0.18823531, b: 0.18823531, a: 0}
+  - {r: 0.909804, g: 0.7568628, b: 0.43921572, a: 0}
+  - {r: 0.45098042, g: 0.74509805, b: 0.82745105, a: 0}
 --- !u!1 &1603728138
 GameObject:
   m_ObjectHideFlags: 0
@@ -10347,8 +10369,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0024000406, y: 1.39775, z: 0}
-    m_Extent: {x: 1.9989, y: 2.60175, z: 0}
+    m_Center: {x: 0.0033000112, y: 1.4007499, z: 0}
+    m_Extent: {x: 1.9958, y: 2.60825, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

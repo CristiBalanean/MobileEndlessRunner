@@ -26,6 +26,11 @@ public class CarsShopManager : MonoBehaviour
     [SerializeField] private Slider accelerationSlider;
     [SerializeField] private Slider brakeSlider;
 
+    [SerializeField] private Material colorSwapMaterial;
+    [SerializeField] private Color[] colors;
+    [SerializeField] private Image colorsButtonHighlight;
+    [SerializeField] private Button[] colorsButtons;
+
     private int i = 0;
 
     private void Start()
@@ -58,6 +63,14 @@ public class CarsShopManager : MonoBehaviour
             carPrice.text = "OWNED";
             SetStats(cars[i]);
         }
+
+        if (PlayerPrefs.HasKey("Color"))
+        {
+            colorSwapMaterial.SetColor("_BaseColor", colors[PlayerPrefs.GetInt("Color") - 1]);
+            colorsButtonHighlight.transform.position = colorsButtons[PlayerPrefs.GetInt("Color") - 1].transform.position;
+        }
+        else
+            colorSwapMaterial.SetColor("_BaseColor", colors[0]);
     }
 
     public void Next()
@@ -155,6 +168,16 @@ public class CarsShopManager : MonoBehaviour
             Debug.LogError("Not Enough Money!");
 
         updateMoney.Invoke();
+    }
+
+    public void ChangeColor(int colorIndex)
+    {
+        PlayerPrefs.SetInt("Color", colorIndex);
+
+        carSprite.material = colorSwapMaterial;
+        colorSwapMaterial.SetColor("_BaseColor", colors[colorIndex - 1]);
+
+        colorsButtonHighlight.transform.position = colorsButtons[colorIndex - 1].transform.position;
     }
 
     private void SaveFile()
