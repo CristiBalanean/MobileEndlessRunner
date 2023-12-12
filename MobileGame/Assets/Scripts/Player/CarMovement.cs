@@ -21,6 +21,8 @@ public class CarMovement : MonoBehaviour
     [SerializeField] private CameraShake cameraShake;
     [SerializeField] private Car player;
     [SerializeField] private AnimationCurve accelerationCurve;
+    [SerializeField] private TrailRenderer[] skidMarkTrails;
+    [SerializeField] private ParticleSystem[] skidMarkParticles;
 
     private float topSpeed;
     public float acceleration;
@@ -57,6 +59,9 @@ public class CarMovement : MonoBehaviour
     {
         float speedLerp = Mathf.Clamp01((topSpeed - 100) / 200);
         speedMultiplier = Mathf.Lerp(0, 175, speedLerp);
+
+        foreach (ParticleSystem particle in skidMarkParticles)
+            particle.Stop();
     }
 
     private void Update()
@@ -175,6 +180,15 @@ public class CarMovement : MonoBehaviour
         // Applying engine acceleration or brake force based on input.y
         if (input.y == 1 && currentVelocityY < topSpeed / 3.6f)
         {
+            foreach (TrailRenderer trail in skidMarkTrails)
+                trail.emitting = false;
+            foreach (ParticleSystem particle in skidMarkParticles)
+            {
+                particle.Stop();
+                //particle.Clear();
+            }
+            SoundManager.instance.Stop("Skid");
+
             accelerationHoldDuration += Time.deltaTime;
 
             float accelerationForce = Mathf.Lerp(0, effectiveAcceleration, accelerationHoldDuration / maxAccelerationHoldDuration);
@@ -188,6 +202,29 @@ public class CarMovement : MonoBehaviour
         }
         else if (input.y == -1 && currentVelocityY > 25 / 3.6f)
         {
+            if (currentSpeed > 50f)
+            {
+                foreach (TrailRenderer trail in skidMarkTrails)
+                    trail.emitting = true;
+                foreach (ParticleSystem particle in skidMarkParticles)
+                {
+                    particle.Emit(1);
+                    particle.Play();
+                }
+                SoundManager.instance.Play("Skid");
+            }
+            else
+            {
+                foreach (TrailRenderer trail in skidMarkTrails)
+                    trail.emitting = false;
+                foreach (ParticleSystem particle in skidMarkParticles)
+                {
+                    particle.Stop();
+                    //particle.Clear();
+                }
+                SoundManager.instance.Stop("Skid");
+            }
+
             // Increase brake hold duration
             brakeHoldDuration += Time.deltaTime;
 
