@@ -9,6 +9,8 @@ public class FloatingOrigin : MonoBehaviour
 
     [SerializeField] private WorldSpawner worldSpawner;
 
+    [SerializeField] private TrailRenderer[] skidMarkTrails;
+
     private void LateUpdate()
     {
         Vector3 cameraPosition = gameObject.transform.position;
@@ -34,5 +36,8 @@ public class FloatingOrigin : MonoBehaviour
             }
         }
         worldSpawner.playerPositionLastFrame = 0;
+
+        foreach(TrailRenderer trail in skidMarkTrails)
+            trail.Clear();
     }
 }
