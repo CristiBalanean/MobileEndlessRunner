@@ -4,23 +4,17 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PowerUps/SlowDown")]
 public class SlowDown : PowerUp
 {
-    private bool isUsed = false;
-
-    public override void ApplyPowerUp(GameObject target)
+    public override void ActivatePowerUp(GameObject target)
     {
-        if (!isUsed)
-        {
-            Time.timeScale = 0.25f;
-            isUsed = true;
-        }
+        Time.timeScale = 0.35f;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        SoundManager.instance.Play("Slowdown");
     }
 
-    public override void FinishPowerUp(GameObject target)
+    public override void DeactivatePowerUp(GameObject target)
     {
-        if (isUsed)
-        {
-            Time.timeScale = 1f;
-            isUsed = false;
-        }
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f;
+        SoundManager.instance.Stop("Slowdown");
     }
 }

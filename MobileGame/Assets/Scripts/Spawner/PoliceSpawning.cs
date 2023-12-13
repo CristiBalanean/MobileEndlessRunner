@@ -14,6 +14,13 @@ public class PoliceSpawning : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     private void Start()
@@ -61,5 +68,10 @@ public class PoliceSpawning : MonoBehaviour
 
         // Spawn a new police car to maintain the count of active police cars
         SpawnPoliceCars();
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        enabled = newGameState == GameState.Gameplay;
     }
 }

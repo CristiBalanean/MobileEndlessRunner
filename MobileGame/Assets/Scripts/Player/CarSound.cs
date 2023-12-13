@@ -5,12 +5,14 @@ using UnityEngine;
 public class CarSound : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
-    private AudioSource audioSource;
+    private AudioSource[] audioSource;
+    public AudioSource correctAudioSource;
 
     private float minSpeed;
     private float maxSpeed;
     private float currentSpeed;
 
+    [SerializeField] private AudioClip audioClip;
     [SerializeField] private float minPitch;
     [SerializeField] private float maxPitch;
     private float pitchFromCar;
@@ -18,7 +20,10 @@ public class CarSound : MonoBehaviour
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponents<AudioSource>();
+        foreach (AudioSource audio in audioSource)
+            if (audio.clip == audioClip)
+                correctAudioSource = audio;
     }
 
     private void Start()
@@ -34,13 +39,13 @@ public class CarSound : MonoBehaviour
 
     private void EngineSound()
     {
-        currentSpeed = rigidBody.velocity.magnitude * 3.6f;
-        pitchFromCar = rigidBody.velocity.magnitude / 30f;
+        currentSpeed = CarMovement.Instance.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude * 3.6f;
+        pitchFromCar = CarMovement.Instance.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude / 30f;
 
         if (currentSpeed < minSpeed)
-            audioSource.pitch = minPitch;
+            correctAudioSource.pitch = minPitch;
 
         if(currentSpeed > minSpeed && currentSpeed < maxSpeed)
-            audioSource.pitch = minPitch + pitchFromCar;
+            correctAudioSource.pitch = minPitch + pitchFromCar;
     }
 }

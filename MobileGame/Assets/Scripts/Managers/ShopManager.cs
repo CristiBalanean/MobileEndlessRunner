@@ -52,4 +52,11 @@ public class ShopManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(scene);
     }
+
+    public void AddMoney()
+    {
+        MoneyManager.Instance.currentMoney += 100000;
+        PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
+        carsUI.GetComponent<CarsShopManager>().updateMoney?.Invoke();
+    }
 }

@@ -17,9 +17,11 @@ public class CarMovement : MonoBehaviour
     public float currentHandling;
     private Vector2 input;
     public bool hasDied = false; //put it in the car health script
+    private bool isSkidding = false;
+    private PowerupManager powerupManager;
 
     [SerializeField] private CameraShake cameraShake;
-    [SerializeField] private Car player;
+    public Car player;
     [SerializeField] private AnimationCurve accelerationCurve;
     [SerializeField] private TrailRenderer[] skidMarkTrails;
     [SerializeField] private ParticleSystem[] skidMarkParticles;
@@ -42,12 +44,16 @@ public class CarMovement : MonoBehaviour
         Instance = this;
 
         rigidBody = GetComponent<Rigidbody2D>();
+        powerupManager = GetComponent<PowerupManager>();
         if(SceneManager.GetActiveScene().name != "MonsterTruckGameMode")
             player = CarData.Instance.currentCar;
 
         InitializeCar();
 
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+
+        foreach (ParticleSystem particle in skidMarkParticles)
+            particle.Stop();
     }
 
     private void OnDestroy()
@@ -59,9 +65,7 @@ public class CarMovement : MonoBehaviour
     {
         float speedLerp = Mathf.Clamp01((topSpeed - 100) / 200);
         speedMultiplier = Mathf.Lerp(0, 175, speedLerp);
-
-        foreach (ParticleSystem particle in skidMarkParticles)
-            particle.Stop();
+        SoundManager.instance.Play("Engine");
     }
 
     private void Update()
@@ -180,6 +184,8 @@ public class CarMovement : MonoBehaviour
         // Applying engine acceleration or brake force based on input.y
         if (input.y == 1 && currentVelocityY < topSpeed / 3.6f)
         {
+            if (isSkidding == true)
+                isSkidding = false;
             foreach (TrailRenderer trail in skidMarkTrails)
                 trail.emitting = false;
             foreach (ParticleSystem particle in skidMarkParticles)
@@ -202,7 +208,12 @@ public class CarMovement : MonoBehaviour
         }
         else if (input.y == -1 && currentVelocityY > 25 / 3.6f)
         {
-            if (currentSpeed > 50f)
+            if (powerupManager.currentPowerup is Nitro && powerupManager.isActive)
+            {
+                powerupManager.Deactivate();
+            }
+
+            if (currentSpeed > 50f && brakeHoldDuration > 0.25f)
             {
                 foreach (TrailRenderer trail in skidMarkTrails)
                     trail.emitting = true;
@@ -211,7 +222,11 @@ public class CarMovement : MonoBehaviour
                     particle.Emit(1);
                     particle.Play();
                 }
-                SoundManager.instance.Play("Skid");
+                if (!isSkidding)
+                {
+                    SoundManager.instance.Play("Skid");
+                    isSkidding = true;
+                }
             }
             else
             {
@@ -223,6 +238,8 @@ public class CarMovement : MonoBehaviour
                     //particle.Clear();
                 }
                 SoundManager.instance.Stop("Skid");
+                if (isSkidding)
+                    isSkidding = false;
             }
 
             // Increase brake hold duration

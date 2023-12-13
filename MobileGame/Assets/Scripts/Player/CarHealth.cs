@@ -5,10 +5,18 @@ using UnityEngine.Events;
 
 public class CarHealth : MonoBehaviour
 {
+    public static CarHealth Instance;
+
     [SerializeField] private UnityEvent deathTrigger;
     [SerializeField] private int health;
 
     private bool hasDied = false;
+    public bool shield = false;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -25,6 +33,9 @@ public class CarHealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        if (shield)
+            return;
+
         health -= amount;
         if (health <= 0 && !hasDied)
         {

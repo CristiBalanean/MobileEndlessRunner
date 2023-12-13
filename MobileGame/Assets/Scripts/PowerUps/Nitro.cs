@@ -1,28 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 [CreateAssetMenu(menuName = "PowerUps/Nitro")]
 public class Nitro : PowerUp
 {
-    private float nitroAmount = 30;
-    private bool isUsed = false;
+    private float nitroAmount = 35;
 
-    public override void ApplyPowerUp(GameObject target)
+    public override void ActivatePowerUp(GameObject target)
     {
-        if (!isUsed)
+        GameObject volumeGO = GameObject.Find("Volume");
+        if (volumeGO != null)
         {
-            CarMovement.Instance.acceleration += nitroAmount;
-            isUsed = true;
+            Volume volume = volumeGO.GetComponent<Volume>();
+            MotionBlur motionBlur;
+            if (volume.profile.TryGet(out motionBlur))
+            {
+                motionBlur.intensity.value = 0.275f;
+                motionBlur.clamp.value = 0.2f;
+            }
         }
+        CarMovement.Instance.acceleration += nitroAmount;
+        SoundManager.instance.Play("Nitro");
     }
 
-    public override void FinishPowerUp(GameObject target)
+    public override void DeactivatePowerUp(GameObject target)
     {
-        if (isUsed)
+        GameObject volumeGO = GameObject.Find("Volume");
+        if (volumeGO != null)
         {
-            CarMovement.Instance.acceleration -= nitroAmount;
-            isUsed = false;
+            Volume volume = GameObject.Find("Volume").GetComponent<Volume>();
+            MotionBlur motionBlur;
+            if (volume.profile.TryGet(out motionBlur))
+            {
+                motionBlur.intensity.value = 0.035f;
+                motionBlur.clamp.value = 0.025f;
+            }
         }
+        CarMovement.Instance.acceleration = CarMovement.Instance.player.GetAcceleration();
+        SoundManager.instance.Stop("Nitro");
     }
 }

@@ -8,6 +8,8 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private Sound[] sounds;
 
+    [SerializeField] private AudioMixerGroup soundsMixer;
+
     private void Awake()
     {
         instance = this;
@@ -20,6 +22,7 @@ public class SoundManager : MonoBehaviour
             sound.source.volume = sound.volume;
             sound.source.pitch = sound.pitch;
             sound.source.loop = sound.loop;
+            sound.source.playOnAwake = sound.playOnAwake;
         }
     }
 
@@ -31,7 +34,7 @@ public class SoundManager : MonoBehaviour
     public void Play(string soundName)
     {
         Sound sound = Array.Find(sounds, sound => sound.name == soundName);
-        if (sound == null || sound.source.isPlaying)
+        if (sound == null)
             return;
         sound.source.Play();
     }
@@ -42,5 +45,19 @@ public class SoundManager : MonoBehaviour
         if (sound == null)
             return;
         sound.source.Stop();
+    }
+
+    public void SlowSounds()
+    {
+        foreach (var sound in sounds)
+            if (sound.audioMixerGroup == soundsMixer && sound.name != "Slowdown")
+                sound.source.enabled = false;
+    }
+
+    public void NormalSounds()
+    {
+        foreach (var sound in sounds)
+            if (sound.audioMixerGroup == soundsMixer)
+                sound.source.enabled = true;
     }
 }

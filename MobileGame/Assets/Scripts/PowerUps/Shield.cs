@@ -5,31 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PowerUps/Shield")]
 public class Shield : PowerUp
 {
-    private bool isUsed = false;
-
-    public override void ApplyPowerUp(GameObject target)
+    public override void ActivatePowerUp(GameObject target)
     {
-        if (!isUsed)
-        {
-            Collider2D[] colliders = target.GetComponentsInChildren<Collider2D>();
-            foreach (Collider2D collider in colliders)
-            { 
-                collider.enabled = false;
-            }
-            isUsed = true;
-        }
+        SoundManager.instance.Play("ForceField");
+        CarHealth.Instance.shield = true;
     }
 
-    public override void FinishPowerUp(GameObject target)
+    public override void DeactivatePowerUp(GameObject target)
     {
-        if (isUsed)
-        {
-            Collider2D[] colliders = target.GetComponentsInChildren<Collider2D>();
-            foreach (Collider2D collider in colliders)
-            {
-                collider.enabled = true;
-            }
-            isUsed = false;
-        }
+        SoundManager.instance.Stop("ForceField");
+        CarHealth.Instance.shield = false;
     }
 }

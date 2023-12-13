@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public abstract class PowerUp : ScriptableObject
 {
-    public abstract void ApplyPowerUp(GameObject target);
+    public abstract void ActivatePowerUp(GameObject target);
 
-    public abstract void FinishPowerUp(GameObject target);
+    public abstract void DeactivatePowerUp(GameObject target);
 }
 
 [System.Serializable]

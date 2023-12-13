@@ -58,7 +58,7 @@ public class PauseScreen : MonoBehaviour
         {
             countDownText.text = currentCountDownTime.ToString();
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f);
             currentCountDownTime--;
         }
 
