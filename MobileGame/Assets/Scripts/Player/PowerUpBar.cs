@@ -18,7 +18,7 @@ public class PowerUpBar : MonoBehaviour
     public float currentTime;
     private bool isPressed = false;
     private bool isPaused = false;
-    private bool isFilling = false;
+    private bool isFilling = true;
     [SerializeField] private bool firstTime = true;
     private PowerupManager powerupManager;
 
@@ -93,6 +93,8 @@ public class PowerUpBar : MonoBehaviour
 
     public void ButtonPressed()
     {
+        StopAllCoroutines();
+
         isPressed = !isPressed;
 
         if (isPressed)
@@ -118,9 +120,15 @@ public class PowerUpBar : MonoBehaviour
             if (!firstTime)
             {
                 if (isFilling)
+                {
                     StartCoroutine(FillBar());
+                    Debug.Log("Filling");
+                }
                 else
+                {
                     StartCoroutine(EmptyBar());
+                    Debug.Log("Emptying");
+                }
             }
         }
 

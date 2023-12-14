@@ -85,5 +85,10 @@ public class PoliceEventManager : MonoBehaviour
     private void OnGameStateChanged(GameState newGameState)
     {
         enabled = newGameState == GameState.Gameplay;
+
+        if (enabled)
+            InvokeRepeating("PoliceEventChance", 30f, 2.5f);
+        else
+            CancelInvoke("PoliceEventChance");
     }
 }

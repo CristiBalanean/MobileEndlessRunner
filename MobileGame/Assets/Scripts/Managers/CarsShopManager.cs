@@ -37,6 +37,8 @@ public class CarsShopManager : MonoBehaviour
     {
         select.interactable = false;
 
+        LoadFile();
+
         if (PlayerPrefs.HasKey("CarDataIndex"))
         {
             carName.text = cars[PlayerPrefs.GetInt("CarDataIndex")].GetName();

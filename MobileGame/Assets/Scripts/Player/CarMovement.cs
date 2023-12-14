@@ -181,6 +181,20 @@ public class CarMovement : MonoBehaviour
         decelerationFactor = Mathf.Clamp(decelerationFactor, 0.05f, 1);
         float effectiveAcceleration = acceleration * decelerationFactor;
 
+        if(input.y == 0)
+        {
+            if (isSkidding == true)
+                isSkidding = false;
+            foreach (TrailRenderer trail in skidMarkTrails)
+                trail.emitting = false;
+            foreach (ParticleSystem particle in skidMarkParticles)
+            {
+                particle.Stop();
+                //particle.Clear();
+            }
+            SoundManager.instance.Stop("Skid");
+        }
+
         // Applying engine acceleration or brake force based on input.y
         if (input.y == 1 && currentVelocityY < topSpeed / 3.6f)
         {

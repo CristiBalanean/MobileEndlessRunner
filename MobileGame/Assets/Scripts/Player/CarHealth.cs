@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Events;
 
 public class CarHealth : MonoBehaviour
@@ -9,6 +10,7 @@ public class CarHealth : MonoBehaviour
 
     [SerializeField] private UnityEvent deathTrigger;
     [SerializeField] private int health;
+    [SerializeField] private AudioMixer audioMixer;
 
     private bool hasDied = false;
     public bool shield = false;
@@ -29,6 +31,7 @@ public class CarHealth : MonoBehaviour
         //ParticleManager.instance.InstantiateParticle(transform);
         CarMovement.Instance.hasDied = true;
         deathTrigger.Invoke();
+        audioMixer.SetFloat("SoundParam", -80);
     }
 
     public void TakeDamage(int amount)

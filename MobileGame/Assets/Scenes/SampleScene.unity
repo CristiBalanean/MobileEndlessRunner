@@ -13927,6 +13927,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   health: 15
+  audioMixer: {fileID: 24100000, guid: 49b2c9eaa096ed44b9e28eaf73039303, type: 2}
   shield: 0
 --- !u!82 &1577061392
 AudioSource:
@@ -20735,8 +20736,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0029999614, y: 1.3979, z: 0}
-    m_Extent: {x: 1.9972999, y: 2.6009998, z: 0}
+    m_Center: {x: 0.0016499758, y: 1.40345, z: 0}
+    m_Extent: {x: 1.99765, y: 2.6026502, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

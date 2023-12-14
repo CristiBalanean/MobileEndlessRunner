@@ -70,5 +70,10 @@ public class TimeManager : MonoBehaviour
     private void OnGameStateChanged(GameState newGameState)
     {
         enabled = newGameState == GameState.Gameplay;
+
+        if(enabled)
+            StartCoroutine(AddMinute());
+        else
+            StopAllCoroutines();
     }
 }
