@@ -9146,6 +9146,14 @@ MonoBehaviour:
     loop: 1
     playOnAwake: 0
     source: {fileID: 0}
+  - name: Explosion
+    audioMixerGroup: {fileID: 6256102462847861083, guid: 49b2c9eaa096ed44b9e28eaf73039303, type: 2}
+    clip: {fileID: 8300000, guid: f32c603dead23444d8f5c7ea63a7e2fd, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
   soundsMixer: {fileID: 6256102462847861083, guid: 49b2c9eaa096ed44b9e28eaf73039303, type: 2}
 --- !u!4 &756715736
 Transform:
@@ -11044,7 +11052,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Build Alpha 0.4
+  m_text: WORK IN PROGRESS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 590eefe89158b0c418e74aa4b168dcb9, type: 2}
   m_sharedMaterial: {fileID: 7189270103020448709, guid: 590eefe89158b0c418e74aa4b168dcb9, type: 2}
@@ -12208,7 +12216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1286241347
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20935,8 +20943,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0073999763, y: 1.3995, z: 0}
-    m_Extent: {x: 2.0008, y: 2.6072001, z: 0}
+    m_Center: {x: -0.0022500157, y: 1.3972499, z: 0}
+    m_Extent: {x: 1.99505, y: 2.6057498, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

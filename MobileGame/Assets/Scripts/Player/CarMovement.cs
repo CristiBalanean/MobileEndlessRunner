@@ -45,7 +45,7 @@ public class CarMovement : MonoBehaviour
 
         rigidBody = GetComponent<Rigidbody2D>();
         powerupManager = GetComponent<PowerupManager>();
-        if(SceneManager.GetActiveScene().name != "MonsterTruckGameMode")
+        if (SceneManager.GetActiveScene().name != "MonsterTruckGameMode")
             player = CarData.Instance.currentCar;
 
         InitializeCar();
@@ -222,9 +222,12 @@ public class CarMovement : MonoBehaviour
         }
         else if (input.y == -1 && currentVelocityY > 25 / 3.6f)
         {
-            if (powerupManager.currentPowerup is Nitro && powerupManager.isActive)
+            if (SceneManager.GetActiveScene().name != "MonsterTruckGameMode")
             {
-                powerupManager.Deactivate();
+                if (powerupManager.currentPowerup is Nitro && powerupManager.isActive)
+                {
+                    powerupManager.Deactivate();
+                }
             }
 
             if (currentSpeed > 50f && brakeHoldDuration > 0.25f)
