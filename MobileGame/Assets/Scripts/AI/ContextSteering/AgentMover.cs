@@ -44,6 +44,22 @@ public class AgentMover : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Vector2 playerPosition = GameObject.Find("Player").transform.position;
+        Vector2 directionToPlayer = (playerPosition - (Vector2)transform.position).normalized;
+
+        // If the AI is too far from the player, adjust the movement input to move closer
+        float distanceToPlayer = Vector2.Distance(playerPosition, transform.position);
+        if (distanceToPlayer > 2.0f)
+        {
+            MovementInput = directionToPlayer;
+        }
+        else
+        {
+            // If close to the player, maintain the current movement input
+            MovementInput = oldMovementInput;
+        }
+
+        // Acceleration and deceleration logic remains the same
         if (MovementInput.magnitude > 0)
         {
             oldMovementInput = MovementInput.normalized; // Normalize to retain direction
@@ -54,8 +70,13 @@ public class AgentMover : MonoBehaviour
             currentSpeed -= deacceleration * Time.deltaTime;
         }
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
-        rb2d.AddForce(oldMovementInput * currentSpeed, ForceMode2D.Force);
+
+        // Use Rigidbody2D velocity instead of AddForce for smoother movement
+        rb2d.velocity = oldMovementInput * currentSpeed;
+
+        ClampXPosition();
     }
+
 
     private void ClampXPosition()
     {

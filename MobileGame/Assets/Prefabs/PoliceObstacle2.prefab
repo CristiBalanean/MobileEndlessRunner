@@ -11,12 +11,9 @@ GameObject:
   - component: {fileID: 3953540001608363002}
   - component: {fileID: 6826439863720545997}
   - component: {fileID: 5958307031078041016}
-  - component: {fileID: 5476539394224708600}
-  - component: {fileID: 8050039551388978572}
-  - component: {fileID: 3954922733956112922}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PoliceCarObstacle2
-  m_TagString: Police
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,55 +114,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!95 &5476539394224708600
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3213163021578674456}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 34863b622fd428441aee24a1b3be03fd, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8050039551388978572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3213163021578674456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7ca3aef0eb924543a3c6557544e10bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 1
-  beginningMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  explodedCarMaterial: {fileID: -876546973899608171, guid: 62bdf8a86f5e30b4686e3efac28f425b, type: 3}
-  explosionGO: {fileID: 7768325357048307294, guid: 4b85876d4ec611e46bea5dc6c34e32d3, type: 3}
---- !u!114 &3954922733956112922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3213163021578674456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d75abdd75bddb34c927954c8f342d76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3357743382105874749
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,9 +123,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1466795304218437043}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PoliceObstacle2
-  m_TagString: Trap
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,7 +157,7 @@ GameObject:
   - component: {fileID: 2632852515824825399}
   - component: {fileID: 6268248750491920994}
   - component: {fileID: 4761220276232232484}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Siren (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +225,7 @@ GameObject:
   - component: {fileID: 2250924173643944742}
   - component: {fileID: 3793486532760494955}
   - component: {fileID: 619001648612772802}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Colliders
   m_TagString: AiCollider
   m_Icon: {fileID: 0}
@@ -389,7 +337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2093924642668157991}
   - component: {fileID: 922472575213020847}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: BlueLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,7 +419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7572825677327393645}
   - component: {fileID: 1999056646013934756}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: RedLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

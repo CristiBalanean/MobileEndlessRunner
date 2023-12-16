@@ -13,28 +13,28 @@ public class PoliceAICollision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        SoundManager.instance.Play("Crash");
-
         if (policeHealth != null)
         {
-            if (collision.transform.CompareTag("Player") || collision.transform.CompareTag("Trap"))
+            if (collision.transform.CompareTag("Player"))
             {
                 float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
                 policeHealth.TakeDamage((int)collisionMagnitude);
-                if (SceneManager.GetActiveScene().name == "MonsterTruckGameMode")
-                    policeHealth.TriggerExplosion();
             }
-        }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        SoundManager.instance.Play("Crash");
-
-        if(policeHealth != null) 
-        {
-            if(collision.transform.CompareTag("Barrier"))
+            if (collision.transform.CompareTag("Barrier"))
+            {
                 policeHealth.DeathTrigger();
+                if (Vector2.Distance(transform.position, CarMovement.Instance.transform.position) < 6.5f)
+                    SoundManager.instance.Play("Crash");
+            }
+
+            if (collision.transform.CompareTag("Police"))
+            {
+                float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
+                policeHealth.TakeDamage((int)collisionMagnitude);
+                if (Vector2.Distance(transform.position, CarMovement.Instance.transform.position) < 6.5f)
+                    SoundManager.instance.Play("Crash");
+            }
         }
     }
 }

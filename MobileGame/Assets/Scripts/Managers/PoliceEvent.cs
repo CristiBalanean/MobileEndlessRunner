@@ -1,28 +1,27 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PoliceEventManager : MonoBehaviour
+public class PoliceEvent : MonoBehaviour
 {
-    public static PoliceEventManager instance;
+    public static PoliceEvent instance;
 
     public UnityEvent StopSpawningCars;
     public UnityEvent StartSpawningCars;
-    public UnityEvent SpawnBarrier;
+    public UnityEvent SpawnTraps;
     public UnityEvent ChangeCameraOffsetToPolice;
     public UnityEvent ChangeCameraOffsetToNormal;
 
-    public delegate void StartSpawningSpikeTrapsDelegate();
-    public static event StartSpawningSpikeTrapsDelegate StartSpawningSpikeTraps;
+    [SerializeField] private int numberOfCars;
+    public int currentNumberOfCars;
 
-    [SerializeField] private Transform player;
     [SerializeField] private LayerMask obstacleLayer;
 
     [SerializeField] PoliceSpawning policeSpawning;
 
-    [SerializeField] private float eventDuration;
-
-    public bool hasStarted = false;
+    public bool hasStarted;
 
     private void Awake()
     {
@@ -35,8 +34,11 @@ public class PoliceEventManager : MonoBehaviour
         GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
-    void Start()
+    private void Start()
     {
+        currentNumberOfCars = numberOfCars;
+        hasStarted = false;
+
         InvokeRepeating("PoliceEventChance", 30f, 2.5f);
     }
 
@@ -44,7 +46,7 @@ public class PoliceEventManager : MonoBehaviour
     {
         float rand = Random.Range(0, 1000);
 
-        if (rand < 30 && !hasStarted && !CarMovement.Instance.hasDied)
+        if (rand < 50 && !CarMovement.Instance.hasDied)
         {
             Debug.Log("Event Is Preparing!");
             StopSpawningCars?.Invoke();
@@ -54,34 +56,34 @@ public class PoliceEventManager : MonoBehaviour
 
     private IEnumerator WaitForCarsToDespawn()
     {
-        while (Physics2D.OverlapCircleAll(player.position, 50f, obstacleLayer).Length > 0)
+        while (Physics2D.OverlapCircleAll(CarMovement.Instance.transform.position, 50f, obstacleLayer).Length > 0)
         {
             yield return null;
         }
 
         hasStarted = true;
-        StartCoroutine(SpawnPoliceEvent());
+        StartCoroutine(StartEvent());
     }
 
-    private IEnumerator SpawnPoliceEvent()
+    private IEnumerator StartEvent()
     {
-        Debug.Log("Event Has Started!");
+        CancelInvoke("PoliceEventChance");
+        hasStarted = true;
+        currentNumberOfCars = numberOfCars;
         policeSpawning.SpawnPoliceCars();
-        ChangeCameraOffsetToPolice?.Invoke();
-        StartSpawningSpikeTraps?.Invoke();
-        yield return new WaitForSeconds(eventDuration);
-        StartSpawningSpikeTraps?.Invoke();
-        ChangeCameraOffsetToNormal?.Invoke();
+        while (currentNumberOfCars > 3) 
+        {
+            yield return new WaitForSeconds(7.5f);
+            SpawnTraps?.Invoke();
+        }
         GameObject[] traps = GameObject.FindGameObjectsWithTag("Trap");
-        foreach(GameObject trap in traps)
+        foreach (GameObject trap in traps)
         {
             Destroy(trap);
         }
-        yield return new WaitForSeconds(1f);
-        //SpawnBarrier?.Invoke();
         Debug.Log("Event Has Ended!");
-        yield return new WaitForSeconds(3f);
         hasStarted = false;
+        InvokeRepeating("PoliceEventChance", 30f, 2.5f);
     }
 
     private void OnGameStateChanged(GameState newGameState)

@@ -41,22 +41,24 @@ public class PoliceAiHealth : MonoBehaviour
             StartCoroutine(DeathTrigger());
             if (SceneManager.GetActiveScene().name == "MonsterTruckGameMode")
                 TriggerExplosion();
-
-            if (SwatSpawner.instance != null)
-                SwatSpawner.instance.RemovePoliceCar(gameObject);
-            else if (PoliceSpawning.instance != null)
-                PoliceSpawning.instance.RemovePoliceCar(gameObject);
         }
     }
 
     public IEnumerator DeathTrigger()
     {
+        TriggerExplosion();
+
         yield return new WaitForSeconds(0.01f);
         aiAnimator.enabled = true;
         foreach (var collider in aiCollider)
             collider.isTrigger = true;
         yield return new WaitForSeconds(1.25f);
         gameObject.SetActive(false);
+
+        if (SwatSpawner.instance != null)
+            SwatSpawner.instance.RemovePoliceCar(gameObject);
+        else if (PoliceSpawning.instance != null)
+            PoliceSpawning.instance.RemovePoliceCar(gameObject);
     }
 
     public void TriggerExplosion()

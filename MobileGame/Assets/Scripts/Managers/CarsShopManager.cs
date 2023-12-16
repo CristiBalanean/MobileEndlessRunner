@@ -31,7 +31,7 @@ public class CarsShopManager : MonoBehaviour
     [SerializeField] private Image colorsButtonHighlight;
     [SerializeField] private Button[] colorsButtons;
 
-    private int i = 0;
+    public int i = 0;
 
     private void Start()
     {
@@ -146,6 +146,7 @@ public class CarsShopManager : MonoBehaviour
         CarData.Instance.currentCar = cars[i];
         PlayerPrefs.SetInt("CarDataIndex", i);
         select.interactable = false;
+        Debug.Log(cars[PlayerPrefs.GetInt("CarDataIndex")]);
     }
 
     public void Unlock()

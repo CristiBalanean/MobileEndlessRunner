@@ -23,8 +23,11 @@ public class ColliderDetection : MonoBehaviour
         StartCoroutine(cameraShake.Shake(.1f, .1f, 1f));
         SoundManager.instance.Play("Crash");
 
-        float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
-        health.TakeDamage((int)collisionMagnitude);
+        if (!collision.transform.CompareTag("Police"))
+        {
+            float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
+            health.TakeDamage((int)collisionMagnitude);
+        }
 
         GameObject particle = Instantiate(impactParticle, collision.transform.position, UnityEngine.Quaternion.identity);
         Destroy(particle, 1.1f);

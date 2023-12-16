@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6588382700691569662}
   - component: {fileID: 5441868638675385999}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: RedLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5250752617153647940}
   - component: {fileID: 7689852264696566028}
   - component: {fileID: 6899599566155382006}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Police
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 4704876855790763609}
   - component: {fileID: 1517449264846060025}
   - component: {fileID: 1307683905280985150}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Colliders
   m_TagString: AiCollider
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 6511031590756795853}
   - component: {fileID: 7619324850127893409}
   - component: {fileID: 1501734061092167126}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Siren
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 2565883693847437874}
   - component: {fileID: 991308789650551405}
   - component: {fileID: 8141827983743375030}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Police (2)
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -606,7 +606,7 @@ GameObject:
   - component: {fileID: 4165707319507427988}
   - component: {fileID: 3483144122563966911}
   - component: {fileID: 4279847562163650516}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Colliders
   m_TagString: AiCollider
   m_Icon: {fileID: 0}
@@ -719,7 +719,7 @@ GameObject:
   - component: {fileID: 1993240413277181931}
   - component: {fileID: 7410233668419193660}
   - component: {fileID: 8390579480775568255}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Barrier (1)
   m_TagString: Barrier
   m_Icon: {fileID: 0}
@@ -848,7 +848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 918676310741011244}
   - component: {fileID: 4930317351748960370}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: BlueLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,9 +929,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7107353670471669501}
-  m_Layer: 0
+  - component: {fileID: 7701474597285291509}
+  m_Layer: 10
   m_Name: PoliceBarrier2
-  m_TagString: Untagged
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -954,6 +955,51 @@ Transform:
   - {fileID: 1993240413277181931}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &7701474597285291509
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4639830907679312594}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.33485103, y: 1.0824254}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.6256156, y: 1.9811912}
+  m_EdgeRadius: 0
 --- !u!1 &7789951528907624505
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +1010,7 @@ GameObject:
   m_Component:
   - component: {fileID: 575352236276983136}
   - component: {fileID: 3969294785784338256}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: RedLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1047,7 +1093,7 @@ GameObject:
   - component: {fileID: 6094924908425119659}
   - component: {fileID: 5149551520150403917}
   - component: {fileID: 1108257751480626581}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Siren
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1114,7 +1160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3350080745717842486}
   - component: {fileID: 5526484696089095879}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: BlueLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

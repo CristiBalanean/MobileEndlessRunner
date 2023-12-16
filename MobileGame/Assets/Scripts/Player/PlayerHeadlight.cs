@@ -11,15 +11,17 @@ public class PlayerHeadlight : MonoBehaviour
     private void Awake()
     {
         playerHeadlight = GetComponent<Light2D>();
+        playerHeadlight.intensity = 1;
+        gameObject.SetActive(false);
     }
 
     public void TurnOffHeadlight()
     {
-        playerHeadlight.intensity = 0;
+        gameObject.SetActive(false);
     }
 
     public void TurnOnHeadlight()
     {
-        playerHeadlight.intensity = 1;
+        gameObject.SetActive(true);
     }
 }

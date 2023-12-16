@@ -26,16 +26,16 @@ public class PoliceSpawning : MonoBehaviour
     private void Start()
     {
         // Initialize the array of active police cars
-        activePoliceCars = new GameObject[2];
+        activePoliceCars = new GameObject[3];
         activePoliceCount = 0;
     }
 
     public void SpawnPoliceCars()
     {
         // Spawn police cars only if there are less than 2 active police cars
-        while (activePoliceCount < 2)
+        while (activePoliceCount < 3 && PoliceEvent.instance.currentNumberOfCars > 0)
         {
-            float yVariation = Random.Range(-8f, -6f);
+            float yVariation = Random.Range(-12f, -10f);
 
             // Randomly select a spawn point
             Transform selectedSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
@@ -55,6 +55,8 @@ public class PoliceSpawning : MonoBehaviour
 
     public void RemovePoliceCar(GameObject car)
     {
+        PoliceEvent.instance.currentNumberOfCars--;
+
         // Remove the destroyed police car from the array of active police cars
         for (int i = 0; i < activePoliceCount; i++)
         {
@@ -66,8 +68,13 @@ public class PoliceSpawning : MonoBehaviour
             }
         }
 
-        // Spawn a new police car to maintain the count of active police cars
-        SpawnPoliceCars();
+        if (PoliceEvent.instance.hasStarted)
+            SpawnPoliceCars(); // Spawn a new police car to maintain the count of active police cars
+        else
+        {
+            PoliceEvent.instance.StartSpawningCars?.Invoke();
+            ScoreManager.Instance.AddToScore(25000);
+        }
     }
 
     private void OnGameStateChanged(GameState newGameState)

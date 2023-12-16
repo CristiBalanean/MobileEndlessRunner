@@ -7535,6 +7535,7 @@ MonoBehaviour:
   - {fileID: 3664580242639268156, guid: af72fd2070929034ca7da94af355d0ba, type: 3}
   - {fileID: 8055293268442821844, guid: bcc84094e82b89c4fa2faa70e70642a0, type: 3}
   - {fileID: 3357743382105874749, guid: 7e9f9f34075d3f34dae45475b929dd29, type: 3}
+  barrierPrefab: {fileID: 5991905743273117496, guid: 6fd0378b0d5ca6e41bc4ea1ec020361a, type: 3}
   spawnPoints:
   - {fileID: 105679620}
   - {fileID: 1759088693}
@@ -8672,7 +8673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.8116399, b: 0, a: 0.19607843}
+  m_Color: {r: 1, g: 0.8116399, b: 0, a: 0.11764706}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12789,6 +12790,204 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377938313}
   m_CullTransparentMesh: 1
+--- !u!1 &1379906994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1379906996}
+  - component: {fileID: 1379906995}
+  m_Layer: 0
+  m_Name: PoliceEventManager (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1379906995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379906994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0e9984151321a42b2aa54a15f4c5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StopSpawningCars:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 105679622}
+        m_TargetAssemblyTypeName: SpawnPoint, Assembly-CSharp
+        m_MethodName: PoliceEventIsStarting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1759088691}
+        m_TargetAssemblyTypeName: SpawnPoint, Assembly-CSharp
+        m_MethodName: PoliceEventIsStarting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 370085783}
+        m_TargetAssemblyTypeName: SpawnPoint, Assembly-CSharp
+        m_MethodName: PoliceEventIsStarting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1999443271}
+        m_TargetAssemblyTypeName: SpawnPoint, Assembly-CSharp
+        m_MethodName: PoliceEventIsStarting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  StartSpawningCars:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 105679622}
+        m_TargetAssemblyTypeName: SpawnPoint, Assembly-CSharp
+        m_MethodName: PoliceEventIsEnding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1759088691}
+        m_TargetAssemblyTypeName: SpawnPoint, Assembly-CSharp
+        m_MethodName: PoliceEventIsEnding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 370085783}
+        m_TargetAssemblyTypeName: SpawnPoint, Assembly-CSharp
+        m_MethodName: PoliceEventIsEnding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1999443271}
+        m_TargetAssemblyTypeName: SpawnPoint, Assembly-CSharp
+        m_MethodName: PoliceEventIsEnding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  SpawnTraps:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 421150896}
+        m_TargetAssemblyTypeName: TrapsSpawner, Assembly-CSharp
+        m_MethodName: SpawnTraps
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ChangeCameraOffsetToPolice:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 340411491}
+        m_TargetAssemblyTypeName: CameraFollow, Assembly-CSharp
+        m_MethodName: ChangeToPoliceOffset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ChangeCameraOffsetToNormal:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 340411491}
+        m_TargetAssemblyTypeName: CameraFollow, Assembly-CSharp
+        m_MethodName: ChangeToNormalOffset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  numberOfCars: 10
+  currentNumberOfCars: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  policeSpawning: {fileID: 1657466112}
+  hasStarted: 0
+--- !u!4 &1379906996
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379906994}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1387011884
 GameObject:
   m_ObjectHideFlags: 0
@@ -20736,8 +20935,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0016499758, y: 1.40345, z: 0}
-    m_Extent: {x: 1.99765, y: 2.6026502, z: 0}
+    m_Center: {x: -0.0073999763, y: 1.3995, z: 0}
+    m_Extent: {x: 2.0008, y: 2.6072001, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -31798,7 +31997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2113721267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31964,6 +32163,7 @@ MonoBehaviour:
     m_Bits: 64
   policeSpawning: {fileID: 1657466112}
   eventDuration: 30
+  hasStarted: 0
 --- !u!4 &2113721268
 Transform:
   m_ObjectHideFlags: 0
@@ -32289,6 +32489,7 @@ SceneRoots:
   - {fileID: 98607423}
   - {fileID: 637044324}
   - {fileID: 2113721268}
+  - {fileID: 1379906996}
   - {fileID: 253520551}
   - {fileID: 756715736}
   - {fileID: 785718679}
