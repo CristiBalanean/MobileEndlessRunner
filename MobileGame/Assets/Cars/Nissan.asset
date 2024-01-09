@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82192abfb2e48644be9b8d2a8a7642c, type: 3}
   m_Name: Nissan
   m_EditorClassIdentifier: 
-  carName: Nissan Skyline R34
+  carName: Nova Starlight
   topSpeed: 190
   acceleration: 24
   brakingPower: 48

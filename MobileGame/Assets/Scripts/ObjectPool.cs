@@ -8,6 +8,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] private int amount;
 
     [SerializeField] private GameObject objectToPool;
+    [SerializeField] private GameObject overtakeText;
 
     private void Start()
     {
@@ -15,6 +16,10 @@ public class ObjectPool : MonoBehaviour
         {
             GameObject obj = Instantiate(objectToPool);
             obj.SetActive(false);
+            if (objectToPool == overtakeText)
+            {
+                obj.transform.SetParent(CarMovement.Instance.transform);
+            }
             pool.Add(obj);
         }
     }

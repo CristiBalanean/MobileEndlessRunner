@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82192abfb2e48644be9b8d2a8a7642c, type: 3}
   m_Name: Ferrari
   m_EditorClassIdentifier: 
-  carName: Ferrari
+  carName: Blaze ZR
   topSpeed: 280
   acceleration: 33
   brakingPower: 66

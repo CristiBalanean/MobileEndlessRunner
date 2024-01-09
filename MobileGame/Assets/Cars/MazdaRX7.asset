@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82192abfb2e48644be9b8d2a8a7642c, type: 3}
   m_Name: MazdaRX7
   m_EditorClassIdentifier: 
-  carName: Mazda RX7
+  carName: Chroma Cipher
   topSpeed: 225
   acceleration: 28
   brakingPower: 56

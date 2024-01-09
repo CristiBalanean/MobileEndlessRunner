@@ -320,6 +320,10 @@ MonoBehaviour:
   beginningMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   explodedCarMaterial: {fileID: -876546973899608171, guid: 62bdf8a86f5e30b4686e3efac28f425b, type: 3}
   explosionGO: {fileID: 7768325357048307294, guid: 4b85876d4ec611e46bea5dc6c34e32d3, type: 3}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  cameraShake: {fileID: 0}
 --- !u!114 &6291380848383285093
 MonoBehaviour:
   m_ObjectHideFlags: 0

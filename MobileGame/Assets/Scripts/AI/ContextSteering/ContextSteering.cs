@@ -26,7 +26,7 @@ public class ContextSteering : MonoBehaviour
         rigidBody.velocity = Vector2.up * CarMovement.Instance.GetSpeed() / 3.6f;
 
         float rand = Random.Range(0, 2);
-        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioSource audioSource = GetComponentInChildren<AudioSource>();
         audioSource.PlayDelayed(rand);
     }
 

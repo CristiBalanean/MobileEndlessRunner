@@ -17,8 +17,11 @@ public class PoliceAICollision : MonoBehaviour
         {
             if (collision.transform.CompareTag("Player"))
             {
-                float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
-                policeHealth.TakeDamage((int)collisionMagnitude);
+                if (collision.collider is BoxCollider2D)
+                {
+                    float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
+                    policeHealth.TakeDamage((int)collisionMagnitude);
+                }
             }
 
             if (collision.transform.CompareTag("Barrier"))
@@ -30,10 +33,13 @@ public class PoliceAICollision : MonoBehaviour
 
             if (collision.transform.CompareTag("Police"))
             {
-                float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
-                policeHealth.TakeDamage((int)collisionMagnitude);
-                if (Vector2.Distance(transform.position, CarMovement.Instance.transform.position) < 6.5f)
-                    SoundManager.instance.Play("Crash");
+                if (collision.collider is BoxCollider2D)
+                {
+                    float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
+                    policeHealth.TakeDamage((int)collisionMagnitude);
+                    if (Vector2.Distance(transform.position, CarMovement.Instance.transform.position) < 6.5f)
+                        SoundManager.instance.Play("Crash");
+                }
             }
         }
     }

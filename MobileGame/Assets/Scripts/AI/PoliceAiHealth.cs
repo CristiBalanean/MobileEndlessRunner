@@ -9,10 +9,13 @@ public class PoliceAiHealth : MonoBehaviour
     [SerializeField] private Material beginningMaterial;
     [SerializeField] private Material explodedCarMaterial;
     [SerializeField] private GameObject explosionGO;
+    [SerializeField] private LayerMask obstacleLayer;
 
+    public CameraCollisionShake cameraShake;
     private Animator aiAnimator;
     private SpriteRenderer spriteRenderer;
     private Collider2D[] aiCollider;
+    private bool isDead = false; // Flag to prevent multiple calls to DeathTrigger
 
     private void Awake()
     {
@@ -20,6 +23,7 @@ public class PoliceAiHealth : MonoBehaviour
         aiAnimator = GetComponent<Animator>();
         aiCollider = GetComponentsInChildren<Collider2D>();
         aiAnimator.enabled = false;
+        cameraShake = GameObject.Find("Main Camera").GetComponent<CameraCollisionShake>();
     }
 
     private void OnEnable()
@@ -30,22 +34,35 @@ public class PoliceAiHealth : MonoBehaviour
         aiAnimator.Update(0f);
         foreach (var collider in aiCollider)
             collider.isTrigger = false;
+        isDead = false; // Reset the isDead flag when the car is re-enabled
     }
 
     public void TakeDamage(int amount)
     {
         health -= amount;
 
-        if(health <= 0)
+        if (health <= 0 && !isDead)
         {
+            isDead = true; // Set the flag to prevent multiple calls
             StartCoroutine(DeathTrigger());
-            if (SceneManager.GetActiveScene().name == "MonsterTruckGameMode")
-                TriggerExplosion();
         }
     }
 
     public IEnumerator DeathTrigger()
     {
+        Collider2D[] nearbyCars = Physics2D.OverlapCircleAll(transform.position, 3.5f, obstacleLayer);
+
+        // Handle the death and explosion for each nearby car
+        foreach (Collider2D car in nearbyCars)
+        {
+            PoliceAiHealth carHealth = car.transform.root.GetComponent<PoliceAiHealth>();
+
+            if (carHealth != null && !carHealth.isDead) // Check if the car is not already dead
+            {
+                carHealth.TakeDamage(100); // Apply the same damage to nearby cars
+            }
+        }
+
         TriggerExplosion();
 
         yield return new WaitForSeconds(0.01f);
@@ -63,6 +80,7 @@ public class PoliceAiHealth : MonoBehaviour
 
     public void TriggerExplosion()
     {
+        StartCoroutine(cameraShake.Shake(.5f, .5f, 1f));
         ScoreManager.Instance.AddToScore(2500);
         spriteRenderer.material = explodedCarMaterial;
         GameObject explosion = Instantiate(explosionGO, transform.position, Quaternion.identity);

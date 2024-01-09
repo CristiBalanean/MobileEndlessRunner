@@ -6730,6 +6730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 25
   objectToPool: {fileID: 3517040841658587091, guid: fa5d73a1d3df8964c94231b297c04c8f, type: 3}
+  overtakeText: {fileID: 0}
 --- !u!4 &314338017
 Transform:
   m_ObjectHideFlags: 0
@@ -13153,6 +13154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 5
   objectToPool: {fileID: 7669761549882261515, guid: 489857cd198915f48b20f628fcd3af9c, type: 3}
+  overtakeText: {fileID: 7669761549882261515, guid: 489857cd198915f48b20f628fcd3af9c, type: 3}
 --- !u!4 &1417943741
 Transform:
   m_ObjectHideFlags: 0
@@ -13803,6 +13805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 8
   objectToPool: {fileID: 7848097289965926118, guid: 179da39be07b8204da3cf25589bc3d17, type: 3}
+  overtakeText: {fileID: 0}
 --- !u!1 &1568816648
 GameObject:
   m_ObjectHideFlags: 0
@@ -20943,8 +20946,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0022500157, y: 1.3972499, z: 0}
-    m_Extent: {x: 1.99505, y: 2.6057498, z: 0}
+    m_Center: {x: -0.001850009, y: 1.40465, z: 0}
+    m_Extent: {x: 2.0011501, y: 2.60195, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

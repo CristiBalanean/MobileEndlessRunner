@@ -69,6 +69,7 @@ public class PoliceEvent : MonoBehaviour
     {
         CancelInvoke("PoliceEventChance");
         hasStarted = true;
+        ChangeCameraOffsetToPolice?.Invoke();
         currentNumberOfCars = numberOfCars;
         policeSpawning.SpawnPoliceCars();
         while (currentNumberOfCars > 3) 

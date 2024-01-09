@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82192abfb2e48644be9b8d2a8a7642c, type: 3}
   m_Name: Honda Civic
   m_EditorClassIdentifier: 
-  carName: Honda Civic
+  carName: Mirage CV
   topSpeed: 120
   acceleration: 12
   brakingPower: 24
