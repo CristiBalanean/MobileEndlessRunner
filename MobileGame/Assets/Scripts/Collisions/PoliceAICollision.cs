@@ -24,9 +24,9 @@ public class PoliceAICollision : MonoBehaviour
                 }
             }
 
-            if (collision.transform.CompareTag("Barrier"))
+            if (collision.transform.CompareTag("PoliceBarrier"))
             {
-                policeHealth.DeathTrigger();
+                policeHealth.TakeDamage(100);
                 if (Vector2.Distance(transform.position, CarMovement.Instance.transform.position) < 6.5f)
                     SoundManager.instance.Play("Crash");
             }

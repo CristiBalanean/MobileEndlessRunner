@@ -66,7 +66,7 @@ public class PoliceEventManager : MonoBehaviour
     private IEnumerator SpawnPoliceEvent()
     {
         Debug.Log("Event Has Started!");
-        policeSpawning.SpawnPoliceCars();
+        policeSpawning.SpawnPoliceCar();
         ChangeCameraOffsetToPolice?.Invoke();
         StartSpawningSpikeTraps?.Invoke();
         yield return new WaitForSeconds(eventDuration);

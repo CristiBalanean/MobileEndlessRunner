@@ -21,4 +21,9 @@ public class HideObject : MonoBehaviour
     {
         transform.parent.gameObject.SetActive(false);
     }
+
+    public void HideCurrentObject()
+    {
+        transform.gameObject.SetActive(false);
+    }
 }

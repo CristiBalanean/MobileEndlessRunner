@@ -1,21 +1,28 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PoliceSpawning : MonoBehaviour
 {
     public static PoliceSpawning instance;
 
+    public UnityEvent DisablePoliceEvent;
+
     [SerializeField] private GameObject[] policePrefab;
     [SerializeField] private Transform player;
 
     [SerializeField] private Transform[] spawnPoints;
-    private GameObject[] activePoliceCars; // Array to keep track of active police cars
-    private int activePoliceCount; // Current number of active police cars
+
+    public int totalNumberOfCarsToSpawn;
+    public int currentNumberOfCarsToSpawn;
+    public int currentNumberOfCars;
 
     private void Awake()
     {
         instance = this;
+        currentNumberOfCars = 0;
+        currentNumberOfCarsToSpawn = totalNumberOfCarsToSpawn;
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-
     }
 
     private void OnDestroy()
@@ -23,57 +30,41 @@ public class PoliceSpawning : MonoBehaviour
         GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
-    private void Start()
+    public void SetupPoliceCars()
     {
-        // Initialize the array of active police cars
-        activePoliceCars = new GameObject[3];
-        activePoliceCount = 0;
-    }
+        Debug.Log("Setup");
 
-    public void SpawnPoliceCars()
-    {
-        // Spawn police cars only if there are less than 2 active police cars
-        while (activePoliceCount < 3 && PoliceEvent.instance.currentNumberOfCars > 0)
+        for (int i = 0; i < 3; i++)
         {
-            float yVariation = Random.Range(-12f, -10f);
-
-            // Randomly select a spawn point
-            Transform selectedSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-
-            float xPosition = selectedSpawnPoint.position.x;
-            float yPosition = player.position.y + yVariation;
-
-            int rand = Random.Range(0,policePrefab.Length);
-            // Instantiate the police car at the specified position
-            GameObject policeCar = Instantiate(policePrefab[rand], new Vector3(xPosition, yPosition, 0f), Quaternion.identity);
-
-            // Add the police car to the array of active police cars
-            activePoliceCars[activePoliceCount] = policeCar;
-            activePoliceCount++;
+            SpawnPoliceCar();
+            currentNumberOfCars++;
+            currentNumberOfCarsToSpawn--;
         }
     }
 
-    public void RemovePoliceCar(GameObject car)
+    public void SpawnPoliceCar()
     {
-        PoliceEvent.instance.currentNumberOfCars--;
+        Debug.Log("Spawned");
 
-        // Remove the destroyed police car from the array of active police cars
-        for (int i = 0; i < activePoliceCount; i++)
-        {
-            if (activePoliceCars[i] == car)
-            {
-                activePoliceCars[i] = null;
-                activePoliceCount--;
-                break;
-            }
-        }
+        float yVariation = Random.Range(-12f, -10f);
 
-        if (PoliceEvent.instance.hasStarted)
-            SpawnPoliceCars(); // Spawn a new police car to maintain the count of active police cars
-        else
+        // Randomly select a spawn point
+        Transform selectedSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
+        float xPosition = selectedSpawnPoint.position.x;
+        float yPosition = player.position.y + yVariation;
+
+        int rand = Random.Range(0,policePrefab.Length);
+        // Instantiate the police car at the specified position
+        Instantiate(policePrefab[rand], new Vector3(xPosition, yPosition, 0f), Quaternion.identity);
+    }
+
+    public IEnumerator StartSpawning()
+    {
+        while (PoliceEvent.instance.hasStarted)
         {
-            PoliceEvent.instance.StartSpawningCars?.Invoke();
-            ScoreManager.Instance.AddToScore(25000);
+            yield return new WaitForSeconds(5f);
+            SpawnPoliceCar();
         }
     }
 

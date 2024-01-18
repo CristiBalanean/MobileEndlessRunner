@@ -9,6 +9,7 @@ TagManager:
   - AiCollider
   - Trap
   - Barrier
+  - PoliceBarrier
   layers:
   - Default
   - TransparentFX

@@ -37,7 +37,6 @@ public class AgentMover : MonoBehaviour
             if(SwatSpawner.instance != null)
                 SwatSpawner.instance.RemovePoliceCar(gameObject);
             else if(PoliceSpawning.instance != null)
-                PoliceSpawning.instance.RemovePoliceCar(gameObject);
             Destroy(gameObject);
         }
     }

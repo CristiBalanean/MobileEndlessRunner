@@ -32,7 +32,6 @@ public class PoliceAI : MonoBehaviour
 
         if (Vector2.Distance(transform.position, playerCarTransform.position) > 12)
         {
-            PoliceSpawning.instance.RemovePoliceCar(gameObject);
             Destroy(gameObject, 1.5f);
         }
     }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5958307031078041016}
   m_Layer: 10
   m_Name: PoliceCarObstacle2
-  m_TagString: Barrier
+  m_TagString: PoliceBarrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 1466795304218437043}
   m_Layer: 10
   m_Name: PoliceObstacle2
-  m_TagString: Barrier
+  m_TagString: PoliceBarrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 619001648612772802}
   m_Layer: 10
   m_Name: Colliders
-  m_TagString: AiCollider
+  m_TagString: PoliceBarrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

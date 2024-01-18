@@ -16,7 +16,7 @@ public class TrapsSpawner : MonoBehaviour
     {
         int randomTrap = Random.Range(0, 2);
 
-        if(randomTrap == 0)
+        if (randomTrap == 0)
         {
             //we spawn spike traps
             int randomSpawnPoint1 = Random.Range(0, spawnPoints.Length);
@@ -29,11 +29,10 @@ public class TrapsSpawner : MonoBehaviour
             StartCoroutine(PlaceExclamationMark(exclamationMark1, spawnPoints[randomSpawnPoint1].position, () =>
             {
                 Instantiate(trapsPrefab[0], spawnPoints[randomSpawnPoint1].position + new Vector3(0, 10, 0), Quaternion.identity);
-                for(int i =0; i < spawnPoints.Length; i++)
+                for (int i = 0; i < spawnPoints.Length; i++)
                 {
                     if (i != randomSpawnPoint1 && i != randomSpawnPoint2)
                     {
-                        Debug.Log("Cool");
                         Instantiate(barrierPrefab, spawnPoints[i].position + new Vector3(0, 10, 0), Quaternion.identity);
                     }
                 }
@@ -56,7 +55,6 @@ public class TrapsSpawner : MonoBehaviour
                 {
                     if (i != randomSpawnPoint1)
                     {
-                        Debug.Log("Cool");
                         Instantiate(barrierPrefab, spawnPoints[i].position + new Vector3(0, 10, 0), Quaternion.identity);
                     }
                 }

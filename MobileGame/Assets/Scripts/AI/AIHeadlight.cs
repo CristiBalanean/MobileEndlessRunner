@@ -13,6 +13,14 @@ public class AIHeadlight : MonoBehaviour
         headlight = GetComponent<Light2D>();
     }
 
+    private void Start()
+    {
+        if (!TimeManager.instance.isDay)
+            TurnOnHeadlight();
+        else
+            TurnOffHeadlight();
+    }
+
     private void OnEnable()
     {
         TimeManager.instance.notifyIsDay.AddListener(TurnOffHeadlight);
@@ -20,6 +28,8 @@ public class AIHeadlight : MonoBehaviour
 
         if (!TimeManager.instance.isDay)
             TurnOnHeadlight();
+        else
+            TurnOffHeadlight();
     }
 
     private void OnDisable()
@@ -44,7 +54,7 @@ public class AIHeadlight : MonoBehaviour
         float randomSecondsDelay = Random.Range(0, 0.35f);
 
         yield return new WaitForSeconds(randomSecondsDelay);
-        headlight.intensity = 0;
+        headlight.enabled = false;
     }
 
     private IEnumerator DelayHeadlightsOn()
@@ -52,6 +62,6 @@ public class AIHeadlight : MonoBehaviour
         float randomSecondsDelay = Random.Range(0f, 0.35f);
 
         yield return new WaitForSeconds(randomSecondsDelay);
-        headlight.intensity = 1;
+        headlight.enabled = true;
     }
 }

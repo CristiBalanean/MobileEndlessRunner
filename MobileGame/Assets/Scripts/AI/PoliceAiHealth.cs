@@ -24,6 +24,7 @@ public class PoliceAiHealth : MonoBehaviour
         aiCollider = GetComponentsInChildren<Collider2D>();
         aiAnimator.enabled = false;
         cameraShake = GameObject.Find("Main Camera").GetComponent<CameraCollisionShake>();
+        isDead = false; // Reset the isDead flag when the car is re-enabled
     }
 
     private void OnEnable()
@@ -34,11 +35,13 @@ public class PoliceAiHealth : MonoBehaviour
         aiAnimator.Update(0f);
         foreach (var collider in aiCollider)
             collider.isTrigger = false;
-        isDead = false; // Reset the isDead flag when the car is re-enabled
     }
 
     public void TakeDamage(int amount)
     {
+        if (health <= 0)
+            return;
+
         health -= amount;
 
         if (health <= 0 && !isDead)
@@ -50,14 +53,16 @@ public class PoliceAiHealth : MonoBehaviour
 
     public IEnumerator DeathTrigger()
     {
-        Collider2D[] nearbyCars = Physics2D.OverlapCircleAll(transform.position, 3.5f, obstacleLayer);
+        Debug.Log("Death triggered");
+
+        Collider2D[] nearbyCars = Physics2D.OverlapCircleAll(transform.position, 2f, obstacleLayer);
 
         // Handle the death and explosion for each nearby car
         foreach (Collider2D car in nearbyCars)
         {
             PoliceAiHealth carHealth = car.transform.root.GetComponent<PoliceAiHealth>();
 
-            if (carHealth != null && !carHealth.isDead) // Check if the car is not already dead
+            if (carHealth != null) // Check if the car is not already dead
             {
                 carHealth.TakeDamage(100); // Apply the same damage to nearby cars
             }
@@ -65,17 +70,16 @@ public class PoliceAiHealth : MonoBehaviour
 
         TriggerExplosion();
 
+        if (SwatSpawner.instance != null)
+            SwatSpawner.instance.RemovePoliceCar(gameObject);
+        else if (PoliceSpawning.instance != null)
+
         yield return new WaitForSeconds(0.01f);
         aiAnimator.enabled = true;
         foreach (var collider in aiCollider)
             collider.isTrigger = true;
         yield return new WaitForSeconds(1.25f);
         gameObject.SetActive(false);
-
-        if (SwatSpawner.instance != null)
-            SwatSpawner.instance.RemovePoliceCar(gameObject);
-        else if (PoliceSpawning.instance != null)
-            PoliceSpawning.instance.RemovePoliceCar(gameObject);
     }
 
     public void TriggerExplosion()

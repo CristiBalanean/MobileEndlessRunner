@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,14 +13,16 @@ public class PoliceEvent : MonoBehaviour
     public UnityEvent ChangeCameraOffsetToPolice;
     public UnityEvent ChangeCameraOffsetToNormal;
 
-    [SerializeField] private int numberOfCars;
-    public int currentNumberOfCars;
-
     [SerializeField] private LayerMask obstacleLayer;
 
-    [SerializeField] PoliceSpawning policeSpawning;
+    [SerializeField] private PoliceSpawning policeSpawning;
+
+    [SerializeField] private GameObject carsUpAheadText;
+    [SerializeField] private GameObject helicopter;
 
     public bool hasStarted;
+    public bool canSpawnTraps;
+    private bool isPreparing;
 
     private void Awake()
     {
@@ -36,19 +37,19 @@ public class PoliceEvent : MonoBehaviour
 
     private void Start()
     {
-        currentNumberOfCars = numberOfCars;
         hasStarted = false;
 
-        InvokeRepeating("PoliceEventChance", 30f, 2.5f);
+        InvokeRepeating("PoliceEventChance", 0f, 2.5f);
     }
 
     private void PoliceEventChance()
     {
         float rand = Random.Range(0, 1000);
 
-        if (rand < 50 && !CarMovement.Instance.hasDied)
+        if (rand < 5000 && !CarMovement.Instance.hasDied && !isPreparing)
         {
             Debug.Log("Event Is Preparing!");
+            isPreparing = true;
             StopSpawningCars?.Invoke();
             StartCoroutine(WaitForCarsToDespawn());
         }
@@ -67,23 +68,43 @@ public class PoliceEvent : MonoBehaviour
 
     private IEnumerator StartEvent()
     {
+        Debug.Log("Event Started!");
         CancelInvoke("PoliceEventChance");
+        isPreparing = false;
         hasStarted = true;
         ChangeCameraOffsetToPolice?.Invoke();
-        currentNumberOfCars = numberOfCars;
-        policeSpawning.SpawnPoliceCars();
-        while (currentNumberOfCars > 3) 
-        {
-            yield return new WaitForSeconds(7.5f);
-            SpawnTraps?.Invoke();
-        }
+        policeSpawning.SetupPoliceCars();
+        StartCoroutine(policeSpawning.StartSpawning());
+        SpawnHelicopter();
+        StartCoroutine(SpawnTrapsCoroutine());
+        canSpawnTraps = true;
+        yield return new WaitForSeconds(30f);
+        canSpawnTraps = false;
+        yield return new WaitForSeconds(5f);
         GameObject[] traps = GameObject.FindGameObjectsWithTag("Trap");
         foreach (GameObject trap in traps)
         {
             Destroy(trap);
         }
+        EndEvent();
+    }
+
+    public void EndEvent()
+    {
         Debug.Log("Event Has Ended!");
         hasStarted = false;
+        carsUpAheadText.SetActive(true);
+        var animator = carsUpAheadText.GetComponent<Animator>();
+        animator.Rebind();
+        animator.Update(0f);
+        StartCoroutine(StartSpawningCarsCoroutine());
+    }
+
+    private IEnumerator StartSpawningCarsCoroutine()
+    {
+        yield return new WaitForSeconds(3.5f);
+        StartSpawningCars?.Invoke();
+        ChangeCameraOffsetToNormal?.Invoke();
         InvokeRepeating("PoliceEventChance", 30f, 2.5f);
     }
 
@@ -95,5 +116,20 @@ public class PoliceEvent : MonoBehaviour
             InvokeRepeating("PoliceEventChance", 30f, 2.5f);
         else
             CancelInvoke("PoliceEventChance");
+    }
+
+    private void SpawnHelicopter()
+    {
+        Vector2 targetPositionWithOffset = (Vector2)CarMovement.Instance.transform.position - new Vector2(0, 15f);
+        Instantiate(helicopter, targetPositionWithOffset, Quaternion.identity);
+    }
+
+    private IEnumerator SpawnTrapsCoroutine()
+    {
+        while (hasStarted)
+        {
+            yield return new WaitForSeconds(5f);
+            SpawnTraps?.Invoke();
+        }
     }
 }

@@ -11,10 +11,13 @@ public class BreakBarrier : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Player" || collision.transform.tag == "Police")
+        if (collision.transform.tag == "Player" || collision.transform.tag == "AiCollider")
+        {
             animator.SetTrigger("Break");
+            SoundManager.instance.Play("Barrier");
+        }
     }
 
     public void DestroyObject()
