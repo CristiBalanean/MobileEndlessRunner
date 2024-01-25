@@ -178,7 +178,8 @@ GameObject:
   - component: {fileID: 4930093588548240644}
   - component: {fileID: 3943640325378508949}
   - component: {fileID: 2490502102790732818}
-  - component: {fileID: 7915033898773599202}
+  - component: {fileID: 5746592014877373361}
+  - component: {fileID: -5333300968613753247}
   m_Layer: 6
   m_Name: Police
   m_TagString: Police
@@ -268,7 +269,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 6.5
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -336,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d75abdd75bddb34c927954c8f342d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7915033898773599202
+--- !u!114 &5746592014877373361
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -345,25 +346,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 6725105912748856326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48aeba87021c54b44a0aa4f190360575, type: 3}
+  m_Script: {fileID: 11500000, guid: ec93a7a82d236834eb8f1d81b365ed42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 320
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  targetDetectionRange: 50
-  obstacleDetectionRange: 1.5
   target: {fileID: 0}
-  obstacles: []
-  interest: []
-  danger: []
-  directions: []
-  kpSpeed: 5
-  kiSpeed: 0.1
-  kdSpeed: 1
+  rigidBody: {fileID: 0}
+  targetRigidbody: {fileID: 0}
+  kd: 1
+  kp: 1
+--- !u!114 &-5333300968613753247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6725105912748856326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6f0216957ec714c94d722fabb45e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  separationRadius: 4
+  separationForce: 0.45
+  damping: 0.05
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1088
 --- !u!1 &7390366964062150291
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,8 +753,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.006000042, y: 1.4814999, z: 0}
-    m_Extent: {x: 1.9986, y: 2.5268, z: 0}
+    m_Center: {x: -0.0014500022, y: 1.4801999, z: 0}
+    m_Extent: {x: 1.9997499, y: 2.5271, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

@@ -967,12 +967,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f49ef5837fa3cde47aa3c1d08f8c545d, type: 2}
   - {fileID: 11400000, guid: 59a7f2de083045c46839fbcac298cf9c, type: 2}
   - {fileID: 11400000, guid: e65ba5daacf01b847850dd2c1574e1fb, type: 2}
+  - {fileID: 11400000, guid: 9175194a4a0c359469d74ad614560d4b, type: 2}
   - {fileID: 11400000, guid: 6e5cd8246ce2a1f42afd69e4015048e5, type: 2}
   - {fileID: 11400000, guid: c61286a791d17c24f89580439bbd7969, type: 2}
   - {fileID: 11400000, guid: b3ac9ae6cdc54ce43b51dd91c28c4ad4, type: 2}
   - {fileID: 11400000, guid: 25891577896d9674f8e47aa64a460ce7, type: 2}
   - {fileID: 11400000, guid: 34ab5bf7215b4ea4d964c3a3402f18ba, type: 2}
   - {fileID: 11400000, guid: 3f7faefde4c65cf43abb96606181519f, type: 2}
+  - {fileID: 11400000, guid: 45bce6a975d0e6e41bd2cfdbdf5d3d0e, type: 2}
   powerups:
   - powerup: {fileID: 11400000, guid: 287e2f8145786744f9f332ad37e4cc9b, type: 2}
     powerupImage: {fileID: 21300000, guid: 3e52b20867de2a847b07c9e37ab2a91b, type: 3}

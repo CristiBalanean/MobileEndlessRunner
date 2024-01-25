@@ -55,7 +55,7 @@ public class PoliceAiHealth : MonoBehaviour
     {
         Debug.Log("Death triggered");
 
-        Collider2D[] nearbyCars = Physics2D.OverlapCircleAll(transform.position, 2f, obstacleLayer);
+        Collider2D[] nearbyCars = Physics2D.OverlapCircleAll(transform.position, 1f, obstacleLayer);
 
         // Handle the death and explosion for each nearby car
         foreach (Collider2D car in nearbyCars)

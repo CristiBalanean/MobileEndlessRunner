@@ -9236,6 +9236,27 @@ TextureImporter:
         boneIndex[1]: 0
         boneIndex[2]: 0
         boneIndex[3]: 0
+    - serializedVersion: 2
+      name: Dodge Challenger RT
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a64fb52e97b630345b865aa99c4b9ecd
+      internalID: -219731797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -9254,6 +9275,7 @@ TextureImporter:
       Bus: -528902320
       Dacia: -1728525261
       DefaultCar: -1203546740
+      Dodge Challenger RT: -219731797
       Ferrari: -690558637
       Golf: -1046139785
       Honda: -409047236

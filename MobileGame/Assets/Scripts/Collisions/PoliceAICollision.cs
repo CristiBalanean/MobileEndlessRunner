@@ -31,7 +31,7 @@ public class PoliceAICollision : MonoBehaviour
                     SoundManager.instance.Play("Crash");
             }
 
-            if (collision.transform.CompareTag("Police"))
+            /*if (collision.transform.CompareTag("Police"))
             {
                 if (collision.collider is BoxCollider2D)
                 {
@@ -40,7 +40,7 @@ public class PoliceAICollision : MonoBehaviour
                     if (Vector2.Distance(transform.position, CarMovement.Instance.transform.position) < 6.5f)
                         SoundManager.instance.Play("Crash");
                 }
-            }
+            }*/
         }
     }
 }
