@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,19 +10,31 @@ public class PoliceAIStateManager : MonoBehaviour
     public PoliceAIBlockState blockState = new PoliceAIBlockState();
     public PoliceAIHookState hookState = new PoliceAIHookState();
     public PoliceAIBustState bustState = new PoliceAIBustState();
+    public PoliceAICrashingState crashState = new PoliceAICrashingState();
 
     public Transform target;
     public Rigidbody2D rigidBody;
     public Rigidbody2D targetRigidbody;
+    public PoliceAIStateManager state;
+    public AvoidanceBehavior avoidance;
+    public CameraCollisionShake cameraShake;
+    public Collider2D aiCollider;
+    public Material hookMaterial;
 
     public float kd;
     public float kp;
+
+    private bool isHooked;
 
     private void Awake()
     {
         target = CarMovement.Instance.transform;
         targetRigidbody = target.GetComponent<Rigidbody2D>();
         rigidBody = GetComponent<Rigidbody2D>();
+        state = GetComponent<PoliceAIStateManager>();
+        avoidance = GetComponent<AvoidanceBehavior>();
+        aiCollider = GetComponentInChildren<Collider2D>();
+        cameraShake = GameObject.Find("Main Camera").GetComponent<CameraCollisionShake>();
     }
 
     private void Start()
@@ -33,8 +46,6 @@ public class PoliceAIStateManager : MonoBehaviour
 
     private void Update()
     {
-        ClampCarPositionHorizontal();
-
         if(currentState != followState)
             currentState.UpdateState(this);
     }
@@ -51,10 +62,22 @@ public class PoliceAIStateManager : MonoBehaviour
         state.EnterState(this);
     }
 
-    private void ClampCarPositionHorizontal()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        var pos = transform.position;
-        pos.x = Mathf.Clamp(transform.position.x, -2.0f, 2.0f);
-        transform.position = pos;
+        if (currentState == followState && collision.transform.CompareTag("Player"))
+        {
+            foreach(ContactPoint2D c in collision.contacts)
+            {
+                if(c.collider.name == "BackCollider" && !isHooked)
+                {
+                    int chance = Random.Range(0, 100);
+                    if (chance < 7)
+                    {
+                        isHooked = true;
+                        this.SwitchState(hookState);
+                    }
+                }
+            }
+        }
     }
 }

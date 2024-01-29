@@ -352,6 +352,11 @@ MonoBehaviour:
   target: {fileID: 0}
   rigidBody: {fileID: 0}
   targetRigidbody: {fileID: 0}
+  state: {fileID: 0}
+  avoidance: {fileID: 0}
+  cameraShake: {fileID: 0}
+  aiCollider: {fileID: 0}
+  hookMaterial: {fileID: -876546973899608171, guid: 62bdf8a86f5e30b4686e3efac28f425b, type: 3}
   kd: 1
   kp: 1
 --- !u!114 &-4316661542113656960
@@ -366,9 +371,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f6f0216957ec714c94d722fabb45e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  separationRadius: 4
-  separationForce: 0.45
-  damping: 0.05
+  separationRadius: 3
+  separationForce: 5
+  damping: 0.75
   layerMask:
     serializedVersion: 2
     m_Bits: 1088
@@ -611,9 +616,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 3
-  MaxDistance: 6
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -621,23 +626,23 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.3
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -3.3346713
+      outSlope: -3.3346713
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.30011982
+      outSlope: -0.30011982
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -753,8 +758,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0050500035, y: 1.4741501, z: 0}
-    m_Extent: {x: 1.99565, y: 2.52735, z: 0}
+    m_Center: {x: 0.0031000376, y: 1.47525, z: 0}
+    m_Extent: {x: 2.001, y: 2.5294502, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

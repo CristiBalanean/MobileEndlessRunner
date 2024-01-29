@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PoliceAIFollowState : PoliceAIBaseState
@@ -7,6 +8,8 @@ public class PoliceAIFollowState : PoliceAIBaseState
     public override void EnterState(PoliceAIStateManager police)
     {
         Debug.Log("Follow State");
+
+        police.rigidBody.mass = 1;
     }
 
     public override void UpdateState(PoliceAIStateManager police)
@@ -17,7 +20,7 @@ public class PoliceAIFollowState : PoliceAIBaseState
         }
         else
         {
-            police.rigidBody.velocity = Vector2.zero;
+            police.rigidBody.AddForce(Vector2.down * 5);
         }
     }
 

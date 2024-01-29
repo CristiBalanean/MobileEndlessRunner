@@ -4,11 +4,15 @@ using UnityEngine.SceneManagement;
 public class PoliceAICollision : MonoBehaviour
 {
     private PoliceAiHealth policeHealth;
+    private CameraCollisionShake cameraShake;
+    private PoliceAIStateManager policeAIStateManager;
 
     private void Awake()
     {
         Transform root = transform.root;
         policeHealth = GetComponent<PoliceAiHealth>();
+        cameraShake = GameObject.Find("Main Camera").GetComponent<CameraCollisionShake>();
+        policeAIStateManager = GetComponent<PoliceAIStateManager>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -19,8 +23,11 @@ public class PoliceAICollision : MonoBehaviour
             {
                 if (collision.collider is BoxCollider2D)
                 {
-                    float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
-                    policeHealth.TakeDamage((int)collisionMagnitude);
+                    int chance = Random.Range(0, 100);
+                    if (chance < 10)
+                    {
+                        policeAIStateManager.SwitchState(policeAIStateManager.crashState);
+                    }
                 }
             }
 
@@ -31,16 +38,15 @@ public class PoliceAICollision : MonoBehaviour
                     SoundManager.instance.Play("Crash");
             }
 
-            /*if (collision.transform.CompareTag("Police"))
+            if (collision.transform.CompareTag("Police"))
             {
-                if (collision.collider is BoxCollider2D)
+                float distance = Vector2.Distance(transform.position, CarMovement.Instance.transform.position);
+                if (distance < 5f)
                 {
-                    float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
-                    policeHealth.TakeDamage((int)collisionMagnitude);
-                    if (Vector2.Distance(transform.position, CarMovement.Instance.transform.position) < 6.5f)
-                        SoundManager.instance.Play("Crash");
+                    //StartCoroutine(cameraShake.Shake(.1f, .1f, 1f));
+                    SoundManager.instance.Play("Crash");
                 }
-            }*/
+            }
         }
     }
 }

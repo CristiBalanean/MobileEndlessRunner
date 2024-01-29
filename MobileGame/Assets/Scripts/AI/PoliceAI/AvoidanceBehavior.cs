@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AvoidanceBehavior : MonoBehaviour
@@ -17,13 +15,13 @@ public class AvoidanceBehavior : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Vector2 separationDirection = CalculateSeparationDirection();
         Vector2 separationForceVector = separationDirection * separationForce;
 
         // Smooth out the force application using damping
-        currentVelocity = Vector2.Lerp(currentVelocity, separationForceVector, damping);
+        currentVelocity = Vector2.Lerp(currentVelocity, separationForceVector, damping * Time.fixedDeltaTime);
         rigidBody.AddForce(currentVelocity);
     }
 

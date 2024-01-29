@@ -26,7 +26,7 @@ public class HelicopterAI : MonoBehaviour
         }
         else
         {
-            rigidBody.velocity = Vector2.zero;
+            rigidBody.AddForce(Vector2.down * 10);
         }
     }
 

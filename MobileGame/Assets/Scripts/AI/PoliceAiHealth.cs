@@ -27,6 +27,18 @@ public class PoliceAiHealth : MonoBehaviour
         isDead = false; // Reset the isDead flag when the car is re-enabled
     }
 
+    private void Update()
+    {
+        ClampCarPositionHorizontal();
+    }
+
+    private void ClampCarPositionHorizontal()
+    {
+        var pos = transform.position;
+        pos.x = Mathf.Clamp(transform.position.x, -2.0f, 2.0f);
+        transform.position = pos;
+    }
+
     private void OnEnable()
     {
         spriteRenderer.material = beginningMaterial;
