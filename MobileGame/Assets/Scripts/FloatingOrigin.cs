@@ -11,6 +11,8 @@ public class FloatingOrigin : MonoBehaviour
 
     [SerializeField] private TrailRenderer[] trailRenderers;
 
+    [SerializeField] private ParticleSystem rainParticle;
+
     private void LateUpdate()
     {
         Vector3 cameraPosition = gameObject.transform.position;
@@ -23,6 +25,8 @@ public class FloatingOrigin : MonoBehaviour
 
     private void RecenterObjects(float yOffset)
     {
+        rainParticle.Stop();
+
         float yOffsetDifference = worldSpawner.nextSegmentSpawnPosition - threshold;
         worldSpawner.nextSegmentSpawnPosition = yOffsetDifference;
 
@@ -36,6 +40,8 @@ public class FloatingOrigin : MonoBehaviour
             }
         }
         worldSpawner.playerPositionLastFrame = 0;
+
+        rainParticle.Play();
 
         trailRenderers = FindObjectsOfType<TrailRenderer>();
         foreach(TrailRenderer trail in trailRenderers)

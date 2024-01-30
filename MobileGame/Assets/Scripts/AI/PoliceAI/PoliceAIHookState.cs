@@ -20,7 +20,7 @@ public class PoliceAIHookState : PoliceAIBaseState
         hookJoint.connectedBody = police.targetRigidbody;
         hookJoint.autoConfigureDistance = false;
         hookJoint.enabled = true;
-        police.rigidBody.mass = 2;
+        police.rigidBody.mass = 3;
 
         // Add LineRenderer to visualize the joint
         lineRenderer = police.gameObject.AddComponent<LineRenderer>();
@@ -44,7 +44,7 @@ public class PoliceAIHookState : PoliceAIBaseState
         lineRenderer.SetPosition(1, police.targetRigidbody.position);
 
         // Add any other logic you need for the AI's behavior
-        police.rigidBody.AddForce(Vector2.down * 10);
+        police.rigidBody.AddForce(Vector2.down * 60);
 
         // Update the timer
         elapsedTime += Time.deltaTime;
