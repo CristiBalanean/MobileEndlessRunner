@@ -9,8 +9,7 @@ public class FloatingOrigin : MonoBehaviour
 
     [SerializeField] private WorldSpawner worldSpawner;
 
-    [SerializeField] private TrailRenderer[] skidMarkTrails;
-    [SerializeField] private TrailRenderer[] slowdownTrails;
+    [SerializeField] private TrailRenderer[] trailRenderers;
 
     private void LateUpdate()
     {
@@ -38,9 +37,10 @@ public class FloatingOrigin : MonoBehaviour
         }
         worldSpawner.playerPositionLastFrame = 0;
 
-        foreach(TrailRenderer trail in skidMarkTrails)
+        trailRenderers = FindObjectsOfType<TrailRenderer>();
+        foreach(TrailRenderer trail in trailRenderers)
+        {
             trail.Clear();
-        foreach (TrailRenderer trail in slowdownTrails)
-            trail.Clear();
+        }
     }
 }

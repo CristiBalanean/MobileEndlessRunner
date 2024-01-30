@@ -16,6 +16,18 @@ public class HelicopterAI : MonoBehaviour
         target = CarMovement.Instance.transform;
         targetRigidbody = target.GetComponent<Rigidbody2D>();
         rigidBody = GetComponent<Rigidbody2D>();
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void Start()
+    {
+        InvokeRepeating("CheckForDespawn", 10f, 1f);
     }
 
     private void FixedUpdate()
@@ -40,5 +52,19 @@ public class HelicopterAI : MonoBehaviour
         Vector2 desiredAcceleration = kp * positionError + kd * velocityError;
 
         rigidBody.AddForce(desiredAcceleration);
+    }
+
+    private void CheckForDespawn()
+    {
+        float distance = Vector2.Distance(transform.position, CarMovement.Instance.transform.position);
+
+        if (distance > 15)
+            Destroy(gameObject);
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        enabled = newGameState == GameState.Gameplay;
+        rigidBody.simulated = newGameState == GameState.Gameplay;
     }
 }

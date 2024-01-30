@@ -14146,6 +14146,7 @@ GameObject:
   - component: {fileID: 1577061397}
   - component: {fileID: 1577061398}
   - component: {fileID: 1577061399}
+  - component: {fileID: 1577061400}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -14212,12 +14213,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  skidMarkTrails:
-  - {fileID: 2088589715}
-  - {fileID: 1905524225}
-  skidMarkParticles:
-  - {fileID: 2088589717}
-  - {fileID: 1905524227}
   acceleration: 0
 --- !u!50 &1577061387
 Rigidbody2D:
@@ -14619,6 +14614,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   bustUI: {fileID: 562795429}
+--- !u!114 &1577061400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577061385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31030e81a76e0c149a538f9b7b7d2e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skidMarkTrails:
+  - {fileID: 2088589715}
+  - {fileID: 1905524225}
+  skidMarkParticles:
+  - {fileID: 2088589717}
+  - {fileID: 1905524227}
 --- !u!1 &1603728138
 GameObject:
   m_ObjectHideFlags: 0
@@ -21290,8 +21303,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.004499972, y: 1.4008, z: 0}
-    m_Extent: {x: 1.9962001, y: 2.6023, z: 0}
+    m_Center: {x: 0.005799949, y: 1.39855, z: 0}
+    m_Extent: {x: 2.0008, y: 2.60815, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

@@ -17,14 +17,11 @@ public class CarMovement : MonoBehaviour
     public float currentHandling;
     private Vector2 input;
     public bool hasDied = false; //put it in the car health script
-    private bool isSkidding = false;
     private PowerupManager powerupManager;
 
     [SerializeField] private CameraShake cameraShake;
     public Car player;
     [SerializeField] private AnimationCurve accelerationCurve;
-    [SerializeField] private TrailRenderer[] skidMarkTrails;
-    [SerializeField] private ParticleSystem[] skidMarkParticles;
 
     private float topSpeed;
     public float acceleration;
@@ -51,9 +48,6 @@ public class CarMovement : MonoBehaviour
         InitializeCar();
 
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-
-        foreach (ParticleSystem particle in skidMarkParticles)
-            particle.Stop();
     }
 
     private void OnDestroy()
@@ -181,34 +175,9 @@ public class CarMovement : MonoBehaviour
         decelerationFactor = Mathf.Clamp(decelerationFactor, 0.05f, 1);
         float effectiveAcceleration = acceleration * decelerationFactor;
 
-        if(input.y == 0)
-        {
-            if (isSkidding == true)
-                isSkidding = false;
-            foreach (TrailRenderer trail in skidMarkTrails)
-                trail.emitting = false;
-            foreach (ParticleSystem particle in skidMarkParticles)
-            {
-                particle.Stop();
-                //particle.Clear();
-            }
-            SoundManager.instance.Stop("Skid");
-        }
-
         // Applying engine acceleration or brake force based on input.y
         if (input.y == 1 && currentVelocityY < topSpeed / 3.6f)
         {
-            if (isSkidding == true)
-                isSkidding = false;
-            foreach (TrailRenderer trail in skidMarkTrails)
-                trail.emitting = false;
-            foreach (ParticleSystem particle in skidMarkParticles)
-            {
-                particle.Stop();
-                //particle.Clear();
-            }
-            SoundManager.instance.Stop("Skid");
-
             accelerationHoldDuration += Time.deltaTime;
 
             float accelerationForce = Mathf.Lerp(0, effectiveAcceleration, accelerationHoldDuration / maxAccelerationHoldDuration);
@@ -228,35 +197,6 @@ public class CarMovement : MonoBehaviour
                 {
                     powerupManager.Deactivate();
                 }
-            }
-
-            if (currentSpeed > 50f && brakeHoldDuration > 0.25f)
-            {
-                foreach (TrailRenderer trail in skidMarkTrails)
-                    trail.emitting = true;
-                foreach (ParticleSystem particle in skidMarkParticles)
-                {
-                    particle.Emit(1);
-                    particle.Play();
-                }
-                if (!isSkidding)
-                {
-                    SoundManager.instance.Play("Skid");
-                    isSkidding = true;
-                }
-            }
-            else
-            {
-                foreach (TrailRenderer trail in skidMarkTrails)
-                    trail.emitting = false;
-                foreach (ParticleSystem particle in skidMarkParticles)
-                {
-                    particle.Stop();
-                    //particle.Clear();
-                }
-                SoundManager.instance.Stop("Skid");
-                if (isSkidding)
-                    isSkidding = false;
             }
 
             // Increase brake hold duration

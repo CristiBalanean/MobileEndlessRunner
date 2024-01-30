@@ -35,6 +35,13 @@ public class PoliceAIStateManager : MonoBehaviour
         avoidance = GetComponent<AvoidanceBehavior>();
         aiCollider = GetComponentInChildren<Collider2D>();
         cameraShake = GameObject.Find("Main Camera").GetComponent<CameraCollisionShake>();
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     private void Start()
@@ -42,6 +49,8 @@ public class PoliceAIStateManager : MonoBehaviour
         currentState = followState;
 
         currentState.EnterState(this);
+
+        InvokeRepeating("CheckForDespawn", 5f, 1f);
     }
 
     private void Update()
@@ -62,6 +71,14 @@ public class PoliceAIStateManager : MonoBehaviour
         state.EnterState(this);
     }
 
+    private void CheckForDespawn()
+    {
+        float distance = Vector2.Distance(transform.position, CarMovement.Instance.transform.position);
+
+        if (distance > 15)
+            Destroy(gameObject);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (currentState == followState && collision.transform.CompareTag("Player"))
@@ -79,5 +96,11 @@ public class PoliceAIStateManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        enabled = newGameState == GameState.Gameplay;
+        rigidBody.simulated = newGameState == GameState.Gameplay;
     }
 }

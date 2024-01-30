@@ -39,14 +39,14 @@ public class PoliceEvent : MonoBehaviour
     {
         hasStarted = false;
 
-        InvokeRepeating("PoliceEventChance", 0f, 2.5f);
+        InvokeRepeating("PoliceEventChance", 30f, 2.5f);
     }
 
     private void PoliceEventChance()
     {
         float rand = Random.Range(0, 1000);
 
-        if (rand < 5000 && !CarMovement.Instance.hasDied && !isPreparing)
+        if (rand < 50 && !CarMovement.Instance.hasDied && !isPreparing && !hasStarted)
         {
             Debug.Log("Event Is Preparing!");
             isPreparing = true;
@@ -81,11 +81,7 @@ public class PoliceEvent : MonoBehaviour
         yield return new WaitForSeconds(30f);
         canSpawnTraps = false;
         yield return new WaitForSeconds(5f);
-        GameObject[] traps = GameObject.FindGameObjectsWithTag("Trap");
-        foreach (GameObject trap in traps)
-        {
-            Destroy(trap);
-        }
+        DestroyProps();
         EndEvent();
     }
 
@@ -98,6 +94,25 @@ public class PoliceEvent : MonoBehaviour
         animator.Rebind();
         animator.Update(0f);
         StartCoroutine(StartSpawningCarsCoroutine());
+    }
+
+    private void DestroyProps()
+    {
+        GameObject[] traps = GameObject.FindGameObjectsWithTag("Trap");
+        foreach (GameObject trap in traps)
+        {
+            Destroy(trap);
+        }
+        GameObject[] barriers = GameObject.FindGameObjectsWithTag("Barrier");
+        foreach (GameObject barrier in barriers)
+        {
+            Destroy(barrier);
+        }
+        GameObject[] policeBarriers = GameObject.FindGameObjectsWithTag("PoliceBarrier");
+        foreach (GameObject policeBarrier in policeBarriers)
+        {
+            Destroy(policeBarrier);
+        }
     }
 
     private IEnumerator StartSpawningCarsCoroutine()
@@ -113,7 +128,7 @@ public class PoliceEvent : MonoBehaviour
         enabled = newGameState == GameState.Gameplay;
 
         if (enabled)
-            InvokeRepeating("PoliceEventChance", 30f, 2.5f);
+            InvokeRepeating("PoliceEventChance", 10f, 2.5f);
         else
             CancelInvoke("PoliceEventChance");
     }
