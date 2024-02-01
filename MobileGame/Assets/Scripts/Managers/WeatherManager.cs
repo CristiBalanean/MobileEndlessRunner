@@ -4,21 +4,24 @@ using UnityEngine.Events;
 
 public class WeatherManager : MonoBehaviour
 {
+    public UnityEvent StartParticles;
+    public UnityEvent StopParticles;
+
     [SerializeField] private ParticleSystem rainParticle;
 
-    private bool isRaining;
+    public bool isRaining;
 
     private void Start()
     {
         // Introduce a chance for rain when the game begins
         float chanceForRainAtStart = Random.Range(0, 100);
-        if (chanceForRainAtStart < 300)
+        if (chanceForRainAtStart < 20)
         {
             StartRain();
         }
 
         // Start checking for rain periodically
-        InvokeRepeating("CheckForRain", 10f, 2.5f);
+        InvokeRepeating("CheckForRain", 10f, 10f);
     }
 
     private void CheckForRain()
@@ -26,7 +29,7 @@ public class WeatherManager : MonoBehaviour
         if (!isRaining)
         {
             float chance = Random.Range(0, 100);
-            if (chance < 30)
+            if (chance < 10)
             {
                 StartRain();
             }
@@ -35,16 +38,20 @@ public class WeatherManager : MonoBehaviour
 
     private void StartRain()
     {
+        StartParticles?.Invoke();
         SoundManager.instance.Play("Rain");
         rainParticle.Play();
         rainParticle.GetComponent<StopRain>().RainStarted();
         isRaining = true;
+        CancelInvoke("CheckForRain");
     }
 
     public void StopRain()
     {
+        StopParticles?.Invoke();
         SoundManager.instance.Stop("Rain");
         rainParticle.Stop();
         isRaining = false;
+        InvokeRepeating("CheckForRain", 10f, 10f);
     }
 }

@@ -12,6 +12,7 @@ public class FloatingOrigin : MonoBehaviour
     [SerializeField] private TrailRenderer[] trailRenderers;
 
     [SerializeField] private ParticleSystem rainParticle;
+    [SerializeField] private WeatherManager weatherManager;
 
     private void LateUpdate()
     {
@@ -25,7 +26,8 @@ public class FloatingOrigin : MonoBehaviour
 
     private void RecenterObjects(float yOffset)
     {
-        rainParticle.Stop();
+        if(weatherManager.isRaining)
+            rainParticle.Stop();
 
         float yOffsetDifference = worldSpawner.nextSegmentSpawnPosition - threshold;
         worldSpawner.nextSegmentSpawnPosition = yOffsetDifference;
@@ -41,7 +43,8 @@ public class FloatingOrigin : MonoBehaviour
         }
         worldSpawner.playerPositionLastFrame = 0;
 
-        rainParticle.Play();
+        if (weatherManager.isRaining)
+            rainParticle.Play();
 
         trailRenderers = FindObjectsOfType<TrailRenderer>();
         foreach(TrailRenderer trail in trailRenderers)

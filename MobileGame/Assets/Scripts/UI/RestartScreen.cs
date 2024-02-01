@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class RestartScreen : MonoBehaviour
 {
     [SerializeField] private TMP_Text finalScore;
+    [SerializeField] private TMP_Text moneyEarned;
 
     public void RestartGame()
     {
@@ -23,5 +24,10 @@ public class RestartScreen : MonoBehaviour
     public void SetFinalScore()
     {
         finalScore.text = "FINAL SCORE: " + ScoreManager.Instance.GetFinalScore();
+    }
+
+    public void SetMoneyEarned()
+    {
+        moneyEarned.text = "MONEY EARNED: " + PlayerPrefs.GetInt("MoneyToGive").ToString();
     }
 }
