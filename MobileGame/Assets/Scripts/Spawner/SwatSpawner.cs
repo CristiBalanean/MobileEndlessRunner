@@ -16,8 +16,6 @@ public class SwatSpawner : MonoBehaviour
     [SerializeField] private float repeatRate;
 
     private float warningTime = 1.5f; // Time before spike trap spawns to show the warning
-    private GameObject[] activePoliceCars; // Array to keep track of active police cars
-    private int activePoliceCount; // Current number of active police cars
 
     private void Awake()
     {
@@ -26,46 +24,19 @@ public class SwatSpawner : MonoBehaviour
 
     private void Start()
     {
-        Invoke("SpawnPoliceCars", 30);
+        InvokeRepeating("SpawnPoliceCars", 10f, 5f);
         StartCoroutine(ChooseAction());
-        activePoliceCars = new GameObject[2];
-        activePoliceCount = 0;
     }
 
     public void SpawnPoliceCars()
     {
-        // Spawn police cars only if there are less than 2 active police cars
-        while (activePoliceCount < 2)
-        {
             // Randomly select a spawn point
             Transform selectedSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-            Vector3 spawnPointPosition = selectedSpawnPoint.position - new Vector3(0, 30, 0);
+            Vector3 spawnPointPosition = selectedSpawnPoint.position - new Vector3(0, 25, 0);
 
             int rand = Random.Range(0,swatVehiclePrefab.Length);
             // Instantiate the police car at the specified position
             GameObject policeCar = Instantiate(swatVehiclePrefab[rand], spawnPointPosition, Quaternion.identity);
-
-            // Add the police car to the array of active police cars
-            activePoliceCars[activePoliceCount] = policeCar;
-            activePoliceCount++;
-        }
-    }
-
-    public void RemovePoliceCar(GameObject car)
-    {
-        // Remove the destroyed police car from the array of active police cars
-        for (int i = 0; i < activePoliceCount; i++)
-        {
-            if (activePoliceCars[i] == car)
-            {
-                activePoliceCars[i] = null;
-                activePoliceCount--;
-                break;
-            }
-        }
-
-        // Spawn a new police car to maintain the count of active police cars
-        SpawnPoliceCars();
     }
 
     private void SpawnRammer()

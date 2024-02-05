@@ -82,10 +82,6 @@ public class PoliceAiHealth : MonoBehaviour
 
         TriggerExplosion();
 
-        if (SwatSpawner.instance != null)
-            SwatSpawner.instance.RemovePoliceCar(gameObject);
-        else if (PoliceSpawning.instance != null)
-
         yield return new WaitForSeconds(0.01f);
         aiAnimator.enabled = true;
         foreach (var collider in aiCollider)

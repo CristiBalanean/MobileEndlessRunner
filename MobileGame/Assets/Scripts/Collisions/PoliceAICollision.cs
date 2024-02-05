@@ -21,12 +21,20 @@ public class PoliceAICollision : MonoBehaviour
         {
             if (collision.transform.CompareTag("Player"))
             {
-                if (collision.collider is BoxCollider2D)
+                if (SceneManager.GetActiveScene().name == "MonsterTruckGameMode")
                 {
-                    int chance = Random.Range(0, 100);
-                    if (chance < 10)
+                    float collisionIntensity = collision.relativeVelocity.magnitude;
+                    policeHealth.TakeDamage((int)collisionIntensity);
+                }
+                else
+                {
+                    if (collision.collider is BoxCollider2D)
                     {
-                        policeAIStateManager.SwitchState(policeAIStateManager.crashState);
+                        int chance = Random.Range(0, 100);
+                        if (chance < 10)
+                        {
+                            policeAIStateManager.SwitchState(policeAIStateManager.crashState);
+                        }
                     }
                 }
             }

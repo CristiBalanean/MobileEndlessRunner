@@ -109,14 +109,14 @@ public class CarMovement : MonoBehaviour
 
     private void UpdateCurrentSpeed()
     {
-        currentSpeed = rigidBody.velocity.magnitude * 3.6f;
+        currentSpeed = rigidBody.velocity.magnitude * 5f;
 
         if (currentSpeed > topSpeed)
             currentSpeed = topSpeed;
         else if (currentSpeed < 25)
         {
             currentSpeed = 25;
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, 25 / 3.6f);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, 25 / 5f);
         }
 
         OnSpeedChange?.Invoke(currentSpeed);
@@ -168,7 +168,7 @@ public class CarMovement : MonoBehaviour
         float currentVelocityY = rigidBody.velocity.y;
 
         // Calculate the ratio of current speed to top speed
-        float speedRatio = Mathf.Clamp01(currentVelocityY / (topSpeed / 3.6f));
+        float speedRatio = Mathf.Clamp01(currentVelocityY / (topSpeed / 5f));
 
         // Calculate effective acceleration with friction using an exponential function
         float decelerationFactor = accelerationCurve.Evaluate(speedRatio);
@@ -176,7 +176,7 @@ public class CarMovement : MonoBehaviour
         float effectiveAcceleration = acceleration * decelerationFactor;
 
         // Applying engine acceleration or brake force based on input.y
-        if (input.y == 1 && currentVelocityY < topSpeed / 3.6f)
+        if (input.y == 1 && currentVelocityY < topSpeed / 5f)
         {
             accelerationHoldDuration += Time.deltaTime;
 
@@ -189,7 +189,7 @@ public class CarMovement : MonoBehaviour
             // Reset brake hold duration when accelerating
             brakeHoldDuration = 0f;
         }
-        else if (input.y == -1 && currentVelocityY > 25 / 3.6f)
+        else if (input.y == -1 && currentVelocityY > 25 / 5f)
         {
             if (SceneManager.GetActiveScene().name != "MonsterTruckGameMode")
             {

@@ -11,6 +11,7 @@ public class PoliceAIStateManager : MonoBehaviour
     public PoliceAIHookState hookState = new PoliceAIHookState();
     public PoliceAIBustState bustState = new PoliceAIBustState();
     public PoliceAICrashingState crashState = new PoliceAICrashingState();
+    public PoliceAIBackingState backingState = new PoliceAIBackingState();
 
     public Transform target;
     public Rigidbody2D rigidBody;
@@ -37,11 +38,18 @@ public class PoliceAIStateManager : MonoBehaviour
         cameraShake = GameObject.Find("Main Camera").GetComponent<CameraCollisionShake>();
 
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+
+        PoliceEvent policeEvent = GameObject.Find("PoliceEventManager")?.GetComponent<PoliceEvent>();
+        if(policeEvent != null )
+            policeEvent.BackDownEvent.AddListener(BackDown);
     }
 
     private void OnDestroy()
     {
         GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        PoliceEvent policeEvent = GameObject.Find("PoliceEventManager")?.GetComponent<PoliceEvent>();
+        if (policeEvent != null)
+            policeEvent.BackDownEvent.RemoveListener(BackDown);
     }
 
     private void Start()
@@ -102,5 +110,10 @@ public class PoliceAIStateManager : MonoBehaviour
     {
         enabled = newGameState == GameState.Gameplay;
         rigidBody.simulated = newGameState == GameState.Gameplay;
+    }
+
+    private void BackDown()
+    {
+        this.SwitchState(backingState);
     }
 }

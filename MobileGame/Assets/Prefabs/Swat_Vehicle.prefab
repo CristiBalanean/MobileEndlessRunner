@@ -411,7 +411,8 @@ GameObject:
   - component: {fileID: 3144352370243264760}
   - component: {fileID: 527406840277121590}
   - component: {fileID: 6146551005286032440}
-  - component: {fileID: 2704198087342701917}
+  - component: {fileID: 7189743608069739548}
+  - component: {fileID: 6613688025193833629}
   m_Layer: 6
   m_Name: Swat_Vehicle
   m_TagString: Police
@@ -501,7 +502,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -577,6 +578,10 @@ MonoBehaviour:
   beginningMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   explodedCarMaterial: {fileID: -876546973899608171, guid: 62bdf8a86f5e30b4686e3efac28f425b, type: 3}
   explosionGO: {fileID: 7768325357048307294, guid: 4b85876d4ec611e46bea5dc6c34e32d3, type: 3}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  cameraShake: {fileID: 0}
 --- !u!95 &527406840277121590
 Animator:
   serializedVersion: 5
@@ -610,7 +615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d75abdd75bddb34c927954c8f342d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2704198087342701917
+--- !u!114 &7189743608069739548
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -619,22 +624,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 6754588251916728658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48aeba87021c54b44a0aa4f190360575, type: 3}
+  m_Script: {fileID: 11500000, guid: ec93a7a82d236834eb8f1d81b365ed42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 320
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  targetDetectionRange: 50
-  obstacleDetectionRange: 2
   target: {fileID: 0}
-  obstacles: []
-  interest: []
-  danger: []
-  directions: []
+  rigidBody: {fileID: 0}
+  targetRigidbody: {fileID: 0}
+  state: {fileID: 0}
+  avoidance: {fileID: 0}
+  cameraShake: {fileID: 0}
+  aiCollider: {fileID: 0}
+  hookMaterial: {fileID: -876546973899608171, guid: 62bdf8a86f5e30b4686e3efac28f425b, type: 3}
+  kd: 1
+  kp: 1
+--- !u!114 &6613688025193833629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6754588251916728658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6f0216957ec714c94d722fabb45e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  separationRadius: 3
+  separationForce: 5
+  damping: 0.75
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &8125471226469248491
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,8 +804,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.007949948, y: 1.4769499, z: 0}
-    m_Extent: {x: 1.9956499, y: 2.53145, z: 0}
+    m_Center: {x: -0.0053499937, y: 1.47275, z: 0}
+    m_Extent: {x: 1.99395, y: 2.52935, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

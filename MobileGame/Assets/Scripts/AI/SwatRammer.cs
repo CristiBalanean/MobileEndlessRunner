@@ -9,7 +9,7 @@ public class SwatRammer : MonoBehaviour
 
     private void Awake()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponentInChildren<Rigidbody2D>();
     }
 
     private void Start()

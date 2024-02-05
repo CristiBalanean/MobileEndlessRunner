@@ -9,6 +9,13 @@ public class ObjectPool : MonoBehaviour
 
     [SerializeField] private GameObject objectToPool;
     [SerializeField] private GameObject overtakeText;
+    [SerializeField] private Sprite[] mapSprites;
+
+    private void Awake()
+    {
+        if (objectToPool.name == "Highway")
+            objectToPool.GetComponent<SpriteRenderer>().sprite = mapSprites[GameModeData.instance.map];
+    }
 
     private void Start()
     {

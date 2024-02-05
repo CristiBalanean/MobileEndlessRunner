@@ -6731,6 +6731,7 @@ MonoBehaviour:
   amount: 25
   objectToPool: {fileID: 3517040841658587091, guid: fa5d73a1d3df8964c94231b297c04c8f, type: 3}
   overtakeText: {fileID: 0}
+  mapSprites: []
 --- !u!4 &314338017
 Transform:
   m_ObjectHideFlags: 0
@@ -22899,7 +22900,7 @@ GameObject:
   - component: {fileID: 1379906996}
   - component: {fileID: 1379906995}
   m_Layer: 0
-  m_Name: PoliceEventManager (1)
+  m_Name: PoliceEventManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23064,6 +23065,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  BackDownEvent:
+    m_PersistentCalls:
+      m_Calls: []
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -23296,6 +23300,7 @@ MonoBehaviour:
   amount: 5
   objectToPool: {fileID: 7669761549882261515, guid: 489857cd198915f48b20f628fcd3af9c, type: 3}
   overtakeText: {fileID: 7669761549882261515, guid: 489857cd198915f48b20f628fcd3af9c, type: 3}
+  mapSprites: []
 --- !u!4 &1417943741
 Transform:
   m_ObjectHideFlags: 0
@@ -28843,6 +28848,10 @@ MonoBehaviour:
   amount: 8
   objectToPool: {fileID: 7848097289965926118, guid: 179da39be07b8204da3cf25589bc3d17, type: 3}
   overtakeText: {fileID: 0}
+  mapSprites:
+  - {fileID: 21300000, guid: 3c1de2f920b13ae429c19cf743d469e0, type: 3}
+  - {fileID: 21300000, guid: 7d4ed7817833e294cbe1bf878a7aebbc, type: 3}
+  - {fileID: 21300000, guid: 169c8de4cf2e92d4b9dab44fc4b8f02e, type: 3}
 --- !u!1 &1568816648
 GameObject:
   m_ObjectHideFlags: 0
@@ -41159,8 +41168,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0017000437, y: 1.4036, z: 0}
-    m_Extent: {x: 1.9964, y: 2.5997999, z: 0}
+    m_Center: {x: 0.0018999577, y: 1.39945, z: 0}
+    m_Extent: {x: 2.0014, y: 2.60645, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

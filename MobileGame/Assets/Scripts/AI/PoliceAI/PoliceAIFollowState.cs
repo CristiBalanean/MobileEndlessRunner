@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PoliceAIFollowState : PoliceAIBaseState
 {
@@ -14,14 +15,7 @@ public class PoliceAIFollowState : PoliceAIBaseState
 
     public override void UpdateState(PoliceAIStateManager police)
     {
-        if (PoliceEvent.instance.hasStarted)
-        {
-            FollowTarget(police);
-        }
-        else
-        {
-            police.rigidBody.AddForce(Vector2.down * 5);
-        }
+        FollowTarget(police);
     }
 
     private void FollowTarget(PoliceAIStateManager police)

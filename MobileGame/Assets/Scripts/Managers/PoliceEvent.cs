@@ -12,6 +12,7 @@ public class PoliceEvent : MonoBehaviour
     public UnityEvent SpawnTraps;
     public UnityEvent ChangeCameraOffsetToPolice;
     public UnityEvent ChangeCameraOffsetToNormal;
+    public UnityEvent BackDownEvent;
 
     [SerializeField] private LayerMask obstacleLayer;
 
@@ -89,6 +90,7 @@ public class PoliceEvent : MonoBehaviour
     {
         Debug.Log("Event Has Ended!");
         hasStarted = false;
+        BackDownEvent?.Invoke();
         carsUpAheadText.SetActive(true);
         var animator = carsUpAheadText.GetComponent<Animator>();
         animator.Rebind();

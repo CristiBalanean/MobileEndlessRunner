@@ -11,6 +11,7 @@ public class PlaymodeManager : MonoBehaviour
     [SerializeField] private string menuScene;
     [SerializeField] private string normalModeScene;
     [SerializeField] private string chaosModeScene;
+    [SerializeField] private string mapSelectScene;
     [SerializeField] private TMP_Text playmodeNameText;
     [SerializeField] private TMP_Text playmodeHighscoreText;
 
@@ -94,16 +95,18 @@ public class PlaymodeManager : MonoBehaviour
 
     public void PlayModeSelectButton()
     {
-        switch (index)
+        switch(index)
         {
             case 0:
-                StartCoroutine(LoadLevel(normalModeScene));
+                GameModeData.instance.gameMode = normalModeScene;
                 break;
 
             case 1:
-                StartCoroutine(LoadLevel(chaosModeScene));
+                GameModeData.instance.gameMode = chaosModeScene;
                 break;
         }
+
+        StartCoroutine(LoadLevel(mapSelectScene));
     }
 
     public void BackButton()
