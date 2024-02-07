@@ -16636,6 +16636,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   acceleration: 0
+  maxYVelocity: 0
 --- !u!50 &333528032
 Rigidbody2D:
   serializedVersion: 4
@@ -16821,7 +16822,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  health: 50
+  health: 250
   audioMixer: {fileID: 24100000, guid: 49b2c9eaa096ed44b9e28eaf73039303, type: 2}
   shield: 0
 --- !u!61 &333528037
@@ -34282,7 +34283,7 @@ MonoBehaviour:
   threshold: 100
   worldSpawner: {fileID: 1138659454}
   trailRenderers: []
-  rainParticle: {fileID: 93322429}
+  particles: []
   weatherManager: {fileID: 1911022362}
 --- !u!114 &1669807234
 MonoBehaviour:
@@ -34908,8 +34909,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0016999841, y: 1.4388, z: 0}
-    m_Extent: {x: 1.9927001, y: 2.5601, z: 0}
+    m_Center: {x: -0.0016000271, y: 1.4408002, z: 0}
+    m_Extent: {x: 1.9936, y: 2.5685, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -35407,7 +35408,7 @@ MonoBehaviour:
   StopParticles:
     m_PersistentCalls:
       m_Calls: []
-  rainParticle: {fileID: 93322429}
+  particles: []
   isRaining: 0
 --- !u!4 &1911022363
 Transform:

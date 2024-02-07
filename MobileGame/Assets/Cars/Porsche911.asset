@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: Viper 911
   topSpeed: 260
-  acceleration: 30
-  brakingPower: 60
+  acceleration: 17
+  brakingPower: 34
   lowSpeedHandling: 7.5
   highSpeedHandling: 7.5
   carSprite: {fileID: -1600550253, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}

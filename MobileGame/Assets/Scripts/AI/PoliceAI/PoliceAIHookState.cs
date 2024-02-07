@@ -10,6 +10,7 @@ public class PoliceAIHookState : PoliceAIBaseState
     private float distanceLerpSpeed = 2f;
     private float stateDuration = 2f; // Duration of the Hook State in seconds
     private float elapsedTime = 0f;
+    private float hookForce;
 
     public override void EnterState(PoliceAIStateManager police)
     {
@@ -21,6 +22,7 @@ public class PoliceAIHookState : PoliceAIBaseState
         hookJoint.autoConfigureDistance = false;
         hookJoint.enabled = true;
         police.rigidBody.mass = 2;
+        hookForce = CarMovement.Instance.acceleration + 3.5f;
 
         // Add LineRenderer to visualize the joint
         lineRenderer = police.gameObject.AddComponent<LineRenderer>();
@@ -44,7 +46,7 @@ public class PoliceAIHookState : PoliceAIBaseState
         lineRenderer.SetPosition(1, police.targetRigidbody.position);
 
         // Add any other logic you need for the AI's behavior
-        police.rigidBody.AddForce(Vector2.down * 20);
+        police.rigidBody.AddForce(Vector2.down * hookForce);
 
         // Update the timer
         elapsedTime += Time.deltaTime;

@@ -28,6 +28,6 @@ public class RestartScreen : MonoBehaviour
 
     public void SetMoneyEarned()
     {
-        moneyEarned.text = "MONEY EARNED: " + PlayerPrefs.GetInt("MoneyToGive").ToString();
+        moneyEarned.text = "MONEY EARNED: " + MoneyManager.Instance.moneyToGive.ToString();
     }
 }

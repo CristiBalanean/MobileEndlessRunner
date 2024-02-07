@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: Challenger Charger
   topSpeed: 210
-  acceleration: 25
-  brakingPower: 50
+  acceleration: 16
+  brakingPower: 32
   lowSpeedHandling: 7.5
   highSpeedHandling: 7.5
   carSprite: {fileID: -219731797, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}

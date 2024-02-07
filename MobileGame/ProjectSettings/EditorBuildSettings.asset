@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: e30ae40d29fc42b4e829bde3fb48d054
+  - enabled: 1
+    path: Assets/Scenes/TwoWaysGameMode.unity
+    guid: 463525695e85eea489552efdf44df720
   m_configObjects: {}

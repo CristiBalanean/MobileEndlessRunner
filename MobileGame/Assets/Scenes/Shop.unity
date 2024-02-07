@@ -3225,8 +3225,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3f7faefde4c65cf43abb96606181519f, type: 2}
   - {fileID: 11400000, guid: 45bce6a975d0e6e41bd2cfdbdf5d3d0e, type: 2}
   maxSpeed: 325
-  maxAcceleration: 40
-  maxBrake: 80
+  maxAcceleration: 22
+  maxBrake: 42
   speedSlider: {fileID: 2081386852}
   accelerationSlider: {fileID: 976532904}
   brakeSlider: {fileID: 483191407}

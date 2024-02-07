@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: Blaze ZR
   topSpeed: 280
-  acceleration: 33
-  brakingPower: 66
+  acceleration: 18
+  brakingPower: 36
   lowSpeedHandling: 7.5
   highSpeedHandling: 8
   carSprite: {fileID: -690558637, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: Onyx
   topSpeed: 140
-  acceleration: 15
-  brakingPower: 30
+  acceleration: 13
+  brakingPower: 26
   lowSpeedHandling: 3.5
   highSpeedHandling: 4
   carSprite: {fileID: -1978909859, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}

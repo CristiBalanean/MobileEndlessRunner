@@ -27,7 +27,7 @@ public class CoinSpawner : MonoBehaviour
 
     private void SpawnCoins()
     {
-        int numberOfCoins = Random.Range(5, 15);
+        int numberOfCoins = Random.Range(3, 8);
         for (int i = 0; i < numberOfCoins; i++)
         {
             int spawnerNumber = Random.Range(0, spawners.Length);

@@ -15,6 +15,5 @@ public class StopRain : MonoBehaviour
     private IEnumerator StopRainTimer(float timer)
     {
         yield return new WaitForSeconds(timer);
-        weatherManager.StopRain();
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    public float topSpeed;
+    private float topSpeed;
     [SerializeField] private float acceleration;
 
     public float currentSpeed;
@@ -19,12 +19,12 @@ public class Obstacle : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
 
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+
         CarGraphics carGraphics = SpritePool.Instance.ChooseSprite();
         GetComponent<SpriteRenderer>().sprite = carGraphics.GetSprite();
         GameObject collider = Instantiate(carGraphics.GetCollider(), transform.position, Quaternion.identity);
         collider.transform.parent = transform;
-
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     private void OnDestroy()
@@ -34,8 +34,22 @@ public class Obstacle : MonoBehaviour
 
     private void OnEnable()
     {
-        // Set the initial velocity
-        Vector2 initialVelocity = Vector2.up * topSpeed;
+        Vector2 localForward = transform.up; // Assuming the car's forward direction is its local up direction
+
+        if (Vector2.Dot(localForward, Vector2.down) < 0)
+        {
+            float speedRatio = CarMovement.Instance.GetTopSpeed() / 310;
+            topSpeed = Random.Range(CarMovement.Instance.maxYVelocity - 5, CarMovement.Instance.maxYVelocity) - Mathf.Lerp(10, 15, speedRatio);
+        }
+        else
+        {
+            float speedRatio = CarMovement.Instance.GetTopSpeed() / 310;
+            topSpeed = Random.Range(CarMovement.Instance.maxYVelocity - 5, CarMovement.Instance.maxYVelocity) - Mathf.Lerp(20, 25, speedRatio);
+        }
+
+        // Set the initial velocity in the determined local forward direction
+        Vector2 initialVelocity = localForward * topSpeed;
+
         rigidBody.velocity = initialVelocity;
         currentSpeed = topSpeed;
 

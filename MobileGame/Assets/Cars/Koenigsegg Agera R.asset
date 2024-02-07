@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: Zenith R
   topSpeed: 200
-  acceleration: 25
-  brakingPower: 50
+  acceleration: 16
+  brakingPower: 32
   lowSpeedHandling: 7
   highSpeedHandling: 7.5
   carSprite: {fileID: -2122711842, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}

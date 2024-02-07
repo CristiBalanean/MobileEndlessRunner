@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: Inferno GT
   topSpeed: 150
-  acceleration: 17
-  brakingPower: 34
+  acceleration: 14
+  brakingPower: 28
   lowSpeedHandling: 3.5
   highSpeedHandling: 4
   carSprite: {fileID: 1200064572, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}

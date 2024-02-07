@@ -33,14 +33,24 @@ public class ObjectPool : MonoBehaviour
 
     public GameObject GetPooledObject()
     {
+        List<GameObject> inactiveObjects = new List<GameObject>();
+
+        // Collect all inactive objects in a separate list
         for (int i = 0; i < pool.Count; i++)
         {
             if (!pool[i].gameObject.activeInHierarchy)
             {
-                return pool[i];
+                inactiveObjects.Add(pool[i]);
             }
         }
 
-        return null;
+        // Return a random inactive object, if any
+        if (inactiveObjects.Count > 0)
+        {
+            int randomIndex = Random.Range(0, inactiveObjects.Count);
+            return inactiveObjects[randomIndex];
+        }
+
+        return null; // Return null if no inactive objects are found
     }
 }

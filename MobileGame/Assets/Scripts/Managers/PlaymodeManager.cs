@@ -10,6 +10,7 @@ public class PlaymodeManager : MonoBehaviour
 {
     [SerializeField] private string menuScene;
     [SerializeField] private string normalModeScene;
+    [SerializeField] private string twoWaysModeScene;
     [SerializeField] private string chaosModeScene;
     [SerializeField] private string mapSelectScene;
     [SerializeField] private TMP_Text playmodeNameText;
@@ -76,6 +77,13 @@ public class PlaymodeManager : MonoBehaviour
                 break;
 
             case 1:
+                playmodeNameText.text = "TWO WAYS MODE";
+                lockImage.gameObject.SetActive(false);
+                playmodeButton.interactable = true;
+                playmodeHighscoreText.text = "HIGHSCORE: " + PlayerPrefs.GetInt("TwoWaysHighscore").ToString();
+                break;
+
+            case 2:
                 playmodeNameText.text = "CHAOS MODE";
                 if (!monsterTruck.IsUnlocked())
                 {
@@ -102,6 +110,10 @@ public class PlaymodeManager : MonoBehaviour
                 break;
 
             case 1:
+                GameModeData.instance.gameMode = twoWaysModeScene;
+                break;
+
+            case 2:
                 GameModeData.instance.gameMode = chaosModeScene;
                 break;
         }

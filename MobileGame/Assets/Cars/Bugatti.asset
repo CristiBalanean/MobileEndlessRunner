@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: Thunderbolt RS
   topSpeed: 300
-  acceleration: 36
-  brakingPower: 72
+  acceleration: 19
+  brakingPower: 38
   lowSpeedHandling: 7.5
   highSpeedHandling: 7.5
   carSprite: {fileID: 248233056, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}

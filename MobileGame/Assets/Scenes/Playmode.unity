@@ -388,11 +388,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuScene: Menu
   normalModeScene: SampleScene
+  twoWaysModeScene: TwoWaysGameMode
   chaosModeScene: MonsterTruckGameMode
   mapSelectScene: Map
   playmodeNameText: {fileID: 798707282}
   playmodeHighscoreText: {fileID: 1666680918}
   playmodeSprites:
+  - {fileID: 21300000, guid: 4e2e9aed80b4c6743833f2d15ade3974, type: 3}
   - {fileID: 21300000, guid: 4e2e9aed80b4c6743833f2d15ade3974, type: 3}
   - {fileID: 21300000, guid: 8c34431dfa361f14a95e1503a2323ea8, type: 3}
   lockImage: {fileID: 971842282}

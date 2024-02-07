@@ -8,6 +8,8 @@ public class MoneyManager : MonoBehaviour
 
     public int currentMoney;
 
+    public int moneyToGive;
+
     private void Awake()
     {
         if (Instance == null)
@@ -22,9 +24,8 @@ public class MoneyManager : MonoBehaviour
 
     public void ComputeFinalMoney()
     {
-        int moneyToGive = ScoreManager.Instance.GetFinalScore() / 15 + (int)ScoreManager.Instance.GetDistanceTraveled() / 10;
+        moneyToGive = ScoreManager.Instance.GetFinalScore() / 15 + (int)ScoreManager.Instance.GetDistanceTraveled() / 10;
         currentMoney += moneyToGive;
         PlayerPrefs.SetInt("Money", currentMoney);
-        PlayerPrefs.SetInt("MoneyToGive", moneyToGive);
     }
 }

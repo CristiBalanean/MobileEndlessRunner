@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: Eclipse
   topSpeed: 165
-  acceleration: 20
-  brakingPower: 40
+  acceleration: 14
+  brakingPower: 28
   lowSpeedHandling: 5
   highSpeedHandling: 5
   carSprite: {fileID: -2068725451, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}

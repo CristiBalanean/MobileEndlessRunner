@@ -7,7 +7,7 @@ public class WeatherManager : MonoBehaviour
     public UnityEvent StartParticles;
     public UnityEvent StopParticles;
 
-    [SerializeField] private ParticleSystem rainParticle;
+    [SerializeField] private ParticleSystem[] particles;
 
     public bool isRaining;
 
@@ -19,39 +19,29 @@ public class WeatherManager : MonoBehaviour
         {
             StartRain();
         }
-
-        // Start checking for rain periodically
-        InvokeRepeating("CheckForRain", 10f, 10f);
-    }
-
-    private void CheckForRain()
-    {
-        if (!isRaining)
-        {
-            float chance = Random.Range(0, 100);
-            if (chance < 10)
-            {
-                StartRain();
-            }
-        }
     }
 
     private void StartRain()
     {
-        StartParticles?.Invoke();
-        SoundManager.instance.Play("Rain");
-        rainParticle.Play();
-        rainParticle.GetComponent<StopRain>().RainStarted();
+        if(GameModeData.instance.map != 1)
+            StartParticles?.Invoke();
+
+        switch(GameModeData.instance.map)
+        {
+            case 0:
+                SoundManager.instance.Play("Rain");
+                break;
+
+            case 1:
+                break;
+
+            case 2:
+                SoundManager.instance.Play("Snow");
+                break;
+        }
+
+        particles[GameModeData.instance.map].Play();
         isRaining = true;
         CancelInvoke("CheckForRain");
-    }
-
-    public void StopRain()
-    {
-        StopParticles?.Invoke();
-        SoundManager.instance.Stop("Rain");
-        rainParticle.Stop();
-        isRaining = false;
-        InvokeRepeating("CheckForRain", 10f, 10f);
     }
 }

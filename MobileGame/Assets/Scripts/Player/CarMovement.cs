@@ -35,6 +35,7 @@ public class CarMovement : MonoBehaviour
     private float maxBrakeHoldDuration = 1f; // Adjust this value for the maximum duration the brake is held
     private float accelerationHoldDuration = 0;
     private float maxAccelerationHoldDuration = .75f;
+    public float maxYVelocity;
 
     private void Awake()
     {
@@ -57,9 +58,12 @@ public class CarMovement : MonoBehaviour
 
     private void Start()
     {
-        float speedLerp = Mathf.Clamp01((topSpeed - 100) / 200);
-        speedMultiplier = Mathf.Lerp(0, 175, speedLerp);
+        //float speedLerp = Mathf.Clamp01((topSpeed - 100) / 200);
+        //speedMultiplier = Mathf.Lerp(0, 175, speedLerp);
         SoundManager.instance.Play("Engine");
+        float speedRatio = (topSpeed - 100f) / 210f;
+        maxYVelocity = Mathf.Lerp(30, 50, speedRatio);
+        Debug.Log(maxYVelocity);
     }
 
     private void Update()
@@ -109,14 +113,16 @@ public class CarMovement : MonoBehaviour
 
     private void UpdateCurrentSpeed()
     {
-        currentSpeed = rigidBody.velocity.magnitude * 5f;
+        currentSpeed = Mathf.Lerp(25, topSpeed, rigidBody.velocity.y / maxYVelocity);
 
         if (currentSpeed > topSpeed)
+        {
             currentSpeed = topSpeed;
+        }
         else if (currentSpeed < 25)
         {
             currentSpeed = 25;
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, 25 / 5f);
+            rigidBody.velocity = Vector2.up * 2.5f;
         }
 
         OnSpeedChange?.Invoke(currentSpeed);
@@ -175,8 +181,11 @@ public class CarMovement : MonoBehaviour
         decelerationFactor = Mathf.Clamp(decelerationFactor, 0.05f, 1);
         float effectiveAcceleration = acceleration * decelerationFactor;
 
+        // Ensure the car does not exceed the maximum Y velocity
+        float targetVelocityY = Mathf.Min(maxYVelocity, currentVelocityY);
+
         // Applying engine acceleration or brake force based on input.y
-        if (input.y == 1 && currentVelocityY < topSpeed / 5f)
+        if (input.y == 1 && currentVelocityY < maxYVelocity)
         {
             accelerationHoldDuration += Time.deltaTime;
 
@@ -189,7 +198,7 @@ public class CarMovement : MonoBehaviour
             // Reset brake hold duration when accelerating
             brakeHoldDuration = 0f;
         }
-        else if (input.y == -1 && currentVelocityY > 25 / 5f)
+        else if (input.y == -1 && currentSpeed > 25)
         {
             if (SceneManager.GetActiveScene().name != "MonsterTruckGameMode")
             {
@@ -217,7 +226,11 @@ public class CarMovement : MonoBehaviour
             brakeHoldDuration = 0f;
             accelerationHoldDuration = 0;
         }
+
+        // Set the Y velocity to the target velocity to ensure it doesn't exceed maxYVelocity
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x, targetVelocityY);
     }
+
 
     public float GetSpeed()
     {

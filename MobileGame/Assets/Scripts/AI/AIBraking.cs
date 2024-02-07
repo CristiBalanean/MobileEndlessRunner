@@ -33,7 +33,7 @@ public class AIBraking : MonoBehaviour
 
     private void DetectObstaclesInFront()
     {
-        RaycastHit2D[] hitInfos = Physics2D.RaycastAll(transform.position, Vector2.up, 7.5f, obstacleLayer);
+        RaycastHit2D[] hitInfos = Physics2D.RaycastAll(transform.position, transform.up, 7.5f, obstacleLayer);
 
         // Reset the flag before checking for obstacles
         hasSomethingInFront = false;

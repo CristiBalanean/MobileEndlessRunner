@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: Phantom
   topSpeed: 215
-  acceleration: 26
-  brakingPower: 52
+  acceleration: 16
+  brakingPower: 32
   lowSpeedHandling: 7
   highSpeedHandling: 7.5
   carSprite: {fileID: -1291099520, guid: faf44ae6e16b9ab41b8a9c15078345c5, type: 3}

@@ -5699,13 +5699,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1577061386}
-  pool: {fileID: 314338016}
+  pool: {fileID: 197628355}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
   densityCollider: {fileID: 32846391}
   laneSpeed: 50
-  spawnTime: 2
+  spawnTime: 3.5
   isPoliceEvent: 0
 --- !u!1 &133656089
 GameObject:
@@ -6164,6 +6164,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161033484}
   m_CullTransparentMesh: 1
+--- !u!1 &197628354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 197628356}
+  - component: {fileID: 197628355}
+  m_Layer: 0
+  m_Name: ObjectPoolObstacleDown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &197628355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197628354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6ce83d74933784a8bb3b96d4016d0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 25
+  objectToPool: {fileID: 3517040841658587091, guid: 680a2b861c796f349b7907569b5dd763, type: 3}
+  overtakeText: {fileID: 0}
+  mapSprites: []
+--- !u!4 &197628356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197628354}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &216818289
 GameObject:
   m_ObjectHideFlags: 0
@@ -35415,13 +35463,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1577061386}
-  pool: {fileID: 314338016}
+  pool: {fileID: 197628355}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
   densityCollider: {fileID: 880804982}
   laneSpeed: 60
-  spawnTime: 1.5
+  spawnTime: 4
   isPoliceEvent: 0
 --- !u!114 &1759088692
 MonoBehaviour:
@@ -46000,8 +46048,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.000049948692, y: 1.40175, z: 0}
-    m_Extent: {x: 2.00605, y: 2.6069498, z: 0}
+    m_Center: {x: -0.007999957, y: 1.40105, z: 0}
+    m_Extent: {x: 1.9988, y: 2.6055498, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -57372,6 +57420,7 @@ SceneRoots:
   - {fileID: 1999443273}
   - {fileID: 522308650}
   - {fileID: 314338017}
+  - {fileID: 197628356}
   - {fileID: 1564572544}
   - {fileID: 1417943741}
   - {fileID: 1238921875}

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carName: Monster Truck
   topSpeed: 150
-  acceleration: 25
-  brakingPower: 40
+  acceleration: 17
+  brakingPower: 34
   lowSpeedHandling: 3
   highSpeedHandling: 3.5
   carSprite: {fileID: 22038423, guid: 1e607790bfa04ee479296d3f28ac0993, type: 3}

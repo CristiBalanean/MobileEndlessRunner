@@ -25,13 +25,11 @@ public class StartRainParticle : MonoBehaviour
             StartParticle();
 
         weatherManager.StartParticles.AddListener(StartParticle);
-        weatherManager.StopParticles.AddListener(StopParticle);
     }
 
     private void OnDisable()
     {
         weatherManager.StartParticles.RemoveListener(StartParticle);
-        weatherManager.StopParticles.RemoveListener(StopParticle);
     }
 
     public void StartParticle()

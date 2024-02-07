@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpawnPoint : MonoBehaviour
 {
@@ -51,16 +52,43 @@ public class SpawnPoint : MonoBehaviour
 
     private void SpawnVehicle()
     {
-        if (CheckIfCanSpawn() && CheckLaneDensity() <= maxLaneDensity)
+        if (SceneManager.GetActiveScene().name == "TwoWaysGameMode" && (transform.name == "SpawnPoint1" || transform.name == "SpawnPoint2"))
         {
-            GameObject car = pool.GetPooledObject();
-            if(car != null)
+            int numberOfVehiclesToSpawn = Random.Range(1, 5); // Randomly choose between 1 and 3 vehicles to spawn
+
+            for (int i = 0; i < numberOfVehiclesToSpawn; i++)
             {
-                car.transform.position = transform.position;
-                car.GetComponent<Obstacle>().topSpeed = (Random.Range(50, 60) + CarMovement.Instance.speedMultiplier) / 3.6f;
-                car.SetActive(true);
-                currentTime = spawnTime;
+                SpawnSingleVehicleWithOffset(i);
             }
+        }
+        else
+        {
+            if (CheckIfCanSpawn() && CheckLaneDensity() <= maxLaneDensity)
+            {
+                GameObject car = pool.GetPooledObject();
+                if (car != null)
+                {
+                    car.transform.position = transform.position;
+                    //car.GetComponent<Obstacle>().topSpeed = (Random.Range(50, 60) + CarMovement.Instance.speedMultiplier) / 3.6f;
+                    car.SetActive(true);
+                    currentTime = Random.Range(spawnTime - 1f, spawnTime + 1f);
+                }
+            }
+        }
+    }
+
+    private void SpawnSingleVehicleWithOffset(int index)
+    {
+        GameObject car = pool.GetPooledObject();
+        if (car != null)
+        {
+            // Random y-offset to prevent overlap
+            float yOffset = index * 4.5f; // Adjust the multiplier as needed
+
+            car.transform.position = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
+            //car.GetComponent<Obstacle>().topSpeed = (Random.Range(50, 60) + CarMovement.Instance.speedMultiplier) / 3.6f;
+            car.SetActive(true);
+            currentTime = spawnTime;
         }
     }
 
