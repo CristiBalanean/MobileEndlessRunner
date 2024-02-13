@@ -16,14 +16,8 @@ public class HelicopterAI : MonoBehaviour
         target = CarMovement.Instance.transform;
         targetRigidbody = target.GetComponent<Rigidbody2D>();
         rigidBody = GetComponent<Rigidbody2D>();
-
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
-    private void OnDestroy()
-    {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-    }
 
     private void Start()
     {
@@ -60,11 +54,5 @@ public class HelicopterAI : MonoBehaviour
 
         if (distance > 15)
             Destroy(gameObject);
-    }
-
-    private void OnGameStateChanged(GameState newGameState)
-    {
-        enabled = newGameState == GameState.Gameplay;
-        rigidBody.simulated = newGameState == GameState.Gameplay;
     }
 }

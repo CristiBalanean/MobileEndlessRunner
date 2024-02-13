@@ -22,12 +22,6 @@ public class PoliceSpawning : MonoBehaviour
         instance = this;
         currentNumberOfCars = 0;
         currentNumberOfCarsToSpawn = totalNumberOfCarsToSpawn;
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-    }
-
-    private void OnDestroy()
-    {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     public void SetupPoliceCars()
@@ -66,10 +60,5 @@ public class PoliceSpawning : MonoBehaviour
             yield return new WaitForSeconds(5f);
             SpawnPoliceCar();
         }
-    }
-
-    private void OnGameStateChanged(GameState newGameState)
-    {
-        enabled = newGameState == GameState.Gameplay;
     }
 }

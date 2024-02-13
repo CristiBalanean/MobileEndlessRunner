@@ -19,15 +19,11 @@ public class WorldLight : MonoBehaviour
     {
         worldLight = GetComponent<Light2D>();
         timeManager.WorldTimeChanged += OnWorldTimeChange;
-
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     private void OnDestroy()
     {
         timeManager.WorldTimeChanged -= OnWorldTimeChange;
-
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     private void OnWorldTimeChange(object sender, TimeSpan newTime)
@@ -38,10 +34,5 @@ public class WorldLight : MonoBehaviour
     private float PercentOfDay(TimeSpan timeSpan)
     {
         return (float)timeSpan.TotalMinutes % 1440 / 1440;
-    }
-
-    private void OnGameStateChanged(GameState newGameState)
-    {
-        enabled = newGameState == GameState.Gameplay;
     }
 }

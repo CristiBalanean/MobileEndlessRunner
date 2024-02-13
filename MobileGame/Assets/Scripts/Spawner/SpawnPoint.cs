@@ -15,16 +15,6 @@ public class SpawnPoint : MonoBehaviour
     private int maxLaneDensity;
     public bool isPoliceEvent = false;
 
-    private void Awake()
-    {
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-    }
-
-    private void OnDestroy()
-    {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-    }
-
     private void Start()
     {
         currentTime = spawnTime;
@@ -132,10 +122,5 @@ public class SpawnPoint : MonoBehaviour
     public void PoliceEventIsEnding()
     {
         isPoliceEvent = false;
-    }
-
-    private void OnGameStateChanged(GameState newGameState)
-    {
-        enabled = newGameState == GameState.Gameplay;
     }
 }

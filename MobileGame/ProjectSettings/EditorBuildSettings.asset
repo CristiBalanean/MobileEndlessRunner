@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TwoWaysGameMode.unity
     guid: 463525695e85eea489552efdf44df720
+  - enabled: 1
+    path: Assets/Scenes/TimeGameMode.unity
+    guid: e2f8e8f61dbb28a49aa9d2710d16e847
   m_configObjects: {}

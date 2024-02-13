@@ -34,15 +34,8 @@ public class PowerupManager : MonoBehaviour
             trail.emitting = false;
         slowdownGO.SetActive(false);
 
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-
         if (PowerUpData.Instance.currentPowerUp is Shield)
             isShield = true;
-    }
-
-    private void OnDestroy()
-    {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     public void Activate()
@@ -100,10 +93,5 @@ public class PowerupManager : MonoBehaviour
                 trail.emitting = false;
             SoundManager.instance.NormalSounds();
         }
-    }
-
-    private void OnGameStateChanged(GameState newGameState)
-    {
-        enabled = newGameState == GameState.Gameplay;
     }
 }

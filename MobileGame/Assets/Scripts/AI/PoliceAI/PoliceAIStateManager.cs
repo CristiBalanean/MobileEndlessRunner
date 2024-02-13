@@ -37,8 +37,6 @@ public class PoliceAIStateManager : MonoBehaviour
         aiCollider = GetComponentInChildren<Collider2D>();
         cameraShake = GameObject.Find("Main Camera").GetComponent<CameraCollisionShake>();
 
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-
         PoliceEvent policeEvent = GameObject.Find("PoliceEventManager")?.GetComponent<PoliceEvent>();
         if(policeEvent != null )
             policeEvent.BackDownEvent.AddListener(BackDown);
@@ -46,7 +44,6 @@ public class PoliceAIStateManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
         PoliceEvent policeEvent = GameObject.Find("PoliceEventManager")?.GetComponent<PoliceEvent>();
         if (policeEvent != null)
             policeEvent.BackDownEvent.RemoveListener(BackDown);
@@ -104,12 +101,6 @@ public class PoliceAIStateManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void OnGameStateChanged(GameState newGameState)
-    {
-        enabled = newGameState == GameState.Gameplay;
-        rigidBody.simulated = newGameState == GameState.Gameplay;
     }
 
     private void BackDown()

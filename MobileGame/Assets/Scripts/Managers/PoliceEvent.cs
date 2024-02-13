@@ -28,12 +28,6 @@ public class PoliceEvent : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-    }
-
-    private void OnDestroy()
-    {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     private void Start()
@@ -81,6 +75,7 @@ public class PoliceEvent : MonoBehaviour
         canSpawnTraps = true;
         yield return new WaitForSeconds(30f);
         canSpawnTraps = false;
+        hasStarted = false;
         yield return new WaitForSeconds(5f);
         DestroyProps();
         EndEvent();
@@ -89,7 +84,6 @@ public class PoliceEvent : MonoBehaviour
     public void EndEvent()
     {
         Debug.Log("Event Has Ended!");
-        hasStarted = false;
         BackDownEvent?.Invoke();
         carsUpAheadText.SetActive(true);
         var animator = carsUpAheadText.GetComponent<Animator>();
@@ -123,16 +117,6 @@ public class PoliceEvent : MonoBehaviour
         StartSpawningCars?.Invoke();
         ChangeCameraOffsetToNormal?.Invoke();
         InvokeRepeating("PoliceEventChance", 30f, 2.5f);
-    }
-
-    private void OnGameStateChanged(GameState newGameState)
-    {
-        enabled = newGameState == GameState.Gameplay;
-
-        if (enabled)
-            InvokeRepeating("PoliceEventChance", 10f, 2.5f);
-        else
-            CancelInvoke("PoliceEventChance");
     }
 
     private void SpawnHelicopter()

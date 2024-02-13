@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-
+using UnityEngine.UI;
 
 public class MapManager : MonoBehaviour
 {
@@ -12,9 +12,12 @@ public class MapManager : MonoBehaviour
     [SerializeField] private string normalModeScene;
     [SerializeField] private string chaosModeScene;
 
+    [SerializeField] private Sprite[] mapSprites;
+
     [SerializeField] private Animator transition;
 
     [SerializeField] private TMP_Text buttonText;
+    [SerializeField] private Button button;
 
     [SerializeField] int mapsNumber = 3;
     int index = 0;
@@ -51,7 +54,9 @@ public class MapManager : MonoBehaviour
 
     private void ChangeButtonText()
     {
-        switch(index)
+        button.GetComponent<Image>().sprite = mapSprites[index];
+
+        switch (index)
         {
             case 0:
                 buttonText.text = "FOREST";

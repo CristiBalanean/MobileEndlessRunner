@@ -19,17 +19,10 @@ public class Obstacle : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
 
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-
         CarGraphics carGraphics = SpritePool.Instance.ChooseSprite();
         GetComponent<SpriteRenderer>().sprite = carGraphics.GetSprite();
         GameObject collider = Instantiate(carGraphics.GetCollider(), transform.position, Quaternion.identity);
         collider.transform.parent = transform;
-    }
-
-    private void OnDestroy()
-    {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     private void OnEnable()
@@ -68,11 +61,5 @@ public class Obstacle : MonoBehaviour
             else if (player.transform.position.y > transform.position.y && distance > 10f)
                 gameObject.SetActive(false);
         }
-    }
-
-    private void OnGameStateChanged(GameState newGameState)
-    {
-        enabled = newGameState == GameState.Gameplay;
-        rigidBody.simulated = newGameState == GameState.Gameplay;
     }
 }

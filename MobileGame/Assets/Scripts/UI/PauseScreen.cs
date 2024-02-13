@@ -12,14 +12,14 @@ public class PauseScreen : MonoBehaviour
     [SerializeField] private TMP_Text countDownText;
     [SerializeField] private int countDownTime;
     [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private CameraShake cameraShake;
     private int currentCountDownTime;
 
     private void OnEnable()
     {
-        GameState newGameState = GameState.Paused;
-
+        Time.timeScale = 0;
+        cameraShake.enabled = false;
         audioMixer.SetFloat("SoundParam", -80);
-        GameStateManager.Instance.SetState(newGameState);
     }
 
     public void ReturnButton()
@@ -41,6 +41,7 @@ public class PauseScreen : MonoBehaviour
 
     IEnumerator LoadLevel(string scene)
     {
+        Time.timeScale = 1;
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(scene);
@@ -71,8 +72,8 @@ public class PauseScreen : MonoBehaviour
         else
             audioMixer.SetFloat("SoundParam", 0);
 
-        GameState newGameState = GameState.Gameplay;
-        GameStateManager.Instance.SetState(newGameState);
+        Time.timeScale = 1f;
+        cameraShake.enabled = true;
 
         countDownText.gameObject.SetActive(false);
     }

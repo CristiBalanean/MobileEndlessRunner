@@ -22,13 +22,6 @@ public class TimeManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-    }
-
-    private void OnDestroy()
-    {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     private void Start()
@@ -65,15 +58,5 @@ public class TimeManager : MonoBehaviour
 
             yield return new WaitForSeconds(minuteLength);
         }
-    }
-
-    private void OnGameStateChanged(GameState newGameState)
-    {
-        enabled = newGameState == GameState.Gameplay;
-
-        if(enabled)
-            StartCoroutine(AddMinute());
-        else
-            StopAllCoroutines();
     }
 }

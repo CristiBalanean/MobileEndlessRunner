@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class AIHealth : MonoBehaviour
     [SerializeField] private Material beginningMaterial;
     [SerializeField] private Material explodedCarMaterial;
     [SerializeField] private GameObject explosionGO;
+    public CameraCollisionShake cameraShake;
 
     private Animator aiAnimator;
     private SpriteRenderer spriteRenderer;
@@ -18,6 +20,7 @@ public class AIHealth : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         aiCollider = GameObject.FindGameObjectWithTag("AiCollider").GetComponents<Collider2D>();
         aiAnimator.enabled = false;
+        cameraShake = GameObject.Find("Main Camera").GetComponent<CameraCollisionShake>();
     }
 
     private void OnEnable()
@@ -42,6 +45,7 @@ public class AIHealth : MonoBehaviour
 
     public void TriggerExplosion()
     {
+        StartCoroutine(cameraShake.Shake(.5f, .5f, 5f));
         ScoreManager.Instance.AddToScore(5000);
         spriteRenderer.material = explodedCarMaterial;
         GameObject explosion = Instantiate(explosionGO, transform.position, Quaternion.identity);

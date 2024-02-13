@@ -51,7 +51,7 @@ public class PoliceAICollision : MonoBehaviour
                 float distance = Vector2.Distance(transform.position, CarMovement.Instance.transform.position);
                 if (distance < 5f)
                 {
-                    //StartCoroutine(cameraShake.Shake(.1f, .1f, 1f));
+                    StartCoroutine(cameraShake.Shake(.1f, .1f, 1f));
                     SoundManager.instance.Play("Crash");
                 }
             }

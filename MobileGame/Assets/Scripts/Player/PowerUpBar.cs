@@ -18,8 +18,6 @@ public class PowerUpBar : MonoBehaviour
     public float currentTime;
     private bool isPressed = false;
     private bool isPaused = false;
-    private bool isFilling = true;
-    [SerializeField] private bool firstTime = true;
     private PowerupManager powerupManager;
 
     private void Awake()
@@ -28,16 +26,12 @@ public class PowerUpBar : MonoBehaviour
 
         powerupManager.EmptyBar += EmptyBar;
         powerupManager.FillBar += FillBar;
-
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     private void OnDestroy()
     {
         powerupManager.EmptyBar -= EmptyBar;
         powerupManager.FillBar -= FillBar;
-
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     private void Start()
@@ -61,8 +55,6 @@ public class PowerUpBar : MonoBehaviour
 
     private IEnumerator EmptyBar()
     {
-        isFilling = false;
-
         while (currentTime > 0)
         {
             if (isPaused)
@@ -78,8 +70,6 @@ public class PowerUpBar : MonoBehaviour
 
     private IEnumerator FillBar()
     {
-        isFilling = true;
-
         while (currentTime < powerUpCountdown)
         {
             if (isPaused)
@@ -105,34 +95,5 @@ public class PowerUpBar : MonoBehaviour
         {
             powerupDeactivation.Invoke();
         }
-    }
-
-    private void OnGameStateChanged(GameState newGameState)
-    {
-        Debug.Log("caca"); // asta o scris o Dani
-
-        enabled = newGameState == GameState.Gameplay;
-        if (!enabled)
-            isPaused = true;
-        else
-        {
-            isPaused = false;
-            if (!firstTime)
-            {
-                if (isFilling)
-                {
-                    StartCoroutine(FillBar());
-                    Debug.Log("Filling");
-                }
-                else
-                {
-                    StartCoroutine(EmptyBar());
-                    Debug.Log("Emptying");
-                }
-            }
-        }
-
-        if (firstTime)
-            firstTime = false;
     }
 }

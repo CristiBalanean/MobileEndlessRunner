@@ -16,7 +16,7 @@ public class MonsterTruckCollision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        StartCoroutine(cameraShake.Shake(.5f, .5f, 1f));
+        //StartCoroutine(cameraShake.Shake(.5f, .5f, 1f));
         SoundManager.instance.Play("Crash");
 
         if(collision.transform.CompareTag("Police"))

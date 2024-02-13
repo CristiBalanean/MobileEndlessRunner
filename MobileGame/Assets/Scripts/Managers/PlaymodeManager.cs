@@ -11,6 +11,7 @@ public class PlaymodeManager : MonoBehaviour
     [SerializeField] private string menuScene;
     [SerializeField] private string normalModeScene;
     [SerializeField] private string twoWaysModeScene;
+    [SerializeField] private string timeModeScene;
     [SerializeField] private string chaosModeScene;
     [SerializeField] private string mapSelectScene;
     [SerializeField] private TMP_Text playmodeNameText;
@@ -84,6 +85,13 @@ public class PlaymodeManager : MonoBehaviour
                 break;
 
             case 2:
+                playmodeNameText.text = "TIME MODE";
+                lockImage.gameObject.SetActive(false);
+                playmodeButton.interactable = true;
+                playmodeHighscoreText.text = "HIGHSCORE: " + PlayerPrefs.GetInt("TimeHighscore").ToString();
+                break;
+
+            case 3:
                 playmodeNameText.text = "CHAOS MODE";
                 if (!monsterTruck.IsUnlocked())
                 {
@@ -114,6 +122,10 @@ public class PlaymodeManager : MonoBehaviour
                 break;
 
             case 2:
+                GameModeData.instance.gameMode = timeModeScene;
+                break;
+
+            case 3:
                 GameModeData.instance.gameMode = chaosModeScene;
                 break;
         }

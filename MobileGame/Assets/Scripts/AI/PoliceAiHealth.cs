@@ -15,7 +15,7 @@ public class PoliceAiHealth : MonoBehaviour
     private Animator aiAnimator;
     private SpriteRenderer spriteRenderer;
     private Collider2D[] aiCollider;
-    private bool isDead = false; // Flag to prevent multiple calls to DeathTrigger
+    [SerializeField] private bool isDead = false; // Flag to prevent multiple calls to DeathTrigger
 
     private void Awake()
     {

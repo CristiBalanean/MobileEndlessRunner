@@ -27,8 +27,8 @@ public class PoliceAIHookState : PoliceAIBaseState
         // Add LineRenderer to visualize the joint
         lineRenderer = police.gameObject.AddComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
-        lineRenderer.startWidth = 0.05f;
-        lineRenderer.endWidth = 0.05f;
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
         lineRenderer.sortingOrder = 1;
         lineRenderer.material = police.hookMaterial;
 

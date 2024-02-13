@@ -27,12 +27,6 @@ public class PoliceEventManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-    }
-
-    private void OnDestroy()
-    {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     void Start()
@@ -82,15 +76,5 @@ public class PoliceEventManager : MonoBehaviour
         Debug.Log("Event Has Ended!");
         yield return new WaitForSeconds(3f);
         hasStarted = false;
-    }
-
-    private void OnGameStateChanged(GameState newGameState)
-    {
-        enabled = newGameState == GameState.Gameplay;
-
-        if (enabled)
-            InvokeRepeating("PoliceEventChance", 30f, 2.5f);
-        else
-            CancelInvoke("PoliceEventChance");
     }
 }

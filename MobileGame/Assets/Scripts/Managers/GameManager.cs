@@ -20,10 +20,8 @@ public class GameManager : MonoBehaviour
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
         AudioListener.pause = false;
-        GameState newGameState = GameState.Gameplay;
-        GameStateManager.Instance.SetState(newGameState);
-        newGameState = GameState.Paused;
-        GameStateManager.Instance.SetState(newGameState);
+
+        Time.timeScale = 0;
 
         SoundManager.instance.Play("Ambience");
         SoundManager.instance.Play("Main Theme");
@@ -48,10 +46,7 @@ public class GameManager : MonoBehaviour
         else
             audioMixer.SetFloat("MusicParam", 0);
 
-        if (PlayerPrefs.HasKey("Sound"))
-            audioMixer.SetFloat("SoundParam", Mathf.Log10(PlayerPrefs.GetFloat("Sound")) * 20);
-        else
-            audioMixer.SetFloat("SoundParam", 0);
+        audioMixer.SetFloat("SoundParam", -80);
     }
 
     private void Update()
@@ -61,9 +56,12 @@ public class GameManager : MonoBehaviour
             isPlaying = true;
             tapToPlayText.SetActive(false);
 
-            GameState newGameState = GameState.Gameplay;
+            if (PlayerPrefs.HasKey("Sound"))
+                audioMixer.SetFloat("SoundParam", Mathf.Log10(PlayerPrefs.GetFloat("Sound")) * 20);
+            else
+                audioMixer.SetFloat("SoundParam", 0);
 
-            GameStateManager.Instance.SetState(newGameState);
+            Time.timeScale = 1;
         }
     }
 
