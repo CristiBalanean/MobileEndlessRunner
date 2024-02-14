@@ -98,6 +98,8 @@ public class ScoreManager : MonoBehaviour
     {
         if (GetFinalScore() > PlayerPrefs.GetInt("HighScore"))
         {
+            GoogleSignIn.SetHighscoreLeaderboard(GetFinalScore());
+
             if (SceneManager.GetActiveScene().name == "SampleScene")
                 PlayerPrefs.SetInt("HighScore", GetFinalScore());
             else if (SceneManager.GetActiveScene().name == "MonsterTruckGameMode")

@@ -1,60 +1,27 @@
+using System.Security.Authentication;
+using System.Threading.Tasks;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Services.Authentication;
+using Unity.Services.Core;
 using UnityEngine;
 
-public class LeaderboardManager : MonoBehaviour
+public class GoogleIntegration : MonoBehaviour
 {
-    public static LeaderboardManager instance;
-
-    public bool connectedToGooglePlay;
-
-    private void Awake()
-    {
-        DontDestroyOnLoad(this);
-
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
-
-        PlayGamesPlatform.DebugLogEnabled = true;
-        PlayGamesPlatform.Activate();
-    }
-
-    private void Start()
-    {
-        LogIntoGooglePlay();
-    }
-
-    public void LogIntoGooglePlay()
+    public void Start()
     {
         PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
     }
 
-    private void ProcessAuthentication(SignInStatus status)
+    internal void ProcessAuthentication(SignInStatus status)
     {
         if (status == SignInStatus.Success)
         {
-            connectedToGooglePlay = true;
+            Debug.Log("Success");
         }
-
         else
-            connectedToGooglePlay = false;
-    }
-
-    public void SendToLeaderboard(int score)
-    {
-        if (connectedToGooglePlay) 
         {
-            Social.ReportScore(score, GPGSIds.leaderboard_highwaydashleaderboard, LeaderboardUpdate);
+            Debug.Log("Failure");
         }
-    }
-
-    private void LeaderboardUpdate(bool success)
-    {
-        if (success) Debug.Log("Updated Leaderboard");
-        else Debug.Log("Updating Leaderboard Failed!");
     }
 }

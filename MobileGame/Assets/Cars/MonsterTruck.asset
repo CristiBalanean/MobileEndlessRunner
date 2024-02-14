@@ -20,5 +20,5 @@ MonoBehaviour:
   highSpeedHandling: 3.5
   carSprite: {fileID: 22038423, guid: 1e607790bfa04ee479296d3f28ac0993, type: 3}
   carPrice: 250000
-  unlocked: 1
+  unlocked: 0
   colliderPrefab: {fileID: 1203725089412988513, guid: 202cfaa0cf1833c4e82b3017b16902d1, type: 3}
