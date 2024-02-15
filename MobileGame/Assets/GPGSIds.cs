@@ -24,7 +24,10 @@
 
 public static class GPGSIds
 {
-        public const string leaderboard_highway_dash = "CgkIvZqi8NgeEAIQAg"; // <GPGSID>
+        public const string leaderboard_chaos_mode = "CgkIvZqi8NgeEAIQBQ"; // <GPGSID>
+        public const string leaderboard_two_ways_mode = "CgkIvZqi8NgeEAIQAw"; // <GPGSID>
+        public const string leaderboard_normal_mode = "CgkIvZqi8NgeEAIQAg"; // <GPGSID>
+        public const string leaderboard_time_mode = "CgkIvZqi8NgeEAIQBA"; // <GPGSID>
 
 }
 

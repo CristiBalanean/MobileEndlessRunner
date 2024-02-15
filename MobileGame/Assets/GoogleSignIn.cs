@@ -35,15 +35,4 @@ public class GoogleSignIn : MonoBehaviour
     {
         Social.ShowLeaderboardUI();
     }
-
-    public static void SetHighscoreLeaderboard(int score)
-    {
-        Social.ReportScore(score, GPGSIds.leaderboard_highway_dash, LeaderboardUpdate);
-    }
-
-    private static void LeaderboardUpdate(bool success)
-    {
-        if (success) Debug.Log("Success");
-        else Debug.Log("Failed");
-    }
 }

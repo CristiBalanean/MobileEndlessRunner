@@ -96,14 +96,39 @@ public class ScoreManager : MonoBehaviour
 
     public void SetHighscore()
     {
-        if (GetFinalScore() > PlayerPrefs.GetInt("HighScore"))
+        switch(SceneManager.GetActiveScene().name)
         {
-            GoogleSignIn.SetHighscoreLeaderboard(GetFinalScore());
+            case "SampleScene":
+                if(GetFinalScore() > PlayerPrefs.GetInt("HighScore"))
+                {
+                    Social.ReportScore(GetFinalScore(), GPGSIds.leaderboard_normal_mode, LeaderboardUpdate);
+                    PlayerPrefs.SetInt("HighScore", GetFinalScore());
+                }
+                break;
 
-            if (SceneManager.GetActiveScene().name == "SampleScene")
-                PlayerPrefs.SetInt("HighScore", GetFinalScore());
-            else if (SceneManager.GetActiveScene().name == "MonsterTruckGameMode")
-                PlayerPrefs.SetInt("MonsterTruckHighScore", GetFinalScore());
+            case "TwoWaysGameMode":
+                if (GetFinalScore() > PlayerPrefs.GetInt("TwoWaysHighscore"))
+                {
+                    Social.ReportScore(GetFinalScore(), GPGSIds.leaderboard_two_ways_mode, LeaderboardUpdate);
+                    PlayerPrefs.SetInt("TwoWaysHighscore", GetFinalScore());
+                }
+                break;
+
+            case "TimeGameMode":
+                if (GetFinalScore() > PlayerPrefs.GetInt("TimeHighscore"))
+                {
+                    Social.ReportScore(GetFinalScore(), GPGSIds.leaderboard_time_mode, LeaderboardUpdate);
+                    PlayerPrefs.SetInt("TimeHighscore", GetFinalScore());
+                }
+                break;
+
+            case "MonsterTruckGameMode":
+                if (GetFinalScore() > PlayerPrefs.GetInt("MonsterTruckHighScore"))
+                {
+                    Social.ReportScore(GetFinalScore(), GPGSIds.leaderboard_chaos_mode, LeaderboardUpdate);
+                    PlayerPrefs.SetInt("MonsterTruckHighScore", GetFinalScore());
+                }
+                break;
         }
     }
 
@@ -117,5 +142,11 @@ public class ScoreManager : MonoBehaviour
         overtakeText.transform.position = player.transform.position;
         overtakeText.GetComponentInChildren<TMP_Text>().text = "+" + (overtakeCounter * 100).ToString();
         overtakeText.SetActive(true);
+    }
+
+    private static void LeaderboardUpdate(bool success)
+    {
+        if (success) Debug.Log("Success");
+        else Debug.Log("Failed");
     }
 }

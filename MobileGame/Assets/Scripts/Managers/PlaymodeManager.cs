@@ -103,7 +103,7 @@ public class PlaymodeManager : MonoBehaviour
                 {
                     playmodeButton.interactable = true;
                     lockImage.gameObject.SetActive(false);
-                    playmodeHighscoreText.text = "HIGHSCORE: " + PlayerPrefs.GetString("MonsterTruckHighScore").ToString();
+                    playmodeHighscoreText.text = "HIGHSCORE: " + PlayerPrefs.GetInt("MonsterTruckHighScore").ToString();
                 }
                 break;
         }
