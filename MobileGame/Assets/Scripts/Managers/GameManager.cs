@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject tapToPlayText;
     [SerializeField] private GameObject postProcessingVolume;
     [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private TutorialManager tutorialManager;
 
     private bool isPlaying = false;
 
@@ -53,16 +54,27 @@ public class GameManager : MonoBehaviour
     {
         if((Input.GetMouseButton(0) || Input.touchCount > 0) && !isPlaying)
         {
-            isPlaying = true;
-            tapToPlayText.SetActive(false);
-
-            if (PlayerPrefs.HasKey("Sound"))
-                audioMixer.SetFloat("SoundParam", Mathf.Log10(PlayerPrefs.GetFloat("Sound")) * 20);
-            else
-                audioMixer.SetFloat("SoundParam", 0);
-
-            Time.timeScale = 1;
+            StartCoroutine(StartGame());
         }
+    }
+
+    private IEnumerator StartGame()
+    {
+        isPlaying = true;
+        tapToPlayText.SetActive(false);
+
+        if (PlayerPrefs.HasKey("Sound"))
+            audioMixer.SetFloat("SoundParam", Mathf.Log10(PlayerPrefs.GetFloat("Sound")) * 20);
+        else
+            audioMixer.SetFloat("SoundParam", 0);
+
+        Time.timeScale = 1;
+
+        yield return new WaitForSeconds(2f);
+
+        tutorialManager.gameObject.SetActive(true);
+        if(PowerUpData.Instance.currentPowerUp != null)
+            tutorialManager.ShowPopupPowerups();
     }
 
     public void ChangePostProcessingSettings()

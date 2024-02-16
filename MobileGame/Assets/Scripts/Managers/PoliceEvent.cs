@@ -67,6 +67,7 @@ public class PoliceEvent : MonoBehaviour
         CancelInvoke("PoliceEventChance");
         isPreparing = false;
         hasStarted = true;
+        TutorialManager.instance.ShowPopUpPolice();
         ChangeCameraOffsetToPolice?.Invoke();
         policeSpawning.SetupPoliceCars();
         StartCoroutine(policeSpawning.StartSpawning());

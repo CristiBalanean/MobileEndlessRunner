@@ -14,6 +14,8 @@ public class Obstacle : MonoBehaviour
 
     private bool shouldCheckDistance = false;
 
+    public static bool firstCar = false;
+
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -60,6 +62,12 @@ public class Obstacle : MonoBehaviour
                 gameObject.SetActive(false);
             else if (player.transform.position.y > transform.position.y && distance > 10f)
                 gameObject.SetActive(false);
+
+            else if (Vector2.Distance(player.transform.position, transform.position) < 3f && !firstCar)
+            {
+                TutorialManager.instance.ShowPopUpCars();
+                firstCar = true;
+            }
         }
     }
 }
