@@ -30,6 +30,9 @@ public class CarHealth : MonoBehaviour
     {
         //ParticleManager.instance.InstantiateParticle(transform);
         CarMovement.Instance.hasDied = true;
+        if (GamesPlayedManager.instance.gamesPlayed % 5 == 0)
+            AdsManager.instance.interstitialAds.ShowInterstitialAds();
+        GamesPlayedManager.instance.gamesPlayed++;
         deathTrigger.Invoke();
         audioMixer.SetFloat("SoundParam", -80);
     }
