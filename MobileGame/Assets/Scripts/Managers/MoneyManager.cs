@@ -21,11 +21,4 @@ public class MoneyManager : MonoBehaviour
 
         currentMoney = PlayerPrefs.GetInt("Money");
     }
-
-    public void ComputeFinalMoney()
-    {
-        moneyToGive = ScoreManager.Instance.GetFinalScore() / 15 + (int)ScoreManager.Instance.GetDistanceTraveled() / 10;
-        currentMoney += moneyToGive;
-        PlayerPrefs.SetInt("Money", currentMoney);
-    }
 }

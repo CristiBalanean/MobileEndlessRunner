@@ -20,7 +20,7 @@ public class MonsterTruckGas : MonoBehaviour
         gasBar.fillAmount = currentGas / startingGas;
 
         MoneyManager moneyManager = FindObjectOfType<MoneyManager>();
-        deathTrigger.AddListener(moneyManager.ComputeFinalMoney);
+        //deathTrigger.AddListener(moneyManager.ComputeFinalMoney);
     }
 
     private void Update()

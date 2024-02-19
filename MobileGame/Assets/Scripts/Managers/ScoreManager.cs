@@ -149,4 +149,16 @@ public class ScoreManager : MonoBehaviour
         if (success) Debug.Log("Success");
         else Debug.Log("Failed");
     }
+
+    public int ComputeFinalMoney()
+    {
+        int moneyToGive = GetFinalScore() / 15 + (int)GetDistanceTraveled() / 10;
+        return moneyToGive;
+    }
+
+    public void SetFinalMoney(int money)
+    {
+        MoneyManager.Instance.currentMoney += money;
+        PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
+    }
 }

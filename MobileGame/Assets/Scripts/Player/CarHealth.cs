@@ -23,7 +23,7 @@ public class CarHealth : MonoBehaviour
     private void Start()
     {
         MoneyManager moneyManager = FindObjectOfType<MoneyManager>();
-        deathTrigger.AddListener(moneyManager.ComputeFinalMoney);
+        //deathTrigger.AddListener(moneyManager.ComputeFinalMoney);
     }
 
     public void TriggerDeath()
@@ -54,6 +54,11 @@ public class CarHealth : MonoBehaviour
     {
         CarMovement.Instance.hasDied = false;
         hasDied = false;
-        health = 100;
+        health = 15;
+
+        if (PlayerPrefs.HasKey("Sound"))
+            audioMixer.SetFloat("SoundParam", Mathf.Log10(PlayerPrefs.GetFloat("Sound")) * 20);
+        else
+            audioMixer.SetFloat("SoundParam", 0);
     }
 }

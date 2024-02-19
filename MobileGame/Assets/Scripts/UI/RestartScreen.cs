@@ -17,15 +17,21 @@ public class RestartScreen : MonoBehaviour
 
     public bool isRewarded = false;
     public RewardType rewardType;
+    private bool doubleMoney = false;
 
     private void OnEnable()
     {
         restartButton.gameObject.SetActive(true);
         continueButton.gameObject.SetActive(false);
+        doubleMoney = false;
     }
 
     public void RestartGame()
     {
+        if(doubleMoney)
+            ScoreManager.Instance.SetFinalMoney(ScoreManager.Instance.ComputeFinalMoney() * 2);
+        else
+            ScoreManager.Instance.SetFinalMoney(ScoreManager.Instance.ComputeFinalMoney());
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.SetActiveScene(currentScene);
         StartCoroutine(LoadLevel(currentScene.name));
@@ -33,17 +39,14 @@ public class RestartScreen : MonoBehaviour
 
     public void Exit()
     {
+        ScoreManager.Instance.SetFinalMoney(ScoreManager.Instance.ComputeFinalMoney());
         StartCoroutine(LoadLevel("Menu"));
     }
 
     public void SetFinalScore()
     {
         finalScore.text = "FINAL SCORE: " + ScoreManager.Instance.GetFinalScore();
-    }
-
-    public void SetMoneyEarned()
-    {
-        moneyEarned.text = "MONEY EARNED: " + MoneyManager.Instance.moneyToGive.ToString();
+        moneyEarned.text = "MONEY EARNED: " + ScoreManager.Instance.ComputeFinalMoney().ToString();
     }
 
     public void ShowAdRevive()
@@ -88,7 +91,8 @@ public class RestartScreen : MonoBehaviour
         switch (rewardType)
         {
             case RewardType.DoubleMoney:
-                MoneyManager.Instance.ComputeFinalMoney();
+                doubleMoney = true;
+                moneyEarned.text = "MONEY EARNED: " + ScoreManager.Instance.ComputeFinalMoney().ToString() + " x2";
                 break;
 
             case RewardType.Revive:
