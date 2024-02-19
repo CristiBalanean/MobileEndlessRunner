@@ -12,7 +12,7 @@ public class CarHealth : MonoBehaviour
     [SerializeField] private int health;
     [SerializeField] private AudioMixer audioMixer;
 
-    private bool hasDied = false;
+    public bool hasDied = false;
     public bool shield = false;
 
     private void Awake()
@@ -48,5 +48,12 @@ public class CarHealth : MonoBehaviour
             TriggerDeath();
             hasDied = true;
         }
+    }
+
+    public void ContinueGame()
+    {
+        CarMovement.Instance.hasDied = false;
+        hasDied = false;
+        health = 100;
     }
 }

@@ -2681,6 +2681,7 @@ GameObject:
   - component: {fileID: 1729518791}
   - component: {fileID: 1729518792}
   - component: {fileID: 1729518790}
+  - component: {fileID: 1729518796}
   m_Layer: 0
   m_Name: AdsManager
   m_TagString: Untagged
@@ -2726,7 +2727,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ffc575eca74348448f81fccc09fa0e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  androidAdUnitId: Banner_Android
+  _androidAdUnitId: Banner_Android
+  _iOSAdUnitId: Banner_iOS
 --- !u!114 &1729518793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2755,7 +2757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initializeAds: {fileID: 1729518793}
-  bannerAds: {fileID: 1729518792}
+  bannerAds: {fileID: 1729518796}
   rewardedAds: {fileID: 1729518791}
   interstitialAds: {fileID: 1729518790}
   isInitialized: 0
@@ -2774,6 +2776,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1729518796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729518789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7aef0954596624982994da5341ea8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appId: ca-app-pub-3940256099942544~3347511713
 --- !u!1 &1779511677
 GameObject:
   m_ObjectHideFlags: 0

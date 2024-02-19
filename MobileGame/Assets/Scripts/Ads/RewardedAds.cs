@@ -38,18 +38,18 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     #endregion
 
     #region ShowCallbacks
-    public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message) { }
+    public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message) { Debug.Log("Rewarded Ad Failed"); }
 
-    public void OnUnityAdsShowStart(string placementId) { }
+    public void OnUnityAdsShowStart(string placementId) { Debug.Log("Rewarded Ad Started"); }
 
-    public void OnUnityAdsShowClick(string placementId) { }
+    public void OnUnityAdsShowClick(string placementId) { Debug.Log("Rewarded Ad Clicked"); }
 
     public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
     {
-        if (placementId == adUnitId && showCompletionState.Equals(UnityAdsCompletionState.COMPLETED))
-        {
-            Debug.Log("Ad Show Rewarded Complete");
-        }
+        Debug.Log(showCompletionState.ToString());
+        Debug.Log("Ad Show Rewarded Complete");
+        FindObjectOfType<RestartScreen>().isRewarded = true;
+        FindObjectOfType<RestartScreen>().HandleRewardedAdComplete(FindObjectOfType<RestartScreen>().rewardType);
     }
     #endregion
 }

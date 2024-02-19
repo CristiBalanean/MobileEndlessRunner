@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         SoundManager.instance.Play("Ambience");
         SoundManager.instance.Play("Main Theme");
 
-        AdsManager.instance.bannerAds.HideBannerAd();
+        AdsManager.instance.bannerAds.DestroyBanner();
     }
 
     private void Start()

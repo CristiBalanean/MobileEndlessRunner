@@ -27,26 +27,29 @@ public class CoinSpawner : MonoBehaviour
 
     private void SpawnCoins()
     {
-        int numberOfCoins = Random.Range(3, 8);
-        for (int i = 0; i < numberOfCoins; i++)
+        if (!CarHealth.Instance.hasDied)
         {
-            int spawnerNumber = Random.Range(0, spawners.Length);
-            Vector2 spawnerPosition = spawners[spawnerNumber].position;
-
-            // Check if the position is already occupied within a tolerance
-            while (occupiedPositions.Contains(spawnerPosition))
+            int numberOfCoins = Random.Range(3, 8);
+            for (int i = 0; i < numberOfCoins; i++)
             {
-                spawnerPosition += new Vector2(0, offset);
+                int spawnerNumber = Random.Range(0, spawners.Length);
+                Vector2 spawnerPosition = spawners[spawnerNumber].position;
+
+                // Check if the position is already occupied within a tolerance
+                while (occupiedPositions.Contains(spawnerPosition))
+                {
+                    spawnerPosition += new Vector2(0, offset);
+                }
+
+                // Instantiate the coin at the calculated position
+                Instantiate(coinPrefab, spawnerPosition, Quaternion.identity);
+
+                // Mark the position as occupied
+                occupiedPositions.Add(spawnerPosition);
             }
 
-            // Instantiate the coin at the calculated position
-            Instantiate(coinPrefab, spawnerPosition, Quaternion.identity);
-
-            // Mark the position as occupied
-            occupiedPositions.Add(spawnerPosition);
+            // Clear the occupied positions for the next group of coins
+            occupiedPositions.Clear();
         }
-
-        // Clear the occupied positions for the next group of coins
-        occupiedPositions.Clear();
     }
 }

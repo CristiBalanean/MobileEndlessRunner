@@ -42,26 +42,29 @@ public class SpawnPoint : MonoBehaviour
 
     private void SpawnVehicle()
     {
-        if (SceneManager.GetActiveScene().name == "TwoWaysGameMode" && (transform.name == "SpawnPoint1" || transform.name == "SpawnPoint2"))
+        if (!CarHealth.Instance.hasDied)
         {
-            int numberOfVehiclesToSpawn = Random.Range(1, 5); // Randomly choose between 1 and 3 vehicles to spawn
+            if (SceneManager.GetActiveScene().name == "TwoWaysGameMode" && (transform.name == "SpawnPoint1" || transform.name == "SpawnPoint2"))
+            {
+                int numberOfVehiclesToSpawn = Random.Range(1, 5); // Randomly choose between 1 and 3 vehicles to spawn
 
-            for (int i = 0; i < numberOfVehiclesToSpawn; i++)
-            {
-                SpawnSingleVehicleWithOffset(i);
-            }
-        }
-        else
-        {
-            if (CheckIfCanSpawn() && CheckLaneDensity() <= maxLaneDensity)
-            {
-                GameObject car = pool.GetPooledObject();
-                if (car != null)
+                for (int i = 0; i < numberOfVehiclesToSpawn; i++)
                 {
-                    car.transform.position = transform.position;
-                    //car.GetComponent<Obstacle>().topSpeed = (Random.Range(50, 60) + CarMovement.Instance.speedMultiplier) / 3.6f;
-                    car.SetActive(true);
-                    currentTime = Random.Range(spawnTime - 1f, spawnTime + 1f);
+                    SpawnSingleVehicleWithOffset(i);
+                }
+            }
+            else
+            {
+                if (CheckIfCanSpawn() && CheckLaneDensity() <= maxLaneDensity)
+                {
+                    GameObject car = pool.GetPooledObject();
+                    if (car != null)
+                    {
+                        car.transform.position = transform.position;
+                        //car.GetComponent<Obstacle>().topSpeed = (Random.Range(50, 60) + CarMovement.Instance.speedMultiplier) / 3.6f;
+                        car.SetActive(true);
+                        currentTime = Random.Range(spawnTime - 1f, spawnTime + 1f);
+                    }
                 }
             }
         }
