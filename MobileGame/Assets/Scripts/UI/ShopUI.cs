@@ -7,6 +7,8 @@ using UnityEngine.Events;
 public class ShopUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text currentMoneyText;
+    [SerializeField] private GameObject shadowPanel;
+    [SerializeField] private GameObject iapPanel;
 
     private void Start()
     {
@@ -21,5 +23,11 @@ public class ShopUI : MonoBehaviour
     public void UpdateMoney()
     {
         currentMoneyText.text = MoneyManager.Instance.currentMoney.ToString();
+    }
+
+    public void ShowIAPWindow()
+    {
+        shadowPanel.gameObject.SetActive(true);
+        iapPanel.gameObject.SetActive(true);
     }
 }
