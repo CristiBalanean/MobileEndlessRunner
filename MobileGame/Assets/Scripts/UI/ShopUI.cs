@@ -12,22 +12,23 @@ public class ShopUI : MonoBehaviour
 
     private void Start()
     {
-        currentMoneyText.text = MoneyManager.Instance.currentMoney.ToString();
+        currentMoneyText.text = "<sprite=0>" + MoneyManager.Instance.currentMoney.ToString();
     }
 
     private void OnEnable()
     {
-        currentMoneyText.text = MoneyManager.Instance.currentMoney.ToString();
-    }
-
-    public void UpdateMoney()
-    {
-        currentMoneyText.text = MoneyManager.Instance.currentMoney.ToString();
+        currentMoneyText.text = "<sprite=0>" + MoneyManager.Instance.currentMoney.ToString();
     }
 
     public void ShowIAPWindow()
     {
         shadowPanel.gameObject.SetActive(true);
         iapPanel.gameObject.SetActive(true);
+    }
+
+    public void HideIAPWindow() 
+    {
+        shadowPanel.gameObject.SetActive(false);
+        iapPanel.gameObject.SetActive(false);
     }
 }

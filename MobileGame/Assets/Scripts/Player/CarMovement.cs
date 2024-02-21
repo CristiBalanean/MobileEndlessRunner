@@ -36,6 +36,7 @@ public class CarMovement : MonoBehaviour
     private float accelerationHoldDuration = 0;
     private float maxAccelerationHoldDuration = .75f;
     public float maxYVelocity;
+    private float minYVelocity;
 
     private void Awake()
     {
@@ -56,6 +57,7 @@ public class CarMovement : MonoBehaviour
         SoundManager.instance.Play("Engine");
         float speedRatio = (topSpeed - 100f) / 210f;
         maxYVelocity = Mathf.Lerp(30, 50, speedRatio);
+        minYVelocity = 5;
         Debug.Log(maxYVelocity);
     }
 
@@ -106,16 +108,15 @@ public class CarMovement : MonoBehaviour
 
     private void UpdateCurrentSpeed()
     {
-        currentSpeed = Mathf.Lerp(25, topSpeed, rigidBody.velocity.y / maxYVelocity);
+        float speedRatio = (rigidBody.velocity.y - 5) / (maxYVelocity-5);
+        Debug.Log(speedRatio);
+        float displayedSpeed = Mathf.Lerp(25, topSpeed, speedRatio);
+
+        currentSpeed = Mathf.Max(displayedSpeed, 25);
 
         if (currentSpeed > topSpeed)
         {
             currentSpeed = topSpeed;
-        }
-        else if (currentSpeed < 25)
-        {
-            currentSpeed = 25;
-            rigidBody.velocity = Vector2.up * 2.5f;
         }
 
         OnSpeedChange?.Invoke(currentSpeed);
@@ -174,8 +175,8 @@ public class CarMovement : MonoBehaviour
         decelerationFactor = Mathf.Clamp(decelerationFactor, 0.05f, 1);
         float effectiveAcceleration = acceleration * decelerationFactor;
 
-        // Ensure the car does not exceed the maximum Y velocity
-        float targetVelocityY = Mathf.Min(maxYVelocity, currentVelocityY);
+        // Set the Y velocity to the maximum between the current velocity and minYVelocity
+        float targetVelocityY = Mathf.Clamp(currentVelocityY, minYVelocity, maxYVelocity);
 
         // Applying engine acceleration or brake force based on input.y
         if (input.y == 1 && currentVelocityY < maxYVelocity)
@@ -220,7 +221,7 @@ public class CarMovement : MonoBehaviour
             accelerationHoldDuration = 0;
         }
 
-        // Set the Y velocity to the target velocity to ensure it doesn't exceed maxYVelocity
+        // Set the Y velocity to the target velocity to ensure it doesn't go below minYVelocity or exceed maxYVelocity
         rigidBody.velocity = new Vector2(rigidBody.velocity.x, targetVelocityY);
     }
 

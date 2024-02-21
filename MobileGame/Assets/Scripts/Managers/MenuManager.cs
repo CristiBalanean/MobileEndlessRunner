@@ -1,10 +1,24 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Purchasing;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class MenuManager : MonoBehaviour
+[Serializable]
+public class NonConsumableItems
 {
+    public string name;
+    public string id;
+    public string description;
+    public float price;
+}
+
+public class MenuManager : MonoBehaviour, IStoreListener
+{
+    IStoreController storeController;
+
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject chooseControls;
     [SerializeField] private string shopScene;
@@ -12,6 +26,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private string settingsScene;
     [SerializeField] private Animator transition;
     [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private NonConsumableItems nonConsumable;
+    [SerializeField] private Button removeAdsButton;
 
     private const string FirstTimeKey = "IsFirstTime";
 
@@ -44,6 +60,24 @@ public class MenuManager : MonoBehaviour
             audioMixer.SetFloat("SoundParam", Mathf.Log10(PlayerPrefs.GetFloat("Sound")) * 20);
         else
             audioMixer.SetFloat("SoundParam", 0);
+
+        SetupBuilder();
+        CheckNonConsumables(nonConsumable.id);
+    }
+
+    private void SetupBuilder()
+    {
+        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+
+        builder.AddProduct(nonConsumable.id, ProductType.NonConsumable);
+
+        UnityPurchasing.Initialize(this, builder);
+    }
+
+    public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
+    {
+        print("Success");
+        storeController = controller;
     }
 
     public void Play()
@@ -89,4 +123,55 @@ public class MenuManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(scene);
     }
+
+    public void RemoveAds()
+    {
+        storeController.InitiatePurchase(nonConsumable.id);
+    }
+
+    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
+    {
+        var product = purchaseEvent.purchasedProduct;
+        print("Purchase Complete " + product.definition.id);
+
+        AdsManager.instance.adsRemoved = true;
+        AdsManager.instance.bannerAds.DestroyBanner();
+        removeAdsButton.interactable = false;
+
+        return PurchaseProcessingResult.Complete;
+    }
+
+    private void CheckNonConsumables(string id)
+    {
+        if(storeController != null)
+        {
+            var product =storeController.products.WithID(id);
+            if (product != null)
+            {
+                if (product.hasReceipt)
+                {
+                    AdsManager.instance.adsRemoved = true;
+                    AdsManager.instance.bannerAds.DestroyBanner();
+                    removeAdsButton.interactable = false;
+                }
+            }
+        }
+    }
+
+    #region callbacks
+    public void OnInitializeFailed(InitializationFailureReason error)
+    {
+        print("Initialization failed " + error);
+    }
+
+    public void OnInitializeFailed(InitializationFailureReason error, string message)
+    {
+        print("Initialization failed " + error + message);
+    }
+
+    public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
+    {
+        print("Purchase failed");
+    }
+    #endregion
 }

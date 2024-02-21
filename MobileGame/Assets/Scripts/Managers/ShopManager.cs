@@ -1,15 +1,26 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Purchasing;
+using TMPro;
 
-public class ShopManager : MonoBehaviour
+[Serializable]
+public class ConsumableItems
 {
+    public string name;
+    public string id;
+    public string description;
+    public float price;
+}
+
+
+public class ShopManager : MonoBehaviour, IStoreListener
+{
+    IStoreController storeController;
+
+    [SerializeField] private TMP_Text currentMoneyText;
     [SerializeField] private Button carsButton;
     [SerializeField] private Button powerUpsButton;
 
@@ -20,9 +31,31 @@ public class ShopManager : MonoBehaviour
 
     [SerializeField] private Animator transition;
 
+    [SerializeField] private ConsumableItems[] consumableItems;
+
+
     private void Start()
     {
         carsButton.interactable = false;
+        SetupBuilder();
+    }
+
+    private void SetupBuilder()
+    {
+        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+
+        foreach (ConsumableItems cons in consumableItems)
+        {
+            builder.AddProduct(cons.id, ProductType.Consumable);
+        }
+
+        UnityPurchasing.Initialize(this, builder);
+    }
+
+    public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
+    {
+        print("Success");
+        storeController = controller;
     }
 
     public void BackButton()
@@ -53,10 +86,67 @@ public class ShopManager : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
-    public void AddMoney()
+    public void AddMoney10000()
     {
-        MoneyManager.Instance.currentMoney += 100000;
-        PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
-        carsUI.GetComponent<CarsShopManager>().updateMoney?.Invoke();
+        storeController.InitiatePurchase(consumableItems[0].id);
+    }
+
+    public void AddMoney100000()
+    {
+        storeController.InitiatePurchase(consumableItems[1].id);
+    }
+
+    public void AddMoney1000000()
+    {
+        storeController.InitiatePurchase(consumableItems[2].id);
+    }
+
+    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
+    {
+        var product = purchaseEvent.purchasedProduct;
+        print("Purchase Complete " + product.definition.id);
+
+        if(product.definition.id == consumableItems[0].id)
+        {
+            MoneyManager.Instance.currentMoney += 10000;
+            UpdateMoney();
+            PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
+        }
+        else if (product.definition.id == consumableItems[1].id)
+        {
+            MoneyManager.Instance.currentMoney += 100000;
+            UpdateMoney();
+            PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
+        }
+        else if (product.definition.id == consumableItems[2].id)
+        {
+            MoneyManager.Instance.currentMoney += 1000000;
+            UpdateMoney();
+            PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
+        }
+
+        return PurchaseProcessingResult.Complete;
+    }
+
+    #region callbacks
+    public void OnInitializeFailed(InitializationFailureReason error)
+    {
+        print("Initialization failed " + error);
+    }
+
+    public void OnInitializeFailed(InitializationFailureReason error, string message)
+    {
+        print("Initialization failed " + error + message);
+    }
+
+    public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
+    {
+        print("Purchase failed");
+    }
+    #endregion
+
+    public void UpdateMoney()
+    {
+        currentMoneyText.text = "<sprite=0>" + MoneyManager.Instance.currentMoney.ToString();
     }
 }

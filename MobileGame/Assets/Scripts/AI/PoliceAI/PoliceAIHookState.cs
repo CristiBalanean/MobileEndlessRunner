@@ -45,8 +45,16 @@ public class PoliceAIHookState : PoliceAIBaseState
         lineRenderer.SetPosition(0, police.transform.position);
         lineRenderer.SetPosition(1, police.targetRigidbody.position);
 
-        // Add any other logic you need for the AI's behavior
-        police.rigidBody.AddForce(Vector2.down * hookForce);
+        if (police.rigidBody.velocity.y > 0)
+        {
+            police.rigidBody.AddForce(Vector2.down * hookForce); // Add any other logic you need for the AI's behavior
+        }
+        else
+        {
+            // If the AI is not moving upward, stop applying the downward force
+            // This prevents the AI from continuously adding the force once the velocity becomes non-positive
+            police.rigidBody.velocity = new Vector2(police.rigidBody.velocity.x, 0f);
+        }
 
         // Update the timer
         elapsedTime += Time.deltaTime;

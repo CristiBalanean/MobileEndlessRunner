@@ -13,6 +13,7 @@ public class AdsManager : MonoBehaviour
     public static AdsManager instance { get; private set; }
 
     public bool isInitialized = false;
+    public bool adsRemoved = false;
 
     private void Awake()
     {
@@ -33,9 +34,12 @@ public class AdsManager : MonoBehaviour
 
     public void LoadAds()
     {
-        bannerAds.LoadBanner();
+        if (!adsRemoved)
+        {
+            bannerAds.LoadBanner();
+            interstitialAds.LoadInterstitialAds();
+        }
         rewardedAds.LoadRewardedAds();
-        interstitialAds.LoadInterstitialAds();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -44,8 +48,11 @@ public class AdsManager : MonoBehaviour
             bannerAds.DestroyBanner();
         else
         {
-            bannerAds.DestroyBanner();
-            bannerAds.LoadBanner();
+            if (!adsRemoved)
+            {
+                bannerAds.DestroyBanner();
+                bannerAds.LoadBanner();
+            }
         }
     }
 }
