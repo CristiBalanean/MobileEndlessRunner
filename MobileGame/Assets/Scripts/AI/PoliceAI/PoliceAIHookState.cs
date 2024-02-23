@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PoliceAIHookState : PoliceAIBaseState
 {
-    private DistanceJoint2D hookJoint;
-    private LineRenderer lineRenderer;
     private float desiredDistance = 2.5f;
     private float distanceLerpSpeed = 2f;
     private float stateDuration = 2f; // Duration of the Hook State in seconds
@@ -17,20 +15,20 @@ public class PoliceAIHookState : PoliceAIBaseState
         Debug.Log("Hook State");
 
         // Add and configure DistanceJoint2D
-        hookJoint = police.gameObject.AddComponent<DistanceJoint2D>();
-        hookJoint.connectedBody = police.targetRigidbody;
-        hookJoint.autoConfigureDistance = false;
-        hookJoint.enabled = true;
+        police.hookJoint.enabled = true;
+        police.hookJoint.connectedBody = police.targetRigidbody;
+        police.hookJoint.autoConfigureDistance = false;
+        police.hookJoint.enabled = true;
         police.rigidBody.mass = 2;
         hookForce = CarMovement.Instance.acceleration + 3.5f;
 
         // Add LineRenderer to visualize the joint
-        lineRenderer = police.gameObject.AddComponent<LineRenderer>();
-        lineRenderer.positionCount = 2;
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
-        lineRenderer.sortingOrder = 1;
-        lineRenderer.material = police.hookMaterial;
+        police.lineRenderer.enabled = true;
+        police.lineRenderer.positionCount = 2;
+        police.lineRenderer.startWidth = 0.1f;
+        police.lineRenderer.endWidth = 0.1f;
+        police.lineRenderer.sortingOrder = 1;
+        police.lineRenderer.material = police.hookMaterial;
 
         // Reset the timer
         elapsedTime = 0f;
@@ -39,11 +37,11 @@ public class PoliceAIHookState : PoliceAIBaseState
     public override void UpdateState(PoliceAIStateManager police)
     {
         // Gradually approach the desired distance using lerp
-        hookJoint.distance = Mathf.Lerp(hookJoint.distance, desiredDistance, Time.deltaTime * distanceLerpSpeed);
+        police.hookJoint.distance = Mathf.Lerp(police.hookJoint.distance, desiredDistance, Time.deltaTime * distanceLerpSpeed);
 
         // Update LineRenderer positions
-        lineRenderer.SetPosition(0, police.transform.position);
-        lineRenderer.SetPosition(1, police.targetRigidbody.position);
+        police.lineRenderer.SetPosition(0, police.transform.position);
+        police.lineRenderer.SetPosition(1, police.targetRigidbody.position);
 
         if (police.rigidBody.velocity.y > 0)
         {
@@ -62,8 +60,8 @@ public class PoliceAIHookState : PoliceAIBaseState
         // Check if the state should transition to another state after 2 seconds
         if (elapsedTime >= stateDuration)
         {
-            hookJoint.enabled = false;
-            lineRenderer.enabled = false;
+            police.hookJoint.enabled = false;
+            police.lineRenderer.enabled = false;
             police.SwitchState(police.followState); // Replace 'anotherState' with the state you want to transition to
         }
     }

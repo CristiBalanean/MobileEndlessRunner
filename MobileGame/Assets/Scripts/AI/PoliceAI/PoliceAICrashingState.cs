@@ -20,6 +20,7 @@ public class PoliceAICrashingState : PoliceAIBaseState
         {
             hookJoint.enabled = false;
             lineRenderer.enabled = false;
+            police.hookJoint.connectedBody = null;
         }
     }
 

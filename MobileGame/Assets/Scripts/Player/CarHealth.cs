@@ -12,7 +12,7 @@ public class CarHealth : MonoBehaviour
     [SerializeField] private UnityEvent deathTrigger;
     [SerializeField] private int health;
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private Image healthBar;
+    [SerializeField] private Slider healthBar;
 
     public bool hasDied = false;
     public bool shield = false;
@@ -45,7 +45,7 @@ public class CarHealth : MonoBehaviour
             return;
 
         health -= amount;
-        healthBar.fillAmount = (float)health / 15;
+        healthBar.value = (float)health / 15;
         Debug.Log(health / 15);
         if (health <= 0 && !hasDied)
         {

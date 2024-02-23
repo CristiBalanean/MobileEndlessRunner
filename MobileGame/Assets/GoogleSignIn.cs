@@ -35,4 +35,9 @@ public class GoogleSignIn : MonoBehaviour
     {
         Social.ShowLeaderboardUI();
     }
+
+    public void ShowAchievements()
+    {
+        Social.ShowAchievementsUI();
+    }
 }

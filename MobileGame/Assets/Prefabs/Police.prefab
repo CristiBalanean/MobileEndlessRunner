@@ -10105,6 +10105,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   cameraShake: {fileID: 0}
+  isDead: 0
 --- !u!114 &2490502102790732818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10137,6 +10138,8 @@ MonoBehaviour:
   cameraShake: {fileID: 0}
   aiCollider: {fileID: 0}
   hookMaterial: {fileID: -876546973899608171, guid: 62bdf8a86f5e30b4686e3efac28f425b, type: 3}
+  hookJoint: {fileID: 0}
+  lineRenderer: {fileID: 0}
   kd: 1
   kp: 1
 --- !u!114 &-5333300968613753247

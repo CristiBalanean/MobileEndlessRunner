@@ -24,10 +24,20 @@
 
 public static class GPGSIds
 {
-        public const string leaderboard_chaos_mode = "CgkIvZqi8NgeEAIQBQ"; // <GPGSID>
+        public const string achievement_expert = "CgkIvZqi8NgeEAIQCQ"; // <GPGSID>
+        public const string achievement_unlimited_power = "CgkIvZqi8NgeEAIQDw"; // <GPGSID>
+        public const string achievement_pro = "CgkIvZqi8NgeEAIQCA"; // <GPGSID>
+        public const string achievement_car_connoisseur = "CgkIvZqi8NgeEAIQDA"; // <GPGSID>
+        public const string achievement_rookie = "CgkIvZqi8NgeEAIQBw"; // <GPGSID>
+        public const string achievement_escape_artist = "CgkIvZqi8NgeEAIQBg"; // <GPGSID>
+        public const string achievement_monstrous_acquisition = "CgkIvZqi8NgeEAIQDQ"; // <GPGSID>
         public const string leaderboard_two_ways_mode = "CgkIvZqi8NgeEAIQAw"; // <GPGSID>
+        public const string leaderboard_chaos_mode = "CgkIvZqi8NgeEAIQBQ"; // <GPGSID>
+        public const string achievement_master = "CgkIvZqi8NgeEAIQCg"; // <GPGSID>
         public const string leaderboard_normal_mode = "CgkIvZqi8NgeEAIQAg"; // <GPGSID>
+        public const string achievement_master_of_the_multiplier = "CgkIvZqi8NgeEAIQDg"; // <GPGSID>
         public const string leaderboard_time_mode = "CgkIvZqi8NgeEAIQBA"; // <GPGSID>
+        public const string achievement_first_ride = "CgkIvZqi8NgeEAIQCw"; // <GPGSID>
 
 }
 

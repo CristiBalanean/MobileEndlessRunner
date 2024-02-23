@@ -1,3 +1,4 @@
+using GooglePlayGames;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -96,6 +97,8 @@ public class ScoreManager : MonoBehaviour
 
     public void SetHighscore()
     {
+        CheckForAchievements();
+
         switch(SceneManager.GetActiveScene().name)
         {
             case "SampleScene":
@@ -132,9 +135,95 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    private void CheckForAchievements()
+    {
+        if(GetFinalScore() > 10000)
+        {
+            PlayGamesPlatform.Instance.UnlockAchievement("CgkIvZqi8NgeEAIQBw", (bool success) =>
+            {
+                if (success)
+                {
+                    Debug.Log("Achievement unlocked successfully!");
+                    // Do any additional actions you want upon achievement unlock
+                }
+                else
+                {
+                    Debug.LogWarning("Failed to unlock achievement.");
+                    // Handle the case where unlocking the achievement failed
+                }
+            });
+        }
+        if(GetFinalScore() > 100000)
+        {
+            PlayGamesPlatform.Instance.UnlockAchievement("CgkIvZqi8NgeEAIQCA", (bool success) =>
+            {
+                if (success)
+                {
+                    Debug.Log("Achievement unlocked successfully!");
+                    // Do any additional actions you want upon achievement unlock
+                }
+                else
+                {
+                    Debug.LogWarning("Failed to unlock achievement.");
+                    // Handle the case where unlocking the achievement failed
+                }
+            });
+        }
+        if (GetFinalScore() > 500000)
+        {
+            PlayGamesPlatform.Instance.UnlockAchievement("CgkIvZqi8NgeEAIQCQ", (bool success) =>
+            {
+                if (success)
+                {
+                    Debug.Log("Achievement unlocked successfully!");
+                    // Do any additional actions you want upon achievement unlock
+                }
+                else
+                {
+                    Debug.LogWarning("Failed to unlock achievement.");
+                    // Handle the case where unlocking the achievement failed
+                }
+            });
+        }
+        if (GetFinalScore() > 1000000)
+        {
+            PlayGamesPlatform.Instance.UnlockAchievement("CgkIvZqi8NgeEAIQCg", (bool success) =>
+            {
+                if (success)
+                {
+                    Debug.Log("Achievement unlocked successfully!");
+                    // Do any additional actions you want upon achievement unlock
+                }
+                else
+                {
+                    Debug.LogWarning("Failed to unlock achievement.");
+                    // Handle the case where unlocking the achievement failed
+                }
+            });
+        }
+    }
+
     public void IncrementOvertakeCounter()
     {
         overtakeCounter++;
+
+        if(overtakeCounter == 50)
+        {
+            PlayGamesPlatform.Instance.UnlockAchievement("CgkIvZqi8NgeEAIQDg", (bool success) =>
+            {
+                if (success)
+                {
+                    Debug.Log("Achievement unlocked successfully!");
+                    // Do any additional actions you want upon achievement unlock
+                }
+                else
+                {
+                    Debug.LogWarning("Failed to unlock achievement.");
+                    // Handle the case where unlocking the achievement failed
+                }
+            });
+        }
+
         AddToScore(overtakeCounter * 100);
         currentOvertakeComboTime = overtakeComboTime;
 

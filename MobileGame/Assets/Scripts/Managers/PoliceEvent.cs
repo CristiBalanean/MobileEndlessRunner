@@ -1,3 +1,4 @@
+using GooglePlayGames;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -85,6 +86,19 @@ public class PoliceEvent : MonoBehaviour
     public void EndEvent()
     {
         Debug.Log("Event Has Ended!");
+        PlayGamesPlatform.Instance.UnlockAchievement("CgkIvZqi8NgeEAIQBg", (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log("Achievement unlocked successfully!");
+                // Do any additional actions you want upon achievement unlock
+            }
+            else
+            {
+                Debug.LogWarning("Failed to unlock achievement.");
+                // Handle the case where unlocking the achievement failed
+            }
+        });
         BackDownEvent?.Invoke();
         carsUpAheadText.SetActive(true);
         var animator = carsUpAheadText.GetComponent<Animator>();

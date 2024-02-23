@@ -1,3 +1,4 @@
+using GooglePlayGames;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -153,6 +154,21 @@ public class CarsShopManager : MonoBehaviour
     {
         if (MoneyManager.Instance.currentMoney >= cars[i].GetCarPrice())
         {
+            PlayGamesPlatform.Instance.UnlockAchievement("CgkIvZqi8NgeEAIQCw", (bool success) =>
+            {
+                if (success)
+                {
+                    Debug.Log("Achievement unlocked successfully!");
+                    // Do any additional actions you want upon achievement unlock
+                    PlayerPrefs.SetInt("FirstCar", 1);
+                }
+                else
+                {
+                    Debug.LogWarning("Failed to unlock achievement.");
+                    // Handle the case where unlocking the achievement failed
+                }
+            });
+
             select.gameObject.SetActive(true);
             unlock.gameObject.SetActive(false);
             lockedSprite.gameObject.SetActive(false);
@@ -161,11 +177,53 @@ public class CarsShopManager : MonoBehaviour
             MoneyManager.Instance.currentMoney -= cars[i].GetCarPrice();
             PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
 
-            if((carName.text == "Monster Truck" && cars[i].IsUnlocked()))
+            if ((carName.text == "Monster Truck" && cars[i].IsUnlocked()))
+            {
+                PlayGamesPlatform.Instance.UnlockAchievement("CgkIvZqi8NgeEAIQDQ", (bool success) =>
+                {
+                    if (success)
+                    {
+                        Debug.Log("Achievement unlocked successfully!");
+                        // Do any additional actions you want upon achievement unlock
+                        PlayerPrefs.SetInt("FirstCar", 1);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Failed to unlock achievement.");
+                        // Handle the case where unlocking the achievement failed
+                    }
+                });
                 select.interactable = false;
+            }
 
             SaveFile();
             LoadFile();
+
+            bool allUnlocked = true;
+            foreach(var item in cars)
+            {
+                if(!item.IsUnlocked())
+                {
+                    allUnlocked = false;
+                }
+            }
+            if(allUnlocked)
+            {
+                PlayGamesPlatform.Instance.UnlockAchievement("CgkIvZqi8NgeEAIQDA", (bool success) =>
+                {
+                    if (success)
+                    {
+                        Debug.Log("Achievement unlocked successfully!");
+                        // Do any additional actions you want upon achievement unlock
+                        PlayerPrefs.SetInt("FirstCar", 1);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Failed to unlock achievement.");
+                        // Handle the case where unlocking the achievement failed
+                    }
+                });
+            }
         }
         else
             Debug.LogError("Not Enough Money!");

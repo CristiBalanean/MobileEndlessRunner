@@ -1,3 +1,4 @@
+using GooglePlayGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -138,6 +139,21 @@ public class PowerUpShopManager : MonoBehaviour
     {
         if (MoneyManager.Instance.currentMoney >= powerups[index].powerupPrice)
         {
+            PlayGamesPlatform.Instance.UnlockAchievement("CgkIvZqi8NgeEAIQDw", (bool success) =>
+            {
+                if (success)
+                {
+                    Debug.Log("Achievement unlocked successfully!");
+                    // Do any additional actions you want upon achievement unlock
+                    PlayerPrefs.SetInt("FirstCar", 1);
+                }
+                else
+                {
+                    Debug.LogWarning("Failed to unlock achievement.");
+                    // Handle the case where unlocking the achievement failed
+                }
+            });
+
             powerups[index].unlocked = true;
             selectButton.gameObject.SetActive(true);
             unlockButton.gameObject.SetActive(false);

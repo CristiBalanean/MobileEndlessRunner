@@ -109,7 +109,6 @@ public class CarMovement : MonoBehaviour
     private void UpdateCurrentSpeed()
     {
         float speedRatio = (rigidBody.velocity.y - 5) / (maxYVelocity-5);
-        Debug.Log(speedRatio);
         float displayedSpeed = Mathf.Lerp(25, topSpeed, speedRatio);
 
         currentSpeed = Mathf.Max(displayedSpeed, 25);

@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Purchasing;
 
 public class PoliceAIStateManager : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PoliceAIStateManager : MonoBehaviour
     public CameraCollisionShake cameraShake;
     public Collider2D aiCollider;
     public Material hookMaterial;
+    public DistanceJoint2D hookJoint;
+    public LineRenderer lineRenderer;
 
     public float kd;
     public float kp;
@@ -36,6 +39,9 @@ public class PoliceAIStateManager : MonoBehaviour
         avoidance = GetComponent<AvoidanceBehavior>();
         aiCollider = GetComponentInChildren<Collider2D>();
         cameraShake = GameObject.Find("Main Camera").GetComponent<CameraCollisionShake>();
+        hookJoint = gameObject.AddComponent<DistanceJoint2D>();
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+
 
         PoliceEvent policeEvent = GameObject.Find("PoliceEventManager")?.GetComponent<PoliceEvent>();
         if(policeEvent != null )
@@ -53,6 +59,7 @@ public class PoliceAIStateManager : MonoBehaviour
     {
         currentState = followState;
 
+        rigidBody.velocity = Vector2.up * (CarMovement.Instance.GetSpeed() / 5f);
         currentState.EnterState(this);
 
         InvokeRepeating("CheckForDespawn", 5f, 1f);
