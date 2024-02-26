@@ -12850,6 +12850,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57119243d570c54da25c296f5271bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raycastLength: 0
+  raycastNumber: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!61 &412001907
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19527,7 +19532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &684365911
 Transform:
   m_ObjectHideFlags: 0
@@ -36250,16 +36255,17 @@ GameObject:
   - component: {fileID: 1577061390}
   - component: {fileID: 1577061389}
   - component: {fileID: 1577061387}
+  - component: {fileID: 1577061392}
+  - component: {fileID: 1577061398}
   - component: {fileID: 1577061386}
   - component: {fileID: 1577061391}
-  - component: {fileID: 1577061392}
   - component: {fileID: 1577061395}
   - component: {fileID: 1577061396}
   - component: {fileID: 1577061397}
-  - component: {fileID: 1577061398}
   - component: {fileID: 1577061399}
   - component: {fileID: 1577061400}
   - component: {fileID: 1577061401}
+  - component: {fileID: 1577061402}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -36766,6 +36772,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf7169b4ec1f6b40b1185dfb0ec3a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1577061402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577061385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57119243d570c54da25c296f5271bd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastLength: 0.6
+  raycastNumber: 3
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1603728138
 GameObject:
   m_ObjectHideFlags: 0
@@ -49149,8 +49172,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0016999245, y: 1.398, z: 0}
-    m_Extent: {x: 2.0049, y: 2.6063, z: 0}
+    m_Center: {x: 0.0033000112, y: 1.4007499, z: 0}
+    m_Extent: {x: 1.9958, y: 2.60825, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -49291,6 +49314,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57119243d570c54da25c296f5271bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raycastLength: 0
+  raycastNumber: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!61 &1950872214
 BoxCollider2D:
   m_ObjectHideFlags: 0
