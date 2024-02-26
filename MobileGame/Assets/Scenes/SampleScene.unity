@@ -20301,7 +20301,7 @@ MonoBehaviour:
   - name: Main Theme
     audioMixerGroup: {fileID: 6644168083918109884, guid: 49b2c9eaa096ed44b9e28eaf73039303, type: 2}
     clip: {fileID: 8300000, guid: 603f0ad5ff966f140a1d951516efa618, type: 3}
-    volume: 0.5
+    volume: 0.8
     pitch: 1
     loop: 1
     playOnAwake: 0
@@ -36613,6 +36613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraShake: {fileID: 0}
   impactParticle: {fileID: 827022964876259116, guid: f8f55cdbdda1057469eda7b5792369c2, type: 3}
+  healthBar: {fileID: 1809774342}
 --- !u!114 &1577061396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38540,6 +38541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1809774340}
   - component: {fileID: 1809774341}
+  - component: {fileID: 1809774342}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -38619,6 +38621,27 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &1809774342
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809774339}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 439b822456b36974e80f272e0c0302fa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1811015334
 GameObject:
   m_ObjectHideFlags: 0
@@ -49126,8 +49149,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0016999841, y: 1.40575, z: 0}
-    m_Extent: {x: 2.0004, y: 2.6022499, z: 0}
+    m_Center: {x: -0.0016999245, y: 1.398, z: 0}
+    m_Extent: {x: 2.0049, y: 2.6063, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

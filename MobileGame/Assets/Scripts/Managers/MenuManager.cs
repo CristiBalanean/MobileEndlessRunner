@@ -62,7 +62,6 @@ public class MenuManager : MonoBehaviour, IStoreListener
             audioMixer.SetFloat("SoundParam", 0);
 
         SetupBuilder();
-        CheckNonConsumables(nonConsumable.id);
     }
 
     private void SetupBuilder()
@@ -78,6 +77,7 @@ public class MenuManager : MonoBehaviour, IStoreListener
     {
         print("Success");
         storeController = controller;
+        CheckNonConsumables(nonConsumable.id);
     }
 
     public void Play()
@@ -145,11 +145,15 @@ public class MenuManager : MonoBehaviour, IStoreListener
     {
         if(storeController != null)
         {
+            Debug.Log("Controller found");
             var product =storeController.products.WithID(id);
+            Debug.Log(product);
             if (product != null)
             {
+                Debug.Log("Product found");
                 if (product.hasReceipt)
                 {
+                    Debug.Log("Ads Removed On");
                     AdsManager.instance.adsRemoved = true;
                     AdsManager.instance.bannerAds.DestroyBanner();
                     removeAdsButton.interactable = false;

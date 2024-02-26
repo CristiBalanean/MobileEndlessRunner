@@ -6,6 +6,7 @@ public class MonsterTruckCollision : MonoBehaviour
 {
     private CarHealth health;
     public CameraCollisionShake cameraShake;
+    [SerializeField] private Animator healthBar;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class MonsterTruckCollision : MonoBehaviour
 
         if(collision.transform.CompareTag("Police"))
         {
+            healthBar.SetTrigger("ShowBar");
             float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
             health.TakeDamage((int)collisionMagnitude);
         }

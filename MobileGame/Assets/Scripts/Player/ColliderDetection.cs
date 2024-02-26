@@ -10,6 +10,7 @@ public class ColliderDetection : MonoBehaviour
     public CameraCollisionShake cameraShake;
 
     [SerializeField] private GameObject impactParticle;
+    [SerializeField] private Animator healthBar;
 
     private void Awake()
     {
@@ -26,7 +27,16 @@ public class ColliderDetection : MonoBehaviour
         if (!collision.transform.CompareTag("Police"))
         {
             float collisionMagnitude = Mathf.Abs(collision.relativeVelocity.y);
-            health.TakeDamage((int)collisionMagnitude);
+            healthBar.SetTrigger("ShowBar");
+            if (collision.GetType() == typeof(BoxCollider2D))
+            {
+                health.TakeDamage((int)collisionMagnitude / 2);
+
+            }
+            else
+            {
+                health.TakeDamage((int)collisionMagnitude);
+            }
         }
 
         GameObject particle = Instantiate(impactParticle, collision.transform.position, UnityEngine.Quaternion.identity);

@@ -8,7 +8,7 @@ public class RiskyOvertake : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("AiCollider"))
+        if (collision.CompareTag("AiCollider") && PoliceEventManager.instance != null && !PoliceEventManager.instance.hasStarted)
         {
             overlappingColliders++;
             // You can optionally check for specific conditions before allowing risky overtake
@@ -18,7 +18,7 @@ public class RiskyOvertake : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("AiCollider"))
+        if (collision.CompareTag("AiCollider") && PoliceEventManager.instance != null && !PoliceEventManager.instance.hasStarted)
         {
             overlappingColliders--;
             if (overlappingColliders < 0)
@@ -27,7 +27,7 @@ public class RiskyOvertake : MonoBehaviour
             }
 
             // Check if the player can perform a risky overtake when leaving the collider
-            if (overlappingColliders == 0 && transform.position.y > collision.transform.position.y && collision.isTrigger == false)
+            if (overlappingColliders == 0 && transform.position.y > collision.transform.position.y && collision.isTrigger == false && CarMovement.Instance.GetSpeed() > 70)
             {
                 ScoreManager.Instance.IncrementOvertakeCounter();
             }

@@ -21,6 +21,8 @@ public class PowerUpShopManager : MonoBehaviour
     [SerializeField] private Button unlockButton;
     [SerializeField] private Button selectButton;
 
+    [SerializeField] private Animator unlockAnimator;
+
     private int index;
 
     private void Start()
@@ -165,7 +167,10 @@ public class PowerUpShopManager : MonoBehaviour
             LoadFile();
         }
         else
+        {
             Debug.LogError("Not Enough Money!");
+            unlockAnimator.SetTrigger("NotEnoughMoney");
+        }
 
         updateMoney.Invoke();
     }

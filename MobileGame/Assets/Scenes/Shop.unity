@@ -461,6 +461,7 @@ GameObject:
   - component: {fileID: 154733193}
   - component: {fileID: 154733192}
   - component: {fileID: 154733191}
+  - component: {fileID: 154733194}
   m_Layer: 5
   m_Name: Unlock
   m_TagString: Untagged
@@ -594,6 +595,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154733189}
   m_CullTransparentMesh: 1
+--- !u!95 &154733194
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154733189}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f7393a5e4bffe947a322233822ca031, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &159770596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1894,8 +1916,8 @@ MonoBehaviour:
   updateMoney:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1235526822}
-        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+      - m_Target: {fileID: 1924521964}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
         m_MethodName: UpdateMoney
         m_Mode: 1
         m_Arguments:
@@ -1935,6 +1957,7 @@ MonoBehaviour:
   powerupPrice: {fileID: 241341725}
   unlockButton: {fileID: 2119215725}
   selectButton: {fileID: 965778772}
+  unlockAnimator: {fileID: 2119215728}
 --- !u!1 &422037693
 GameObject:
   m_ObjectHideFlags: 0
@@ -4235,8 +4258,8 @@ MonoBehaviour:
   updateMoney:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1235526822}
-        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+      - m_Target: {fileID: 1924521964}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
         m_MethodName: UpdateMoney
         m_Mode: 1
         m_Arguments:
@@ -4293,6 +4316,7 @@ MonoBehaviour:
   - {fileID: 1795478586}
   - {fileID: 1262063395}
   - {fileID: 422037695}
+  unlockAnimator: {fileID: 154733194}
   i: 0
 --- !u!1 &1027856525
 GameObject:
@@ -8572,6 +8596,7 @@ GameObject:
   - component: {fileID: 2119215727}
   - component: {fileID: 2119215726}
   - component: {fileID: 2119215725}
+  - component: {fileID: 2119215728}
   m_Layer: 5
   m_Name: Unlock
   m_TagString: Untagged
@@ -8705,6 +8730,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2119215723}
   m_CullTransparentMesh: 1
+--- !u!95 &2119215728
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119215723}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f7393a5e4bffe947a322233822ca031, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

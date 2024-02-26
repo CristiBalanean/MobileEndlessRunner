@@ -32,6 +32,8 @@ public class CarsShopManager : MonoBehaviour
     [SerializeField] private Image colorsButtonHighlight;
     [SerializeField] private Button[] colorsButtons;
 
+    [SerializeField] private Animator unlockAnimator;
+
     public int i = 0;
 
     private void Start()
@@ -200,14 +202,14 @@ public class CarsShopManager : MonoBehaviour
             LoadFile();
 
             bool allUnlocked = true;
-            foreach(var item in cars)
+            foreach (var item in cars)
             {
-                if(!item.IsUnlocked())
+                if (!item.IsUnlocked())
                 {
                     allUnlocked = false;
                 }
             }
-            if(allUnlocked)
+            if (allUnlocked)
             {
                 PlayGamesPlatform.Instance.UnlockAchievement("CgkIvZqi8NgeEAIQDA", (bool success) =>
                 {
@@ -226,7 +228,10 @@ public class CarsShopManager : MonoBehaviour
             }
         }
         else
+        {
             Debug.LogError("Not Enough Money!");
+            unlockAnimator.SetTrigger("NotEnoughMoney");
+        }
 
         updateMoney.Invoke();
     }
