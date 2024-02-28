@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        tutorialManager.gameObject.SetActive(true);
+        tutorialManager.ShowPopupControls();
         if(PowerUpData.Instance.currentPowerUp != null)
             tutorialManager.ShowPopupPowerups();
     }

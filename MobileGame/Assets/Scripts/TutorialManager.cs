@@ -19,18 +19,6 @@ public class TutorialManager : MonoBehaviour
         instance = this;
     }
 
-    private void OnEnable()
-    {
-        if (PlayerPrefs.HasKey("ControlsTutorial") == false)
-        {
-            popUps[0].SetActive(true);
-            Time.timeScale = 0;
-            audioMixer.SetFloat("SoundParam", -80);
-        }
-        else
-            ShowPopupBarMode();
-    }
-
     public void HidePopup()
     {
         for (int i = 0; i < popUps.Length; i++)
@@ -55,6 +43,16 @@ public class TutorialManager : MonoBehaviour
                 audioMixer.SetFloat("SoundParam", 0);
 
             TaskCompleted(index);
+        }
+    }
+
+    public void ShowPopupControls()
+    {
+        if (PlayerPrefs.HasKey("ControlsTutorial") == false)
+        {
+            popUps[0].SetActive(true);
+            Time.timeScale = 0;
+            audioMixer.SetFloat("SoundParam", -80);
         }
     }
 
