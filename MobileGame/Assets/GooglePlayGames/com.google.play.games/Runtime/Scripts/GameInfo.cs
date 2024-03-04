@@ -38,7 +38,7 @@ namespace GooglePlayGames {
 
         public const string ApplicationId = "1054649912637"; // Filled in automatically
         public const string IosClientId = "__IOS_CLIENTID__"; // Filled in automatically
-        public const string WebClientId = "1054649912637-jjfm2u2e2k4dtcdhb51namhsugd0jvgs.apps.googleusercontent.com"; // Filled in automatically
+        public const string WebClientId = "1054649912637-a48fihjqfvlcrlgl2qb0tufrbjo6lcot.apps.googleusercontent.com"; // Filled in automatically
         public const string NearbyConnectionServiceId = "com.OrdealGAMES.HighwayDash";
 
         public static bool ApplicationIdInitialized() {

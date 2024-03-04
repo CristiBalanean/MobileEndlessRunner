@@ -40,8 +40,6 @@ public class CarsShopManager : MonoBehaviour
     {
         select.interactable = false;
 
-        LoadFile();
-
         if (PlayerPrefs.HasKey("CarDataIndex"))
         {
             carName.text = cars[PlayerPrefs.GetInt("CarDataIndex")].GetName();
@@ -177,7 +175,6 @@ public class CarsShopManager : MonoBehaviour
             carPrice.text = "OWNED";
             cars[i].Unlock();
             MoneyManager.Instance.currentMoney -= cars[i].GetCarPrice();
-            PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
 
             if ((carName.text == "Monster Truck" && cars[i].IsUnlocked()))
             {
@@ -197,9 +194,6 @@ public class CarsShopManager : MonoBehaviour
                 });
                 select.interactable = false;
             }
-
-            SaveFile();
-            LoadFile();
 
             bool allUnlocked = true;
             foreach (var item in cars)
@@ -244,43 +238,6 @@ public class CarsShopManager : MonoBehaviour
         colorSwapMaterial.SetColor("_BaseColor", colors[colorIndex - 1]);
 
         colorsButtonHighlight.transform.position = colorsButtons[colorIndex - 1].transform.position;
-    }
-
-    private void SaveFile()
-    {
-        List<CarUnlockedData> carDataList = new List<CarUnlockedData>();
-
-        // Populate carDataList with unlocked state of each car
-        foreach (var car in cars)
-        {
-            CarUnlockedData carData = new CarUnlockedData();
-            carData.carName = car.GetName();
-            carData.unlocked = car.IsUnlocked();
-            carDataList.Add(carData);
-        }
-
-        CarUnlockedDataWrapper wrapper = new CarUnlockedDataWrapper(carDataList.ToArray());
-
-        JsonHandler.instance.SaveJson(wrapper);
-    }
-
-    private void LoadFile()
-    {
-        CarUnlockedDataWrapper wrapper = JsonHandler.instance.LoadJson();
-
-        if (wrapper != null)
-        {
-            foreach (var carData in wrapper.carDataList)
-            {
-                // Find the car by name in the cars array
-                var car = Array.Find(cars, c => c.GetName() == carData.carName);
-
-                if (car != null && carData.unlocked)
-                {
-                    car.Unlock();
-                }
-            }
-        }
     }
 
     private void SetStats(Car car)

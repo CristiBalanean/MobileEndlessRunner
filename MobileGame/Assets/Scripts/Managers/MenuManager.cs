@@ -21,6 +21,7 @@ public class MenuManager : MonoBehaviour, IStoreListener
 
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject chooseControls;
+    [SerializeField] private GameObject savedGamesPanel;
     [SerializeField] private string shopScene;
     [SerializeField] private string playScene;
     [SerializeField] private string settingsScene;
@@ -95,8 +96,15 @@ public class MenuManager : MonoBehaviour, IStoreListener
         StartCoroutine(LoadLevel(settingsScene));
     }
 
+    public void ShowSavedGamesPanel()
+    {
+        savedGamesPanel.SetActive(true);
+    }
+
     public void Quit()
     {
+        GameDataHandler.instance.SaveOnQuit();
+
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #endif

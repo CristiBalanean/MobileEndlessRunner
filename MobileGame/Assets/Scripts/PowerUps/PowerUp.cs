@@ -5,20 +5,16 @@ using UnityEngine.UI;
 
 public abstract class PowerUp : ScriptableObject
 {
-    public abstract void ActivatePowerUp(GameObject target);
-
-    public abstract void DeactivatePowerUp(GameObject target);
-}
-
-[System.Serializable]
-public class Powerups
-{
     public PowerUp powerup;
     public Sprite powerupImage;
     public string powerUpName;
     public string powerUpDescription;
     public int powerupPrice;
     public bool unlocked = false;
+
+    public abstract void ActivatePowerUp(GameObject target);
+
+    public abstract void DeactivatePowerUp(GameObject target);
 }
 
 [System.Serializable]

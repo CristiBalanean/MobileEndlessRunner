@@ -11,7 +11,7 @@ public class PowerUpShopManager : MonoBehaviour
 {
     public UnityEvent updateMoney;
 
-    [SerializeField] private Powerups[] powerups;
+    [SerializeField] private PowerUp[] powerups;
     [SerializeField] private Image powerupSprite;
     [SerializeField] private Image lockImage;
     [SerializeField] private TMP_Text powerupName;
@@ -28,8 +28,6 @@ public class PowerUpShopManager : MonoBehaviour
     private void Start()
     {
         index = 0;
-
-        LoadFile();
 
         if (PlayerPrefs.HasKey("PowerupDataIndex"))
         {
@@ -161,10 +159,6 @@ public class PowerUpShopManager : MonoBehaviour
             unlockButton.gameObject.SetActive(false);
             lockImage.gameObject.SetActive(false);
             MoneyManager.Instance.currentMoney -= powerups[index].powerupPrice;
-            PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
-
-            SaveFile();
-            LoadFile();
         }
         else
         {
@@ -173,42 +167,5 @@ public class PowerUpShopManager : MonoBehaviour
         }
 
         updateMoney.Invoke();
-    }
-
-    private void SaveFile()
-    {
-        List<PowerupUnlockedData> powerupDataList = new List<PowerupUnlockedData>();
-
-        // Populate carDataList with unlocked state of each car
-        foreach (var powerup in powerups)
-        {
-            PowerupUnlockedData powerupData = new PowerupUnlockedData();
-            powerupData.powerupName = powerup.powerUpName;
-            powerupData.unlocked = powerup.unlocked;
-            powerupDataList.Add(powerupData);
-        }
-
-        PowerupUnlockedDataWrapper wrapper = new PowerupUnlockedDataWrapper(powerupDataList.ToArray());
-
-        JsonHandlerPowerups.instance.SaveJson(wrapper);
-    }
-
-    private void LoadFile()
-    {
-        PowerupUnlockedDataWrapper wrapper = JsonHandlerPowerups.instance.LoadJson();
-
-        if (wrapper != null)
-        {
-            foreach (var powerupData in wrapper.powerupDataList)
-            {
-                // Find the car by name in the cars array
-                var powerup = Array.Find(powerups, c => c.powerUpName == powerupData.powerupName);
-
-                if (powerup != null && powerupData.unlocked)
-                {
-                    powerup.unlocked = true;
-                }
-            }
-        }
     }
 }

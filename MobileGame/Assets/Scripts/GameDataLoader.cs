@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameDataLoader : MonoBehaviour
 {
     [SerializeField] private Car[] cars;
-    [SerializeField] private Powerups[] powerups;
+    [SerializeField] private PowerUp[] powerups;
 
     void Start()
     {

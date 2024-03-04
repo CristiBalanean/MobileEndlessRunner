@@ -39,7 +39,10 @@ public class RestartScreen : MonoBehaviour
 
     public void Exit()
     {
-        ScoreManager.Instance.SetFinalMoney(ScoreManager.Instance.ComputeFinalMoney());
+        if (doubleMoney)
+            ScoreManager.Instance.SetFinalMoney(ScoreManager.Instance.ComputeFinalMoney() * 2);
+        else
+            ScoreManager.Instance.SetFinalMoney(ScoreManager.Instance.ComputeFinalMoney());
         StartCoroutine(LoadLevel("Menu"));
     }
 

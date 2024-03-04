@@ -22,7 +22,7 @@ public class Car : ScriptableObject
     [SerializeField] private int carPrice;
 
     [Header("Unlocked")]
-    [SerializeField] private bool unlocked;
+    [SerializeField] public bool unlocked;
 
     [Header("Collider")]
     [SerializeField] private GameObject colliderPrefab;

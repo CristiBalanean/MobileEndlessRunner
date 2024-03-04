@@ -248,6 +248,5 @@ public class ScoreManager : MonoBehaviour
     public void SetFinalMoney(int money)
     {
         MoneyManager.Instance.currentMoney += money;
-        PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
     }
 }

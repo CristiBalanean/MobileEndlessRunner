@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9390c591373204c86190ead1c2d3dd, type: 3}
   m_Name: Nitro
   m_EditorClassIdentifier: 
+  powerup: {fileID: 11400000}
+  powerupImage: {fileID: 21300000, guid: 3e52b20867de2a847b07c9e37ab2a91b, type: 3}
+  powerUpName: NITRO
+  powerUpDescription: WHILE THE NITRO POWERUP IS ACTIVE IT MAKES YOUR CAR ACCELERATE
+    FASTER
+  powerupPrice: 20000
+  unlocked: 0

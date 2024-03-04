@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0eb4542896ed443bb62521d876030c, type: 3}
   m_Name: SlowDown
   m_EditorClassIdentifier: 
+  powerup: {fileID: 11400000}
+  powerupImage: {fileID: 21300000, guid: 87cb99d94c9c85542aa051c1c5d38c3a, type: 3}
+  powerUpName: SLOWDOWN
+  powerUpDescription: WHILE THE SLOWDOWN POWERUP IS ACTIVE YOU SLOW DOWN TIME AND
+    HAVE INCREASED HANDLING
+  powerupPrice: 100000
+  unlocked: 0

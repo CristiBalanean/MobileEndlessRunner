@@ -110,19 +110,16 @@ public class ShopManager : MonoBehaviour, IStoreListener
         {
             MoneyManager.Instance.currentMoney += 10000;
             UpdateMoney();
-            PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
         }
         else if (product.definition.id == consumableItems[1].id)
         {
             MoneyManager.Instance.currentMoney += 100000;
             UpdateMoney();
-            PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
         }
         else if (product.definition.id == consumableItems[2].id)
         {
             MoneyManager.Instance.currentMoney += 1000000;
             UpdateMoney();
-            PlayerPrefs.SetInt("Money", MoneyManager.Instance.currentMoney);
         }
 
         return PurchaseProcessingResult.Complete;

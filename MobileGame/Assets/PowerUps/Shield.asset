@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a6b13a9f7fc6c48b7a0eced812dfff, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
+  powerup: {fileID: 11400000}
+  powerupImage: {fileID: 21300000, guid: 8de32b4df29f14e4592f63b3fc2560f8, type: 3}
+  powerUpName: SHIELD
+  powerUpDescription: WHILE THE SHIELD POWERUP IS ACTIVE IT MAKES YOUR CAR INVULNERABLE
+    TO DAMEGE. CAN ONLY BE USE IF THE POWERUP BAR IS AT AT LEAST 50%
+  powerupPrice: 50000
+  unlocked: 0
