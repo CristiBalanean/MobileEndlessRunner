@@ -11,6 +11,7 @@ public class PauseScreen : MonoBehaviour
     [SerializeField] private Animator transition;
     [SerializeField] private TMP_Text countDownText;
     [SerializeField] private int countDownTime;
+    [SerializeField] private GameObject countdownPanel;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private CameraShake cameraShake;
     private int currentCountDownTime;
@@ -52,6 +53,7 @@ public class PauseScreen : MonoBehaviour
         currentCountDownTime = countDownTime;
 
         countDownText.gameObject.SetActive(true);
+        countdownPanel.SetActive(true);
 
         gameObject.GetComponent<RectTransform>().localScale = Vector3.zero;
 
@@ -75,6 +77,7 @@ public class PauseScreen : MonoBehaviour
         Time.timeScale = 1f;
         cameraShake.enabled = true;
 
+        countdownPanel.SetActive(false);
         countDownText.gameObject.SetActive(false);
     }
 }

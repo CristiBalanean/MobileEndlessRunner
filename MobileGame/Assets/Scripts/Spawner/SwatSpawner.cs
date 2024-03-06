@@ -83,6 +83,7 @@ public class SwatSpawner : MonoBehaviour
 
     private IEnumerator PlaceExclamationMark(Vector2 position, System.Action onExclamationMarkComplete)
     {
+        SoundManager.instance.Play("Warning");
         Vector3 screenPosition1 = Camera.main.WorldToScreenPoint(position);
         Vector2 canvasSpace1;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, screenPosition1, null, out canvasSpace1);

@@ -1,22 +1,4 @@
-<<<<<<< Updated upstream
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class CloudSavingManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-=======
-using System;
+    using System;
 using System.Collections.Generic;
 using Unity.Services.Core;
 using Unity.Services.CloudSave;
@@ -104,6 +86,5 @@ public class CloudSavingManager : MonoBehaviour
     {
         GameDataHandler.instance.LoadDataCloud();
         loadSuccessfulPanel.SetActive(true);
->>>>>>> Stashed changes
     }
 }
