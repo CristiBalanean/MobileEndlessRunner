@@ -27,6 +27,7 @@ public class GasPickup : MonoBehaviour
     {
         if (collision.GetComponentInParent<MonsterTruckGas>() != null)
         {
+            SoundManager.instance.Play("Pickup");
             pickupEvent.Invoke();
             Destroy(gameObject);
         }

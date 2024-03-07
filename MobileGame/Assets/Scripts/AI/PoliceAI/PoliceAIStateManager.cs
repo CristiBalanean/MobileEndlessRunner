@@ -39,9 +39,6 @@ public class PoliceAIStateManager : MonoBehaviour
         avoidance = GetComponent<AvoidanceBehavior>();
         aiCollider = GetComponentInChildren<Collider2D>();
         cameraShake = GameObject.Find("Main Camera").GetComponent<CameraCollisionShake>();
-        hookJoint = gameObject.AddComponent<DistanceJoint2D>();
-        lineRenderer = gameObject.AddComponent<LineRenderer>();
-
 
         PoliceEvent policeEvent = GameObject.Find("PoliceEventManager")?.GetComponent<PoliceEvent>();
         if(policeEvent != null )

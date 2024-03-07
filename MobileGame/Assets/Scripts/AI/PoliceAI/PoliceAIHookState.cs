@@ -14,6 +14,9 @@ public class PoliceAIHookState : PoliceAIBaseState
     {
         Debug.Log("Hook State");
 
+        police.hookJoint = police.gameObject.AddComponent<DistanceJoint2D>();
+        police.lineRenderer = police.gameObject.AddComponent<LineRenderer>();
+
         // Add and configure DistanceJoint2D
         police.hookJoint.enabled = true;
         police.hookJoint.connectedBody = police.targetRigidbody;

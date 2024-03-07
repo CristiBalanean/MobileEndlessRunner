@@ -4896,7 +4896,7 @@ GameObject:
   - component: {fileID: -5137476395587064871}
   - component: {fileID: 5506743911467977839}
   m_Layer: 6
-  m_Name: Car
+  m_Name: CarTwoWays
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5159,7 +5159,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3517040841658587091}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c945db06e6aa1ce4591836a3623dd5a7, type: 3}
   m_Name: 

@@ -14,14 +14,8 @@ public class PoliceAICrashingState : PoliceAIBaseState
         police.aiCollider.isTrigger = true;
         police.state.enabled = false;
         police.avoidance.enabled = false;
-        DistanceJoint2D hookJoint = police.gameObject.GetComponent<DistanceJoint2D>();
-        LineRenderer lineRenderer = police.gameObject.AddComponent<LineRenderer>();
-        if (hookJoint != null && lineRenderer != null)
-        {
-            hookJoint.enabled = false;
-            lineRenderer.enabled = false;
-            police.hookJoint.connectedBody = null;
-        }
+        GameObject.Destroy(police.hookJoint);
+        GameObject.Destroy(police.lineRenderer);
     }
 
     public override void UpdateState(PoliceAIStateManager police)

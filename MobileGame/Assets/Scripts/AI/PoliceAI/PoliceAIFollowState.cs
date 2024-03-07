@@ -10,14 +10,8 @@ public class PoliceAIFollowState : PoliceAIBaseState
     {
         Debug.Log("Follow State");
         police.rigidBody.mass = 1;
-        DistanceJoint2D hookJoint = police.gameObject.GetComponent<DistanceJoint2D>();
-        LineRenderer lineRenderer = police.gameObject.GetComponent<LineRenderer>();
-        if (hookJoint!= null && lineRenderer != null) 
-        {
-            hookJoint.enabled = false;
-            lineRenderer.enabled = false;
-            police.hookJoint.connectedBody = null;
-        }
+        GameObject.Destroy(police.hookJoint);
+        GameObject.Destroy(police.lineRenderer);
     }
 
     public override void UpdateState(PoliceAIStateManager police)

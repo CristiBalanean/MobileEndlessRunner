@@ -28,6 +28,7 @@ public class TimePickup : MonoBehaviour
         Transform parent = collision.transform.root;
         if (parent.GetComponent<TimeMode>() != null)
         {
+            SoundManager.instance.Play("Pickup");
             pickupEvent.Invoke();
             Destroy(gameObject);
         }

@@ -26,6 +26,7 @@ public class CarHealth : MonoBehaviour
     {
         MoneyManager moneyManager = FindObjectOfType<MoneyManager>();
         //deathTrigger.AddListener(moneyManager.ComputeFinalMoney);
+        StartCoroutine(IncreaseHealth());
     }
 
     public void TriggerDeath()
@@ -51,6 +52,17 @@ public class CarHealth : MonoBehaviour
         {
             TriggerDeath();
             hasDied = true;
+        }
+    }
+
+    private IEnumerator IncreaseHealth()
+    {
+        while(!hasDied)
+        {
+            yield return new WaitForSeconds(10f);
+            if(health < 15)
+                health += 1;
+            healthBar.value = (float)health / 15;
         }
     }
 
