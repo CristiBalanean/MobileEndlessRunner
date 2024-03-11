@@ -6,6 +6,7 @@ public class AIOvertaking : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private Collider2D colliderLeft;
     [SerializeField] private Collider2D colliderRight;
+    [SerializeField] private Animator animator;
 
     private AIBraking braking;
 
@@ -17,6 +18,33 @@ public class AIOvertaking : MonoBehaviour
     private void Awake()
     {
         braking = GetComponent<AIBraking>();
+        animator = FindChildAnimatorRecursive(transform); // Start the recursive search from the root
+    }
+
+    private Animator FindChildAnimatorRecursive(Transform parent)
+    {
+        Animator foundAnimator = null;
+
+        foreach (Transform child in parent)
+        {
+            // Check if the child has an Animator component
+            Animator childAnimator = child.GetComponent<Animator>();
+            if (childAnimator != null)
+            {
+                foundAnimator = childAnimator;
+                break; // Found the Animator, no need to continue searching
+            }
+
+            // Recursively search in the child's children
+            Animator recursiveResult = FindChildAnimatorRecursive(child);
+            if (recursiveResult != null)
+            {
+                foundAnimator = recursiveResult;
+                break; // Found the Animator, no need to continue searching
+            }
+        }
+
+        return foundAnimator;
     }
 
     private void OnEnable()
@@ -47,16 +75,27 @@ public class AIOvertaking : MonoBehaviour
         bool isBlockedRight = colliderRight.IsTouchingLayers(layerMask);
         bool isBlockedLeft = colliderLeft.IsTouchingLayers(layerMask);
 
-        if (!isBlockedRight && targetLanePosition > 0 || !isBlockedLeft && targetLanePosition < 0)
+        if ((!isBlockedRight && targetLanePosition > 0) || (!isBlockedLeft && targetLanePosition < 0))
         {
+            if(!isBlockedRight && targetLanePosition > 0 && !isOvertaking)
+            {
+                animator.SetTrigger("SignalRight");
+            }
+            if(!isBlockedLeft && targetLanePosition < 0 && !isOvertaking)
+            {
+                animator.SetTrigger("SignalLeft");
+            }    
             StartCoroutine(MoveToLane(targetLanePosition));
         }
     }
 
     private IEnumerator MoveToLane(float targetLanePosition)
     {
-        canChangeLane = false;
         isOvertaking = true;
+
+        yield return new WaitForSeconds(1.5f);
+
+        canChangeLane = false;
         globalCooldownTimer = globalCooldownDuration; // Reset the global cooldown timer
 
         float startLanePosition = transform.position.x;

@@ -20,6 +20,7 @@ public class PowerUpShopManager : MonoBehaviour
 
     [SerializeField] private Button unlockButton;
     [SerializeField] private Button selectButton;
+    [SerializeField] private Button deselectButton;
 
     [SerializeField] private Animator unlockAnimator;
 
@@ -31,8 +32,6 @@ public class PowerUpShopManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("PowerupDataIndex"))
         {
-            selectButton.interactable = false;
-
             index = PlayerPrefs.GetInt("PowerupDataIndex");
 
             powerupSprite.sprite = powerups[PlayerPrefs.GetInt("PowerupDataIndex")].powerupImage;
@@ -41,7 +40,8 @@ public class PowerUpShopManager : MonoBehaviour
             powerupDescription.text = powerups[PlayerPrefs.GetInt("PowerupDataIndex")].powerUpDescription;
             powerupPrice.text = "OWNED";
 
-            selectButton.gameObject.SetActive(true);
+            deselectButton.gameObject.SetActive(true);
+            selectButton.gameObject.SetActive(false);
             unlockButton.gameObject.SetActive(false);
             lockImage.gameObject.SetActive(false);
         }
@@ -50,19 +50,21 @@ public class PowerUpShopManager : MonoBehaviour
             powerupSprite.sprite = powerups[index].powerupImage;
             powerupName.text = powerups[index].powerUpName;
             powerupDescription.text = powerups[index].powerUpDescription;
-            powerupPrice.text = "<sprite=0> " + powerups[index].powerupPrice.ToString();
 
             if (!powerups[index].unlocked)
             {
                 selectButton.gameObject.SetActive(false);
                 unlockButton.gameObject.SetActive(true);
                 lockImage.gameObject.SetActive(true);
+                powerupPrice.text = "<sprite=0> " + powerups[index].powerupPrice.ToString();
             }
             else
             {
                 selectButton.gameObject.SetActive(true);
+                deselectButton.gameObject.SetActive(false);
                 unlockButton.gameObject.SetActive(false);
                 lockImage.gameObject.SetActive(false);
+                powerupPrice.text = "OWNED";
             }
         }
     }
@@ -80,21 +82,26 @@ public class PowerUpShopManager : MonoBehaviour
         if (!powerups[index].unlocked)
         {
             selectButton.gameObject.SetActive(false);
+            deselectButton.gameObject.SetActive(false);
             unlockButton.gameObject.SetActive(true);
             lockImage.gameObject.SetActive(true);
         }
         else
         {
-            selectButton.gameObject.SetActive(true);
+            if (PlayerPrefs.HasKey("PowerupDataIndex") && PlayerPrefs.GetInt("PowerupDataIndex") == index)
+            {
+                selectButton.gameObject.SetActive(false);
+                deselectButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                selectButton.gameObject.SetActive(true);
+                deselectButton.gameObject.SetActive(false);
+            }
             unlockButton.gameObject.SetActive(false);
             lockImage.gameObject.SetActive(false);
             powerupPrice.text = "OWNED";
         }
-
-        if (PowerUpData.Instance.currentPowerUp == powerups[index].powerup)
-            selectButton.interactable = false;
-        else
-            selectButton.interactable = true;
     }
 
     public void Previous()
@@ -110,21 +117,26 @@ public class PowerUpShopManager : MonoBehaviour
         if (!powerups[index].unlocked)
         {
             selectButton.gameObject.SetActive(false);
+            deselectButton.gameObject.SetActive(false);
             unlockButton.gameObject.SetActive(true);
             lockImage.gameObject.SetActive(true);
         }
         else
         {
-            selectButton.gameObject.SetActive(true);
+            if(PlayerPrefs.HasKey("PowerupDataIndex") && PlayerPrefs.GetInt("PowerupDataIndex") == index)
+            {
+                selectButton.gameObject.SetActive(false);
+                deselectButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                selectButton.gameObject.SetActive(true);
+                deselectButton.gameObject.SetActive(false);
+            }
             unlockButton.gameObject.SetActive(false);
             lockImage.gameObject.SetActive(false);
             powerupPrice.text = "OWNED";
         }
-
-        if (PowerUpData.Instance.currentPowerUp == powerups[index].powerup)
-            selectButton.interactable = false;
-        else
-            selectButton.interactable = true;
     }
 
     public void Select()
@@ -132,7 +144,17 @@ public class PowerUpShopManager : MonoBehaviour
         PowerUpData.Instance.currentPowerUp = powerups[index].powerup;
         PowerUpData.Instance.currentPowerUpImage = powerups[index].powerupImage;
         PlayerPrefs.SetInt("PowerupDataIndex", index);
-        selectButton.interactable = false;
+        selectButton.gameObject.SetActive(false);
+        deselectButton.gameObject.SetActive(true);
+    }
+
+    public void Deselect()
+    {
+        PowerUpData.Instance.currentPowerUp = null;
+        PowerUpData.Instance.currentPowerUpImage = null;
+        PlayerPrefs.DeleteKey("PowerupDataIndex");
+        selectButton.gameObject.SetActive(true);
+        deselectButton.gameObject.SetActive(false);
     }
 
     public void Unlock()

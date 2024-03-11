@@ -5103,7 +5103,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3517040841658587091}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 34863b622fd428441aee24a1b3be03fd, type: 2}
   m_CullingMode: 0
@@ -5169,6 +5169,7 @@ MonoBehaviour:
     m_Bits: 320
   colliderLeft: {fileID: 708749691498881095}
   colliderRight: {fileID: 1780172585436918364}
+  animator: {fileID: 0}
 --- !u!114 &-910315899207388484
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -71,6 +71,10 @@ public class RestartScreen : MonoBehaviour
     public void ContinueButton()
     {
         CarHealth.Instance.ContinueGame();
+        if (PoliceEvent.instance.hasStarted)
+        {
+            PoliceEvent.instance.DestroyProps();
+        }
         gameObject.SetActive(false);
     }
 

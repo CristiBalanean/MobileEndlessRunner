@@ -43,6 +43,7 @@ public class SwatSpawner : MonoBehaviour
     {
         int rand1 = Random.Range(0, spawnPoints.Length);
         Vector3 desiredPosition1 = spawnPoints[rand1].position;
+        SoundManager.instance.Play("Warning");
 
         // Start the PlaceExclamationMark coroutine and wait for it to finish
         StartCoroutine(PlaceExclamationMark(desiredPosition1, () =>
@@ -56,6 +57,7 @@ public class SwatSpawner : MonoBehaviour
     {
         int rand = Random.Range(1, 3);
         Vector3 desiredPosition = spawnPoints[rand].position;
+        SoundManager.instance.Play("Warning");
 
         // Start the PlaceExclamationMark coroutine and wait for it to finish
         StartCoroutine(PlaceExclamationMark(desiredPosition, () =>
@@ -83,7 +85,6 @@ public class SwatSpawner : MonoBehaviour
 
     private IEnumerator PlaceExclamationMark(Vector2 position, System.Action onExclamationMarkComplete)
     {
-        SoundManager.instance.Play("Warning");
         Vector3 screenPosition1 = Camera.main.WorldToScreenPoint(position);
         Vector2 canvasSpace1;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, screenPosition1, null, out canvasSpace1);

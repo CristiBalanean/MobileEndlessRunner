@@ -12,9 +12,8 @@ public class RiskyOvertake : MonoBehaviour
     private HashSet<int> rightInitiallyHitRays = new HashSet<int>();
     private HashSet<int> leftInitiallyHitRays = new HashSet<int>();
 
-    // Track the lowest rays from each side that initially hit something
-    private int rightLowestHitRay = int.MaxValue;
-    private int leftLowestHitRay = int.MaxValue;
+    private int rightLastStoppedRay = -1;
+    private int leftLastStoppedRay = -1;
 
     private void Update()
     {
@@ -50,7 +49,11 @@ public class RiskyOvertake : MonoBehaviour
             if (hit)
             {
                 rightInitiallyHitRays.Add(i);
-                rightLowestHitRay = Mathf.Min(rightLowestHitRay, i);
+            }
+            else
+            {
+                // Update the index of the last ray that stopped hitting
+                rightLastStoppedRay = i;
             }
         }
 
@@ -86,7 +89,11 @@ public class RiskyOvertake : MonoBehaviour
             if (hit)
             {
                 leftInitiallyHitRays.Add(i);
-                leftLowestHitRay = Mathf.Min(leftLowestHitRay, i);
+            }
+            else
+            {
+                // Update the index of the last ray that stopped hitting
+                leftLastStoppedRay = i;
             }
         }
 
@@ -97,13 +104,14 @@ public class RiskyOvertake : MonoBehaviour
         bool leftSideOvertaken = leftInitiallyHitRays.Count == raycastNumber + 1;
 
         // Check if the lowest ray from the right side stopped hitting
-        bool rightLowestRayStoppedHitting = !Physics2D.Raycast(transform.position + Vector3.up * rightLowestHitRay, Vector2.right, raycastLength, obstacleLayer);
+        bool rightLowestRayStoppedHitting = !Physics2D.Raycast(transform.position + Vector3.up * 0.5f, Vector2.right, raycastLength, obstacleLayer);
 
         // Check if the lowest ray from the left side stopped hitting
-        bool leftLowestRayStoppedHitting = !Physics2D.Raycast(transform.position + Vector3.up * leftLowestHitRay, Vector2.left, raycastLength, obstacleLayer);
+        bool leftLowestRayStoppedHitting = !Physics2D.Raycast(transform.position + Vector3.up * 0.5f, Vector2.left, raycastLength, obstacleLayer);
 
         // Check if it's a close overtake
-        bool closelyOvertaken = (rightSideOvertaken && rightLowestRayStoppedHitting) || (leftSideOvertaken && leftLowestRayStoppedHitting);
+        bool closelyOvertaken = (rightSideOvertaken && rightLastStoppedRay == 0 && rightLowestRayStoppedHitting) ||
+                     (leftSideOvertaken && leftLastStoppedRay == 0 && leftLowestRayStoppedHitting);
 
         // Do something with the closelyOvertaken boolean (e.g., reward the player)
         if (closelyOvertaken)
@@ -115,8 +123,6 @@ public class RiskyOvertake : MonoBehaviour
             // Reset the initially hit rays sets and lowest hit rays for the next frame
             rightInitiallyHitRays.Clear();
             leftInitiallyHitRays.Clear();
-            rightLowestHitRay = int.MaxValue;
-            leftLowestHitRay = int.MaxValue;
         }
     }
 }

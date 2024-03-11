@@ -12,6 +12,7 @@ public class PauseScreen : MonoBehaviour
     [SerializeField] private TMP_Text countDownText;
     [SerializeField] private int countDownTime;
     [SerializeField] private GameObject countdownPanel;
+    [SerializeField] private GameObject exitWarningPanel;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private CameraShake cameraShake;
     private int currentCountDownTime;
@@ -33,6 +34,11 @@ public class PauseScreen : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.SetActiveScene(currentScene);
         StartCoroutine(LoadLevel(currentScene.name));
+    }
+
+    public void ExitWarning()
+    {
+        exitWarningPanel.SetActive(true);
     }
 
     public void ExitButton()

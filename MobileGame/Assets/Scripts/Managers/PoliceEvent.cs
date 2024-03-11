@@ -26,9 +26,12 @@ public class PoliceEvent : MonoBehaviour
     public bool canSpawnTraps;
     private bool isPreparing;
 
+    private IEnumerator coroutine;
+
     private void Awake()
     {
         instance = this;
+        coroutine = StartEvent();
     }
 
     private void Start()
@@ -65,6 +68,7 @@ public class PoliceEvent : MonoBehaviour
     private IEnumerator StartEvent()
     {
         Debug.Log("Event Started!");
+        StartCoroutine(ThemeManager.instance.SwitchThemePolice());
         CancelInvoke("PoliceEventChance");
         isPreparing = false;
         hasStarted = true;
@@ -81,6 +85,7 @@ public class PoliceEvent : MonoBehaviour
         yield return new WaitForSeconds(5f);
         DestroyProps();
         EndEvent();
+        StartCoroutine(ThemeManager.instance.SwitchThemeNormal());
     }
 
     public void EndEvent()
@@ -107,7 +112,17 @@ public class PoliceEvent : MonoBehaviour
         StartCoroutine(StartSpawningCarsCoroutine());
     }
 
-    private void DestroyProps()
+    public void EndEventContinue()
+    {
+        Debug.Log("Event Has Ended!");
+        StopCoroutine(coroutine);
+        canSpawnTraps = false;
+        hasStarted = false;
+        BackDownEvent?.Invoke();
+        StartCoroutine(StartSpawningCarsCoroutine());
+    }
+
+    public void DestroyProps()
     {
         GameObject[] traps = GameObject.FindGameObjectsWithTag("Trap");
         foreach (GameObject trap in traps)
@@ -145,6 +160,7 @@ public class PoliceEvent : MonoBehaviour
         while (hasStarted)
         {
             yield return new WaitForSeconds(5f);
+            SoundManager.instance.Play("Warning");
             SpawnTraps?.Invoke();
         }
     }

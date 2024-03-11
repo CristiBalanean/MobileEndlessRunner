@@ -23,7 +23,7 @@ public class Obstacle : MonoBehaviour
 
         CarGraphics carGraphics = SpritePool.Instance.ChooseSprite();
         GetComponent<SpriteRenderer>().sprite = carGraphics.GetSprite();
-        GameObject collider = Instantiate(carGraphics.GetCollider(), transform.position, Quaternion.identity);
+        GameObject collider = Instantiate(carGraphics.GetCollider(), transform.position, transform.rotation);
         collider.transform.parent = transform;
     }
 

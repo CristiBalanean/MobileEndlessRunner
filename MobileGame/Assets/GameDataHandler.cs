@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Services.Analytics;
 using Unity.Services.CloudSave;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameDataHandler : MonoBehaviour
 {
@@ -12,22 +13,30 @@ public class GameDataHandler : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
         else
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
     }
 
     [SerializeField] private Car[] cars;
     [SerializeField] private PowerUp[] powerups;
 
-    void Start()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        LoadFileCars();
-        LoadFilePowerups();
+        if(scene.name == "Menu")
+        {
+            Debug.Log("Menu Loaded...");
+            LoadFileCars();
+            LoadFilePowerups();
 
-        Initialize();
+            Initialize();
+        }
     }
 
     private void Initialize()

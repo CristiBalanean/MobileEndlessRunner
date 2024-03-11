@@ -21,7 +21,15 @@ public class ObjectPool : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            GameObject obj = Instantiate(objectToPool);
+            GameObject obj;
+            if (transform.name == "ObjectPoolObstacleDown")
+            {
+                obj = Instantiate(objectToPool, transform.position, Quaternion.Euler(0f, 0f, 180f));
+            }
+            else
+            {
+                obj = Instantiate(objectToPool);
+            }
             obj.SetActive(false);
             if (objectToPool == overtakeText)
             {

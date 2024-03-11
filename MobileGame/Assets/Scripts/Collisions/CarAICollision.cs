@@ -13,7 +13,8 @@ public class CarAICollision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        SoundManager.instance.Play("Crash");
+        if(Vector2.Distance(CarMovement.Instance.transform.position, transform.position) < 2f)
+            SoundManager.instance.Play("Crash");
 
         if (health != null)
         {

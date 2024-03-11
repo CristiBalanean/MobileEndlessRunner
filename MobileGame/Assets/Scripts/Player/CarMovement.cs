@@ -123,7 +123,13 @@ public class CarMovement : MonoBehaviour
 
     private void CarHandling()
     {
-        float adjustedTimeScale = 1f / Time.timeScale;
+        float adjustedTimeScale;
+        if (Time.fixedDeltaTime == 0.02f * Time.timeScale)
+            adjustedTimeScale = 1f / (Time.timeScale);
+        else
+            adjustedTimeScale = 1f / (Time.timeScale * 1.5f);
+
+        //float adjustedTimeScale = 1f / (Time.timeScale);
 
         currentHandling = Mathf.Lerp(lowSpeedHandling, highSpeedHandling, currentSpeed / topSpeed);
 
